@@ -1,0 +1,96 @@
+body {
+	font-family: Verdana, Helvetica;
+	font-size: 10px;
+}
+.norm10pt {
+	color: #333333;
+	font-size: 10pt;
+	font-family: Verdana, Helvetica;
+	text-align:justify;
+}
+
+.flyoutHeading {
+	font-family: Verdana, Helvetica;
+	font-size: 14pt;
+	font-weight: bold;
+	color: #333333;	
+}
+
+.flyoutMenu TD.flyoutLink  {
+	border-color: #FFFFFF;
+	border-width: 1px;
+	border-style: solid;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 8pt;
+	padding: 1px 25px 3px 6px;
+	cursor: hand;
+}
+
+.flyoutLink a {
+	color: black;
+	text-decoration: none;
+}
+
+.flyoutLink a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.flyoutLink a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.flyoutLink a:active {
+	color: black;
+	text-decoration: none;
+}
+
+.flyoutFont {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 8pt;
+}
+td {
+	font-family: Verdana, Helvetica;
+	font-size: 10px;
+}
+select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+}
+input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+}
+.navbeyaz {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration:none;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+.navbeyaz:a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-decoration:none;
+	color: #FFFFFF;
+.navbeyaz:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-decoration:none;
+	color: #FFFFFF;
+}
+}
+.navbeyaz:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-decoration:none;
+	color: #FFCC00;
+}
+.navbeyaz:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-decoration:none;
+	color: #FFCC00;
+}
