@@ -84,9 +84,9 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'lkduser',
-		'password' => '1Q7y3e4r',
-		'database' => 'lkd_cake',
+		'login' => 'root',
+		'password' => '',
+		'database' => 'lkd_uye',
 		'prefix' => '',
 	);
 
