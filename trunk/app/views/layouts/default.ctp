@@ -29,7 +29,7 @@
 <head>
 	<?php echo $html->charset(); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		<?php __('Linux Kullanıcıları Derneği Üye Sistemi:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -64,6 +64,7 @@
 				if ($session->check('Message.flash')):
 						$session->flash();
 				endif;
+				if  ($session->check('Message.auth')) $session->flash('auth');     
 			?>
 
 			<?php echo $content_for_layout; ?>

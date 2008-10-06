@@ -44,7 +44,7 @@ class UsersController extends AppController {
 		$UserName = $this->params['data']['User']['username'];
         $UserName = Sanitize::paranoid($UserName, array('.', '@')); 
         if (!empty($UserName)) {
-	$this->set('user', $this->User->find('first',array('conditions'=>array('username'=>$UserName))));
+			$this->set('user', $this->User->find('first',array('conditions'=>array('username'=>$UserName))));
         if (empty($this->user)) {
             $this->flash('Bu kullanıcıya ait bir kayıt bulunamadı!','/users/login');
         } else {
