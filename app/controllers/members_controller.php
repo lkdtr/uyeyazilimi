@@ -126,6 +126,93 @@ class MembersController extends AppController {
 	        }
         }
 	}
+
+	function forgot_my_password() {
+		if (!empty($this->data)) {
+		 	$member = $this->Member->find(array('lotr_alias'=>$this->data['Member']['lotr_alias']));
+		 	//Girilen mail veritabaninda yoksa veya boş veri gönderilmişse hata ver.
+		 	if (empty ($member)) {
+				$this->Session->setFlash(__('The email you have entered is not registered with us.',true));//Hata mesajı
+				$this->redirect(array('action'=>'forgot_my_password'));	//yeni bir email girmek için forgot_my_password'e geri dön.
+		 	}
+			else {
+				//Password Confirmation modelini çağır ve sınıfı initialize et..
+				App::import('Model','PasswordConfirmation');
+				$passwordConfirmation = & new PasswordConfirmation();
+				//confirmation oluştur
+				$hash=$passwordConfirmation->newHash($member['Member']['id']);
+				//Kullanıcıya gönderilecek mail için gerekli olan fonksiyon çağırılır.
+				$this->__send_forgot_my_password_email($member, $hash);
+				$this->Session->setFlash(__('A link has been sent to your email address to reset your password. Please check your email.', true));
+				$this->redirect(array('action'=>'login'));
+			}
+		}
+	}
+	
+	function confirm_password_change($incominghash=null) {		
+		if (!empty ($incominghash)){ 
+		App::import('Model','PasswordConfirmation'); 
+		$passwordConfirmation = & new PasswordConfirmation(); 
+		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
+			if (is_numeric($memberId)) { 
+				$pass = $this->__generatePassword();
+				$newpass = Security::hash($pass,null,true); //yeni şifreyi hashler..
+				//Kullanıcının şifresini değiştirir.
+				$this->Member->updateAll(array('Member.password' => "'$newpass'") , array('Member.id' => $memberId));  
+				//Kullanıcının bütün bilgilerini okur. Bu bilgiler mail atarken kullanılacak. (isim, soyisim, mail)
+				$member = $this->Member->read(null, $memberId);				
+				$this->__send_new_password($member, $pass);	//send_new_password fonksiyonunu çağırır.
+				$this->Session->setFlash(__('Your new password has been sent to your email. Please check your email.', true));//İşlem yapıldı mesajı.
+				$this->redirect(array('action'=>'login'));
+			}		
+		}
+		//bir incominghash yoksa veya eşleşme yoksa hata ver.
+		$this->Session->setFlash(__('Your new password request may have expired. Please re-request your password.', true));
+		$this->redirect(array('action'=>'login'));
+	}	
+
+	function cancel_password_change($incominghash=null){	
+		if(!empty ($incominghash)){
+		App::import('Model','PasswordConfirmation'); 
+		$passwordConfirmation = & new PasswordConfirmation(); 
+		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
+			if (is_numeric($memberId)) { 
+				$this->Session->setFlash(__('Your request for a new password has been deleted.', true));
+				$this->redirect(array('action'=>'login'));				
+			}
+		}
+		$this->Session->setFlash(__('Your new password request may have expired. Please re-request your password.', true));
+		$this->redirect(array('action'=>'login'));
+	}
+	
+	
+	function __send_new_password($member, $pass){	
+		$this->Email->layout="default";
+    	$this->Email->to = $member['Member']['lotr_alias'].'@linux.org.tr';
+    	$this->Email->subject = 'Bimel Bayi Portalı İçin Yeni Şifreniz';
+    	$this->Email->from = $this->defaultEmailAddreses['from'];
+   		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
+    	$this->Email->template = 'new_password'; 
+    	$this->Email->sendAs = 'text';
+    	$this->set('member', $member);
+    	$this->set('new_password', $pass);
+    	$this->Email->send();
+    	return;
+	}
+	
+	function __send_forgot_my_password_email($member, $hash) {
+		$this->Email->layout="default";
+    	$this->Email->to = $member['Member']['lotr_alias'].'@linux.org.tr';
+    	$this->Email->subject = 'LKD Üye Sistemi İçin Yeni Şifre İsteği';
+    	$this->Email->from = $this->defaultEmailAddreses['from'];
+   		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
+    	$this->Email->template = 'request_new_password';
+    	$this->Email->sendAs = 'text'; 
+    	$this->set('member', $member);
+    	$this->set('hash', $hash);
+	    $this->Email->send();
+	    return;
+	}
 	
 	function __generatePassword($length=9, $strength=4) {
 	    $vowels = 'aeuy';

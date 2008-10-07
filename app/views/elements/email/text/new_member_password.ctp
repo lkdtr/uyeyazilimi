@@ -4,7 +4,7 @@ Linux Kullanıcıları Derneği üye yönetim sistemine hoşgeldiniz.
 
 Sisteme giriş için, 
 
-Kullanıcı Adınız: <?php echo $user['Member']['lotr_alias']?>@linux.org.tr
+Kullanıcı Adınız: <?php echo $user['Member']['lotr_alias']?>
 Şifreniz: <?php echo $Password?>
 
 Bütün soru ve sorunlarınız için, info@linux.org.tr
