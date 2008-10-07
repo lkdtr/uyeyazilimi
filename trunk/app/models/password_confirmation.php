@@ -38,7 +38,7 @@ class PasswordConfirmation extends AppModel {
 													)));
 		if($found){
 			$this->del($found['PasswordConfirmation']['id']);
-			return true;
+			return $found['PasswordConfirmation']['member_id'];
 		}
 		else return false;
 	}
