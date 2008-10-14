@@ -84,10 +84,11 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'lkd_uye',
+		'login' => 'betauye',
+		'password' => 'Bty890',
+		'database' => 'betauye',
 		'prefix' => '',
+		'encoding' => 'utf8'
 	);
 
 	var $test = array(
