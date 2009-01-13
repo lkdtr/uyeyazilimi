@@ -113,6 +113,8 @@ $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+               mysql_query("SET NAMES 'utf8'");
+
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -528,7 +530,7 @@ if (EW_this.x_uye_soyad && !EW_hasValue(EW_this.x_uye_soyad, "TEXT" )) {
 
 if (EW_this.x_eposta1 && !EW_hasValue(EW_this.x_eposta1, "TEXT" )) {
 
-            if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "Geçersiz e-posta adresi!"))
+            if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "GeÃ§ersiz e-posta adresi!"))
 
                 return false;
 
@@ -536,7 +538,7 @@ if (EW_this.x_eposta1 && !EW_hasValue(EW_this.x_eposta1, "TEXT" )) {
 
 if (EW_this.x_eposta1 && !EW_checkemail(EW_this.x_eposta1.value)) {
 
-        if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "Geçersiz e-posta adresi!"))
+        if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "GeÃ§ersiz e-posta adresi!"))
 
             return false;
 
@@ -544,7 +546,7 @@ if (EW_this.x_eposta1 && !EW_checkemail(EW_this.x_eposta1.value)) {
 
 if (EW_this.x_eposta2 && !EW_checkemail(EW_this.x_eposta2.value)) {
 
-        if (!EW_onError(EW_this, EW_this.x_eposta2, "TEXT", "Geçersiz e-posta adresi!"))
+        if (!EW_onError(EW_this, EW_this.x_eposta2, "TEXT", "GeÃ§ersiz e-posta adresi!"))
 
             return false;
 
@@ -582,13 +584,13 @@ return true;
 
 <tr>
 
-<td height="30" colspan="2" bgcolor="#466176"><SPAN style="font-weight: bold"><font color="#FFFFFF">&nbsp;Üye Bilgileri (Lütfen Bilgilerinizin Güncel ve Doðru Olmasýna Dikkat Ediniz!) </SPAN></td>
+<td height="30" colspan="2" bgcolor="#466176"><SPAN style="font-weight: bold"><font color="#FFFFFF">&nbsp;Ãœye Bilgileri (LÃ¼tfen Bilgilerinizin GÃ¼ncel ve DoÄŸru OlmasÄ±na Dikkat Ediniz!) </SPAN></td>
 
 </tr>
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye numarasý&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">Ãœye numarasÄ±&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><?php echo $x_uye_id; ?><input type="hidden" name="x_uye_id" value="<?php echo strip_tags(@$x_uye_id); ?>">&nbsp;</td>
 
@@ -664,7 +666,7 @@ return true;
 </tr>
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kayýt tarihi&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">KayÄ±t tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5">
  <?php
   if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
@@ -690,7 +692,7 @@ return true;
 	echo "<input type=\"radio\" name=\"x_cinsiyet\" ";
 	if( $x_cinsiyet == "m" )
 		echo "checked";
-	echo " value=\"m\">kadýn&nbsp;</td>";
+	echo " value=\"m\">kadÄ±n&nbsp;</td>";
   
        } else {
  	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
@@ -698,7 +700,7 @@ return true;
 	   if( $x_cinsiyet == "e" )
 	   	echo "erkek";
 	   else
-	   	echo "kadýn";
+	   	echo "kadÄ±n";
 	   
 	   echo "</td>";
 	   }
@@ -716,7 +718,7 @@ return true;
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Görev&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">GÃ¶rev&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><input type="text" name="x_gorev" size="30" maxlength="255" value="<?php echo strip_tags(@$x_gorev); ?>">&nbsp;</td>
 
@@ -732,7 +734,7 @@ return true;
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Mezuniyet yýlý&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">Mezuniyet yÄ±lÄ±&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_yil" size="30" maxlength="4" value="<?php echo strip_tags(@$x_mezuniyet_yil); ?>">&nbsp;</td>
 
@@ -740,7 +742,7 @@ return true;
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Mezun olunan bölüm&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">Mezun olunan bÃ¶lÃ¼m&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_bolum" size="30" maxlength="100" value="<?php echo strip_tags(@$x_mezuniyet_bolum); ?>">&nbsp;</td>
 
@@ -748,7 +750,7 @@ return true;
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Ýletiþim Adresi&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">Ä°letiÅŸim Adresi&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><textarea name="x_is_addr" cols="35" rows="4"><?php echo @$x_is_addr ?></textarea>&nbsp;</td>
 
@@ -764,7 +766,7 @@ return true;
 
 <tr>
 
-<td align="right" bgcolor="#666666"><font color="#FFFFFF">Þehir&nbsp;</td>
+<td align="right" bgcolor="#666666"><font color="#FFFFFF">Åžehir&nbsp;</td>
 
 <td bgcolor="#F5F5F5"><input type="text" name="x_sehir" size="30" maxlength="100" value="<?php echo strip_tags(@$x_sehir); ?>">&nbsp;</td>
 
@@ -782,14 +784,14 @@ return true;
 
 <td align="right" bgcolor="#666666"><font color="#FFFFFF">Yeni Parola&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_PassWord" value="" size=20 maxlength=100>&nbsp;
-<small>(Deðiþtirmek isterseniz)</small>
+<small>(DeÄŸiÅŸtirmek isterseniz)</small>
 </td>
 </tr>
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 1) { echo " checked"; } ?> value=1><?php echo "Üye Ol"; ?>
-  <input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 0) { echo " checked"; } ?> value=0><?php echo "Üye Olma"; ?>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">LKD Ãœye Listesi&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 1) { echo " checked"; } ?> value=1><?php echo "Ãœye Ol"; ?>
+  <input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 0) { echo " checked"; } ?> value=0><?php echo "Ãœye Olma"; ?>
 &nbsp;</td>
 </tr>
 
@@ -806,7 +808,7 @@ return true;
 
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ãœye Karar No&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
   <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_no" value="<?php echo strip_tags(@$x_Uye_karar_no); ?>">&nbsp;</td>
  <?} else { ?>
@@ -816,9 +818,9 @@ return true;
 
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ãœye Karar Tarihi&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
-  <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo strip_tags(@$x_Uye_karar_tarih); ?>">&nbsp; <small>(Yýl-Ay-Gün)</small></td>
+  <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo strip_tags(@$x_Uye_karar_tarih); ?>">&nbsp; <small>(YÄ±l-Ay-GÃ¼n)</small></td>
  <?} else { ?>
   <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih); ?></td>
  <? } ?>
@@ -826,7 +828,7 @@ return true;
 
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik Basýldý&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik BasÄ±ldÄ±&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) {
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_kimlik_basildi\" ";
@@ -836,7 +838,7 @@ return true;
 	echo "<input type=\"radio\" name=\"x_kimlik_basildi\" ";
 	if( $x_kimlik_basildi == 0 )
 		echo "checked";
-	echo " value=0>Hayýr&nbsp;</td>";
+	echo " value=0>HayÄ±r&nbsp;</td>";
   
        } else {
  	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
@@ -844,7 +846,7 @@ return true;
 	   if( $x_kimlik_basildi == 1 )
 	   	echo "Evet";
 	   else
-	   	echo "Hayýr";
+	   	echo "HayÄ±r";
 	   
 	   echo "</td>";
 	   }
@@ -864,7 +866,7 @@ return true;
 	echo "<input type=\"radio\" name=\"x_kimlik_iletildi\" ";
 	if( $x_kimlik_iletildi == 0 )
 		echo "checked";
-	echo " value=0>Hayýr&nbsp;</td>";
+	echo " value=0>HayÄ±r&nbsp;</td>";
   
        } else {
  	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
@@ -872,7 +874,7 @@ return true;
 	   if( $x_kimlik_iletildi == 1 )
 	   	echo "Evet";
 	   else
-	   	echo "Hayýr";
+	   	echo "HayÄ±r";
 	   
 	   echo "</td>";
 	   }
@@ -881,7 +883,7 @@ return true;
 
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar için  Fotoðraf&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar iÃ§in  FotoÄŸraf&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { 
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_vesikalik_foto\" ";
@@ -899,7 +901,7 @@ return true;
 	   if( $x_vesikalik_foto == 1 )
 	   	echo "Evet";
 	   else
-	   	echo "Hayýr";
+	   	echo "HayÄ±r";
 	   
 	   echo "</td>";
 	   }
@@ -908,7 +910,7 @@ return true;
 
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Formu&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ãœye Formu&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { 
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_Uye_formu\" ";
@@ -926,7 +928,7 @@ return true;
 	   if( $x_Uye_formu == 1 )
 	   	echo "Evet";
 	   else
-	   	echo "Hayýr";
+	   	echo "HayÄ±r";
 	   
 	   echo "</td>";
 	   }
@@ -946,7 +948,7 @@ if (@$_SESSION["uy_status_UserLevel"] == -1) {
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resim&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php if (!is_null($x_Resim)) { ?>
-<input type="radio" name="a_x_Resim" value="1" checked>Olduðu gibi býrak&nbsp;<input type="radio" name="a_x_Resim" value="2">Sil&nbsp;<input type="radio" name="a_x_Resim" value="3">Deðiþtir<br>
+<input type="radio" name="a_x_Resim" value="1" checked>OlduÄŸu gibi bÄ±rak&nbsp;<input type="radio" name="a_x_Resim" value="2">Sil&nbsp;<input type="radio" name="a_x_Resim" value="3">DeÄŸiÅŸtir<br>
 <input type="file" name="x_Resim" onChange="if (this.form.a_x_Resim[2]) this.form.a_x_Resim[2].checked=true;">&nbsp;(jpg/jpeg)</td>
 
 </tr>
@@ -959,7 +961,7 @@ if (@$_SESSION["uy_status_UserLevel"] == -1) {
    <img width=200 src="uye_resimler/<?php echo "$x_Resim"; ?>" border="0">
   </a>
   <?php } else {
-                echo "Daha önce resim yüklenmedi";
+                echo "Daha Ã¶nce resim yÃ¼klenmedi";
                }
   ?>
  </td>
@@ -969,7 +971,7 @@ if (@$_SESSION["uy_status_UserLevel"] == -1) {
 
 <tr>
 
-  <td colspan="2" align="right" bgcolor="#466176"><INPUT type="submit" name="Action" value="DÜZENLE"></td>
+  <td colspan="2" align="right" bgcolor="#466176"><INPUT type="submit" name="Action" value="DÃœZENLE"></td>
 
   </tr>
 

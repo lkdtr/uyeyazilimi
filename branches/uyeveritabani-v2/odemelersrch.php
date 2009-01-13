@@ -189,7 +189,7 @@ $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="odemelerlist.php">Listeye Dön</a></font></a></p>
+<p><br><br><a href="odemelerlist.php">Listeye DÃ¶n</a></font></a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -218,7 +218,7 @@ return true;
 <input type="hidden" name="z_uye_id[]" value="=,,">
 </font>&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_uye_idList = "<select name=\"x_uye_id\" size=10><option value=\"\">Lütfen Seçiniz</option>";
+$x_uye_idList = "<select name=\"x_uye_id\" size=10><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $sqlwrk = "SELECT uye_id, eposta1 FROM uyeler ORDER BY eposta1";
 $rswrk = mysql_query($sqlwrk);
 if ($rswrk) {
@@ -249,9 +249,9 @@ echo $x_uye_idList ;
 <td bgcolor="#666666"><font color="#FFFFFF">tur</font></font>&nbsp;</td>
 <td bgcolor="#F5F5F5">
 <input type="hidden" name="z_tur[]" value="LIKE,'%,%'"></font>&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="radio" name="x_tur" value="<?php echo htmlspecialchars("aidat"); ?>"><?php echo "Üye Aidatý"; ?>
-<input type="radio" name="x_tur" value="<?php echo htmlspecialchars("bagis"); ?>"><?php echo "Baðýþ"; ?>
-<input type="radio" name="x_tur" value="<?php echo htmlspecialchars("diger"); ?>"><?php echo "Diðer"; ?>
+<td bgcolor="#F5F5F5"><input type="radio" name="x_tur" value="<?php echo htmlspecialchars("aidat"); ?>"><?php echo "Ãœye AidatÄ±"; ?>
+<input type="radio" name="x_tur" value="<?php echo htmlspecialchars("bagis"); ?>"><?php echo "BaÄŸÄ±ÅŸ"; ?>
+<input type="radio" name="x_tur" value="<?php echo htmlspecialchars("diger"); ?>"><?php echo "DiÄŸer"; ?>
 </font>&nbsp;</td>
 </tr>
 <tr>
@@ -272,7 +272,7 @@ echo $x_uye_idList ;
 <td bgcolor="#F5F5F5">
 <input type="hidden" name="z_odemeyolu[]" value="LIKE,'%,%'"></font>&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_odemeyoluList = "<select name=\"x_odemeyolu\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_odemeyoluList = "<select name=\"x_odemeyolu\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_odemeyoluList .= "<option value=\"" . htmlspecialchars("havale") . "\"";
 if (@$x_odemeyolu == "havale") {
 	$x_odemeyoluList .= " selected";
@@ -292,12 +292,12 @@ $x_odemeyoluList .= "<option value=\"" . htmlspecialchars("elden") . "\"";
 if (@$x_odemeyolu == "elden") {
 	$x_odemeyoluList .= " selected";
 }
-$x_odemeyoluList .= ">" . "Elden Ödeme" . "</option>";
-$x_odemeyoluList .= "<option value=\"" . htmlspecialchars("diðer") . "\"";
-if (@$x_odemeyolu == "diðer") {
+$x_odemeyoluList .= ">" . "Elden Ã–deme" . "</option>";
+$x_odemeyoluList .= "<option value=\"" . htmlspecialchars("diÄŸer") . "\"";
+if (@$x_odemeyolu == "diÄŸer") {
 	$x_odemeyoluList .= " selected";
 }
-$x_odemeyoluList .= ">" . "Diðer - Notlar Kýsmýna Bakýnýz" . "</option>";
+$x_odemeyoluList .= ">" . "DiÄŸer - Notlar KÄ±smÄ±na BakÄ±nÄ±z" . "</option>";
 $x_odemeyoluList .= "</select>";
 echo $x_odemeyoluList;
 ?>
@@ -306,7 +306,7 @@ echo $x_odemeyoluList;
 <tr>
   <td bgcolor="#666666">&nbsp;</td>
   <td bgcolor="#F5F5F5">&nbsp;</td>
-  <td align="right" bgcolor="#F5F5F5"><INPUT type="submit" name="Action" value="Detaylý Arama"></td>
+  <td align="right" bgcolor="#F5F5F5"><INPUT type="submit" name="Action" value="DetaylÄ± Arama"></td>
 </tr>
 </table>
 <p>

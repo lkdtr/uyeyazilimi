@@ -243,11 +243,11 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 <td><div align="right"><b><?php echo (is_numeric($x_miktar)) ? FormatCurrency($x_miktar,0,-2,-2,-2) : $x_miktar; ?></b></div>&nbsp;</td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td><a href="<?php echo (!is_null(@$row["aidat_id"])) ? "aidat_miktarview.php?key=".urlencode($row["aidat_id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
+"><img src='images/browse.gif' alt='GÃ¶r' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td><a href="<?php echo (!is_null(@$row["aidat_id"])) ? "aidat_miktaredit.php?key=".urlencode($row["aidat_id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
+"><img src='images/edit.gif' alt='DÃ¼zenle' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td><a href="<?php echo (!is_null(@$row["aidat_id"])) ? "aidat_miktaradd.php?key=".urlencode($row["aidat_id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
@@ -354,18 +354,18 @@ if ($totalRecs > 0) {
 		$stopRec = $recCount;
 	}
 ?>
-	Kayýtlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
+	KayÄ±tlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
 <?php
 } else {
 ?>
 <?php
 	if (($ewCurSec & ewAllowList) == ewAllowList) {
 ?>
-	Eþleþen Kayýt Bulunamadý!
+	EÅŸleÅŸen KayÄ±t BulunamadÄ±!
 <?php
 	} else {
 ?>
-	Ýzniniz Yok
+	Ä°zniniz Yok
 <?php
 	}
 ?>

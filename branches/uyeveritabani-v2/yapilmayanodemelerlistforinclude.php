@@ -58,10 +58,10 @@ if( $Toplam > $x_AidatToplam) {
 ?>
 <form method="post">
 <table align="center" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
-<tr><td colspan="2" align="center"><h2>Yapmadığınız Ödemeleriniz Var!</h2></td></tr>
+<tr><td colspan="2" align="center"><h2>YapmadÄ±ÄŸÄ±nÄ±z Ã–demeleriniz Var!</h2></td></tr>
 <tr bgcolor="#466176">
-<td><b><font color="#ffffff">Yapılmış Olması Gereken Ödemeler Toplamı</font></b></td>
-<td><b><font color="#ffffff">Şimdiye Kadar Ödenen</font></b></td>
+<td><b><font color="#ffffff">YapÄ±lmÄ±ÅŸ OlmasÄ± Gereken Ã–demeler ToplamÄ±</font></b></td>
+<td><b><font color="#ffffff">Åimdiye Kadar Ã–denen</font></b></td>
 </tr>
 
 <tr bgcolor="<?php echo $bgcolor; ?>">
@@ -73,12 +73,12 @@ if( $Toplam > $x_AidatToplam) {
  <td><?php echo FormatCurrency($x_AidatToplam,0,-2,-2,-2); ?></td>
 </tr>
  
-<tr><td align="right"><b>Yapmanız Gereken Toplam Aidat Ödemesi :</b></td><td><?php echo FormatCurrency($Toplam-$x_AidatToplam,0,-2,-2,-2);?></td></tr>
+<tr><td align="right"><b>YapmanÄ±z Gereken Toplam Aidat Ã–demesi :</b></td><td><?php echo FormatCurrency($Toplam-$x_AidatToplam,0,-2,-2,-2);?></td></tr>
 </table>
 </form>
-<?php } else { // Ödemeler tamam ise ?>
+<?php } else { // Ã–demeler tamam ise ?>
 <table align="center" width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
-<tr><td colspan="2" align="center"><h2>Yapmadığınız Ödeme Bulunmuyor</h2></td></tr>
+<tr><td colspan="2" align="center"><h2>YapmadÄ±ÄŸÄ±nÄ±z Ã–deme Bulunmuyor</h2></td></tr>
 </table>
 
 <? } ?>

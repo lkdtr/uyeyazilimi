@@ -94,7 +94,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="aidat_miktarlist.php">Listeye Dön</a></p>
+<p><br><br><a href="aidat_miktarlist.php">Listeye DÃ¶n</a></p>
 <p>
 <form>
 <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">

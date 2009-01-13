@@ -71,6 +71,7 @@ if (@$_POST["submit"] <> "") {
 		$conn = mysql_connect(HOST, USER, PASS);
 
 		mysql_select_db(DB);
+		        mysql_query("SET NAMES 'utf8'");
 
 		$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
 
@@ -91,6 +92,7 @@ if (@$_POST["submit"] <> "") {
 		$conn = mysql_connect(HOST, USER, PASS);
 
 		mysql_select_db(DB);
+		        mysql_query("SET NAMES 'utf8'");
 
 		$rs = mysql_query("SELECT * FROM uyeler WHERE eposta1 = '" . $userid . "'") or die(mysql_error());
 
@@ -147,7 +149,7 @@ if (@$_POST["submit"] <> "") {
 
 <head>
 
-	<title>LKD ÜYE VERİTABANI</title>
+	<title>LKD ÃœYE VERÄ°TABANI</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
 
@@ -167,7 +169,7 @@ function  EW_checkMyForm(EW_this) {
 
 if (!EW_hasValue(EW_this.userid, "TEXT")) {
 
-	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "Lütfen ID Giriniz"))
+	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "LÃ¼tfen ID Giriniz"))
 
 		return false;
 
@@ -175,7 +177,7 @@ if (!EW_hasValue(EW_this.userid, "TEXT")) {
 
 if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
 
-	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Şifre Giriniz"))
+	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Åifre Giriniz"))
 
 		return false;
 
@@ -197,7 +199,7 @@ return true;
 
 	<tr>
 
-		<td>LKD ÜYE VERİTABANI</td>
+		<td>LKD ÃœYE VERÄ°TABANI</td>
 
 	</tr>
 
@@ -205,7 +207,7 @@ return true;
 
 <?php if (!$validpwd) {?>
 
-<p align="center"><font color="#FF0000">Yanlış ID veya Şifre<br><?php echo $userid $passwd;?></p>
+<p align="center"><font color="#FF0000">YanlÄ±ÅŸ ID veya Åifre<br><?php echo $userid $passwd;?></p>
 
 <?php }?>
 
@@ -215,7 +217,7 @@ return true;
 
 	<tr>
 
-		<td align="left">Kullanıcı ID</td>
+		<td align="left">KullanÄ±cÄ± ID</td>
 
 		<td><input type="text" name="userid" size="20" value="<?php echo @$_COOKIE["uy_userid"]; ?>"></td>
 
@@ -223,7 +225,7 @@ return true;
 
 	<tr>
 
-		<td align="left">Şifre</td>
+		<td align="left">Åifre</td>
 
 		<td><input type="password" name="passwd" size="20"></td>
 
@@ -233,13 +235,13 @@ return true;
 
 		<td align="left">&nbsp;</td>
 
-		<td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
+		<td><input type="checkbox" name="rememberme" value="true">Beni HatÄ±rla (Ã‡erez KullanÄ±lÄ±r)</td>
 
 	</tr>
 
 	<tr>
 
-		<td colspan="2" align="center"><input type="submit" name="submit" value="Giriş"></td>
+		<td colspan="2" align="center"><input type="submit" name="submit" value="GiriÅŸ"></td>
 
 	</tr>
 

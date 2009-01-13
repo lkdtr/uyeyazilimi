@@ -85,6 +85,8 @@ $x_DuyuruTur = @$_POST["x_DuyuruTur"];
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+               mysql_query("SET NAMES 'utf8'");
+
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -197,7 +199,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="duyurularlist.php">Listeye Dön</a></p>
+<p><br><br><a href="duyurularlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -217,7 +219,7 @@ if (win_ie_ver >= 5.5) {
 <!-- start Javascript
 function  EW_checkMyForm(EW_this) {
 if (EW_this.x_DuyuruBaslik && !EW_hasValue(EW_this.x_DuyuruBaslik, "TEXTAREA" )) {
-            if (!EW_onError(EW_this, EW_this.x_DuyuruBaslik, "TEXTAREA", "Duyuru için Başlık Girmelisiniz!"))
+            if (!EW_onError(EW_this, EW_this.x_DuyuruBaslik, "TEXTAREA", "Duyuru iÃ§in BaÅŸlÄ±k Girmelisiniz!"))
                 return false;
         }
 if (EW_this.x_DuyuruTarih && !EW_hasValue(EW_this.x_DuyuruTarih, "TEXT" )) {
@@ -241,7 +243,7 @@ if (EW_this.x_DuyuruAktif && !EW_hasValue(EW_this.x_DuyuruAktif, "RADIO" )) {
                 return false;
         }
 if (EW_this.x_DuyuruTur && !EW_hasValue(EW_this.x_DuyuruTur, "SELECT" )) {
-            if (!EW_onError(EW_this, EW_this.x_DuyuruTur, "SELECT", "Duyuru Türünü Belirleyiniz."))
+            if (!EW_onError(EW_this, EW_this.x_DuyuruTur, "SELECT", "Duyuru TÃ¼rÃ¼nÃ¼ Belirleyiniz."))
                 return false;
         }
 return true;
@@ -288,7 +290,7 @@ return true;
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Statik Sayfa&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php if (!is_null($x_StatikSayfa)) { ?>
-<input type="radio" name="a_x_StatikSayfa" value="1" checked>Olduğu gibi bırak&nbsp;<input type="radio" name="a_x_StatikSayfa" value="2">Çıkar&nbsp;<input type="radio" name="a_x_StatikSayfa" value="3">Değiştir<br>
+<input type="radio" name="a_x_StatikSayfa" value="1" checked>OlduÄŸu gibi bÄ±rak&nbsp;<input type="radio" name="a_x_StatikSayfa" value="2">Ã‡Ä±kar&nbsp;<input type="radio" name="a_x_StatikSayfa" value="3">DeÄŸiÅŸtir<br>
 <?php } else { ?>
 <input type="hidden" name="a_x_StatikSayfa" value="3">
 <?php } ?>
@@ -297,22 +299,22 @@ return true;
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Duyuru Tur&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Uye Sistemi") . "\"";
 if (@$x_DuyuruTur == "LKD Uye Sistemi") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "LKD Uye Sistemi" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Çalışma Raporu") . "\"";
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Ã‡alÄ±ÅŸma Raporu") . "\"";
 if (@$x_DuyuruTur == "LKD Uye Sistemi") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "LKD YK Çalışma Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Çalışma Grubu Raporu") . "\"";
-if (@$x_DuyuruTur == "Çalışma Grubu Raporu") {
+$x_DuyuruTurList .= ">" . "LKD YK Ã‡alÄ±ÅŸma Raporu" . "</option>";
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Ã‡alÄ±ÅŸma Grubu Raporu") . "\"";
+if (@$x_DuyuruTur == "Ã‡alÄ±ÅŸma Grubu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Çalışma Grubu Raporu" . "</option>";
+$x_DuyuruTurList .= ">" . "Ã‡alÄ±ÅŸma Grubu Raporu" . "</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Genel Duyuru") . "\"";
 if (@$x_DuyuruTur == "LKD Genel Duyuru") {
 	$x_DuyuruTurList .= " selected";
@@ -323,11 +325,11 @@ if (@$x_DuyuruTur == "Denetleme Kurulu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "Denetleme Kurulu Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Diğer Duyuru Konuları") . "\"";
-if (@$x_DuyuruTur == "Diğer Duyuru Konuları") {
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("DiÄŸer Duyuru KonularÄ±") . "\"";
+if (@$x_DuyuruTur == "DiÄŸer Duyuru KonularÄ±") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Diğer Duyuru Konuları" . "</option>";
+$x_DuyuruTurList .= ">" . "DiÄŸer Duyuru KonularÄ±" . "</option>";
 $x_DuyuruTurList .= "</select>";
 echo $x_DuyuruTurList;
 ?>

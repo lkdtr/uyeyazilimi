@@ -35,8 +35,10 @@ if (@$_POST["submit"] <> "") {
 //	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
 	$passwd = addslashes($_POST["passwd"]);
 //	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanýna baðlanamadýk");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
+	mysql_query("SET NAMES 'utf8'");
+
 	$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
 	if ($row = mysql_fetch_array($rs)) {
 		if (strtoupper($row["AdminPass"]) == strtoupper($passwd)) {
@@ -47,6 +49,8 @@ if (@$_POST["submit"] <> "") {
 	if (!$validpwd) {
 		$conn = mysql_connect(HOST, USER, PASS);
 		mysql_select_db(DB);
+		mysql_query("SET NAMES 'utf8'");
+
 		$Sorgu = "SELECT * FROM uyeler WHERE (eposta1 = '" . $userid . "')"
 			. " OR (alias = '". $userid ."')"; //Alias da kabul
 		$rs = mysql_query($Sorgu) or die(mysql_error());
@@ -89,8 +93,8 @@ if (@$_POST["submit"] <> "") {
 ?>
 <html>
 <head>
-	<title>LKD ÜYE VERÝTABANI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+	<title>LKD ÃœYE VERÄ°TABANI</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 </head>
 <script language="JavaScript" src="ew.js"></script>
@@ -98,11 +102,11 @@ if (@$_POST["submit"] <> "") {
 <!-- start JavaScript
 function  EW_checkMyForm(EW_this) {
 if (!EW_hasValue(EW_this.userid, "TEXT")) {
-	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "Lütfen ID Giriniz"))
+	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "LÃ¼tfen ID Giriniz"))
 		return false;
 }
 if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
-	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Þifre Giriniz"))
+	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Åžifre Giriniz"))
 		return false;
 }
 return true;
@@ -144,21 +148,21 @@ return true;
         <td width="100" align="left"><input name="userid" type="text" id="email" value="
 	<?php echo (@$_COOKIE["uy_userid"]) ? (@$_COOKIE["uy_userid"]) : "@linux.org.tr"; ?>
 	"></td>
-        <td><input type="checkbox" name="rememberme" value="true">Beni Hatýrla (Çerez Kullanýlýr)</td>
+        <td><input type="checkbox" name="rememberme" value="true">Beni HatÄ±rla (Ã‡erez KullanÄ±lÄ±r)</td>
       </tr>
       <tr>
         <td width="75" align="right">Parola</td>
         <td width="100" align="left"><input type="password" name="passwd"></td>
-        <td><input type="submit" name="submit" value="Giriþ">
+        <td><input type="submit" name="submit" value="GiriÅŸ">
 		<?php if (!$validpwd) {?>
-		<font color="#FF0000">Yanlýþ e-posta veya parola
+		<font color="#FF0000">YanlÄ±ÅŸ e-posta veya parola
 		<?php }?>
 		</td>
       </tr>
     </table></td>
     <td width="40%" align="center">
-    Kullanýcý adý olarak gireceðiniz e-posta adresi, isim.soyisim@linux.org.tr biçiminde olmalýdýr.<br>
-	<a href="sifrehatirlat.php">Parolanýzý unuttuysanýz týklayýnýz.</a></td>
+    KullanÄ±cÄ± adÄ± olarak gireceÄŸiniz e-posta adresi, isim.soyisim@linux.org.tr biÃ§iminde olmalÄ±dÄ±r.<br>
+	<a href="sifrehatirlat.php">ParolanÄ±zÄ± unuttuysanÄ±z tÄ±klayÄ±nÄ±z.</a></td>
     </tr>
 </table></form>
    </td>

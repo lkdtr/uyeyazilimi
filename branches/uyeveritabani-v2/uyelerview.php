@@ -78,6 +78,8 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
+
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -132,14 +134,14 @@ switch ($a)
 <?php include ("header.php") ?>
 <br>
 <div align="center">
- <a href="uyelerlist.php"><img border=0 title="Listeye Dön" alt="Listeye Dön" src="images/ed_undo.gif"></a>
- <a href="uyeleredit.php?key=<?php echo $tkey;?>"><img border=0 title="Düzenle" alt="Düzenle" src="images/edit.gif"></a>
+ <a href="uyelerlist.php"><img border=0 title="Listeye DÃ¶n" alt="Listeye DÃ¶n" src="images/ed_undo.gif"></a>
+ <a href="uyeleredit.php?key=<?php echo $tkey;?>"><img border=0 title="DÃ¼zenle" alt="DÃ¼zenle" src="images/edit.gif"></a>
 </div>
 
 <form>
 <table align="center" width="60%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarasý&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ãœye NumarasÄ±&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_uye_id; ?>&nbsp;</td>
 </tr>
 
@@ -170,13 +172,13 @@ switch ($a)
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">LKD Ãœye Listesi&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_liste_uyeligi == 1 )
-    	echo "Üye";
+    	echo "Ãœye";
     else
-    	echo "Üye Deðil";
+    	echo "Ãœye DeÄŸil";
 
     echo "&nbsp;</td>";
   ?>
@@ -184,7 +186,7 @@ switch ($a)
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kayýt tarihi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">KayÄ±t tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php echo "$x_kayit_tarihi"; ?>&nbsp;</td>
 </tr>
 <tr>
@@ -195,7 +197,7 @@ switch ($x_cinsiyet) {
 		echo "erkek";
 		break;
 	case "m":
-		echo "kadýn";
+		echo "kadÄ±n";
 		break;
 }
 ?>
@@ -206,7 +208,7 @@ switch ($x_cinsiyet) {
 <td bgcolor="#F5F5F5"><?php echo $x_kurum; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Görev&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">GÃ¶rev&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_gorev; ?>&nbsp;</td>
 </tr>
 <tr>
@@ -214,15 +216,15 @@ switch ($x_cinsiyet) {
 <td bgcolor="#F5F5F5"><?php echo $x_mezuniyet; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yýlý&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yÄ±lÄ±&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_yil; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bölüm&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bÃ¶lÃ¼m&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_bolum; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ýletiþim Adresi&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ä°letiÅŸim Adresi&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo str_replace(chr(10), "<br>" ,@$x_is_addr . "") ?>&nbsp;</td>
 </tr>
 <tr>
@@ -230,7 +232,7 @@ switch ($x_cinsiyet) {
 <td bgcolor="#F5F5F5"><?php echo $x_semt; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Þehir&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Åžehir&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_sehir; ?>&nbsp;</td>
 </tr>
 <tr>
@@ -251,25 +253,25 @@ switch ($x_cinsiyet) {
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Karar No&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_no)?>&nbsp;</td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Karar Tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih)?>&nbsp;</td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Basýldý&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimlik BasÄ±ldÄ±&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
     if( $x_kimlik_basildi == 1 )
     	echo "Evet";
     else
-    	echo "Hayýr";
+    	echo "HayÄ±r";
 
     echo "</td>";
   ?>
@@ -283,7 +285,7 @@ switch ($x_cinsiyet) {
     if( $x_kimlik_iletildi == 1 )
     	echo "Evet";
     else
-    	echo "Hayýr";
+    	echo "HayÄ±r";
 
     echo "</td>";
   ?>
@@ -291,7 +293,7 @@ switch ($x_cinsiyet) {
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoðraf&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar iÃ§in FotoÄŸraf&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
     if( $x_vesikalik_foto == 1 )
@@ -305,7 +307,7 @@ switch ($x_cinsiyet) {
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Formu&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
     if( $x_Uye_formu == 1 )
@@ -355,7 +357,7 @@ case "1":
 <img width=200 src="uye_resimler/<?php echo "$x_Resim"; ?>" border="0">
 </a>
 <?php } else {
-		echo "Resim Yüklenmedi";
+		echo "Resim YÃ¼klenmedi";
 	     }
 ?>
 

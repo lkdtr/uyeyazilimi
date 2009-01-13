@@ -67,7 +67,7 @@ $whereClause = "";
 
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
-// adamin kayit oldugu yýl seçiliyor
+// adamin kayit oldugu yÄ±l seÃ§iliyor
 if(!isset($_GET["key"]))
 	$x_UyeId = $_SESSION["uy_status_UserID"];
 else
@@ -78,7 +78,7 @@ $row = @mysql_fetch_array($rs);
 
 $yapilmayan = array();
 for($year=$row[0];$year<=date("Y");$year++) {
-	// odeme yapmadýðý yýllar diziye atýlýyor
+	// odeme yapmadÄ±ÄŸÄ± yÄ±llar diziye atÄ±lÄ±yor
 	$strsql = "SELECT count(*) FROM odemeler WHERE uye_id='".$x_UyeId."' AND tarih LIKE '".$year."%' AND tur='aidat'";
 	$rs = mysql_query($strsql);
 	$row1 = @mysql_fetch_array($rs);
@@ -96,7 +96,7 @@ if(count($yapilmayan) == 0)
 <?php include ("header.php") ?>
 <form method="post">
 <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
-<tr><td colspan="4" align="center"><b>Yapmadýðýnýz Ödemeleriniz Var!</b></td></tr>
+<tr><td colspan="4" align="center"><b>YapmadÄ±ÄŸÄ±nÄ±z Ã–demeleriniz Var!</b></td></tr>
 <tr bgcolor="#466176">
 <td>uye id</td>
 <td>miktar</td>
@@ -139,13 +139,13 @@ foreach($yapilmayan as $key => $val) {
 <td><?php
 switch ($x_tur) {
 	case "aidat":
-		echo "Üye Aidatý";
+		echo "Ãœye AidatÄ±";
 		break;
 	case "bagis":
-		echo "Baðýþ";
+		echo "BaÄŸÄ±ÅŸ";
 		break;
 	case "diger":
-		echo "Diðer";
+		echo "DiÄŸer";
 		break;
 }
 ?>

@@ -97,7 +97,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="duyurularlist.php">Listeye Dön</a></p>
+<p><br><br><a href="duyurularlist.php">Listeye DÃ¶n</a></p>
 <form action="duyurulardelete.php" method="post">
 <p>
 <input type="hidden" name="a" value="D">
@@ -168,11 +168,11 @@ switch ($x_DuyuruTur) {
 case "LKD Genel Kurul Raporu":
 		echo "LKD Genel Kurul Raporu";
 		break;
-case "LKD YK Çalýþma Raporu":
-		echo "LKD YK Çalýþma Raporu";
+case "LKD YK Ã‡alÄ±ÅŸma Raporu":
+		echo "LKD YK Ã‡alÄ±ÅŸma Raporu";
 		break;
-case "Çalýþma Grubu Raporu":
-		echo "Çalýþma Grubu Raporu";
+case "Ã‡alÄ±ÅŸma Grubu Raporu":
+		echo "Ã‡alÄ±ÅŸma Grubu Raporu";
 		break;
 case "LKD Genel Duyuru":
 		echo "LKD Genel Duyuru";
@@ -180,8 +180,8 @@ case "LKD Genel Duyuru":
 case "Denetleme Kurulu Raporu":
 		echo "Denetleme Kurulu Raporu";
 		break;
-case "Diðer Duyuru Konularý":
-		echo "Diðer Duyuru Konularý";
+case "DiÄŸer Duyuru KonularÄ±":
+		echo "DiÄŸer Duyuru KonularÄ±";
 		break;
 }
 ?>
@@ -195,6 +195,6 @@ mysql_close($conn);
 ?>
 </table>
 <p>
-<input type="submit" name="Action" value="Silmeyi Onaylayýn">
+<input type="submit" name="Action" value="Silmeyi OnaylayÄ±n">
 </form>
 <?php include ("footer.php") ?>

@@ -163,7 +163,7 @@ $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="duyurularlist.php">Listeye Dön</a></a></p>
+<p><br><br><a href="duyurularlist.php">Listeye DÃ¶n</a></a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -225,26 +225,26 @@ return true;
 <option value=">=,','">>=</option>
 <option value="LIKE,'%,%'">benzer</option>
 <option value="NOT LIKE,'%,%'">benzemez</option>
-<option value="LIKE,',%'">başlangıcı</option>
+<option value="LIKE,',%'">baÅŸlangÄ±cÄ±</option>
 </select>
 &nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Genel Kurul Raporu") . "\"";
 if (@$x_DuyuruTur == "LKD Genel Kurul Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "LKD Genel Kurul Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Çalışma Raporu") . "\"";
-if (@$x_DuyuruTur == "LKD YK Çalışma Raporu") {
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Ã‡alÄ±ÅŸma Raporu") . "\"";
+if (@$x_DuyuruTur == "LKD YK Ã‡alÄ±ÅŸma Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "LKD YK Çalışma Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Çalışma Grubu Raporu") . "\"";
-if (@$x_DuyuruTur == "Çalışma Grubu Raporu") {
+$x_DuyuruTurList .= ">" . "LKD YK Ã‡alÄ±ÅŸma Raporu" . "</option>";
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Ã‡alÄ±ÅŸma Grubu Raporu") . "\"";
+if (@$x_DuyuruTur == "Ã‡alÄ±ÅŸma Grubu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Çalışma Grubu Raporu" . "</option>";
+$x_DuyuruTurList .= ">" . "Ã‡alÄ±ÅŸma Grubu Raporu" . "</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Genel Duyuru") . "\"";
 if (@$x_DuyuruTur == "LKD Genel Duyuru") {
 	$x_DuyuruTurList .= " selected";
@@ -255,11 +255,11 @@ if (@$x_DuyuruTur == "Denetleme Kurulu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "Denetleme Kurulu Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Diğer Duyuru Konuları") . "\"";
-if (@$x_DuyuruTur == "Diğer Duyuru Konuları") {
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("DiÄŸer Duyuru KonularÄ±") . "\"";
+if (@$x_DuyuruTur == "DiÄŸer Duyuru KonularÄ±") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Diğer Duyuru Konuları" . "</option>";
+$x_DuyuruTurList .= ">" . "DiÄŸer Duyuru KonularÄ±" . "</option>";
 $x_DuyuruTurList .= "</select>";
 echo $x_DuyuruTurList;
 ?>

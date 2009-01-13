@@ -99,7 +99,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="bildirilerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="bildirilerlist.php">Listeye DÃ¶n</a></p>
 <TABLE width="80%"  border="1" align="center" cellpadding="10" cellspacing="0" bordercolor="#CCCCCC" bgcolor="#f4f4f4">
   <TR>
     <TD><TABLE width="100%"  border="0" align="center" cellpadding="5" cellspacing="0">
@@ -119,8 +119,8 @@ case "LKD Bildirileri":
 case "Ortak Bildiriler":
 		echo "Ortak Bildiriler";
 		break;
-case "Diðer STK Bildirileri":
-		echo "Diðer STK Bildirileri";
+case "DiÄŸer STK Bildirileri":
+		echo "DiÄŸer STK Bildirileri";
 		break;
 }
 ?>

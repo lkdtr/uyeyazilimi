@@ -83,8 +83,8 @@ if(!($_POST["subj"] && $_POST["msg"])) {
 </table>
 </form>
 <?php } else { 
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanýna baðlanamadýk");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$rs = mysql_query("SELECT uye_ad,uye_soyad,eposta1 FROM uyeler WHERE uye_id='".$_SESSION["uy_status_UserID"]."'") or die(mysql_error());
 	$content = $_POST["msg"];
 	$headers  = "MIME-Version: 1.0\r\n";

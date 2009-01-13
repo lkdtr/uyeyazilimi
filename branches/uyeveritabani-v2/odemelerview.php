@@ -75,6 +75,8 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
+
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -103,12 +105,12 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p></p><br><br><a href="odemelerlist.php">Listeye Dön</a></p>
+<p></p><br><br><a href="odemelerlist.php">Listeye DÃ¶n</a></p>
 <p>
 <form>
 <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Üye (e-posta)</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ãœye (e-posta)</td>
 <td bgcolor="#F5F5F5"><?php
 if (!is_null($x_uye_id)) {
 	$sqlwrk = "SELECT uye_id, uye_ad, uye_soyad, eposta1 FROM uyeler";
@@ -123,32 +125,32 @@ if (!is_null($x_uye_id)) {
 &nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ödeme Miktarý</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ã–deme MiktarÄ±</td>
 <td bgcolor="#F5F5F5"><?php echo (is_numeric($x_miktar)) ? FormatCurrency($x_miktar,0,-2,-2,-2) : $x_miktar; ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ödeme Türü</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ã–deme TÃ¼rÃ¼</td>
 <td bgcolor="#F5F5F5"><?php
 switch ($x_tur) {
 	case "aidat":
-		echo "Üye Aidatý";
+		echo "Ãœye AidatÄ±";
 		break;
 	case "bagis":
-		echo "Baðýþ";
+		echo "BaÄŸÄ±ÅŸ";
 		break;
 	case "diger":
-		echo "Diðer";
+		echo "DiÄŸer";
 		break;
 }
 ?>
 &nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ödeme Tarihi</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ã–deme Tarihi</td>
 <td bgcolor="#F5F5F5"><?php echo FormatDateTime($x_tarih,7); ?>&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ödeme Þekli</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ã–deme Åžekli</td>
 <td bgcolor="#F5F5F5"><?php
 switch ($x_odemeyolu) {
 case "havale":
@@ -161,10 +163,10 @@ case "posta":
 		echo "Posta Nakit";
 		break;
 case "elden":
-		echo "Elden Ödeme";
+		echo "Elden Ã–deme";
 		break;
-case "diðer":
-		echo "Diðer - Notlar Kýsmýna Bakýnýz";
+case "diÄŸer":
+		echo "DiÄŸer - Notlar KÄ±smÄ±na BakÄ±nÄ±z";
 		break;
 }
 ?>

@@ -163,7 +163,7 @@ $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="bildirilerlist.php">Listeye Dön</a></a></p>
+<p><br><br><a href="bildirilerlist.php">Listeye DÃ¶n</a></a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -220,7 +220,7 @@ return true;
 <input type="hidden" name="z_BildiriTur[]" value="LIKE,'%,%'">benzer
 &nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_BildiriTurList = "<select name=\"x_BildiriTur\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_BildiriTurList = "<select name=\"x_BildiriTur\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_BildiriTurList .= "<option value=\"" . htmlspecialchars("LKD Bildirileri") . "\"";
 if (@$x_BildiriTur == "LKD Bildirileri") {
 	$x_BildiriTurList .= " selected";
@@ -231,11 +231,11 @@ if (@$x_BildiriTur == "Ortak Bildiriler") {
 	$x_BildiriTurList .= " selected";
 }
 $x_BildiriTurList .= ">" . "Ortak Bildiriler" . "</option>";
-$x_BildiriTurList .= "<option value=\"" . htmlspecialchars("Diðer STK Bildirileri") . "\"";
-if (@$x_BildiriTur == "Diðer STK Bildirileri") {
+$x_BildiriTurList .= "<option value=\"" . htmlspecialchars("DiÄŸer STK Bildirileri") . "\"";
+if (@$x_BildiriTur == "DiÄŸer STK Bildirileri") {
 	$x_BildiriTurList .= " selected";
 }
-$x_BildiriTurList .= ">" . "Diðer STK Bildirileri" . "</option>";
+$x_BildiriTurList .= ">" . "DiÄŸer STK Bildirileri" . "</option>";
 $x_BildiriTurList .= "</select>";
 echo $x_BildiriTurList;
 ?>

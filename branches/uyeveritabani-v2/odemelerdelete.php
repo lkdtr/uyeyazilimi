@@ -104,7 +104,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="odemelerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="odemelerlist.php">Listeye DÃ¶n</a></p>
 <form action="odemelerdelete.php" method="post">
 <p>
 <input type="hidden" name="a" value="D">
@@ -155,13 +155,13 @@ if (!is_null($x_uye_id)) {
 <?php
 switch ($x_tur) {
 	case "aidat":
-		echo "Üye Aidatý";
+		echo "Ãœye AidatÄ±";
 		break;
 	case "bagis":
-		echo "Baðýþ";
+		echo "BaÄŸÄ±ÅŸ";
 		break;
 	case "diger":
-		echo "Diðer";
+		echo "DiÄŸer";
 		break;
 }
 ?>
@@ -178,6 +178,6 @@ mysql_close($conn);
 ?>
 </table>
 <p>
-<input type="submit" name="Action" value="Silmeyi Onaylayýn">
+<input type="submit" name="Action" value="Silmeyi OnaylayÄ±n">
 </form>
 <?php include ("footer.php") ?>

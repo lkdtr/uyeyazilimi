@@ -37,9 +37,9 @@
 
 <table align="center" border="0" cellspacing="1" cellpadding="10">
  <tr bgcolor="#466176">
-  <td align="center"><b><font color="#ffffff">&nbsp;Yýl&nbsp;</font></b></td>
+  <td align="center"><b><font color="#ffffff">&nbsp;YÄ±l&nbsp;</font></b></td>
   <td align="center"><b><font color="#ffffff">&nbsp;Miktar&nbsp;</font></b></td>
-  <td align="center"><b><font color="#ffffff">&nbsp;Açýklama&nbsp;</font></b></td>
+  <td align="center"><b><font color="#ffffff">&nbsp;AÃ§Ä±klama&nbsp;</font></b></td>
  </tr>
 
 <?php
@@ -50,7 +50,7 @@
 		echo "<tr bgcolor=\"$bgcolor\">";
 		echo " <td bgcolor=\"#ffffff\" align=\"center\"> * </td>";
 		echo " <td bgcolor=\"#ffffff\" align=\"center\"> ". FormatCurrency($KayitUcreti,0,-2,-2,-2) . " </td>";
-		echo " <td bgcolor=\"#ffffff\" align=\"center\"> Kayýt Ücreti </td>";
+		echo " <td bgcolor=\"#ffffff\" align=\"center\"> KayÄ±t Ãœcreti </td>";
 		echo "</tr>\n";
 		$Toplam += $KayitUcreti;
 	}

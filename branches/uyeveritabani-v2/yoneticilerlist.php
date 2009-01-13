@@ -240,11 +240,11 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 <td><?php echo $x_AdminMail; ?>&nbsp;</td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td><a href="<?php echo (!is_null(@$row["AdminID"])) ? "yoneticilerview.php?key=".urlencode($row["AdminID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
+"><img src='images/browse.gif' alt='GÃ¶r' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td><a href="<?php echo (!is_null(@$row["AdminID"])) ? "yoneticileredit.php?key=".urlencode($row["AdminID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
+"><img src='images/edit.gif' alt='DÃ¼zenle' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td><a href="<?php echo (!is_null(@$row["AdminID"])) ? "yoneticileradd.php?key=".urlencode($row["AdminID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
@@ -351,18 +351,18 @@ if ($totalRecs > 0) {
 		$stopRec = $recCount;
 	}
 ?>
-	Kayýtlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
+	KayÄ±tlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
 <?php
 } else {
 ?>
 <?php
 	if (($ewCurSec & ewAllowList) == ewAllowList) {
 ?>
-	Eþleþen Kayýt Bulunamadý!
+	EÅŸleÅŸen KayÄ±t BulunamadÄ±!
 <?php
 	} else {
 ?>
-	Ýzniniz Yok
+	Ä°zniniz Yok
 <?php
 	}
 ?>

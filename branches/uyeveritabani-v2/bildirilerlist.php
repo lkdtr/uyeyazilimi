@@ -282,15 +282,15 @@ if (@$_GET["start"] <> "") {
 <form action="bildirilerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
-				<td>Hýzlý Arama (*)</td>
+				<td>HÄ±zlÄ± Arama (*)</td>
 		<td>
 					<input type="text" name="psearch" size="20">
 			<input type="Submit" name="Submit" value="Git">
-		&nbsp;&nbsp;<a href="bildirilerlist.php?cmd=reset">Tümünü Göster</a>
-				&nbsp;&nbsp;<a href="bildirilersrch.php">Detaylý Arama</a>
+		&nbsp;&nbsp;<a href="bildirilerlist.php?cmd=reset">TÃ¼mÃ¼nÃ¼ GÃ¶ster</a>
+				&nbsp;&nbsp;<a href="bildirilersrch.php">DetaylÄ± Arama</a>
 		</td>
 	</tr>
-		<tr><td>&nbsp;</td><td><input type="radio" name="psearchtype" value="" checked>Tam Uyuþma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">Tüm Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td></tr>
+		<tr><td>&nbsp;</td><td><input type="radio" name="psearchtype" value="" checked>Tam UyuÅŸma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">TÃ¼m Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td></tr>
 </table>
 </form>
 <form method="post">
@@ -380,19 +380,19 @@ case "LKD Bildirileri":
 case "Ortak Bildiriler":
 		echo "Ortak Bildiriler";
 		break;
-case "Diðer STK Bildirileri":
-		echo "Diðer STK Bildirileri";
+case "DiÄŸer STK Bildirileri":
+		echo "DiÄŸer STK Bildirileri";
 		break;
 }
 ?>
 &nbsp;</td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td><a href="<?php echo (!is_null(@$row["BildiriID"])) ? "bildirilerview.php?key=".urlencode($row["BildiriID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
+"><img src='images/browse.gif' alt='GÃ¶r' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td><a href="<?php echo (!is_null(@$row["BildiriID"])) ? "bildirileredit.php?key=".urlencode($row["BildiriID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
+"><img src='images/edit.gif' alt='DÃ¼zenle' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td><a href="<?php echo (!is_null(@$row["BildiriID"])) ? "bildirileradd.php?key=".urlencode($row["BildiriID"]) : "javascript:alert('Invalid Record! Key is null');";	?>
@@ -499,18 +499,18 @@ if ($totalRecs > 0) {
 		$stopRec = $recCount;
 	}
 ?>
-	Kayýtlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
+	KayÄ±tlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
 <?php
 } else {
 ?>
 <?php
 	if (($ewCurSec & ewAllowList) == ewAllowList) {
 ?>
-	Eþleþen Kayýt Bulunamadý!
+	EÅŸleÅŸen KayÄ±t BulunamadÄ±!
 <?php
 	} else {
 ?>
-	Ýzniniz Yok
+	Ä°zniniz Yok
 <?php
 	}
 ?>

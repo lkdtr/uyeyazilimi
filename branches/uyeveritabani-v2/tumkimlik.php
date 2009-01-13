@@ -28,24 +28,26 @@
 	include("db.php");
 	include("ayar.php");
 
-        $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
-        @mysql_select_db(DB) or die("Veritabanı seçilemedi");
+        $Baglanti = @mysql_connect(HOST, USER, PASS) or die("BaÄŸlanti kurulamadÄ±");
+        @mysql_select_db(DB) or die("VeritabanÄ± seÃ§ilemedi");
+	        mysql_query("SET NAMES 'utf8'");
+
 	$Sorgu = "SELECT * FROM uyeler ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
 
 	echo "<html>\n";
-	echo " <head><title>LKD - Genel Ödeme Listesi</title>\n";
+	echo " <head><title>LKD - Genel Ã–deme Listesi</title>\n";
 	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-9\"/>\n";
 	echo " </head>\n";
 	echo "<body>\n";
 
 	echo "<table bgcolor=\"#D6DDE7\" border=0 bgcolor=\"white\" cellpadding=3 cellspacing=1>\n";
 	echo " <tr bgcolor=\"#466176\">\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Üye Numarası</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">Ãœye NumarasÄ±</font></td>\n";
 	echo "  <td align=\"left\"><font color=\"#ffffff\">Ad Soyad</font></td>\n";
 	echo "  <td align=\"center\"><font color=\"#ffffff\">E-posta</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Kimlik Basıldı</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Kimlik İletildi</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">Kimlik BasÄ±ldÄ±</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">Kimlik Ä°letildi</font></td>\n";
 	echo "  <td align=\"center\"><font color=\"#ffffff\">Resim</font></td>\n";
 	echo " </tr>\n";
 
@@ -58,8 +60,8 @@
 		$Soyad = $Bilgi["uye_soyad"];
 		$Id = $Bilgi["uye_id"];
 		$Alias = $Bilgi["alias"];
-		$KimlikBasildi = ($Bilgi["kimlik_basildi"] ? "Evet" : "Hayır");
-		$KimlikIletildi = ($Bilgi["kimlik_iletildi"] ? "Evet" : "Hayır");
+		$KimlikBasildi = ($Bilgi["kimlik_basildi"] ? "Evet" : "HayÄ±r");
+		$KimlikIletildi = ($Bilgi["kimlik_iletildi"] ? "Evet" : "HayÄ±r");
 		$Resim = ( is_file("uye_resimler/$Id.jpg") ? "uye_resimler/$Id.jpg" : "-" );
 
 		// Neler ogrendik

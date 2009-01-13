@@ -157,7 +157,7 @@ switch ($a) {
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="bildirilerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="bildirilerlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -177,15 +177,15 @@ if (win_ie_ver >= 5.5) {
 <!-- start Javascript
 function  EW_checkMyForm(EW_this) {
 if (EW_this.x_BildiriBaslik && !EW_hasValue(EW_this.x_BildiriBaslik, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_BildiriBaslik, "TEXT", "Bildirinin Baþlýðý Nedir?"))
+            if (!EW_onError(EW_this, EW_this.x_BildiriBaslik, "TEXT", "Bildirinin BaÅŸlÄ±ÄŸÄ± Nedir?"))
                 return false;
         }
 if (EW_this.x_BildiriTarih && !EW_hasValue(EW_this.x_BildiriTarih, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_BildiriTarih, "TEXT", "Tarih Seçiniz..."))
+            if (!EW_onError(EW_this, EW_this.x_BildiriTarih, "TEXT", "Tarih SeÃ§iniz..."))
                 return false;
         }
 if (EW_this.x_BildiriTarih && !EW_checkeurodate(EW_this.x_BildiriTarih.value)) {
-        if (!EW_onError(EW_this, EW_this.x_BildiriTarih, "TEXT", "Tarih Seçiniz..."))
+        if (!EW_onError(EW_this, EW_this.x_BildiriTarih, "TEXT", "Tarih SeÃ§iniz..."))
             return false;
         }
 if (EW_this.x_BildiriAktif && !EW_hasValue(EW_this.x_BildiriAktif, "RADIO" )) {
@@ -193,7 +193,7 @@ if (EW_this.x_BildiriAktif && !EW_hasValue(EW_this.x_BildiriAktif, "RADIO" )) {
                 return false;
         }
 if (EW_this.x_BildiriTur && !EW_hasValue(EW_this.x_BildiriTur, "SELECT" )) {
-            if (!EW_onError(EW_this, EW_this.x_BildiriTur, "SELECT", "Bildiri Türünü Seçiniz."))
+            if (!EW_onError(EW_this, EW_this.x_BildiriTur, "SELECT", "Bildiri TÃ¼rÃ¼nÃ¼ SeÃ§iniz."))
                 return false;
         }
 return true;
@@ -238,7 +238,7 @@ return true;
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Bildiri Tur&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_BildiriTurList = "<select name=\"x_BildiriTur\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_BildiriTurList = "<select name=\"x_BildiriTur\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_BildiriTurList .= "<option value=\"" . htmlspecialchars("LKD Bildirileri") . "\"";
 if (@$x_BildiriTur == "LKD Bildirileri") {
 	$x_BildiriTurList .= " selected";
@@ -249,11 +249,11 @@ if (@$x_BildiriTur == "Ortak Bildiriler") {
 	$x_BildiriTurList .= " selected";
 }
 $x_BildiriTurList .= ">" . "Ortak Bildiriler" . "</option>";
-$x_BildiriTurList .= "<option value=\"" . htmlspecialchars("Diðer STK Bildirileri") . "\"";
-if (@$x_BildiriTur == "Diðer STK Bildirileri") {
+$x_BildiriTurList .= "<option value=\"" . htmlspecialchars("DiÄŸer STK Bildirileri") . "\"";
+if (@$x_BildiriTur == "DiÄŸer STK Bildirileri") {
 	$x_BildiriTurList .= " selected";
 }
-$x_BildiriTurList .= ">" . "Diðer STK Bildirileri" . "</option>";
+$x_BildiriTurList .= ">" . "DiÄŸer STK Bildirileri" . "</option>";
 $x_BildiriTurList .= "</select>";
 echo $x_BildiriTurList;
 ?>

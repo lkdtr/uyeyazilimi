@@ -72,6 +72,8 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
+
 switch ($a) {
 	case "C": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
@@ -176,7 +178,7 @@ switch ($a) {
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="duyurularlist.php">Listeye Dön</a></p>
+<p><br><br><a href="duyurularlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -196,7 +198,7 @@ if (win_ie_ver >= 5.5) {
 <!-- start Javascript
 function  EW_checkMyForm(EW_this) {
 if (EW_this.x_DuyuruBaslik && !EW_hasValue(EW_this.x_DuyuruBaslik, "TEXTAREA" )) {
-            if (!EW_onError(EW_this, EW_this.x_DuyuruBaslik, "TEXTAREA", "Duyuru için Baþlýk Girmelisiniz!"))
+            if (!EW_onError(EW_this, EW_this.x_DuyuruBaslik, "TEXTAREA", "Duyuru iÃ§in BaÅŸlÄ±k Girmelisiniz!"))
                 return false;
         }
 if (EW_this.x_DuyuruTarih && !EW_hasValue(EW_this.x_DuyuruTarih, "TEXT" )) {
@@ -220,7 +222,7 @@ if (EW_this.x_DuyuruAktif && !EW_hasValue(EW_this.x_DuyuruAktif, "RADIO" )) {
                 return false;
         }
 if (EW_this.x_DuyuruTur && !EW_hasValue(EW_this.x_DuyuruTur, "SELECT" )) {
-            if (!EW_onError(EW_this, EW_this.x_DuyuruTur, "SELECT", "Duyuru Türünü Belirleyiniz."))
+            if (!EW_onError(EW_this, EW_this.x_DuyuruTur, "SELECT", "Duyuru TÃ¼rÃ¼nÃ¼ Belirleyiniz."))
                 return false;
         }
 return true;
@@ -271,22 +273,22 @@ return true;
   <TR>
     <TD bgcolor="#f4f4f4">Duyuru Tur</TD>
     <TD bgcolor="#f4f4f4"><?php
-$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_DuyuruTurList = "<select name=\"x_DuyuruTur\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Uye Sistemi") . "\"";
 if (@$x_DuyuruTur == "LKD Uye Sistemi") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "LKD Genel Kurul Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Çalýþma Raporu") . "\"";
-if (@$x_DuyuruTur == "LKD YK Çalýþma Raporu") {
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD YK Ã‡alÄ±ÅŸma Raporu") . "\"";
+if (@$x_DuyuruTur == "LKD YK Ã‡alÄ±ÅŸma Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "LKD YK Çalýþma Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Çalýþma Grubu Raporu") . "\"";
-if (@$x_DuyuruTur == "Çalýþma Grubu Raporu") {
+$x_DuyuruTurList .= ">" . "LKD YK Ã‡alÄ±ÅŸma Raporu" . "</option>";
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Ã‡alÄ±ÅŸma Grubu Raporu") . "\"";
+if (@$x_DuyuruTur == "Ã‡alÄ±ÅŸma Grubu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Çalýþma Grubu Raporu" . "</option>";
+$x_DuyuruTurList .= ">" . "Ã‡alÄ±ÅŸma Grubu Raporu" . "</option>";
 $x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("LKD Genel Duyuru") . "\"";
 if (@$x_DuyuruTur == "LKD Genel Duyuru") {
 	$x_DuyuruTurList .= " selected";
@@ -297,11 +299,11 @@ if (@$x_DuyuruTur == "Denetleme Kurulu Raporu") {
 	$x_DuyuruTurList .= " selected";
 }
 $x_DuyuruTurList .= ">" . "Denetleme Kurulu Raporu" . "</option>";
-$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("Diðer Duyuru Konularý") . "\"";
-if (@$x_DuyuruTur == "Diðer Duyuru Konularý") {
+$x_DuyuruTurList .= "<option value=\"" . htmlspecialchars("DiÄŸer Duyuru KonularÄ±") . "\"";
+if (@$x_DuyuruTur == "DiÄŸer Duyuru KonularÄ±") {
 	$x_DuyuruTurList .= " selected";
 }
-$x_DuyuruTurList .= ">" . "Diðer Duyuru Konularý" . "</option>";
+$x_DuyuruTurList .= ">" . "DiÄŸer Duyuru KonularÄ±" . "</option>";
 $x_DuyuruTurList .= "</select>";
 echo $x_DuyuruTurList;
 ?></TD>

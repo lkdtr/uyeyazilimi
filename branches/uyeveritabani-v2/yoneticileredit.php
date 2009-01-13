@@ -80,6 +80,8 @@ $x_AdminMail = @$_POST["x_AdminMail"];
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+               mysql_query("SET NAMES 'utf8'");
+
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -139,7 +141,7 @@ switch ($a)
 }		
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="yoneticilerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="yoneticilerlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript">
 <!-- start Javascript
@@ -149,15 +151,15 @@ if (EW_this.x_AdminAd && !EW_hasValue(EW_this.x_AdminAd, "TEXT" )) {
                 return false; 
         }
 if (EW_this.x_AdminPass && !EW_hasValue(EW_this.x_AdminPass, "PASSWORD" )) {
-            if (!EW_onError(EW_this, EW_this.x_AdminPass, "PASSWORD", "Þifre GÝriniz!"))
+            if (!EW_onError(EW_this, EW_this.x_AdminPass, "PASSWORD", "Åžifre GÄ°riniz!"))
                 return false; 
         }
 if (EW_this.x_AdminMail && !EW_hasValue(EW_this.x_AdminMail, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_AdminMail, "TEXT", "Geçerli bir e-mail adresi giriniz!"))
+            if (!EW_onError(EW_this, EW_this.x_AdminMail, "TEXT", "GeÃ§erli bir e-mail adresi giriniz!"))
                 return false; 
         }
 if (EW_this.x_AdminMail && !EW_checkemail(EW_this.x_AdminMail.value)) {
-        if (!EW_onError(EW_this, EW_this.x_AdminMail, "TEXT", "Geçerli bir e-mail adresi giriniz!"))
+        if (!EW_onError(EW_this, EW_this.x_AdminMail, "TEXT", "GeÃ§erli bir e-mail adresi giriniz!"))
             return false; 
         }
 return true;

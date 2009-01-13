@@ -273,6 +273,7 @@ if (@$_GET["order"] <> "") {
 }
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
 
 // build SQL
 $strsql = "SELECT * FROM uyeler";
@@ -336,33 +337,33 @@ if (@$_GET["start"] <> "") {
 <?php include ("header.php") ?>
 <br>
 <?php /*<table border=1 bordercolor="#666666" cellspacing="0" cellpadding="5" width="96%" bgcolor="#FFFFCC" align="center"><tr><td style="text-align:justify">
-<b>Üye Bilgilerinizin Güncellenmesi Gerekmektedir.</b> Yeni Üye Veritabanı Programımıza üye bilgilerinin güncellenmesi için yardımınıza ihtiyacımız var. <img src="images/edit.gif" align="absmiddle"> simgesine tıklayarak bilgilerinizi güncelleyebilirsiniz.
+<b>Ãœye Bilgilerinizin GÃ¼ncellenmesi Gerekmektedir.</b> Yeni Ãœye VeritabanÄ± ProgramÄ±mÄ±za Ã¼ye bilgilerinin gÃ¼ncellenmesi iÃ§in yardÄ±mÄ±nÄ±za ihtiyacÄ±mÄ±z var. <img src="images/edit.gif" align="absmiddle"> simgesine tÄ±klayarak bilgilerinizi gÃ¼ncelleyebilirsiniz.
 <br>
-<b>Aidat Ödemeleri ile ilgili...</b> Üye kayıt tarihleri (Derneğe üye olduğunuz tarih) ve ödeme bilgileriniz güncelleninceye kadar epey borçlu görünebilirsiniz. Bu konuda da yardıma ihtiyacımız var, veri girişi konusunda çalışabilecek gönüllü arkadaşlarımızın web-cg@linux.org.tr adresine mail atmalari yeterli olacaktır.</td></tr></table>*/?>
+<b>Aidat Ã–demeleri ile ilgili...</b> Ãœye kayÄ±t tarihleri (DerneÄŸe Ã¼ye olduÄŸunuz tarih) ve Ã¶deme bilgileriniz gÃ¼ncelleninceye kadar epey borÃ§lu gÃ¶rÃ¼nebilirsiniz. Bu konuda da yardÄ±ma ihtiyacÄ±mÄ±z var, veri giriÅŸi konusunda Ã§alÄ±ÅŸabilecek gÃ¶nÃ¼llÃ¼ arkadaÅŸlarÄ±mÄ±zÄ±n web-cg@linux.org.tr adresine mail atmalari yeterli olacaktÄ±r.</td></tr></table>*/?>
 <br>
 <? if ($_SESSION["uy_status_UserLevel"] <> 1) { /* Admin degil ise Aramayi gosterme */ ?>
 <form action="uyelerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
-		<td>Hızlı Arama (*)</td>
+		<td>HÄ±zlÄ± Arama (*)</td>
 		<td>
 			<input type="text" name="psearch" size="20">
 			<input type="Submit" name="Submit" value="Git">
-			&nbsp;&nbsp;<a href="uyelerlist.php?cmd=reset">Tümünü Göster</a>
-			&nbsp;&nbsp;<a href="uyelersrch.php">Detaylı Arama</a>
+			&nbsp;&nbsp;<a href="uyelerlist.php?cmd=reset">TÃ¼mÃ¼nÃ¼ GÃ¶ster</a>
+			&nbsp;&nbsp;<a href="uyelersrch.php">DetaylÄ± Arama</a>
 		</td>
 		<?php
 	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
 ?>
 <td rowspan="2" width="40%" align="center">
-<a href="uyeleradd.php"><img src="images/uye.png" alt="Yeni Üye Ekle" border="0"><br>Yeni Üye Ekle</a>
+<a href="uyeleradd.php"><img src="images/uye.png" alt="Yeni Ãœye Ekle" border="0"><br>Yeni Ãœye Ekle</a>
 </td>
 <?php
 	}
 ?>
 	</tr>
 		<tr><td>&nbsp;</td>
-		<td><input type="radio" name="psearchtype" value="" checked>Tam Uyuşma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">Tüm Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td>
+		<td><input type="radio" name="psearchtype" value="" checked>Tam UyuÅŸma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">TÃ¼m Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td>
 	</tr>
 </table>
 </form>
@@ -371,7 +372,7 @@ if (@$_GET["start"] <> "") {
 <table width="100%" align="center" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr bgcolor="#455F76">
 <td>
-<a href="uyelerlist.php?order=<?php echo urlencode("uye_id"); ?>"><font color="#FFFFFF">Üye No<?php if ($OrderBy == "uye_id") { ?><font face="Webdings">&nbsp;<?php echo (@$_SESSION["uyeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["uyeler_OT"] == "DESC") ? "(-)" : "") ?>
+<a href="uyelerlist.php?order=<?php echo urlencode("uye_id"); ?>"><font color="#FFFFFF">Ãœye No<?php if ($OrderBy == "uye_id") { ?><font face="Webdings">&nbsp;<?php echo (@$_SESSION["uyeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["uyeler_OT"] == "DESC") ? "(-)" : "") ?>
 <?php } ?></a>
 </td>
 <td>
@@ -387,10 +388,10 @@ if (@$_GET["start"] <> "") {
 <?php } ?></a>
 </td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
-<td class="navbeyaz">Gör</td>
+<td class="navbeyaz">GÃ¶r</td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
-<td class="navbeyaz">Düzenle</td>
+<td class="navbeyaz">DÃ¼zenle</td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
 <td class="navbeyaz">Sil</td>
@@ -449,11 +450,11 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 <td><?php echo $x_eposta1; ?>&nbsp;</td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyelerview.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
+"><img src='images/browse.gif' alt='GÃ¶r' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyeleredit.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
+"><img src='images/edit.gif' alt='DÃ¼zenle' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyelerdelete.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
@@ -557,18 +558,18 @@ if ($totalRecs > 0) {
 		$stopRec = $recCount;
 	}
 ?>
-	Kayıtlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
+	KayÄ±tlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
 <?php 
 } else {
 ?>
 <?php 
 	if (($ewCurSec & ewAllowList) == ewAllowList) {
 ?>
-	Eşleşen Kayıt Bulunamadı!
+	EÅŸleÅŸen KayÄ±t BulunamadÄ±!
 <?php 
 	} else {
 ?>
-	Burayi Gormeye İzniniz Yok! Bir hata oldugunu dusunuyorsaniz bilgi@lkd.org.tr adresine mail atiniz.
+	Burayi Gormeye Ä°zniniz Yok! Bir hata oldugunu dusunuyorsaniz bilgi@lkd.org.tr adresine mail atiniz.
 <?php
 	}
 ?>

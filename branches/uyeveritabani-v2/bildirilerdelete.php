@@ -97,7 +97,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="bildirilerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="bildirilerlist.php">Listeye DÃ¶n</a></p>
 <form action="bildirilerdelete.php" method="post">
 <p>
 <input type="hidden" name="a" value="D">
@@ -159,8 +159,8 @@ case "LKD Bildirileri":
 case "Ortak Bildiriler":
 		echo "Ortak Bildiriler";
 		break;
-case "Diðer STK Bildirileri":
-		echo "Diðer STK Bildirileri";
+case "DiÄŸer STK Bildirileri":
+		echo "DiÄŸer STK Bildirileri";
 		break;
 }
 ?>
@@ -174,6 +174,6 @@ mysql_close($conn);
 ?>
 </table>
 <p>
-<input type="submit" name="Action" value="Silmeyi Onaylayýn">
+<input type="submit" name="Action" value="Silmeyi OnaylayÄ±n">
 </form>
 <?php include ("footer.php") ?>

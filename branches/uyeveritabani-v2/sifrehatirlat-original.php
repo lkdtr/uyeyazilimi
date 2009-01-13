@@ -32,8 +32,8 @@ if (@$_POST["submit"] <> "") {
 	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
 	$passwd = @$_POST["passwd"];
 	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
 	if ($row = mysql_fetch_array($rs)) {
 		if (strtoupper($row["AdminPass"]) == strtoupper($passwd)) {
@@ -80,7 +80,7 @@ if (@$_POST["submit"] <> "") {
 ?>
 <html>
 <head>
-	<title>LKD ÜYE VERİTABANI</title>
+	<title>LKD ÃœYE VERÄ°TABANI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 </head>
@@ -89,11 +89,11 @@ if (@$_POST["submit"] <> "") {
 <!-- start JavaScript
 function  EW_checkMyForm(EW_this) {
 if (!EW_hasValue(EW_this.userid, "TEXT")) {
-	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "Lütfen ID Giriniz"))
+	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "LÃ¼tfen ID Giriniz"))
 		return false;
 }
 if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
-	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Şifre Giriniz"))
+	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Åifre Giriniz"))
 		return false;
 }
 return true;
@@ -133,14 +133,14 @@ return true;
       <tr>
         <td width="75" align="right">e-mail</td>
         <td width="100" align="left"><input name="userid" type="text" id="email" value="<?php echo @$_COOKIE["uy_userid"]; ?>"></td>
-        <td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
+        <td><input type="checkbox" name="rememberme" value="true">Beni HatÄ±rla (Ã‡erez KullanÄ±lÄ±r)</td>
       </tr>
       <tr>
-        <td width="75" align="right">şifre</td>
+        <td width="75" align="right">ÅŸifre</td>
         <td width="100" align="left"><input type="password" name="passwd"></td>
-        <td><input type="submit" name="submit" value="Giriş">
+        <td><input type="submit" name="submit" value="GiriÅŸ">
 		<?php if (!$validpwd) {?>
-		<font color="#FF0000">Yanlış ID veya Şifre
+		<font color="#FF0000">YanlÄ±ÅŸ ID veya Åifre
 		<?php }?>
 		</td>
       </tr>
@@ -167,14 +167,14 @@ if(!($_POST["email"] && $_POST["button1"])) {
 <tr><td colspan="2" align="center"><font color="red"><b>E-posta adresinizi girmelisiniz!</b></font></td></tr>
 <?php } ?>
 <tr><td>
-Şifreniz e-posta adresinize gönderilecektir.
+Åifreniz e-posta adresinize gÃ¶nderilecektir.
 <b>E-posta : </b></td><td><input type="text" name="email" size="50"></td></tr>
 <tr><td></td><td align="right"><input type="submit" value="Gonder" name="button1"></td></tr>
 </table>
 </form>
 <?php } else {
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$rs = mysql_query("SELECT uye_ad,uye_soyad,eposta1 FROM uyeler WHERE eposta1='".$_POST["email"]."'") or die(mysql_error());
 	$content = "Sayin ".$row[0]." ".$row[1];
 	$headers  = "MIME-Version: 1.0\r\n";
@@ -183,11 +183,11 @@ if(!($_POST["email"] && $_POST["button1"])) {
 	$headers .= "From: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\n";
 	$to = $row[2];
 	if(time() > $_SESSION["Sifre_Mail_Time"]+(5*60)) {
-		echo "<br>Mailiniz Gönderilmiştir. Teşekkür Ederiz.";
+		echo "<br>Mailiniz GÃ¶nderilmiÅŸtir. TeÅŸekkÃ¼r Ederiz.";
 		$_SESSION["Sifre_Mail_Time"] = time();
 		mail($to, "Sifre hatirlatma mesaji", $content, $headers);
 	} else {
-		echo "<br>Yeni bir mail atabilmek için bir süre beklemelisiniz!";
+		echo "<br>Yeni bir mail atabilmek iÃ§in bir sÃ¼re beklemelisiniz!";
 		$_SESSION["Sifre_Mail_Time"] = time();
 	}
 	// acilacak

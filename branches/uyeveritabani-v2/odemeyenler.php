@@ -28,8 +28,8 @@
 	include("db.php");
 	include("ayar.php");
 
-        $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
-        @mysql_select_db(DB) or die("Veritabanı seçilemedi");
+        $Baglanti = @mysql_connect(HOST, USER, PASS) or die("BaÄŸlanti kurulamadÄ±");
+        @mysql_select_db(DB) or die("VeritabanÄ± seÃ§ilemedi");
 	$Sorgu = "SELECT alias,uye_id,uye_ad,uye_soyad,kayit_tarihi FROM uyeler ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
 		
@@ -43,7 +43,7 @@
 
 /*
 	echo "<html>\n";
-	echo " <head><title>LKD - Genel Ödeme Listesi</title>\n";
+	echo " <head><title>LKD - Genel Ã–deme Listesi</title>\n";
 	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-9\"/>\n";
 	echo " </head>\n";
 	echo "<body>\n";
@@ -52,16 +52,16 @@
 	echo " <tr bgcolor=\"#466176\">\n";
 	echo "  <td align=\"left\"><font color=\"#ffffff\">Ad Soyad</font></td>\n";
 	echo "  <td align=\"left\"><font color=\"#ffffff\">Alias</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Üye Numarası</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Kayıt Tarihi</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Yaptığı Ödeme</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Yapması Gereken Ödeme</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">Ãœye NumarasÄ±</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">KayÄ±t Tarihi</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">YaptÄ±ÄŸÄ± Ã–deme</font></td>\n";
+	echo "  <td align=\"center\"><font color=\"#ffffff\">YapmasÄ± Gereken Ã–deme</font></td>\n";
 	echo " </tr>\n";
 
 	$Renkler = array("#ffffff", "#f5f5f5"); // Okunmasi kolaylassin
 	$RenkSec = 0;
 */
-	echo "Ad Soyad;Alias;Üye Numarası;Kayıt Tarihi;Yaptığı Ödeme;Yapması Gereken Ödeme;\n";
+	echo "Ad Soyad;Alias;Ãœye NumarasÄ±;KayÄ±t Tarihi;YaptÄ±ÄŸÄ± Ã–deme;YapmasÄ± Gereken Ã–deme;\n";
 	while( $Bilgi = mysql_fetch_array($Sonuc) ) { // Her uye icin hesaplamalar yapcaz
 		$Renk = $Renkler[ ++$RenkSec%2 ];
 		$Ad = $Bilgi["uye_ad"];

@@ -242,6 +242,7 @@ if (@$_GET["order"] <> "") {
 }
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
 
 // build SQL
 $strsql = "SELECT * FROM odemeler";
@@ -328,16 +329,16 @@ if (@$_GET["start"] <> "") {
 <form action="odemelerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
-		<td>Hýzlý Arama (*)</td>
+		<td>HÄ±zlÄ± Arama (*)</td>
 		<td>
 			<input type="text" name="psearch" size="20">
 			<input type="Submit" name="Submit" value="Git">
-			&nbsp;&nbsp;<a href="odemelerlist.php?cmd=reset">Tümünü Göster</a>
-			<!--&nbsp;&nbsp;<a href="odemelersrch.php">Detaylý Arama</a>-->
+			&nbsp;&nbsp;<a href="odemelerlist.php?cmd=reset">TÃ¼mÃ¼nÃ¼ GÃ¶ster</a>
+			<!--&nbsp;&nbsp;<a href="odemelersrch.php">DetaylÄ± Arama</a>-->
 		</td>
 	</tr>
 		<tr><td>&nbsp;</td>
-		<td><input type="radio" name="psearchtype" value="" checked>Tam Uyuþma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">Tüm Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td>
+		<td><input type="radio" name="psearchtype" value="" checked>Tam UyuÅŸma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">TÃ¼m Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td>
 	</tr>
 </table>
 </form>
@@ -362,7 +363,7 @@ if (@$_GET["start"] <> "") {
 <?php } ?></a>
 </td>
 <td>
-<a href="odemelerlist.php?order=<?php echo urlencode("tur"); ?>"><font color="#FFFFFF">Tür&nbsp;<?php if ($OrderBy == "tur") { ?><font face="Webdings"><?php echo (@$_SESSION["odemeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["odemeler_OT"] == "DESC") ? "(-)" : "") ?>
+<a href="odemelerlist.php?order=<?php echo urlencode("tur"); ?>"><font color="#FFFFFF">TÃ¼r&nbsp;<?php if ($OrderBy == "tur") { ?><font face="Webdings"><?php echo (@$_SESSION["odemeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["odemeler_OT"] == "DESC") ? "(-)" : "") ?>
 <?php } ?></a>
 </td>
 <td>
@@ -437,15 +438,15 @@ if (!is_null($x_uye_id)) {
 <td><?php
 switch ($x_tur) {
 	case "aidat":
-		echo "Üye Aidatý";
+		echo "Ãœye AidatÄ±";
 		$x_AidatToplam += $x_miktar;
 		break;
 	case "bagis":
-		echo "Baðýþ";
+		echo "BaÄŸÄ±ÅŸ";
 		$x_BagisToplam += $x_miktar;
 		break;
 	case "diger":
-		echo "Diðer";
+		echo "DiÄŸer";
 		$x_DigerToplam += $x_miktar;
 		break;
 }
@@ -454,11 +455,11 @@ switch ($x_tur) {
 <td><?php echo FormatDateTime($x_tarih,7); ?>&nbsp;</td>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemelerview.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
+"><img src='images/browse.gif' alt='GÃ¶r' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemeleredit.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
+"><img src='images/edit.gif' alt='DÃ¼zenle' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemeleradd.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
@@ -476,13 +477,13 @@ switch ($x_tur) {
 <tr><td colspan="5">
 <table border=0 width="100%">
 <?php if($x_AidatToplam) { ?>
-<tr><td align="right" width="80%"><b>Bugüne Kadar Ödenen Toplam Aidat :</b></td><td align="right"><?php echo FormatCurrency($x_AidatToplam,0,-2,-2,-2);?></td></tr>
+<tr><td align="right" width="80%"><b>BugÃ¼ne Kadar Ã–denen Toplam Aidat :</b></td><td align="right"><?php echo FormatCurrency($x_AidatToplam,0,-2,-2,-2);?></td></tr>
 <?php }?>
 <?php if($x_BagisToplam) { ?>
-<tr><td align="right"><b>Toplam Baðýþ :</b></td><td align="right"><?php echo FormatCurrency($x_BagisToplam,0,-2,-2,-2);?></td></tr>
+<tr><td align="right"><b>Toplam BaÄŸÄ±ÅŸ :</b></td><td align="right"><?php echo FormatCurrency($x_BagisToplam,0,-2,-2,-2);?></td></tr>
 <?php }?>
 <?php if($x_DigerToplam) { ?>
-<tr><td align="right"><b>Toplam Diðer Ödemeler :</b></td><td align="right"><?php echo FormatCurrency($x_DigerToplam,0,-2,-2,-2);?></td></tr>
+<tr><td align="right"><b>Toplam DiÄŸer Ã–demeler :</b></td><td align="right"><?php echo FormatCurrency($x_DigerToplam,0,-2,-2,-2);?></td></tr>
 <?php }?>
 </table>
 </table>
@@ -575,18 +576,18 @@ if ($totalRecs > 0) {
 		$stopRec = $recCount;
 	}
 ?>
-	Kayýtlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
+	KayÄ±tlar <?php echo $startRec; ?>-<?php echo $stopRec; ?> Toplam: <?php echo $totalRecs; ?>
 <?php
 } else {
 ?>
 <?php
 	if (($ewCurSec & ewAllowList) == ewAllowList) {
 ?>
-	Eþleþen Kayýt Bulunamadý!
+	EÅŸleÅŸen KayÄ±t BulunamadÄ±!
 <?php
 	} else {
 ?>
-	Ýzniniz Yok
+	Ä°zniniz Yok
 <?php
 	}
 ?>

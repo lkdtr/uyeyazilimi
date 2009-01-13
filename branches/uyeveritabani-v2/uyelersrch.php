@@ -211,7 +211,7 @@ $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="uyelerlist.php">Listeye Dön</a></a></p>
+<p><br><br><a href="uyelerlist.php">Listeye DÃ¶n</a></a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript">
 <!-- start Javascript
@@ -221,11 +221,11 @@ if (EW_this.x_uye_id && !EW_checkinteger(EW_this.x_uye_id.value)) {
             return false; 
         }
 if (EW_this.x_eposta1 && !EW_checkemail(EW_this.x_eposta1.value)) {
-        if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "Geçersiz e-posta adresi!"))
+        if (!EW_onError(EW_this, EW_this.x_eposta1, "TEXT", "GeÃ§ersiz e-posta adresi!"))
             return false; 
         }
 if (EW_this.x_eposta2 && !EW_checkemail(EW_this.x_eposta2.value)) {
-        if (!EW_onError(EW_this, EW_this.x_eposta2, "TEXT", "Geçersiz e-posta adresi!"))
+        if (!EW_onError(EW_this, EW_this.x_eposta2, "TEXT", "GeÃ§ersiz e-posta adresi!"))
             return false; 
         }
 return true;

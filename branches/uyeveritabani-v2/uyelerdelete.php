@@ -129,7 +129,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="uyelerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="uyelerlist.php">Listeye DÃ¶n</a></p>
 <form action="uyelerdelete.php" method="post">
 <p>
 <input type="hidden" name="a" value="D">
@@ -203,7 +203,7 @@ mysql_close($conn);
 <tr bgcolor="<?php echo $bgcolor; ?>">
  <td colspan=2 align="right"><b>Silinme Nedeni</b></td>
  <td colspan=3 align="center"><textarea cols=45 name="neden"></textarea></td>
- <td colspan=2 align="center"><input type="submit" name="Action" value="Silmeyi Onaylayýn"></td>
+ <td colspan=2 align="center"><input type="submit" name="Action" value="Silmeyi OnaylayÄ±n"></td>
 </table>
 <p>
 </form>

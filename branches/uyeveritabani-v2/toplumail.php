@@ -1,10 +1,10 @@
 <?php
 	include ("db.php");
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$rs = mysql_query("SELECT uye_ad,uye_soyad,eposta1,PassWord FROM uyeler") or die(mysql_error());
 	$mail = "Sayin __AD__ <br> Sifreniz : __SIFRE__ <br>";
-	$mail.="Lütfen YENI Üye Sisteminize girişinizi yaparak bilgilerinizi güncelleyiniz. Yeni üye sistemi ile beraber ödeme takibi, üye bilgilerinin güncellenmesi gibi işlemler yürütülebilecektir. Üye Ödeme Bilgilerinin güncellenmesi biraz zaman alacaktır. Şu an sistemde hiç ödeme yapmamış gibi görünüyor olabilirsiniz. Üye bilgilerinin güncellenmesi ödemelerin girilmesi gibi konularda veya Web-Çalışma Grubu içerisinde kodlama, tasarım veya içerik konularından herhangi birisinde bize yardımcı olmak isterseniz web-cg@liste.linux.org.tr adresine bir mail atmanız yeterli. Size en kısa zamanda geri döneceğiz.<br>Iyi Günler Dileriz<br>Linux Kullanıcıları Derneği - Web-CG";
+	$mail.="LÃ¼tfen YENI Ãœye Sisteminize giriÅŸinizi yaparak bilgilerinizi gÃ¼ncelleyiniz. Yeni Ã¼ye sistemi ile beraber Ã¶deme takibi, Ã¼ye bilgilerinin gÃ¼ncellenmesi gibi iÅŸlemler yÃ¼rÃ¼tÃ¼lebilecektir. Ãœye Ã–deme Bilgilerinin gÃ¼ncellenmesi biraz zaman alacaktÄ±r. Åu an sistemde hiÃ§ Ã¶deme yapmamÄ±ÅŸ gibi gÃ¶rÃ¼nÃ¼yor olabilirsiniz. Ãœye bilgilerinin gÃ¼ncellenmesi Ã¶demelerin girilmesi gibi konularda veya Web-Ã‡alÄ±ÅŸma Grubu iÃ§erisinde kodlama, tasarÄ±m veya iÃ§erik konularÄ±ndan herhangi birisinde bize yardÄ±mcÄ± olmak isterseniz web-cg@liste.linux.org.tr adresine bir mail atmanÄ±z yeterli. Size en kÄ±sa zamanda geri dÃ¶neceÄŸiz.<br>Iyi GÃ¼nler Dileriz<br>Linux KullanÄ±cÄ±larÄ± DerneÄŸi - Web-CG";
 
 
 	/* and now mail it */

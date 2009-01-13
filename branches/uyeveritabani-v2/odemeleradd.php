@@ -73,6 +73,8 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
+
 switch ($a) {
 	case "C": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
@@ -177,7 +179,7 @@ switch ($a) {
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="odemelerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="odemelerlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript" src="popcalendar.js"></script>
 <script language="JavaScript">
@@ -196,7 +198,7 @@ if (EW_this.x_miktar && !EW_checkinteger(EW_this.x_miktar.value)) {
             return false; 
         }
 if (EW_this.x_tur && !EW_hasValue(EW_this.x_tur, "RADIO" )) {
-            if (!EW_onError(EW_this, EW_this.x_tur, "RADIO", "Ödeme Türünü Seçiniz!"))
+            if (!EW_onError(EW_this, EW_this.x_tur, "RADIO", "Ã–deme TÃ¼rÃ¼nÃ¼ SeÃ§iniz!"))
                 return false; 
         }
 if (EW_this.x_tarih && !EW_hasValue(EW_this.x_tarih, "TEXT" )) {
@@ -208,7 +210,7 @@ if (EW_this.x_tarih && !EW_checkeurodate(EW_this.x_tarih.value)) {
             return false; 
         }
 if (EW_this.x_odemeyolu && !EW_hasValue(EW_this.x_odemeyolu, "SELECT" )) {
-            if (!EW_onError(EW_this, EW_this.x_odemeyolu, "SELECT", "Ödeme Ne Þekilde Yapýldý?"))
+            if (!EW_onError(EW_this, EW_this.x_odemeyolu, "SELECT", "Ã–deme Ne Åžekilde YapÄ±ldÄ±?"))
                 return false; 
         }
 return true;
@@ -225,7 +227,7 @@ return true;
 <td bgcolor="#466176"><font color="#FFFFFF">uye id&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php if (($ewCurSec & ewAllowAdmin) == ewAllowAdmin) { // system admin ?>
 <?php
-$x_uye_idList = "<select name=\"x_uye_id\" size=10><option value=\"\">Lütfen Seçiniz</option>";
+$x_uye_idList = "<select name=\"x_uye_id\" size=10><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $sqlwrk = "SELECT uye_id, uye_ad, uye_soyad, eposta1 FROM uyeler ORDER BY uye_ad";
 $rswrk = mysql_query($sqlwrk);
 if ($rswrk) {
@@ -265,9 +267,9 @@ if (!is_null($x_uye_id)) {
 </tr>
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">tur&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php if (empty($x_tur)) { $x_tur = "aidat"; } // varsayilan degeri belirle... ?><input type="radio" name="x_tur"<?php if ($x_tur == "aidat") { echo " checked"; } ?> value="<?php echo htmlspecialchars("aidat"); ?>"><?php echo "Üye Aidatý"; ?>
-<input type="radio" name="x_tur"<?php if ($x_tur == "bagis") { echo " checked"; } ?> value="<?php echo htmlspecialchars("bagis"); ?>"><?php echo "Baðýþ"; ?>
-<input type="radio" name="x_tur"<?php if ($x_tur == "diger") { echo " checked"; } ?> value="<?php echo htmlspecialchars("diger"); ?>"><?php echo "Diðer"; ?>
+<td bgcolor="#F5F5F5"><?php if (empty($x_tur)) { $x_tur = "aidat"; } // varsayilan degeri belirle... ?><input type="radio" name="x_tur"<?php if ($x_tur == "aidat") { echo " checked"; } ?> value="<?php echo htmlspecialchars("aidat"); ?>"><?php echo "Ãœye AidatÄ±"; ?>
+<input type="radio" name="x_tur"<?php if ($x_tur == "bagis") { echo " checked"; } ?> value="<?php echo htmlspecialchars("bagis"); ?>"><?php echo "BaÄŸÄ±ÅŸ"; ?>
+<input type="radio" name="x_tur"<?php if ($x_tur == "diger") { echo " checked"; } ?> value="<?php echo htmlspecialchars("diger"); ?>"><?php echo "DiÄŸer"; ?>
 &nbsp;</td>
 </tr>
 <tr>
@@ -285,7 +287,7 @@ if (!is_null($x_uye_id)) {
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">odemeyolu&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php
-$x_odemeyoluList = "<select name=\"x_odemeyolu\"><option value=\"\">Lütfen Seçiniz</option>";
+$x_odemeyoluList = "<select name=\"x_odemeyolu\"><option value=\"\">LÃ¼tfen SeÃ§iniz</option>";
 $x_odemeyoluList .= "<option value=\"" . htmlspecialchars("havale") . "\"";
 if (@$x_odemeyolu == "havale") {
 	$x_odemeyoluList .= " selected";
@@ -305,12 +307,12 @@ $x_odemeyoluList .= "<option value=\"" . htmlspecialchars("elden") . "\"";
 if (@$x_odemeyolu == "elden") {
 	$x_odemeyoluList .= " selected";
 }
-$x_odemeyoluList .= ">" . "Elden Ödeme" . "</option>";
-$x_odemeyoluList .= "<option value=\"" . htmlspecialchars("diðer") . "\"";
-if (@$x_odemeyolu == "diðer") {
+$x_odemeyoluList .= ">" . "Elden Ã–deme" . "</option>";
+$x_odemeyoluList .= "<option value=\"" . htmlspecialchars("diÄŸer") . "\"";
+if (@$x_odemeyolu == "diÄŸer") {
 	$x_odemeyoluList .= " selected";
 }
-$x_odemeyoluList .= ">" . "Diðer - Notlar Kýsmýna Bakýnýz" . "</option>";
+$x_odemeyoluList .= ">" . "DiÄŸer - Notlar KÄ±smÄ±na BakÄ±nÄ±z" . "</option>";
 $x_odemeyoluList .= "</select>";
 echo $x_odemeyoluList;
 ?>

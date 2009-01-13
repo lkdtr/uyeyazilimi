@@ -61,8 +61,9 @@ ob_start();
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
 
-// enson duyurular çekiliyor
+// enson duyurular Ã§ekiliyor
 $x_Limit = 3;
 $strsql = "SELECT * FROM duyurular ORDER BY DuyuruID DESC LIMIT 0,$x_Limit";
 $rs = mysql_query($strsql,$conn) or die(mysql_error());
@@ -73,7 +74,7 @@ $rs = mysql_query($strsql,$conn) or die(mysql_error());
 <br><p>
 <table width="96%" border="1" align="center" cellpadding="0" cellspacing="5" align="center">
 <?php
-// while im baþlangýcý
+// while im baÅŸlangÄ±cÄ±
 while($row = mysql_fetch_array($rs)) {
 $x_DuyuruID = @$row["DuyuruID"];
 $x_DuyuruBaslik = @$row["DuyuruBaslik"];
@@ -96,13 +97,13 @@ $x_DuyuruTur = @$row["DuyuruTur"];
 <?php
 switch ($x_DuyuruTur) {
 case "LKD Uye Sistemi":
-		echo "LKD Üye Sistemi";
+		echo "LKD Ãœye Sistemi";
 		break;
-case "LKD YK Çalýþma Raporu":
-		echo "LKD YK Çalýþma Raporu";
+case "LKD YK Ã‡alÄ±ÅŸma Raporu":
+		echo "LKD YK Ã‡alÄ±ÅŸma Raporu";
 		break;
-case "Çalýþma Grubu Raporu":
-		echo "Çalýþma Grubu Raporu";
+case "Ã‡alÄ±ÅŸma Grubu Raporu":
+		echo "Ã‡alÄ±ÅŸma Grubu Raporu";
 		break;
 case "LKD Genel Duyuru":
 		echo "LKD Genel Duyuru";
@@ -110,8 +111,8 @@ case "LKD Genel Duyuru":
 case "Denetleme Kurulu Raporu":
 		echo "Denetleme Kurulu Raporu";
 		break;
-case "Diðer Duyuru Konularý":
-		echo "Diðer Duyuru Konularý";
+case "DiÄŸer Duyuru KonularÄ±":
+		echo "DiÄŸer Duyuru KonularÄ±";
 		break;
 }
 ?>
@@ -123,14 +124,14 @@ case "Diðer Duyuru Konularý":
 		<tr>
 			<td align="right">
 				<hr>
-				<a href="duyurularview.php?key=<?php echo $x_DuyuruID;?>">Devamý</a>&nbsp;
+				<a href="duyurularview.php?key=<?php echo $x_DuyuruID;?>">DevamÄ±</a>&nbsp;
 			</td>
 		</tr>
 	</table>
 </td>
 <?php
  }
- // while in bittiði biten yer
+ // while in bittiÄŸi biten yer
 ?>
 
 </table>

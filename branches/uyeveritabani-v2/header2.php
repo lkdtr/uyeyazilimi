@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>LKD ÜYE VERİTABANI</title>
+<title>LKD ÃœYE VERÄ°TABANI</title>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 <script language="JavaScript1.2" src="flyout.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
@@ -19,19 +19,19 @@
                   <TR>
                     <TD align="center">
 						|&nbsp;
-						<a href="logout.php">Çıkış</a>&nbsp;|&nbsp;
-						<a href="uyelerlist.php?cmd=resetall">Üye Bilgileri </a> | 
-						<a href="odemelerlist.php?cmd=resetall">Ödemeler</a> | 
+						<a href="logout.php">Ã‡Ä±kÄ±ÅŸ</a>&nbsp;|&nbsp;
+						<a href="uyelerlist.php?cmd=resetall">Ãœye Bilgileri </a> | 
+						<a href="odemelerlist.php?cmd=resetall">Ã–demeler</a> | 
 <?php 
 	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
 ?>
 						<a href="duyurularlist.php?cmd=resetall">Duyurular</a> | 
 						<a href="bildirilerlist.php?cmd=resetall">Bildiriler</a> | 
-						<a href="yoneticilerlist.php?cmd=resetall">Yöneticiler</a> | 
+						<a href="yoneticilerlist.php?cmd=resetall">YÃ¶neticiler</a> | 
 <?php 
 	}
 ?>
-						İletişim |						
+						Ä°letiÅŸim |						
 					</TD>
                   </TR>
                   <TR>

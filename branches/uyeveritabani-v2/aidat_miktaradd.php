@@ -122,25 +122,25 @@ switch ($a) {
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="aidat_miktarlist.php">Listeye Dön</a></p>
+<p><br><br><a href="aidat_miktarlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript">
 <!-- start Javascript
 function  EW_checkMyForm(EW_this) {
 if (EW_this.x_yil && !EW_hasValue(EW_this.x_yil, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_yil, "TEXT", "Geçersiz Bir Yýl Girdiniz!"))
+            if (!EW_onError(EW_this, EW_this.x_yil, "TEXT", "GeÃ§ersiz Bir YÄ±l Girdiniz!"))
                 return false;
         }
 if (EW_this.x_yil && !EW_checkinteger(EW_this.x_yil.value)) {
-        if (!EW_onError(EW_this, EW_this.x_yil, "TEXT", "Geçersiz Bir Yýl Girdiniz!"))
+        if (!EW_onError(EW_this, EW_this.x_yil, "TEXT", "GeÃ§ersiz Bir YÄ±l Girdiniz!"))
             return false;
         }
 if (EW_this.x_miktar && !EW_hasValue(EW_this.x_miktar, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_miktar, "TEXT", "Miktar Girmediniz veya Geçersiz Bir Miktar Girdiniz."))
+            if (!EW_onError(EW_this, EW_this.x_miktar, "TEXT", "Miktar Girmediniz veya GeÃ§ersiz Bir Miktar Girdiniz."))
                 return false;
         }
 if (EW_this.x_miktar && !EW_checkinteger(EW_this.x_miktar.value)) {
-        if (!EW_onError(EW_this, EW_this.x_miktar, "TEXT", "Miktar Girmediniz veya Geçersiz Bir Miktar Girdiniz."))
+        if (!EW_onError(EW_this, EW_this.x_miktar, "TEXT", "Miktar Girmediniz veya GeÃ§ersiz Bir Miktar Girdiniz."))
             return false;
         }
 return true;

@@ -2,7 +2,7 @@
 <?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: index.php"); ?>
 <html>
 <head>
-<title>LKD ÜYE VERİTABANI</title>
+<title>LKD ÃœYE VERÄ°TABANI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 <link rel="StyleSheet" href="anylink.css" type="text/css">
@@ -33,14 +33,14 @@
       <tr>
         <td width="75" align="right">e-mail</td>
         <td width="100" align="left"><input name="userid" type="text" id="email" value="<?php echo @$_COOKIE["uy_userid"]; ?>"></td>
-        <td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
+        <td><input type="checkbox" name="rememberme" value="true">Beni HatÄ±rla (Ã‡erez KullanÄ±lÄ±r)</td>
       </tr>
       <tr>
-        <td width="75" align="right">şifre</td>
+        <td width="75" align="right">ÅŸifre</td>
         <td width="100" align="left"><input type="password" name="passwd"></td>
-        <td><input type="submit" name="submit" value="Giriş">
+        <td><input type="submit" name="submit" value="GiriÅŸ">
 		<?php if (!$validpwd) {?>
-		<font color="#FF0000">Yanlış ID veya Şifre
+		<font color="#FF0000">YanlÄ±ÅŸ ID veya Åifre
 		<?php }?>
 		</td>
       </tr>
@@ -57,33 +57,33 @@
 <?php if ($_SESSION["uy_status_UserLevel"] == -1) { ?>
 	<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
      <tr>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Üye Listesi</a></td>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Yapılan Ödemeler</a></td>
+       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Ãœye Listesi</a></td>
+       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">YapÄ±lan Ã–demeler</a></td>
        <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="duyurularlist.php?cmd=resetall" class="navbeyaz">Duyurular</a></td>
-	   <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="yoneticilerlist.php?cmd=resetall" class="navbeyaz">Yöneticiler</a></td>
+	   <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="yoneticilerlist.php?cmd=resetall" class="navbeyaz">YÃ¶neticiler</a></td>
 	   <td align="center"><img src="images/navicon_truncu.gif" width="16" height="9">
 	    <a href="#" onMouseOver="dropdownmenu(this, event, 'anylinkmenu1')" class="navbeyaz">Ekstralar</a>
 	   </td>
-	   <td align="right"><img src="images/navicon_beyaz.gif" width="16" height="9">&nbsp;<a class="navbeyaz" href="logout.php">Çıkış</a></td>
+	   <td align="right"><img src="images/navicon_beyaz.gif" width="16" height="9">&nbsp;<a class="navbeyaz" href="logout.php">Ã‡Ä±kÄ±ÅŸ</a></td>
 <?php }
 else {
 ?>
 	<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
      <tr>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Üye Bilgilerim</a></td>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Ödemelerim</a></td>
-       <td><img src="images/wacko.ico" height="13"> <a href="http://uye.lkd.org.tr/uye/" target="_blank" class="navbeyaz">Üye Wikisi</a></td>
-	   <td align="right"><img src="images/navicon_truncu.gif" width="16" height="9">&nbsp;<a class="navbeyaz" href="logout.php">Çıkış</a></td>
+       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Ãœye Bilgilerim</a></td>
+       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Ã–demelerim</a></td>
+       <td><img src="images/wacko.ico" height="13"> <a href="http://uye.lkd.org.tr/uye/" target="_blank" class="navbeyaz">Ãœye Wikisi</a></td>
+	   <td align="right"><img src="images/navicon_truncu.gif" width="16" height="9">&nbsp;<a class="navbeyaz" href="logout.php">Ã‡Ä±kÄ±ÅŸ</a></td>
 <?
 }
 ?>
      </tr>
    </table>
    <div class="anylinkcss" id="anylinkmenu1">
-    <a href="csv.php" class="navbeyaz">Kimlik için CSV</a>
-    <a href="tumkimlik.php" class="navbeyaz">Kimlik için HTML (tümü)</a>
-    <a href="odemeyenler.php" target="_blank" class="navbeyaz">Ödemeleri Eksik Olanlar (CSV)</a>
-    <a href="tum.php" target="_blank" class="navbeyaz">Ödemeler Genel Durum (HTML)</a>
+    <a href="csv.php" class="navbeyaz">Kimlik iÃ§in CSV</a>
+    <a href="tumkimlik.php" class="navbeyaz">Kimlik iÃ§in HTML (tÃ¼mÃ¼)</a>
+    <a href="odemeyenler.php" target="_blank" class="navbeyaz">Ã–demeleri Eksik Olanlar (CSV)</a>
+    <a href="tum.php" target="_blank" class="navbeyaz">Ã–demeler Genel Durum (HTML)</a>
   </div> 
    </td>
   </tr>

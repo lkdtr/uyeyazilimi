@@ -76,6 +76,9 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+     mysql_query("SET NAMES 'utf8'");
+
+
 switch ($a) {
 	case "C": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
@@ -355,7 +358,7 @@ switch ($a) {
 }
 ?>
 <?php include ("header.php") ?>
-<p><br><br><a href="uyelerlist.php">Listeye Dön</a></p>
+<p><br><br><a href="uyelerlist.php">Listeye DÃ¶n</a></p>
 <script language="JavaScript" src="ew.js"></script>
 <script language="JavaScript">
 <!-- start Javascript
@@ -369,7 +372,7 @@ if (EW_this.x_uye_ad && !EW_hasValue(EW_this.x_uye_ad, "TEXT" )) {
                 return false; 
         }
 if (EW_this.x_uye_soyad && !EW_hasValue(EW_this.x_uye_soyad, "TEXT" )) {
-            if (!EW_onError(EW_this, EW_this.x_uye_soyad, "TEXT", "Soyadınız ?"))
+            if (!EW_onError(EW_this, EW_this.x_uye_soyad, "TEXT", "SoyadÄ±nÄ±z ?"))
                 return false; 
         }
 if (EW_this.x_cinsiyet && !EW_hasValue(EW_this.x_cinsiyet, "RADIO" )) {
@@ -395,7 +398,7 @@ return true;
 <td bgcolor="#F5F5F5"><input type="hidden" name="x_id" value="<?php echo htmlspecialchars(@$x_id); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ãœye NumarasÄ±&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php if (($ewCurSec & ewAllowAdmin) == ewAllowAdmin) { // system admin ?>
 <input type="text" name="x_uye_id" size="30" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
 <?php } else { // yonetici degil! ?>
@@ -420,7 +423,7 @@ return true;
 <td bgcolor="#F5F5F5"><input type="text" name="x_eposta2" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_eposta2); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Kayıt Tarihi&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">KayÄ±t Tarihi&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_kayit_tarihi" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_kayit_tarihi); ?>">&nbsp;</td>
 </tr>
 
@@ -430,17 +433,17 @@ return true;
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">LKD Ãœye Listesi&nbsp;</td>
  <td bgcolor="#F5F5F5">
- <input type="radio" name="x_liste_uyeligi" checked value=1>Üye Ol&nbsp;
- <input type="radio" name="x_liste_uyeligi" value=0>Üye Olma&nbsp;
+ <input type="radio" name="x_liste_uyeligi" checked value=1>Ãœye Ol&nbsp;
+ <input type="radio" name="x_liste_uyeligi" value=0>Ãœye Olma&nbsp;
 </tr>
 
 
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php if (empty($x_cinsiyet)) { $x_cinsiyet = "e"; } // varsayilan degeri belirle... ?><input type="radio" name="x_cinsiyet"<?php if ($x_cinsiyet == "e") { echo " checked"; } ?> value="<?php echo htmlspecialchars("e"); ?>">Erkek
-<input type="radio" name="x_cinsiyet"<?php if ($x_cinsiyet == "m") { echo " checked"; } ?> value="<?php echo htmlspecialchars("m"); ?>">Kadın
+<input type="radio" name="x_cinsiyet"<?php if ($x_cinsiyet == "m") { echo " checked"; } ?> value="<?php echo htmlspecialchars("m"); ?>">KadÄ±n
 &nbsp;</td>
 </tr>
 <tr>
@@ -448,7 +451,7 @@ return true;
 <td bgcolor="#F5F5F5"><input type="text" name="x_kurum" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_kurum); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Görev&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">GÃ¶rev&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_gorev" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_gorev); ?>">&nbsp;</td>
 </tr>
 <tr>
@@ -456,15 +459,15 @@ return true;
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_mezuniyet); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yılı&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yÄ±lÄ±&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_yil" size="30" maxlength="4" value="<?php echo htmlspecialchars(@$x_mezuniyet_yil); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bölüm&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bÃ¶lÃ¼m&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_bolum" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_mezuniyet_bolum); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">İletiŞim Adresi&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ä°letiÅim Adresi&nbsp;</td>
 <td bgcolor="#F5F5F5"><textarea name="x_is_addr" cols="35" rows="4"><?php echo @$x_is_addr ?></textarea>&nbsp;</td>
 </tr>
 <tr>
@@ -472,7 +475,7 @@ return true;
 <td bgcolor="#F5F5F5"><input type="text" name="x_semt" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_semt); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Şehir&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Åehir&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_sehir" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_sehir); ?>">&nbsp;</td>
 </tr>
 <tr>
@@ -503,22 +506,22 @@ return true;
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Karar No&nbsp;</td>
  <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_no" value="<?php echo @$x_Uye_karar_no ?>" size=30 maxlength=100>&nbsp;</td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100>&nbsp;<small>(Yıl-Ay-Gün)</small></td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Karar Tarihi&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100>&nbsp;<small>(YÄ±l-Ay-GÃ¼n)</small></td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Basıldı&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimlik BasÄ±ldÄ±&nbsp;</td>
  <td bgcolor="#F5F5F5">
  <input type="radio" name="x_kimlik_basildi" value=1>Evet&nbsp;
- <input type="radio" name="x_kimlik_basildi" checked value=0>Hayır&nbsp;
+ <input type="radio" name="x_kimlik_basildi" checked value=0>HayÄ±r&nbsp;
 </tr>
 
 
@@ -526,12 +529,12 @@ return true;
  <td bgcolor="#466176"><font color="#FFFFFF">Kimlik iletildi&nbsp;</td>
  <td bgcolor="#F5F5F5">
  <input type="radio" name="x_kimlik_iletildi" value=1>Evet&nbsp;
- <input type="radio" name="x_kimlik_iletildi" checked value=0>Hayır&nbsp;
+ <input type="radio" name="x_kimlik_iletildi" checked value=0>HayÄ±r&nbsp;
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar iÃ§in FotoÄŸraf&nbsp;</td>
  <td bgcolor="#F5F5F5">
  <input type="radio" name="x_vesikalik_foto" value=1>Var&nbsp;
  <input type="radio" name="x_vesikalik_foto" checked value=0>Yok&nbsp;
@@ -539,7 +542,7 @@ return true;
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ãœye Formu&nbsp;</td>
  <td bgcolor="#F5F5F5">
  <input type="radio" name="x_Uye_formu" checked value=1>Var&nbsp;
  <input type="radio" name="x_Uye_formu" value=0>Yok&nbsp;

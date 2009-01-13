@@ -35,8 +35,8 @@ if (@$_POST["submit"] <> "") {
 	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
 	$passwd = @$_POST["passwd"];
 	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
 	if ($row = mysql_fetch_array($rs)) {
 		if (strtoupper($row["AdminPass"]) == strtoupper($passwd)) {
@@ -83,7 +83,7 @@ if (@$_POST["submit"] <> "") {
 ?>
 <html>
 <head>
-	<title>LKD ÜYE VERİTABANI</title>
+	<title>LKD ÃœYE VERÄ°TABANI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 </head>
@@ -92,7 +92,7 @@ if (@$_POST["submit"] <> "") {
 <!-- start JavaScript
 function  EW_checkMyForm(EW_this) {
 if (!EW_hasValue(EW_this.userid, "TEXT")) {
-	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "Lütfen ID Giriniz"))
+	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "LÃ¼tfen ID Giriniz"))
 		return false;
 }
 if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
@@ -137,14 +137,14 @@ return true;
         <td width="75" align="right">E-posta</td>
         <td width="100" align="left"><input name="userid" type="text" id="email" value="
 	<?php echo ($_COOKIE["uy_userid"] != "") ? @$_COOKIE["uy_userid"] : "@linux.org.tr" ?>"></td>
-        <td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
+        <td><input type="checkbox" name="rememberme" value="true">Beni HatÄ±rla (Ã‡erez KullanÄ±lÄ±r)</td>
       </tr>
       <tr>
         <td width="75" align="right">Parola</td>
         <td width="100" align="left"><input type="password" name="passwd"></td>
-        <td><input type="submit" name="submit" value="Giriş">
+        <td><input type="submit" name="submit" value="GiriÅŸ">
 		<?php if (!$validpwd) {?>
-		<font color="#FF0000">Yanlış e-posta veya parola
+		<font color="#FF0000">YanlÄ±ÅŸ e-posta veya parola
 		<?php }?>
 		</td>
       </tr>
@@ -171,14 +171,14 @@ if(!($_POST["email"] && $_POST["button1"])) {
 <tr><td colspan="2" align="center"><font color="red"><b>E-posta adresinizi girmelisiniz!</b></font></td></tr>
 <?php } ?>
 <tr><td colspan=2>
-Parolanız e-posta adresinize gönderilecektir.</td></tr>
+ParolanÄ±z e-posta adresinize gÃ¶nderilecektir.</td></tr>
 <tr><td align="right"><b>E-posta : </b></td><td><input type="text" name="email" size="50"></td></tr>
-<tr><td></td><td align="left"><input type="submit" value="Gönder" name="button1"></td></tr>
+<tr><td></td><td align="left"><input type="submit" value="GÃ¶nder" name="button1"></td></tr>
 </table>
 </form>
 <?php } else {
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
+	$conn = mysql_connect(HOST, USER, PASS) or die("VeritabanÄ±na baÄŸlanamadÄ±k");
+	mysql_select_db(DB) or die("seÃ§emedi");
 	$Sorgu = "SELECT uye_ad,uye_soyad,eposta1,PassWord FROM uyeler WHERE (eposta1='". addslashes($_POST["email"]) ."')"
 	       . " OR (alias = '". addslashes($_POST["email"]) ."')";
 	$rs = mysql_query($Sorgu) or die(mysql_error());
@@ -192,18 +192,18 @@ Parolanız e-posta adresinize gönderilecektir.</td></tr>
 	}
 	
 
-	$content = "Sayın $row[0] $row[1],\r\n\r\n";
-//	$content .= "Bu e-posta, Linux Kullanıcıları Derneği Üye Veritabanı için yeni bir parola istediğiniz için gönderilmiştir. Eğer kendiniz böyle bir istekte bulunmadıysanız, mesajı dikkate almayabilirsiniz.\r\n\r\n";
-	$content .= "Bu e-posta, Linux Kullanıcıları Derneği Üye Veritabanı için yeni bir parola istediğiniz için gönderilmiştir. Eğer kendiniz böyle bir istekte bulunmadıysanız, lütfen yeni parolanızı kaydediniz..\r\n\r\n";
-	$content .= "Yeni Parolanız : $rndPass\r\n\r\n";
-	//$content .= "Parolanız : $row[3]\r\n\r\n";
-	$content .= "Parolanızı sisteme giriş yaptıktan sonra değiştirebilirsiniz.\r\n\r\n";
-	$content .= "Üyelikle ilgili her türlü sorununuz için uye@lkd.org.tr adresi ile bağlantı kurabilirsiniz.";
+	$content = "SayÄ±n $row[0] $row[1],\r\n\r\n";
+//	$content .= "Bu e-posta, Linux KullanÄ±cÄ±larÄ± DerneÄŸi Ãœye VeritabanÄ± iÃ§in yeni bir parola istediÄŸiniz iÃ§in gÃ¶nderilmiÅŸtir. EÄŸer kendiniz bÃ¶yle bir istekte bulunmadÄ±ysanÄ±z, mesajÄ± dikkate almayabilirsiniz.\r\n\r\n";
+	$content .= "Bu e-posta, Linux KullanÄ±cÄ±larÄ± DerneÄŸi Ãœye VeritabanÄ± iÃ§in yeni bir parola istediÄŸiniz iÃ§in gÃ¶nderilmiÅŸtir. EÄŸer kendiniz bÃ¶yle bir istekte bulunmadÄ±ysanÄ±z, lÃ¼tfen yeni parolanÄ±zÄ± kaydediniz..\r\n\r\n";
+	$content .= "Yeni ParolanÄ±z : $rndPass\r\n\r\n";
+	//$content .= "ParolanÄ±z : $row[3]\r\n\r\n";
+	$content .= "ParolanÄ±zÄ± sisteme giriÅŸ yaptÄ±ktan sonra deÄŸiÅŸtirebilirsiniz.\r\n\r\n";
+	$content .= "Ãœyelikle ilgili her tÃ¼rlÃ¼Â sorununuz iÃ§in uye@lkd.org.tr adresi ile baÄŸlantÄ± kurabilirsiniz.";
 
 	$headers = "From: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\nContent-type: text/plain; charset=ISO-8859-9";
 	$to = "$row[2]";
 	if(time() > $_SESSION["Sifre_Mail_Time"]+(5*60) || 1) {
-		echo "<br>Mailiniz Gönderilmiştir. Teşekkür Ederiz.";
+		echo "<br>Mailiniz GÃ¶nderilmiÅŸtir. TeÅŸekkÃ¼r Ederiz.";
 		$_SESSION["Sifre_Mail_Time"] = time();
 		
 		$Sorgu = "UPDATE uyeler SET passWord = '". md5($rndPass) ."' WHERE (eposta1='". addslashes($_POST["email"]) ."')"
@@ -213,7 +213,7 @@ Parolanız e-posta adresinize gönderilecektir.</td></tr>
 		mail($to, "Parola Hatirlatma Mesaji", $content, $headers);
 		
 	} else {
-		echo "<br>Yeni bir mail atabilmek için bir süre beklemelisiniz!";
+		echo "<br>Yeni bir mail atabilmek iÃ§in bir sÃ¼re beklemelisiniz!";
 		$_SESSION["Sifre_Mail_Time"] = time();
 	}
 	// acilacak

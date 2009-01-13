@@ -62,9 +62,9 @@ if (empty($key)) {
 	 $key = @$_POST["key"];
 }
 if (empty($key)) {
-	// burayı değiştirdim
-	// anahtar yoksa girişte çağrılıyor demektir
-	// $key i -1 yapıyorum
+	// burayÄ± deÄŸiÅŸtirdim
+	// anahtar yoksa giriÅŸte Ã§aÄŸrÄ±lÄ±yor demektir
+	// $key i -1 yapÄ±yorum
 	//header("Location: duyurularlist.php");
 	$key = -1;
 }
@@ -78,6 +78,7 @@ if (empty($a)) {
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB);
+        mysql_query("SET NAMES 'utf8'");
 switch ($a)
 {
 	case "I": // gosterilecek bir kayit  var
@@ -109,7 +110,7 @@ switch ($a)
 }
 ?>
 <?php include ("header.php") ?>
-<p align="right"><br><br><a href="duyurularlist.php">Tüm Duyuruların Listesi</a>&nbsp;&nbsp;</p>
+<p align="right"><br><br><a href="duyurularlist.php">TÃ¼m DuyurularÄ±n Listesi</a>&nbsp;&nbsp;</p>
 <p>
 <form>
 <table width="70%" border="0" align="center" cellpadding="4" cellspacing="1">
@@ -122,11 +123,11 @@ switch ($x_DuyuruTur) {
 case "LKD Genel Kurul Raporu":
 		echo "LKD Genel Kurul Raporu";
 		break;
-case "LKD YK Çalışma Raporu":
-		echo "LKD YK Çalışma Raporu";
+case "LKD YK Ã‡alÄ±ÅŸma Raporu":
+		echo "LKD YK Ã‡alÄ±ÅŸma Raporu";
 		break;
-case "Çalışma Grubu Raporu":
-		echo "Çalışma Grubu Raporu";
+case "Ã‡alÄ±ÅŸma Grubu Raporu":
+		echo "Ã‡alÄ±ÅŸma Grubu Raporu";
 		break;
 case "LKD Genel Duyuru":
 		echo "LKD Genel Duyuru";
@@ -134,8 +135,8 @@ case "LKD Genel Duyuru":
 case "Denetleme Kurulu Raporu":
 		echo "Denetleme Kurulu Raporu";
 		break;
-case "Diğer Duyuru Konuları":
-		echo "Diğer Duyuru Konuları";
+case "DiÄŸer Duyuru KonularÄ±":
+		echo "DiÄŸer Duyuru KonularÄ±";
 		break;
 }
 ?></td>
