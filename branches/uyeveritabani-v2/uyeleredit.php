@@ -112,8 +112,8 @@ $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
-mysql_select_db(DB);
-               mysql_query("SET NAMES 'utf8'");
+mysql_select_db(DB, $conn);
+mysql_query("SET NAMES 'utf8'", $conn);
 
 switch ($a)
 {
@@ -123,7 +123,7 @@ switch ($a)
     if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
 			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
     }
-		$rs = mysql_query($strsql) or die(mysql_error());
+		$rs = mysql_query($strsql, $conn) or die(mysql_error());
 		if (!($row = mysql_fetch_array($rs))) {
      	ob_end_clean();
 			header("Location: uyelerlist.php");
@@ -476,22 +476,24 @@ switch ($a)
   		$rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 		
 		// alias tablosunu da guncelleyelim - once birini sonra digerini guncellemeli, baska anahtar yok tabloda
-		mysql_select_db('provider');
+                $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
+		mysql_select_db(DB_MAIL, $conn_mail);
+                mysql_query("SET NAMES 'utf8'", $conn_mail);
 		if($row_eski[alias] != $x_alias)
 		 {
 		  $updateSQL = "UPDATE forwardings SET source='$x_alias' WHERE destination = '$row_eski[eposta1]'";
-		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
+		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		  
 		  if($row_eski[eposta1] != $x_eposta1)		// eger hem alias hem eposta guncelleniyorsa, guncellenen alias'i anahtar almak gerek
 		   {
 		    $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$x_alias'";
-		    $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
+		    $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		   }
 		 }
 		elseif($row_eski[eposta1] != $x_eposta1)	// sadece eposta guncelleniyorsa, eski alias'i anahtar almak gerek
 		 {
 		  $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$row_eski[alias]'";
-		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
+		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		 }
 		 
 		ob_end_clean();

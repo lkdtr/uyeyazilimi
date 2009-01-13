@@ -80,7 +80,8 @@ if (empty($a)) {
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
-mysql_select_db(DB);
+mysql_select_db(DB, $conn);
+mysql_query("SET NAMES 'utf8'", $conn);
 switch ($a)
 {
 	case "I": // display
@@ -100,29 +101,32 @@ switch ($a)
 		if (@$_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
 			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
 		}
-		$rs = mysql_query($strsql) or die(mysql_error());
+		$rs = mysql_query($strsql, $conn) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 		
 		// Uye baska tabloya aliniyor - LKD - YK Istegi (19.10.2006)
 #		$sorgu = "INSERT INTO silinmis_uyeler "
 		$sorgu = "INSERT INTO silinen_uyeler "
 			." SELECT *,'". trim(addslashes($_POST["neden"])) ."',NOW() FROM uyeler WHERE $sqlKey";
-		mysql_query($sorgu) or die(mysql_error());
+		mysql_query($sorgu, $conn) or die(mysql_error());
 		
 		// uye kaydini silelim
 		$strsql = "DELETE FROM uyeler WHERE " . $sqlKey;
 		if (@$_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
 			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
 		}
-		$rs =	mysql_query($strsql) or die(mysql_error());
+		$rs =	mysql_query($strsql, $conn) or die(mysql_error());
+		mysql_close($conn);
 		
 		// alias'ini da alias tablosundan silmeli - dfisek - hizli/kirli cozum
 		$alias = $row[alias] . '@linux.org.tr';
-		mysql_select_db('provider');
+                $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
+		mysql_select_db(DB_MAIL, $conn_mail);
+                mysql_query("SET NAMES 'utf8'", $conn_mail);
 		$strsql = "DELETE FROM forwardings WHERE source = '$alias'";
-		$rs = mysql_query($strsql) or die(mysql_error());		
+		$rs = mysql_query($strsql, $conn_mail) or die(mysql_error());		
+		mysql_close($conn_mail);
 		
-		mysql_close($conn);
 		ob_end_clean();
 		header("Location: uyelerlist.php");
 		break;

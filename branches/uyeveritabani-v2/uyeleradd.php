@@ -75,8 +75,8 @@ if (empty($a)) {
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
-mysql_select_db(DB);
-     mysql_query("SET NAMES 'utf8'");
+mysql_select_db(DB, $conn);
+mysql_query("SET NAMES 'utf8'", $conn);
 
 
 switch ($a) {
@@ -86,7 +86,7 @@ switch ($a) {
     if ($_SESSION["uy_status_UserLevel"] <> -1) { //yonetici degil!
 			$strsql .= " AND (uye_id = " . $_SESSION["uy_status_UserID"] . ")";
     }
-		$rs = mysql_query($strsql);
+		$rs = mysql_query($strsql, $conn);
 		if (mysql_num_rows($rs) == 0) {
 			ob_end_clean();
 			header("Location: uyelerlist.php");
@@ -345,13 +345,16 @@ switch ($a) {
 		$strsql .= implode(",", array_values($fieldList));
 		$strsql .= ")";
 		mysql_query($strsql, $conn) or die(mysql_error());
+		mysql_close($conn);
 		
 		// bir de e-posta alias'ini baska bir tabloya yazalim -- dfisek
-		mysql_select_db('provider');
+                $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
+		mysql_select_db(DB_MAIL,$conn_mail);
+                mysql_query("SET NAMES 'utf8'", $conn_mail);
 		$strsql = "INSERT INTO forwardings VALUES('$_POST[x_alias]',$fieldList[eposta1])";
-		mysql_query($strsql, $conn) or die(mysql_error());
+		mysql_query($strsql, $conn_mail) or die(mysql_error());
+		mysql_close($conn_mail);
 		
-		mysql_close($conn);
 		ob_end_clean();
 		header("Location: uyelerlist.php");
 		break;
