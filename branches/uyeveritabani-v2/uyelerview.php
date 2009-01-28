@@ -311,7 +311,7 @@ switch ($x_cinsiyet) {
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
     if( $x_Uye_formu == 1 )
-    	echo "Var";
+    	echo "<a target=\"_blank\" href=\"uye_formlar/$x_uye_id.tif\">Var</a>";
     else
     	echo "Yok";
 
