@@ -429,7 +429,7 @@ switch ($a)
 				$DosyaAdi = $_SESSION["uy_status_UserID"];
 
 
-     		$destfile = addslashes(dirname($_SERVER["PATH_TRANSLATED"])) .  "/" . $UyeResimlerDizin . "/" . $DosyaAdi . ".$Uzanti";
+     		$destfile = './' . $UyeResimlerDizin . '/' . $DosyaAdi . ".$Uzanti";
 
      		if (!move_uploaded_file($_FILES["x_Resim"]["tmp_name"], $destfile)) // dosyayi yerine gonderemediysek...
 
