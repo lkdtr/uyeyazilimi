@@ -1,4 +1,1 @@
-2008-08-11 22:28:01 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'fields' in 'where clause'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 512]
-2008-08-12 12:20:48 Warning: Warning (2): Attempt to assign property of non-object in [APP/controllers/users_controller.php, line 82]
-2008-08-12 13:18:56 Warning: Warning (2): Attempt to assign property of non-object in [APP/controllers/users_controller.php, line 82]
-2008-08-12 16:49:52 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'fields' in 'where clause'</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 512]
+
