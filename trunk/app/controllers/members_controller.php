@@ -189,7 +189,7 @@ class MembersController extends AppController {
 	function __send_new_password($member, $pass){	
 		$this->Email->layout="default";
     	$this->Email->to = $member['Member']['lotr_alias'].'@linux.org.tr';
-    	$this->Email->subject = 'Bimel Bayi Portalı İçin Yeni Şifreniz';
+    	$this->Email->subject = 'Linux Kulla�nıcıları Derneği Üye Sistemi İçin Yeni Şifreniz';
     	$this->Email->from = $this->defaultEmailAddreses['from'];
    		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
     	$this->Email->template = 'new_password'; 
