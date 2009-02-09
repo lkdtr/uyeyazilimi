@@ -4,7 +4,7 @@ class AppController extends Controller
 {
 	var $components = array('Auth');
 	//var $sessionAccountId=null;
-	var $defaultEmailAddreses=array('from'=>'LKD Üye Sistemi <uyesistemi@lkd.org.tr>','reply-to'=>'uyesistemi@lkd.org.tr');
+	var $defaultEmailAddreses=array('from'=>'LKD Üye İşleri <uye@lkd.org.tr>','reply-to'=>'uyesistemi@lkd.org.tr');
 	//publicly accesable array(controllers=>array(actions))
 	var $publicControllersActions=array('members'=>array('new_member','forgot_my_password','confirm_password_change','cancel_password_change'));
 	/*function authenticate(){

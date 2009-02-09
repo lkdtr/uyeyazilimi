@@ -71,7 +71,7 @@ class MembersController extends AppController {
     }
 	
 	function new_member(){
-		$this->pageTitle="Yeni Şifre Oluşturma";
+		$this->pageTitle="Yeni Parola Oluşturma";
 		//import sanitization class, cake-style
 		App::import('Sanitize');
 		//get the alias
@@ -84,7 +84,7 @@ class MembersController extends AppController {
         	$this->Member->recursive=-1;
         	$user=$this->Member->find('first',array('conditions'=>array('Member.lotr_alias'=>$UserName,'Member.password IS NULL')));
 	        if (empty($user)) {
-   				$this->Session->setFlash('Böyle bir üye bulunamadı veya üyeye daha önce şifre atanmış. Şifrenizi unuttuysanız "Şifremi Unuttum"a tıklayın.');
+   				$this->Session->setFlash('Böyle bir üye bulunamadı veya üyeye daha önce parola atanmış. Parolanızı unuttuysanız "Parolamı Unuttum"a tıklayın.');
 				$this->redirect(array('action'=>'login'));
         	} else {
 				$this->set('user',$user);
@@ -119,10 +119,10 @@ class MembersController extends AppController {
 	            if($this->Member->save($user,false)){
    		    		//send mail after saving
 	            	$this->Email->send();
-   	   				$this->Session->setFlash('Şifreniz oluşturulmuştur ve eposta adresinize gönderilmiştir.');
+   	   				$this->Session->setFlash('Parolanız oluşturulmuş ve e-posta adresinize gönderilmiştir.');
 					$this->redirect(array('action'=>'login'));
 	            }
-	            $this->Session->setFlash('Şifreniz oluşturulurken bir hata oluşmuştur. Lütfen tekrar deneyiniz.');
+	            $this->Session->setFlash('Parolanız oluşturulurken bir hata oluşmuştur. Lütfen tekrar deneyiniz.');
 	        }
         }
 	}
