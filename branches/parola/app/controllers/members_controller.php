@@ -143,7 +143,7 @@ class MembersController extends AppController {
 				$hash=$passwordConfirmation->newHash($member['Member']['id']);
 				//Kullanıcıya gönderilecek mail için gerekli olan fonksiyon çağırılır.
 				$this->__send_forgot_my_password_email($member, $hash);
-				$this->Session->setFlash(__('A link has been sent to your email address to reset your password. Please check your email.', true));
+				$this->Session->setFlash(__('E-posta adresinize parolanızı tekrar oluşturmak için bir bağlantı gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.', true));
 				$this->redirect(array('action'=>'login'));
 			}
 		}
@@ -162,7 +162,7 @@ class MembersController extends AppController {
 				//Kullanıcının bütün bilgilerini okur. Bu bilgiler mail atarken kullanılacak. (isim, soyisim, mail)
 				$member = $this->Member->read(null, $memberId);				
 				$this->__send_new_password($member, $pass);	//send_new_password fonksiyonunu çağırır.
-				$this->Session->setFlash(__('Your new password has been sent to your email. Please check your email.', true));//İşlem yapıldı mesajı.
+				$this->Session->setFlash(__('Yeni parolanız e-posta adresinize gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.', true));//İşlem yapıldı mesajı.
 				$this->redirect(array('action'=>'login'));
 			}		
 		}
