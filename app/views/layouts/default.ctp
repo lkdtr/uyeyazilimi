@@ -50,7 +50,7 @@
         <table class="headerTable">
         <tr class="headerTR">
         <td class="headerTD">
-           <img src="img/resmilogo.png" alt="Logo">
+           <img src="/parola/img/resmilogo.png" alt="Logo">
         </td>
         <td style="text-align: right; border: none">
             <div style="font-size: xx-large">
