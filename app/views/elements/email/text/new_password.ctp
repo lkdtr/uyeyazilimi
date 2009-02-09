@@ -1,5 +1,5 @@
 Merhaba <?php echo $member['Member']['name']; ?> <?php echo $member['Member']['lastname']; ?>,
-Şifreniz isteğiniz üzerine değiştirilmiştir. LKD Üye Sistemine giriş için bilgileriniz aşağıda berilmiştir. Bayi portalına giriş yaptıktan sonra şifrenizi değiştirmenizi öneririz.
+Parolanız isteğiniz üzerine değiştirilmiştir. LKD Üye Sistemine giriş için bilgileriniz aşağıda verilmiştir.
 
 -------------------------------------------
 Kullanıcı Adınız: <?php echo $member['Member']['lotr_alias']; ?>
