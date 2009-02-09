@@ -189,7 +189,7 @@ class MembersController extends AppController {
 	function __send_new_password($member, $pass){	
 		$this->Email->layout="default";
     	$this->Email->to = $member['Member']['lotr_alias'].'@linux.org.tr';
-    	$this->Email->subject = 'Linux Kulla�nıcıları Derneği Üye Sistemi İçin Yeni Şifreniz';
+    	$this->Email->subject = 'Linux Kullanıcıları Derneği Üye Sistemi İçin Yeni Parolanız';
     	$this->Email->from = $this->defaultEmailAddreses['from'];
    		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
     	$this->Email->template = 'new_password'; 
@@ -203,7 +203,7 @@ class MembersController extends AppController {
 	function __send_forgot_my_password_email($member, $hash) {
 		$this->Email->layout="default";
     	$this->Email->to = $member['Member']['lotr_alias'].'@linux.org.tr';
-    	$this->Email->subject = 'LKD Üye Sistemi İçin Yeni Şifre İsteği';
+    	$this->Email->subject = 'LKD Üye Sistemi İçin Yeni Parola İsteği';
     	$this->Email->from = $this->defaultEmailAddreses['from'];
    		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
     	$this->Email->template = 'request_new_password';

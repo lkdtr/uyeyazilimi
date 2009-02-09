@@ -36,8 +36,8 @@
 
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/', array('controller' => 'members', 'action' => 'index', ''));
-	Router::connect('/yeni_sifre', array('controller' => 'members', 'action' => 'new_member'));
-	Router::connect('/sifremi_unuttum', array('controller' => 'members', 'action' => 'forgot_my_password'));
+	Router::connect('/yeni_parola', array('controller' => 'members', 'action' => 'new_member'));
+	Router::connect('/parolami_unuttum', array('controller' => 'members', 'action' => 'forgot_my_password'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
