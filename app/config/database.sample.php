@@ -84,21 +84,11 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'betauye',
-		'password' => 'Bty890',
-		'database' => 'betauye',
+		'login' => 'kullanici',
+		'password' => 'parola',
+		'database' => 'veritabani',
 		'prefix' => '',
 		'encoding' => 'utf8'
-	);
-
-	var $test = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'lkduser',
-		'password' => '1Q7y3e4r',
-		'database' => 'lkd_cake_test',
-		'prefix' => '',
 	);
 }
 ?>
