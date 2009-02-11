@@ -3,6 +3,6 @@
 <p>Eğer ilk defa üye sistemine giriş yapmak istiyorsanız ve ilk defa parola alacaksanız <?php echo $html->link('bu sayfayı kullanınız',array('controller'=>'members','action'=>'new_member')) ?>.</p>
 <?php
 	echo $form->create('Member', array('action' => 'forgot_my_password'));     
-	echo $form->input('lotr_alias',array('label'=>"ad.soyad@linux.org.tr şeklindeki LKD e-posta adresinizin sadece <strong>ad.soyad</strong> kısmını giriniz.",'after'=>'@linux.org.tr'));     
+	echo $form->input('lotr_alias',array('label'=>"ad.soyad@linux.org.tr şeklindeki LKD e-posta adresinizin sadece <strong>ad.soyad</strong> kısmını giriniz.",'after'=>'@linux.org.tr','style'=>'clear:none;float:left;width:300px;'));     
 	echo $form->end('Yeni Parola Talebi Gönder'); 
 ?> 
