@@ -6,7 +6,7 @@ class MembersController extends AppController {
 	var $components = array('Email');
 	var $pageTitle="Üyeler";
 
-	function login(){
+	/*function login(){
 	}
 	
     function logout() {
@@ -14,6 +14,10 @@ class MembersController extends AppController {
         $this->Session->setFlash('You have been logged out. ');
         $this->redirect(array('action'=>'login'));
         exit;
+    }*/
+    
+    function index(){
+    	
     }
 	
 	function new_member(){
@@ -31,7 +35,7 @@ class MembersController extends AppController {
         	$user=$this->Member->find('first',array('conditions'=>array('Member.lotr_alias'=>$UserName,'Member.password IS NULL')));
 	        if (empty($user)) {
    				$this->Session->setFlash('Böyle bir üye bulunamadı veya üyeye daha önce parola atanmış. Parolanızı unuttuysanız "Parolamı Unuttum"a tıklayın.');
-				$this->redirect(array('action'=>'login'));
+				$this->redirect(array('action'=>'index'));
         	} else {
 				$this->set('user',$user);
 	    		$NewPassword = $this->__generatePassword();
@@ -67,7 +71,7 @@ class MembersController extends AppController {
    		    		//send mail after saving
 	            	$this->Email->send();
    	   				$this->Session->setFlash('Parolanız oluşturulmuş ve e-posta adresinize gönderilmiştir.');
-					$this->redirect(array('action'=>'login'));
+					$this->redirect(array('action'=>'index'));
 	            }
 	            $this->Session->setFlash('Parolanız oluşturulurken bir hata oluşmuştur. Lütfen tekrar deneyiniz.');
 	        }
@@ -94,7 +98,7 @@ class MembersController extends AppController {
 				//Kullanıcıya gönderilecek mail için gerekli olan fonksiyon çağırılır.
 				$this->__send_forgot_my_password_email($member, $hash);
 				$this->Session->setFlash('E-posta adresinize parolanızı tekrar oluşturmak için bir bağlantı gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.');
-				$this->redirect(array('action'=>'login'));
+				$this->redirect(array('action'=>'index'));
 			}
 		}
 	}
@@ -115,12 +119,12 @@ class MembersController extends AppController {
 				$member = $this->Member->read(null, $memberId);				
 				$this->__send_new_password($member, $pass);	//send_new_password fonksiyonunu çağırır.
 				$this->Session->setFlash('Yeni parolanız e-posta adresinize gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.');//İşlem yapıldı mesajı.
-				$this->redirect(array('action'=>'login'));
+				$this->redirect(array('action'=>'index'));
 			}		
 		}
 		//bir incominghash yoksa veya eşleşme yoksa hata ver.
 		$this->Session->setFlash('Parola isteğiniz zaman aşımına uğramış olabilir. Lütfen yeniden parola isteğinde bulununuz.');
-		$this->redirect(array('action'=>'login'));
+		$this->redirect(array('action'=>'index'));
 	}	
 
 	function cancel_password_change($incominghash=null){	
@@ -132,11 +136,11 @@ class MembersController extends AppController {
 		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
 			if (is_numeric($memberId)) { 
 				$this->Session->setFlash('Yeni parola talebiniz iptal edilmiştir.');
-				$this->redirect(array('action'=>'login'));				
+				$this->redirect(array('action'=>'index'));				
 			}
 		}
 		$this->Session->setFlash('Parola isteğiniz zaman aşımına uğramış olabilir. Lütfen yeniden parola isteğinde bulununuz.');
-		$this->redirect(array('action'=>'login'));
+		$this->redirect(array('action'=>'index'));
 	}
 	
 	
@@ -199,7 +203,7 @@ class MembersController extends AppController {
 	}
 
 	
-    function isAuthorized() {
+    /*function isAuthorized() {
     	$allowedActions=array('member'=>array('index','logout'),
     					'admin'=>array('index','logout')
     	);
@@ -207,6 +211,6 @@ class MembersController extends AppController {
     		if(in_array($this->params['action'],$allowedActions[$this->Auth->user('member_type')])) return true;
     	}
 		return false;
-    }
+    }*/
 }
 ?>

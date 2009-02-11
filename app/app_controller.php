@@ -2,7 +2,7 @@
 uses('L10n');
 class AppController extends Controller
 {
-	var $components = array('Auth');
+	//var $components = array('Auth');
 	//var $sessionAccountId=null;
 	var $defaultEmailAddreses=array('from'=>'LKD Üye İşleri <uye@lkd.org.tr>','reply-to'=>'uye@lkd.org.tr');
 	//publicly accesable array(controllers=>array(actions))
