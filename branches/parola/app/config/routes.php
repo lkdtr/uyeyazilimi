@@ -35,7 +35,7 @@
  */
 
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-	Router::connect('/', array('controller' => 'members', 'action' => 'index', ''));
+	Router::connect('/', array('controller' => 'members', 'action' => 'login'));
 	Router::connect('/yeni_parola', array('controller' => 'members', 'action' => 'new_member'));
 	Router::connect('/parolami_unuttum', array('controller' => 'members', 'action' => 'forgot_my_password'));
 /**
