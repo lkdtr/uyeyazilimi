@@ -62,7 +62,8 @@ class MembersController extends AppController {
 	    		//$this->set('smtp-errors', $this->Email->smtpError);
 	            $user['Member']['password']= md5($NewPassword);
        			$this->Member->create();
-	            if($this->Member->save($user,false)){
+       			//save only password without validation
+	            if($this->Member->save($user,false,array('password'))){
    		    		//send mail after saving
 	            	$this->Email->send();
    	   				$this->Session->setFlash('Parolanız oluşturulmuş ve e-posta adresinize gönderilmiştir.');
@@ -74,11 +75,14 @@ class MembersController extends AppController {
 	}
 
 	function forgot_my_password() {
+		$this->pageTitle="Parolamı Unuttum";
 		if (!empty($this->data)) {
-		 	$member = $this->Member->find(array('lotr_alias'=>$this->data['Member']['lotr_alias']));
+			App::import('Sanitize');
+			$this->data['Member']['lotr_alias'] = Sanitize::paranoid($this->data['Member']['lotr_alias'], array('.'));
+			$member = $this->Member->find(array('lotr_alias'=>$this->data['Member']['lotr_alias']));
 		 	//Girilen mail veritabaninda yoksa veya boş veri gönderilmişse hata ver.
 		 	if (empty ($member)) {
-				$this->Session->setFlash(__('The email you have entered is not registered with us.',true));//Hata mesajı
+				$this->Session->setFlash("Böyle bir üye bulunamadı.");//Hata mesajı
 				$this->redirect(array('action'=>'forgot_my_password'));	//yeni bir email girmek için forgot_my_password'e geri dön.
 		 	}
 			else {
@@ -89,14 +93,16 @@ class MembersController extends AppController {
 				$hash=$passwordConfirmation->newHash($member['Member']['id']);
 				//Kullanıcıya gönderilecek mail için gerekli olan fonksiyon çağırılır.
 				$this->__send_forgot_my_password_email($member, $hash);
-				$this->Session->setFlash(__('E-posta adresinize parolanızı tekrar oluşturmak için bir bağlantı gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.', true));
+				$this->Session->setFlash('E-posta adresinize parolanızı tekrar oluşturmak için bir bağlantı gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.');
 				$this->redirect(array('action'=>'login'));
 			}
 		}
 	}
 	
-	function confirm_password_change($incominghash=null) {		
-		if (!empty ($incominghash)){ 
+	function confirm_password_change($incominghash=null) {
+		if (!empty ($incominghash)){
+		App::import('Sanitize');
+		$incominghash = Sanitize::paranoid($incominghash);
 		App::import('Model','PasswordConfirmation'); 
 		$passwordConfirmation = & new PasswordConfirmation(); 
 		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
@@ -108,26 +114,28 @@ class MembersController extends AppController {
 				//Kullanıcının bütün bilgilerini okur. Bu bilgiler mail atarken kullanılacak. (isim, soyisim, mail)
 				$member = $this->Member->read(null, $memberId);				
 				$this->__send_new_password($member, $pass);	//send_new_password fonksiyonunu çağırır.
-				$this->Session->setFlash(__('Yeni parolanız e-posta adresinize gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.', true));//İşlem yapıldı mesajı.
+				$this->Session->setFlash('Yeni parolanız e-posta adresinize gönderildi. Lütfen e-posta kutunuzu kontrol ediniz.');//İşlem yapıldı mesajı.
 				$this->redirect(array('action'=>'login'));
 			}		
 		}
 		//bir incominghash yoksa veya eşleşme yoksa hata ver.
-		$this->Session->setFlash(__('Your new password request may have expired. Please re-request your password.', true));
+		$this->Session->setFlash('Parola isteğiniz zaman aşımına uğramış olabilir. Lütfen yeniden parola isteğinde bulununuz.');
 		$this->redirect(array('action'=>'login'));
 	}	
 
 	function cancel_password_change($incominghash=null){	
 		if(!empty ($incominghash)){
+		App::import('Sanitize');
+		$incominghash = Sanitize::paranoid($incominghash);
 		App::import('Model','PasswordConfirmation'); 
 		$passwordConfirmation = & new PasswordConfirmation(); 
 		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
 			if (is_numeric($memberId)) { 
-				$this->Session->setFlash(__('Your request for a new password has been deleted.', true));
+				$this->Session->setFlash('Yeni parola talebiniz iptal edilmiştir.');
 				$this->redirect(array('action'=>'login'));				
 			}
 		}
-		$this->Session->setFlash(__('Your new password request may have expired. Please re-request your password.', true));
+		$this->Session->setFlash('Parola isteğiniz zaman aşımına uğramış olabilir. Lütfen yeniden parola isteğinde bulununuz.');
 		$this->redirect(array('action'=>'login'));
 	}
 	
