@@ -4,7 +4,7 @@ class MembersController extends AppController {
 	var $name = 'Members';
 	var $helpers = array('Html', 'Form');
 	var $components = array('Email');
-	var $pageTitle="Üyeler";
+	var $pageTitle="Parola İşlemleri";
 
 	/*function login(){
 	}
