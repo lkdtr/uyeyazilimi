@@ -127,6 +127,7 @@ switch ($a)
 		$x_Notlar = @$row["Notlar"];
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
+		$x_gonullu = @$row["gonullu"];
 		mysql_free_result($rs);
 		break;
 }
@@ -179,6 +180,19 @@ switch ($a)
     	echo "Üye";
     else
     	echo "Üye Değil";
+
+    echo "&nbsp;</td>";
+  ?>
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar&nbsp;</td>
+  <?
+    echo "<td bgcolor=\"#F5F5F5\">";
+    if( $x_gonullu == 1 )
+    	echo "Katıl";
+    else
+    	echo "Katılma";
 
     echo "&nbsp;</td>";
   ?>

@@ -124,6 +124,7 @@ switch ($a) {
 			$x_Uye_formu = @$row["Uye_formu"];
 			$x_Notlar = @$row["Notlar"];
 			$x_liste_uyeligi = @$row["liste_uyeligi"];
+			$x_gonullu = @$row["gonullu"];
 		}
 		mysql_free_result($rs);
 		break;
@@ -160,6 +161,7 @@ switch ($a) {
 		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
 		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
 		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
+		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
 
 
 		// check file size
@@ -211,6 +213,11 @@ switch ($a) {
                 $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_liste_uyeligi) : $x_liste_uyeligi;
                 $theValue = ($theValue != "") ? intval($theValue) : "NULL";
                 $fieldList["liste_uyeligi"] = $theValue;
+
+                // gonullu
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gonullu) : $x_gonullu;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["gonullu"] = $theValue;
 
 
 		// cinsiyet
@@ -440,6 +447,13 @@ return true;
  <td bgcolor="#F5F5F5">
  <input type="radio" name="x_liste_uyeligi" checked value=1>Üye Ol&nbsp;
  <input type="radio" name="x_liste_uyeligi" value=0>Üye Olma&nbsp;
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <input type="radio" name="x_gonullu" checked value=1>Üye Ol&nbsp;
+ <input type="radio" name="x_gonullu" value=0>Üye Olma&nbsp;
 </tr>
 
 

@@ -1,21 +1,36 @@
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Table structure for table `aidat_miktar`
+-- Veritabanı: `uyetakip`
 --
 
-DROP TABLE IF EXISTS `aidat_miktar`;
-CREATE TABLE `aidat_miktar` (
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `aidat_miktar`
+--
+
+CREATE TABLE IF NOT EXISTS `aidat_miktar` (
   `aidat_id` int(3) NOT NULL auto_increment,
   `yil` int(4) NOT NULL default '0',
   `miktar` int(10) NOT NULL default '0',
   PRIMARY KEY  (`aidat_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `bildiriler`
+-- Tablo yapısı: `bildiriler`
 --
 
-DROP TABLE IF EXISTS `bildiriler`;
-CREATE TABLE `bildiriler` (
+CREATE TABLE IF NOT EXISTS `bildiriler` (
   `BildiriID` int(9) NOT NULL auto_increment,
   `BildiriBaslik` varchar(255) NOT NULL default '',
   `BildiriText` text,
@@ -25,14 +40,15 @@ CREATE TABLE `bildiriler` (
   `BildiriURL` varchar(255) default '',
   `BildiriTur` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`BildiriID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `duyurular`
+-- Tablo yapısı: `duyurular`
 --
 
-DROP TABLE IF EXISTS `duyurular`;
-CREATE TABLE `duyurular` (
+CREATE TABLE IF NOT EXISTS `duyurular` (
   `DuyuruID` int(9) NOT NULL auto_increment,
   `DuyuruTur` varchar(255) NOT NULL default '',
   `DuyuruBaslik` varchar(255) NOT NULL default '',
@@ -43,14 +59,15 @@ CREATE TABLE `duyurular` (
   `DuyuruAktif` enum('Aktif','Pasif','Gizli') NOT NULL default 'Pasif',
   `StatikSayfa` varchar(100) default '',
   PRIMARY KEY  (`DuyuruID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `odemeler`
+-- Tablo yapısı: `odemeler`
 --
 
-DROP TABLE IF EXISTS `odemeler`;
-CREATE TABLE `odemeler` (
+CREATE TABLE IF NOT EXISTS `odemeler` (
   `uye_id` int(7) NOT NULL default '0',
   `miktar` int(10) NOT NULL default '0',
   `tarih` date NOT NULL default '0000-00-00',
@@ -60,14 +77,15 @@ CREATE TABLE `odemeler` (
   `odemeyolu` varchar(255) NOT NULL default '',
   `makbuz` varchar(255) default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `silinen_uyeler`
+-- Tablo yapısı: `silinen_uyeler`
 --
 
-DROP TABLE IF EXISTS `silinen_uyeler`;
-CREATE TABLE `silinen_uyeler` (
+CREATE TABLE IF NOT EXISTS `silinen_uyeler` (
   `id` int(11) NOT NULL auto_increment,
   `uye_id` int(7) NOT NULL default '0',
   `uye_ad` varchar(99) NOT NULL default '',
@@ -103,14 +121,15 @@ CREATE TABLE `silinen_uyeler` (
   `silinmeTarihi` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `TCKimlikNo` (`TCKimlikNo`,`Uye_karar_no`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `uyeler`
+-- Tablo yapısı: `uyeler`
 --
 
-DROP TABLE IF EXISTS `uyeler`;
-CREATE TABLE `uyeler` (
+CREATE TABLE IF NOT EXISTS `uyeler` (
   `id` int(11) NOT NULL auto_increment,
   `uye_id` int(7) NOT NULL default '0',
   `uye_ad` varchar(99) NOT NULL default '',
@@ -142,19 +161,21 @@ CREATE TABLE `uyeler` (
   `Uye_formu` tinyint(1) unsigned default '1',
   `Notlar` text,
   `liste_uyeligi` tinyint(1) unsigned default '1',
+  `gonullu` tinyint(1) unsigned NOT NULL default '1',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `TCKimlikNo` (`TCKimlikNo`,`Uye_karar_no`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `yoneticiler`
+-- Tablo yapısı: `yoneticiler`
 --
 
-DROP TABLE IF EXISTS `yoneticiler`;
-CREATE TABLE `yoneticiler` (
+CREATE TABLE IF NOT EXISTS `yoneticiler` (
   `AdminID` int(5) NOT NULL auto_increment,
   `AdminAd` varchar(100) NOT NULL default '',
   `AdminPass` varchar(100) NOT NULL default '',
   `AdminMail` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`AdminID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin5;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

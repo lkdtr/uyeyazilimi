@@ -109,6 +109,7 @@ $x_Uye_formu = @$_POST["x_Uye_formu"];
 $x_Notlar = @$_POST["x_Notlar"];
 $x_kayit_tarihi = @$_POST["x_kayit_tarihi"];
 $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
+$x_gonullu = @$_POST["x_gonullu"];
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
@@ -161,6 +162,7 @@ switch ($a)
 		$x_Notlar = @$row["Notlar"];
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
+		$x_gonullu = @$row["gonullu"];
 		mysql_free_result($rs);
 		break;
 	case "U": // update
@@ -207,6 +209,7 @@ switch ($a)
 		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
 		$x_kayit_tarihi = @strip_tags($_POST["x_kayit_tarihi"]);
 		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
+		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
 
 		// check file size
 		$EW_MaxFileSize = @strip_tags($_POST["EW_MaxFileSize"]);
@@ -338,6 +341,11 @@ switch ($a)
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_liste_uyeligi) : $x_liste_uyeligi;
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
 		$fieldList["liste_uyeligi"] = $theValue;
+
+		// gonullu
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gonullu) : $x_gonullu;
+		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+		$fieldList["gonullu"] = $theValue;
 		
 		if (@$_SESSION["uy_status_UserLevel"] == -1) { // Admin degilse asagidaki degerler eklenmesin!
 		// cinsiyet
@@ -794,6 +802,13 @@ return true;
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
  <td bgcolor="#F5F5F5"><input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 1) { echo " checked"; } ?> value=1><?php echo "Üye Ol"; ?>
   <input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 0) { echo " checked"; } ?> value=0><?php echo "Üye Olma"; ?>
+&nbsp;</td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Gönüllü Çalışmalar&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="radio" name="x_gonullu"<?php if ($x_gonullu == 1) { echo " checked"; } ?> value=1><?php echo "Katıl"; ?>
+  <input type="radio" name="x_gonullu"<?php if ($x_gonullu == 0) { echo " checked"; } ?> value=0><?php echo "Katılma"; ?>
 &nbsp;</td>
 </tr>
 
