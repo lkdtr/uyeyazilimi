@@ -64,7 +64,7 @@ class MembersController extends AppController {
 			
 	    		/* Check for SMTP errors. */
 	    		//$this->set('smtp-errors', $this->Email->smtpError);
-	            $user['Member']['password']= md5($NewPassword);
+	            $user['Member']['password']= Security::hash($NewPassword,'md5',false);//şifreyi md5 kullanarak salt değer eklemeden hashler
        			$this->Member->create();
        			//save only password without validation
 	            if($this->Member->save($user,false,array('password'))){
@@ -112,7 +112,7 @@ class MembersController extends AppController {
 		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
 			if (is_numeric($memberId)) { 
 				$pass = $this->__generatePassword();
-				$newpass = Security::hash($pass,null,true); //yeni şifreyi hashler..
+				$newpass = Security::hash($pass,'md5',false); //şifreyi md5 kullanarak salt değer eklemeden hashler
 				//Kullanıcının şifresini değiştirir.
 				$this->Member->updateAll(array('Member.password' => "'$newpass'") , array('Member.id' => $memberId));  
 				//Kullanıcının bütün bilgilerini okur. Bu bilgiler mail atarken kullanılacak. (isim, soyisim, mail)
