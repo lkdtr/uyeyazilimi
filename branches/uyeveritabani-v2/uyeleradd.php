@@ -361,6 +361,12 @@ switch ($a) {
 		$strsql = "INSERT INTO forwardings VALUES('$_POST[x_alias]',$fieldList[eposta1])";
 		mysql_query($strsql, $conn_mail) or die(mysql_error());
 		mysql_close($conn_mail);
+
+                // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
+                $slug = explode('@',$x_alias);
+		mysql_select_db(DB_PWD,$conn);
+		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\")";
+		mysql_query($strsql, $conn) or die(mysql_error());
 		
 		ob_end_clean();
 		header("Location: uyelerlist.php");

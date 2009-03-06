@@ -503,7 +503,19 @@ switch ($a)
 		  $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$row_eski[alias]'";
 		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		 }
-		 
+
+                // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
+                mysql_select_db(DB_PWD,$conn);
+                $slug = explode('@', $x_alias);
+                $strsql = "SELECT id FROM members WHERE uye_no = $x_uye_id";
+                $rs = mysql_query($strsql, $conn) or die(mysql_error());
+                $id = mysql_fetch_row($rs);
+                $strsql = "UPDATE members SET lotr_alias = \"$slug[0]\", uye_no = $x_uye_id, name = \"$x_uye_ad\", lastname = \"$x_uye_soyad\"";
+                if ($x_PassWord)
+                 $strsql .= ", password = $fieldList[PassWord]";
+                $strsql .= ' WHERE id=' . $id[0];
+                mysql_query($strsql, $conn) or die(mysql_error());
+
 		ob_end_clean();
 		
 		header("Location: uyelerview.php?key=$tkey");
