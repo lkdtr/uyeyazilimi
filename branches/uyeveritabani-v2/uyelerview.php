@@ -128,6 +128,7 @@ switch ($a)
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
 		$x_gonullu = @$row["gonullu"];
+		$x_artik_uye_degil = @$row["artik_uye_degil"];
 		mysql_free_result($rs);
 		break;
 }
@@ -139,13 +140,17 @@ switch ($a)
  <a href="uyeleredit.php?key=<?php echo $tkey;?>"><img border=0 title="Düzenle" alt="Düzenle" src="images/edit.gif"></a>
 </div>
 
+<?php if( $x_artik_uye_degil == 1 ) { ?>
+<h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
+<?php } ?>
+
 <form>
 <table align="center" width="60%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_uye_id; ?>&nbsp;</td>
 </tr>
-
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">TC Kimlik No&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_TCKimlikNo)?>&nbsp;</td>

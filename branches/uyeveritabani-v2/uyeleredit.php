@@ -110,6 +110,7 @@ $x_Notlar = @$_POST["x_Notlar"];
 $x_kayit_tarihi = @$_POST["x_kayit_tarihi"];
 $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
 $x_gonullu = @$_POST["x_gonullu"];
+$x_artik_uye_degil = @$_POST["x_artik_uye_degil"];
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
@@ -163,6 +164,7 @@ switch ($a)
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
 		$x_gonullu = @$row["gonullu"];
+		$x_artik_uye_degil = @$row["artik_uye_degil"];
 		mysql_free_result($rs);
 		break;
 	case "U": // update
@@ -210,6 +212,7 @@ switch ($a)
 		$x_kayit_tarihi = @strip_tags($_POST["x_kayit_tarihi"]);
 		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
 		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
+		$x_artik_uye_degil = @strip_tags($_POST["x_artik_uye_degil"]);
 
 		// check file size
 		$EW_MaxFileSize = @strip_tags($_POST["EW_MaxFileSize"]);
@@ -346,6 +349,11 @@ switch ($a)
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gonullu) : $x_gonullu;
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
 		$fieldList["gonullu"] = $theValue;
+
+		// artik uye degil
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_artik_uye_degil) : $x_artik_uye_degil;
+		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+		$fieldList["artik_uye_degil"] = $theValue;
 		
 		if (@$_SESSION["uy_status_UserLevel"] == -1) { // Admin degilse asagidaki degerler eklenmesin!
 		// cinsiyet
@@ -503,6 +511,12 @@ switch ($a)
 		  $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$row_eski[alias]'";
 		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		 }
+                // Uye, uyelikten ayrildiysa e-postasi postfix veritabanindan kaldiralim -- artik kullanmasin
+                if($x_artik_uye_degil)
+                 {
+                  $strsql = "DELETE FROM forwardings WHERE source='$x_alias'";
+                  mysql_query($strsql, $conn_mail) or die(mysql_error());
+                 }
 
                 // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
                 mysql_select_db(DB_PWD,$conn);
@@ -515,6 +529,13 @@ switch ($a)
                  $strsql .= ", password = $fieldList[PassWord]";
                 $strsql .= ' WHERE id=' . $id[0];
                 mysql_query($strsql, $conn) or die(mysql_error());
+
+                // Uye, uyelikten ayrildiysa yeni uye veritabanindan kaldiralim -- parola dogrulamasi yapamasin
+                if($x_artik_uye_degil)
+                 {
+                  $strsql = "DELETE FROM members WHERE uye_no = $x_uye_id";
+                  mysql_query($strsql, $conn) or die(mysql_error());
+                 }
 
 		ob_end_clean();
 		
@@ -855,6 +876,13 @@ return true;
  <? } ?>
 </tr>
 
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Artık Üye Değil&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+  <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 0) { echo " checked"; } ?> value=0><?php echo "Hayır"; ?>
+  <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 1) { echo " checked"; } ?> value=1><?php echo "<font color=red>EVET</font> (Dikkat! Arayüzden Geri Dönülemez!)"; ?>
+ </td>
+</tr>
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik Basıldı&nbsp;</td>
