@@ -352,7 +352,6 @@ switch ($a) {
 		$strsql .= implode(",", array_values($fieldList));
 		$strsql .= ")";
 		mysql_query($strsql, $conn) or die(mysql_error());
-		mysql_close($conn);
 		
 		// bir de e-posta alias'ini baska bir tabloya yazalim -- dfisek
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
@@ -367,6 +366,7 @@ switch ($a) {
 		mysql_select_db(DB_PWD,$conn);
 		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\")";
 		mysql_query($strsql, $conn) or die(mysql_error());
+		mysql_close($conn);
 		
 		ob_end_clean();
 		header("Location: uyelerlist.php");
