@@ -129,6 +129,7 @@ switch ($a)
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
 		$x_gonullu = @$row["gonullu"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
+		$x_oylama = @$row["oylama"];
 		mysql_free_result($rs);
 		break;
 }
@@ -203,6 +204,18 @@ switch ($a)
   ?>
 </tr>
 
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Elektronik Oylamalar&nbsp;</td>
+  <?
+    echo "<td bgcolor=\"#F5F5F5\">";
+    if( $x_oylama == 1 )
+    	echo "Katıl";
+    else
+    	echo "Katılma";
+
+    echo "&nbsp;</td>";
+  ?>
+</tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Kayıt tarihi&nbsp;</td>

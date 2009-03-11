@@ -163,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `uyeler` (
   `liste_uyeligi` tinyint(1) unsigned default '1',
   `gonullu` tinyint(1) unsigned NOT NULL default '1',
   `artik_uye_degil` tinyint(1) unsigned NOT NULL default '0',
+  `oylama` tinyint(1) unsigned NOT NULL default '1',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `TCKimlikNo` (`TCKimlikNo`,`Uye_karar_no`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
