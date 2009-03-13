@@ -49,6 +49,25 @@
   <title><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'] ?> .:. LKD Uye Bilgi Sayfasi</title>
   <link rel="StyleSheet" href="stil.css" type="text/css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script type="text/javascript">
+   function toggleLayer( whichLayer )
+    {
+     var elem, vis;
+
+     if( document.getElementById ) // this is the way the standards work
+      elem = document.getElementById( whichLayer );
+     else if( document.all ) // this is the way old msie versions work
+      elem = document.all[whichLayer];
+     else if( document.layers ) // this is the way nn4 works
+      elem = document.layers[whichLayer];
+     vis = elem.style;
+
+     // if the style.display value is blank we try to figure it out here
+     if(vis.display==''&&elem.offsetWidth!=undefined&&elem.offsetHeight!=undefined)
+      vis.display = (elem.offsetWidth!=0&&elem.offsetHeight!=0)?'block':'none';
+     vis.display = (vis.display==''||vis.display=='block')?'none':'block';
+    }
+  </script>
  </head>
  <body bgcolor="#d6dde7">
   <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Uye Bilgi Sayfasi</h1></td></tr></table></p>
@@ -125,29 +144,29 @@
   if($odeme_sayisi > 0)
    {
 ?>
-    <p><a href="#">Aidat Odeme Detaylariniz</a></p>
-    <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
-     <tr bgcolor="#466176">
-      <td><font color="#FFFFFF">Odeme Tarihi</font></td>
-      <td><font color="#FFFFFF">Miktar</font></td>
-     </tr>
+    <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Odeme Detaylari</a></p>
+    <div style="display: none;" id="OdemeDetaylari">
+     <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+      <tr bgcolor="#466176">
+       <td><font color="#FFFFFF">Odeme Tarihi</font></td>
+       <td><font color="#FFFFFF">Miktar</font></td>
+      </tr>
 <?php
-     while($odeme_sayisi--)
-      {
-       $odeme = mysql_fetch_array($odeme_tablosu);
+      while($odeme_sayisi--)
+       {
+        $odeme = mysql_fetch_array($odeme_tablosu);
 ?>
-       <tr bgcolor="#F5F5F5">
-        <td><?php echo tarih_insancil($odeme['tarih']); ?></td>
-        <td><?php echo $odeme['miktar'] . ' TL'; ?></td>
-       </tr>
+        <tr bgcolor="#F5F5F5">
+         <td><?php echo tarih_insancil($odeme['tarih']); ?></td>
+         <td><?php echo $odeme['miktar'] . ' TL'; ?></td>
+        </tr>
 <?php
-      }
+       }
 ?>
-    </table>
+     </table>
+    </div>
 <?php
    }
-
- mysql_close($conn);
 ?>
  </body>
 </html>
