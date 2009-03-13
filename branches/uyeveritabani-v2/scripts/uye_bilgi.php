@@ -42,6 +42,13 @@
  $query = 'SELECT * FROM odemeler WHERE tur="aidat" AND uye_id = ' . $user_info['uye_id'] . ' ORDER BY tarih DESC';
  $odeme_tablosu = mysql_query($query);
  $odeme_sayisi = mysql_num_rows($odeme_tablosu);
+
+ // uyenin yapmasi gereken odemelerin listesini alalim
+ $query = 'SELECT * FROM aidat_miktar WHERE yil >= ' . $user_info['kayit_tarihi'] . ' ORDER BY yil DESC';
+ $aidat_miktar_tablosu = mysql_query($query);
+ $aidat_miktar_sayisi = mysql_num_rows($aidat_miktar_tablosu);
+
+ mysql_close($conn);
 ?>
 
 <html>
@@ -139,13 +146,14 @@
 
   <p>&nbsp;</p>
 
+  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Odeme Detaylariniz</a></p>
+  <p>&nbsp;</p>
+  <div style="display: none;" id="OdemeDetaylari">
   <!-- Uyenin Aidat Odeme Detaylarini Gosterelim -->
 <?php
-  if($odeme_sayisi > 0)
-   {
+   if($odeme_sayisi > 0)
+    {
 ?>
-    <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Odeme Detaylari</a></p>
-    <div style="display: none;" id="OdemeDetaylari">
      <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
       <tr bgcolor="#466176">
        <td><font color="#FFFFFF">Odeme Tarihi</font></td>
@@ -164,9 +172,49 @@
        }
 ?>
      </table>
-    </div>
 <?php
-   }
+    }
+   else
+    {
 ?>
+     <h2>Henüz hiç aidat ödemesi yamissiniz.</h2>
+<?php
+    }
+?>
+
+   <p>&nbsp;</p>
+
+   <p><a href="javascript:toggleLayer('YillaraGoreAidatDagilimi')">Yillara Gore Aidat Dagilimi</a></p>
+   <p>&nbsp;</p>
+   <div style="display: none;" id="YillaraGoreAidatDagilimi">
+    <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+     <tr bgcolor="#466176">
+      <td align="center"><font color="#FFFFFF">Yil</font></td>
+      <td><font color="#FFFFFF">Aidat</font></td>
+     </tr>
+<?php
+     while($aidat_miktar_sayisi--)
+      {
+       $aidat_miktar = mysql_fetch_array($aidat_miktar_tablosu);
+?>
+       <tr bgcolor="#F5F5F5">
+        <td align="center"><?php echo $aidat_miktar['yil']; ?></td>
+        <td><?php echo $aidat_miktar['miktar'] . ' TL'; ?></td>
+       </tr>
+<?php
+      }
+     if($user_info['kayit_tarihi'] <= 2002)    // giris aidati da alinmis
+      {
+?>
+       <tr bgcolor="#F5F5F5">
+        <td align="center">Giris Aidati</td>
+        <td>5 TL</td>
+       </tr>
+<?php
+      }
+?>
+    </table>
+   </div>
+  </div>
  </body>
 </html>
