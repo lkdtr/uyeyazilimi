@@ -79,10 +79,10 @@
  </head>
  <body bgcolor="#d6dde7">
   <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Üye Bilgi Sayfası</h1></td></tr></table></p>
-  <p>Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.</p>
 
   <!-- Uyenin Kendi Bilgilerini Gosterelim -->
   <table width="350">
+   <tr><td colspan="2"><p align="justify">Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.<br>&nbsp;</p></td></tr>
    <tr>
     <td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['uye_id']; ?>&nbsp;</td>
