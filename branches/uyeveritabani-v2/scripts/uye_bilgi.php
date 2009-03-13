@@ -78,7 +78,7 @@
   </script>
  </head>
  <body bgcolor="#d6dde7">
-  <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Uye Bilgi Sayfasi</h1></td></tr></table></p>
+  <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Üye Bilgi Sayfası</h1></td></tr></table></p>
   <p>Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.</p>
 
   <!-- Uyenin Kendi Bilgilerini Gosterelim -->
