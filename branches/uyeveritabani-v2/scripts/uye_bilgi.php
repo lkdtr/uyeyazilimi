@@ -1,7 +1,7 @@
 <?php
  /*
   HTTP dogrulamasi kullanarak giris yapmis bir uyenin bilgilerini uye veritabanindan alarak kendisine gosteren basit bir bilgi sayfasi.
-  uyelerview.php ve *odemeler*.php derlemesi.
+  uyelerview.php ve *odemeler*.php derlemesi. toggleLayer javascript fonksiyonu netlobo.com'dan alinma.
  */
 
  function tarih_insancil($tarih)    // veritabanindan gelen tarihi insancil bir hale cevirelim
@@ -48,12 +48,13 @@
  $aidat_miktar_tablosu = mysql_query($query);
  $aidat_miktar_sayisi = mysql_num_rows($aidat_miktar_tablosu);
 
+ // veritabanindan alacagimizi aldik
  mysql_close($conn);
 ?>
 
 <html>
  <head>
-  <title><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'] ?> .:. LKD Uye Bilgi Sayfasi</title>
+  <title><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'] ?> .:. LKD Üye Bilgi Sayfası</title>
   <link rel="StyleSheet" href="stil.css" type="text/css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <script type="text/javascript">
@@ -78,16 +79,16 @@
  </head>
  <body bgcolor="#d6dde7">
   <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Uye Bilgi Sayfasi</h1></td></tr></table></p>
-  <p>Dernek üyesi olarak bilgilerinizi asagida bulabilirsiniz. Bu bilgilerden degistirmek istedikleriniz olursa ya da hatali bir bilgi bulundugunu dusunuyorsaniz, lutfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek uye isleri ekibi ile baglantiya geciniz.</p>
+  <p>Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.</p>
 
   <!-- Uyenin Kendi Bilgilerini Gosterelim -->
   <table width="350">
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Uye Numarasi&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['uye_id']; ?>&nbsp;</td>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Ad Soyad&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Adı Soyadı&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad']; ?>&nbsp;</td>
    </tr>
    <tr>
@@ -95,7 +96,7 @@
     <td bgcolor="#F5F5F5"><?php echo $user_info['eposta1']; ?>&nbsp;</td>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Uye Olma Yili&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Üye Olma Yılı&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['kayit_tarihi']; ?>&nbsp;</td>
    </tr>
    <tr>
@@ -132,7 +133,7 @@
     ?>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Odemesi&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Ödemesi&nbsp;</td>
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
      if( $aidat_odemesi > 0 )
@@ -146,7 +147,7 @@
 
   <p>&nbsp;</p>
 
-  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Odeme Detaylariniz</a></p>
+  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
   <p>&nbsp;</p>
   <div style="display: none;" id="OdemeDetaylari">
   <!-- Uyenin Aidat Odeme Detaylarini Gosterelim -->
@@ -156,7 +157,7 @@
 ?>
      <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
       <tr bgcolor="#466176">
-       <td><font color="#FFFFFF">Odeme Tarihi</font></td>
+       <td><font color="#FFFFFF">Ödeme Tarihi</font></td>
        <td><font color="#FFFFFF">Miktar</font></td>
       </tr>
 <?php
@@ -177,19 +178,19 @@
    else
     {
 ?>
-     <h2>Henüz hiç aidat ödemesi yamissiniz.</h2>
+     <h2>Henüz hiç aidat ödemesi yapmamışsınız.</h2>
 <?php
     }
 ?>
 
    <p>&nbsp;</p>
 
-   <p><a href="javascript:toggleLayer('YillaraGoreAidatDagilimi')">Yillara Gore Aidat Dagilimi</a></p>
+   <p><a href="javascript:toggleLayer('YillaraGoreAidatDagilimi')">Yıllara Göre Aidat Dağılımı</a></p>
    <p>&nbsp;</p>
    <div style="display: none;" id="YillaraGoreAidatDagilimi">
     <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
      <tr bgcolor="#466176">
-      <td align="center"><font color="#FFFFFF">Yil</font></td>
+      <td align="center"><font color="#FFFFFF">Yıl</font></td>
       <td><font color="#FFFFFF">Aidat</font></td>
      </tr>
 <?php
@@ -203,11 +204,11 @@
        </tr>
 <?php
       }
-     if($user_info['kayit_tarihi'] <= 2002)    // giris aidati da alinmis
+     if($user_info['kayit_tarihi'] <= 2002)    // giris aidati da alinmali
       {
 ?>
        <tr bgcolor="#F5F5F5">
-        <td align="center">Giris Aidati</td>
+        <td align="center">Giriş Aidatı</td>
         <td>5 TL</td>
        </tr>
 <?php
