@@ -96,7 +96,7 @@
     <td bgcolor="#F5F5F5"><?php echo $user_info['eposta1']; ?>&nbsp;</td>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Üye Olma Yılı&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Üyelik Başlangıç Yılı&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['kayit_tarihi']; ?>&nbsp;</td>
    </tr>
    <tr>
@@ -104,9 +104,9 @@
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
      if( $user_info['gonullu'] == 1 )
-      echo "Katıl";
+      echo "Katılmak İstiyor";
      else
-      echo "Katılma";
+      echo "Katılmak İstemiyor";
      echo "&nbsp;</td>";
     ?>
    </tr>
@@ -115,9 +115,9 @@
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
      if( $user_info['oylama'] == 1 )
-      echo "Katıl";
+      echo "Katılmak İstiyor";
      else
-      echo "Katılma";
+      echo "Katılmak İstemiyor";
      echo "&nbsp;</td>";
     ?>
    </tr>
@@ -133,7 +133,7 @@
     ?>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Ödemesi&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Borcu&nbsp;</td>
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
      if( $aidat_odemesi > 0 )
