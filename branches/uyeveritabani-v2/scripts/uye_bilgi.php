@@ -133,16 +133,17 @@
     ?>
    </tr>
    <tr>
-    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Borcu&nbsp;</td>
+    <td bgcolor="#466176"><font color="#FFFFFF">Aidat Borcu&nbsp;(*)</td>
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
      if( $aidat_odemesi > 0 )
       echo $aidat_odemesi . ' TL';
      else
       echo "Yok";
-     echo "&nbsp;</td>";
+     echo "</td>";
     ?>
    </tr>
+   <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi bir-iki hafta gecikmeli olarak burada görebilirsiniz.</p></td></tr>
   </table>
 
   <p>&nbsp;</p>
