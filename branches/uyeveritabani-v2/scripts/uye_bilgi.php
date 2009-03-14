@@ -156,7 +156,7 @@
    if($odeme_sayisi > 0)
     {
 ?>
-     <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+     <table width="170" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
       <tr bgcolor="#466176">
        <td><font color="#FFFFFF">Ödeme Tarihi</font></td>
        <td><font color="#FFFFFF">Miktar</font></td>
@@ -189,7 +189,7 @@
    <p><a href="javascript:toggleLayer('YillaraGoreAidatDagilimi')">Yıllara Göre Aidat Dağılımı</a></p>
    <p>&nbsp;</p>
    <div style="display: none;" id="YillaraGoreAidatDagilimi">
-    <table width="120" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+    <table width="170" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
      <tr bgcolor="#466176">
       <td align="center"><font color="#FFFFFF">Yıl</font></td>
       <td><font color="#FFFFFF">Aidat</font></td>
@@ -201,7 +201,17 @@
 ?>
        <tr bgcolor="#F5F5F5">
         <td align="center"><?php echo $aidat_miktar['yil']; ?></td>
-        <td><?php echo $aidat_miktar['miktar'] . ' TL'; ?></td>
+        <td>
+         <?php
+          echo $aidat_miktar['miktar'] . ' TL';
+          if($aidat_odemesi < $aidat_miktar['miktar'])
+           if($aidat_odemesi > 0)
+            echo " (Kısmi Ödendi)";
+           else
+            echo " (Ödendi)";
+          $aidat_odemesi -= $aidat_miktar['miktar'];
+         ?>
+        </td>
        </tr>
 <?php
       }
@@ -210,7 +220,7 @@
 ?>
        <tr bgcolor="#F5F5F5">
         <td align="center">Giriş Aidatı</td>
-        <td>5 TL</td>
+        <td>5 TL<?php if($aidat_odemesi <= 0) echo " (Ödendi)"; ?></td>
        </tr>
 <?php
       }
