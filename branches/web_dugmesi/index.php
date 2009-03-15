@@ -16,7 +16,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="tr" lang="tr">
 <head>
-    <title><?php echo $uye_id; ?> Numarali LKD Uyesi icin Web Dugmeleri</title>
+    <title><?php echo $uye_id; ?> Numaralı LKD Üyesi için Web Düğmeleri</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <style type="text/css" media="screen">@import "css/screen.css";</style>
     <style type="text/css" media="screen">
