@@ -1,64 +1,84 @@
-<?php
-/* SVN FILE: $Id: index.php 6311 2008-01-02 06:33:52Z phpnut $ */
-/**
- * Requests collector.
- *
- *  This file collects requests if:
- *	- no mod_rewrite is avilable or .htaccess files are not supported
- *	-/public is not set as a web root.
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) : Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @since			CakePHP(tm) v 0.2.9
- * @version			$Revision: 6311 $
- * @modifiedby		$LastChangedBy: phpnut $
- * @lastmodified	$Date: 2008-01-02 01:33:52 -0500 (Wed, 02 Jan 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-/**
- *  Get Cake's root directory
- */
-	define('APP_DIR', 'app');
-	define('DS', DIRECTORY_SEPARATOR);
-	define('ROOT', dirname(__FILE__));
-	define('WEBROOT_DIR', 'webroot');
-	define('WWW_ROOT', ROOT . DS . APP_DIR . DS . WEBROOT_DIR . DS);
-/**
- * This only needs to be changed if the cake installed libs are located
- * outside of the distributed directory structure.
- */
-	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		//define ('CAKE_CORE_INCLUDE_PATH', FULL PATH TO DIRECTORY WHERE CAKE CORE IS INSTALLED DO NOT ADD A TRAILING DIRECTORY SEPARATOR';
-		define('CAKE_CORE_INCLUDE_PATH', ROOT);
-	}
-	if (function_exists('ini_set')) {
-		ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . CAKE_CORE_INCLUDE_PATH . PATH_SEPARATOR . ROOT . DS . APP_DIR . DS);
-		define('APP_PATH', null);
-		define('CORE_PATH', null);
-	} else {
-		define('APP_PATH', ROOT . DS . APP_DIR . DS);
-		define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
-	}
-	require CORE_PATH . 'cake' . DS . 'basics.php';
-	$TIME_START = getMicrotime();
-	require CORE_PATH . 'cake' . DS . 'config' . DS . 'paths.php';
-	require LIBS . 'object.php';
-	require LIBS . 'inflector.php';
-	require LIBS . 'configure.php';
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="tr" lang="tr">
+<head>
+	<title>LKD</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
-	$bootstrap = true;
-	$url = null;
-	require APP_DIR . DS . WEBROOT_DIR . DS . 'index.php';
-?>
+	<style type="text/css" media="screen">@import "css/reset.css";</style>
+	<style type="text/css" media="screen">@import "css/screen.css";</style>
+	<style type="text/css" media="screen">
+		p{
+			padding:5px;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("form").submit(function(){
+
+				var uyeno = $("#"+$(this).attr("id")+" input:text").val();
+
+				if(uyeno == ""){
+					alert("Üye no. boş bırakılamaz!");
+					return false;
+				}
+
+				//alert($("#dugme input:hidden"));
+
+			
+				$(this).parents('.mright').prev().html('');
+				$("input:hidden").each(function(i, n){		
+					$(this).parents('.mright').prev().append("<p><img src=\"yaz.php?tur=&secim="+i+"&uyeno="+uyeno+"\" /></p>");
+					//alert(i+"---"+n);
+				});
+				
+
+				$("#"+$(this).attr("id")+" input:submit").removeAttr("disabled");
+				
+				return false;
+				
+			});
+
+		});
+	
+	</script>
+	
+	
+<body>
+
+<div id="wrapper">
+	<div id="header"><img src="img/lkd-header.jpg" width="860" height="100" alt="Lkd Header"></div>
+	<div class="mleft">
+		<p><img src="img/lkd-00.png"></p>
+		<p><img src="img/lkd-01.png"></p>
+		<p><img src="img/lkd-02.png"></p>
+		<p><img src="img/lkd-03.png"></p>
+		<p><img src="img/lkd-04.png"></p>				
+	</div>
+	<div class="mright">
+		<form id="dugme" method="post" aciton="yaz.php?tur=dugme">
+		<fieldset>
+		<ol>
+
+		 	<li>
+		 		<input type="hidden" id="s1" name="sablon" value="0">
+		 		<input type="hidden" id="s2" name="sablon" value="1">
+		 		<input type="hidden" id="s3" name="sablon" value="2">
+		 		<input type="hidden" id="s4" name="sablon" value="3">
+		 		<input type="hidden" id="s5" name="sablon" value="4">
+		 	</li>
+			<li>
+				<label for="uyeno">Üye no.</label><input class="mod" type="text" name="uyeno" id="uyeno" />
+			</li>		
+		</ol>
+		<p><input class="btn" type="submit" value="Oluştur"></p>
+		</fieldset>
+		</form>
+	</div>
+	<div class="clear"></div>
+	
+	<div class="clear"></div>	
+	<div id="footer">LKD 2009</div>
+</div>
