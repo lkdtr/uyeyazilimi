@@ -537,11 +537,23 @@ switch ($a)
                  $strsql .= ", password = $fieldList[PassWord]";
                 $strsql .= ' WHERE id=' . $id[0];
                 mysql_query($strsql, $conn) or die(mysql_error());
-
                 // Uye, uyelikten ayrildiysa yeni uye veritabanindan kaldiralim -- parola dogrulamasi yapamasin
                 if($x_artik_uye_degil)
                  {
                   $strsql = "DELETE FROM members WHERE uye_no = $x_uye_id";
+                  mysql_query($strsql, $conn) or die(mysql_error());
+                 }
+
+                // isim bilgisini bir de Trac veritabaninda guncelleyelim -- alias (trac'daki login) degistirme destegi uzerinde ayrica ugrasilmasi gerek
+                mysql_select_db(DB_TRAC,$conn);
+                $strsql = "UPDATE session_attribute SET value = \"$x_uye_ad $x_uye_soyad\" WHERE sid = \"$slug[0]\" AND name = \"name\"";
+                mysql_query($strsql, $conn) or die(mysql_error());
+                // Uye, uyelikten ayrildiysa, oturum bilgilerini Trac veritabanindan kaldiralim -- Trac'tan e-posta bildirimi gitmesin
+                if($x_artik_uye_degil)
+                 {
+                  $strsql = 'DELETE FROM session_attribute WHERE sid = "' . $slug[0] . '"';
+                  mysql_query($strsql, $conn) or die(mysql_error());
+                  $strsql = 'DELETE FROM session WHERE sid = "' . $slug[0] . '"';
                   mysql_query($strsql, $conn) or die(mysql_error());
                  }
 
