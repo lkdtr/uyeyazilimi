@@ -372,7 +372,16 @@ switch ($a) {
 		mysql_select_db(DB_PWD,$conn);
 		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\")";
 		mysql_query($strsql, $conn) or die(mysql_error());
-		mysql_close($conn);
+
+                // isim / alias bilgisini bir de Trac veritabanina yazalim
+                mysql_select_db(DB_TRAC,$conn);
+                $strsql = 'INSERT INTO session VALUES ("' . $slug[0] . '", 1, 0)';
+                mysql_query($strsql, $conn) or die(mysql_error());
+                $strsql = 'INSERT INTO session_attribute VALUES ("' . $slug[0] . '", 1, "name", "' . $x_uye_ad . ' ' . $x_uye_soyad . '"),
+                                                                ("' . $slug[0] . '", 1, "email", "' . $x_alias . '");';
+                mysql_query($strsql, $conn) or die(mysql_error());
+
+                mysql_close($conn);
 		
 		ob_end_clean();
 		header("Location: uyelerlist.php");
