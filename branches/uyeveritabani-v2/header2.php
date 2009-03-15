@@ -3,7 +3,7 @@
 <title>LKD ÜYE VERİTABANI</title>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 <script language="JavaScript1.2" src="flyout.js" type="text/javascript"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="event_onload();">
 	<!-- Banner alani -->

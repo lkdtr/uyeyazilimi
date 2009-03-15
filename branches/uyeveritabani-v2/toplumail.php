@@ -14,7 +14,7 @@
 		$content = eregi_replace("__SIFRE__" , $row[3] , $content);
 
 		$headers  = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=iso-8859-9\r\n";
+		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "To: ".$row[0]." ".$row[1]." <".$row[2].">\r\n";
 		$to = $row[2];
 		$headers .= "From: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\n";

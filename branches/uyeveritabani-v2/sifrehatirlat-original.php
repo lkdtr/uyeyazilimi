@@ -81,7 +81,7 @@ if (@$_POST["submit"] <> "") {
 <html>
 <head>
 	<title>LKD ÜYE VERİTABANI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 </head>
 <script language="JavaScript" src="ew.js"></script>
@@ -178,7 +178,7 @@ if(!($_POST["email"] && $_POST["button1"])) {
 	$rs = mysql_query("SELECT uye_ad,uye_soyad,eposta1 FROM uyeler WHERE eposta1='".$_POST["email"]."'") or die(mysql_error());
 	$content = "Sayin ".$row[0]." ".$row[1];
 	$headers  = "MIME-Version: 1.0\r\n";
-	$headers .= "Content-type: text/html; charset=iso-8859-9\r\n";
+	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .= "To: ".$row[0]." ".$row[1]." <".$row[2].">\r\n";
 	$headers .= "From: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\n";
 	$to = $row[2];

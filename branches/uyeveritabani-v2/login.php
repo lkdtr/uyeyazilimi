@@ -151,7 +151,7 @@ if (@$_POST["submit"] <> "") {
 
 	<title>LKD ÜYE VERİTABANI</title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <meta name="generator" content="PHPMaker v2.0.0.4"/>
 

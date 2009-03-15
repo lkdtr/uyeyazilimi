@@ -84,7 +84,7 @@ if (@$_POST["submit"] <> "") {
 <html>
 <head>
 	<title>LKD ÜYE VERİTABANI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 </head>
 <script language="JavaScript" src="ew.js"></script>

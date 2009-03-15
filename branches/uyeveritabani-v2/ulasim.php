@@ -88,7 +88,7 @@ if(!($_POST["subj"] && $_POST["msg"])) {
 	$rs = mysql_query("SELECT uye_ad,uye_soyad,eposta1 FROM uyeler WHERE uye_id='".$_SESSION["uy_status_UserID"]."'") or die(mysql_error());
 	$content = $_POST["msg"];
 	$headers  = "MIME-Version: 1.0\r\n";
-	$headers .= "Content-type: text/html; charset=iso-8859-9\r\n";
+	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .= "From: ".$row[0]." ".$row[1]." <".$row[2].">\r\n";
 	$headers .= "To: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\n";
 	$to = "uye@lkd.org.tr";

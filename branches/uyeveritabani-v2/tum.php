@@ -37,7 +37,7 @@
 
 	echo "<html>\n";
 	echo " <head><title>LKD - Genel Ödeme Listesi</title>\n";
-	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-9\"/>\n";
+	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
 	echo " </head>\n";
 	echo "<body>\n";
 

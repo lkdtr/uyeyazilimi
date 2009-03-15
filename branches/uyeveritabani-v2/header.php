@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>LKD ÜYE VERİTABANI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-9"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="StyleSheet" href="stil.css" type="text/css">
 <link rel="StyleSheet" href="anylink.css" type="text/css">
 <script type="text/javascript" src="anylink.js"></script>
