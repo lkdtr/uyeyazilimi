@@ -1,64 +1,65 @@
-<?php
-/* SVN FILE: $Id: index.php 6311 2008-01-02 06:33:52Z phpnut $ */
-/**
- * Requests collector.
- *
- *  This file collects requests if:
- *	- no mod_rewrite is avilable or .htaccess files are not supported
- *	-/public is not set as a web root.
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) : Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @since			CakePHP(tm) v 0.2.9
- * @version			$Revision: 6311 $
- * @modifiedby		$LastChangedBy: phpnut $
- * @lastmodified	$Date: 2008-01-02 01:33:52 -0500 (Wed, 02 Jan 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-/**
- *  Get Cake's root directory
- */
-	define('APP_DIR', 'app');
-	define('DS', DIRECTORY_SEPARATOR);
-	define('ROOT', dirname(__FILE__));
-	define('WEBROOT_DIR', 'webroot');
-	define('WWW_ROOT', ROOT . DS . APP_DIR . DS . WEBROOT_DIR . DS);
-/**
- * This only needs to be changed if the cake installed libs are located
- * outside of the distributed directory structure.
- */
-	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		//define ('CAKE_CORE_INCLUDE_PATH', FULL PATH TO DIRECTORY WHERE CAKE CORE IS INSTALLED DO NOT ADD A TRAILING DIRECTORY SEPARATOR';
-		define('CAKE_CORE_INCLUDE_PATH', ROOT);
-	}
-	if (function_exists('ini_set')) {
-		ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . CAKE_CORE_INCLUDE_PATH . PATH_SEPARATOR . ROOT . DS . APP_DIR . DS);
-		define('APP_PATH', null);
-		define('CORE_PATH', null);
-	} else {
-		define('APP_PATH', ROOT . DS . APP_DIR . DS);
-		define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
-	}
-	require CORE_PATH . 'cake' . DS . 'basics.php';
-	$TIME_START = getMicrotime();
-	require CORE_PATH . 'cake' . DS . 'config' . DS . 'paths.php';
-	require LIBS . 'object.php';
-	require LIBS . 'inflector.php';
-	require LIBS . 'configure.php';
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>LKD Bağış Sistemi</title>
 
-	$bootstrap = true;
-	$url = null;
-	require APP_DIR . DS . WEBROOT_DIR . DS . 'index.php';
+    <?php 
+        function monthSelect () {
+            echo '<select name="validityDateMonth">';
+            for ($i=1;$i<=12;$i++) {
+                echo "<option value=$i>$i</option>";
+
+            }
+            echo '</select>';
+        }
+        function yearSelect() {
+            $currentYearDate = getdate();
+            $currentYear =$currentYearDate['year'];
+            echo '<select name="validityDateYear">';
+            for ($i=$currentYear;$i<=$currentYear+20;$i++) {
+                echo "<option value=$i>$i</option>";
+            }
+            echo '</select>';
+        }
+
+
 ?>
+
+</head>
+
+<body bgcolor="white">
+
+<center>
+    <form method="POST" action="process_payment.php">
+    <input type="hidden" name="payment_accepted" value="false">
+    <img src="images/resmilogo.png" alt="LKD"><br/>
+        Bağlantı Adresiniz, <strong><?php echo $_SERVER['REMOTE_ADDR']?></strong>
+        <table>
+
+            <tr><td>Ad</td><td><input type="text" name="nameText"></td></tr>
+            <tr><td>Soyad</td><td><input type="text" name="surnameText"></td></tr>
+
+
+            <tr><td>Adres</td><td><textarea name="addressTextArea" rows="5"></textarea></td></tr>
+	    <tr><td>Telefon</td><td><input type="text" name="telephoneText"></td></tr>
+            <tr><td>Açıklama</td><td><textarea name="descriptionTextArea" rows="5"></textarea></td></tr>
+             <tr><td>Ödeme Türü</td><td><input type="radio" name="paymentTypeRadio" value="1" default> Bağış&nbsp;<input type="radio" name="paymentTypeRadio" value="2">Üyelik Ödentisi</td></tr>
+			 <tr>
+				<td colspan="2">
+				<div style="color:#FF0000">Üyelik ödentisi için açıklama kısmına üye numaranızı / isminizi girmeyi unutmayınız.</div>
+				</td>
+			 </tr>
+            <tr><td>E-Posta</td><td><input type="text" name="emailText"></td></tr>
+            <tr><td>Kart No</td><td><input type="text" name="cardNoText"></td></tr>
+
+            <tr><td>Son Kullanma Tarihi</td><td><?php monthSelect();?>&nbsp;<?php yearSelect();?></td></tr>
+
+            <tr><td>CVC</td><td><input type="text" name="cvcText"></td></tr>
+            <tr><td>Tutar</td><td><input type="text" name="tutarYTLText" size="10" maxlength="10" style="text-align:right" value="0"> YTL&nbsp;<input type="text" name="tutarYKRText" size="2" maxlength="2" value="00"> Kuruş</td></tr>
+            <tr><td colspan="2" style="text-align:center"><input type="submit" value="Öde"></td></tr>
+
+        </table>
+    </form>
+</center>
+</body>
+</html>
