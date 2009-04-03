@@ -8,7 +8,7 @@
  # Uye veritabanindan e-posta bilgilerini cekelim
  $dblink = @mysql_pconnect(HOST,USER,PASS) or die(mysql_error());
  mysql_select_db(DB,$dblink) or die(mysql_error());
- $query = 'SELECT alias,eposta1 FROM uyeler';
+ $query = 'SELECT alias,eposta1 FROM uyeler WHERE artik_uye_degil = 0';
  $result = mysql_query($query) or die(mysql_error());
  $rowno = mysql_num_rows($result);
  mysql_close($dblink);
