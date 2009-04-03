@@ -2,30 +2,27 @@
  #
  # Postfix'in provider veritabani forwarders tablosunu uyetakip veritabaninin uyeler tablosundaki verilere gore gunceller
  #
- # v0.1 - dfisek - 20/04/2005
 
- $username = '****';
- $password = '****';
+ require('../db.php');
 
- $dblink = @mysql_pconnect(localhost,$username,$password);
- mysql_select_db('uyetakip',$dblink);
-
+ # Uye veritabanindan e-posta bilgilerini cekelim
+ $dblink = @mysql_pconnect(HOST,USER,PASS) or die(mysql_error());
+ mysql_select_db(DB,$dblink) or die(mysql_error());
  $query = 'SELECT alias,eposta1 FROM uyeler';
- $result = mysql_query($query);
+ $result = mysql_query($query) or die(mysql_error());
  $rowno = mysql_num_rows($result);
-
- mysql_select_db('provider', $dblink);
+ mysql_close($dblink);
+ 
+ # Postfix veritabanina baglanip bilgileri guncelleyelim, eger yoksa adres ekleyelim
+ $dblink = @mysql_pconnect(HOST_MAIL,USER_MAIL,PASS_MAIL) or die(mysql_error());
+ mysql_select_db(DB_MAIL, $dblink);
 
  while($rowno--)
   {
    $row = mysql_fetch_array($result);
-   $source = $row[alias] . '@linux.org.tr';
-   $destination = $row[eposta1];
 
-   $query = "UPDATE forwardings SET destination = \"$destination\" WHERE source = \"$source\"";
-   // $temp = mysql_query($query);
-
-   echo "$query;<br>";
+   $query = 'REPLACE INTO forwardings VALUES ("' . $row['alias'] . '", "' . $row['eposta1'] . '")';
+   mysql_query($query) or die(mysql_error());
   }
-
+ mysql_close($dblink);
 ?>
