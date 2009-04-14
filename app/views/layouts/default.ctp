@@ -54,7 +54,7 @@
         </td>
         <td style="text-align: right; border: none">
             <div style="font-size: xx-large">
-                Üye Veritabanı
+                Üye Sistemi
             </div>
         </td>
         </tr>
