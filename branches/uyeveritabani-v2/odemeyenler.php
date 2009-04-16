@@ -30,7 +30,7 @@
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");
-	$Sorgu = "SELECT alias,uye_id,uye_ad,uye_soyad,kayit_tarihi FROM uyeler ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
+	$Sorgu = "SELECT alias,uye_id,uye_ad,uye_soyad,kayit_tarihi FROM uyeler WHERE artik_uye_degil=0 ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
 		
 	header("Pragma: public"); // required
