@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* MembersController Test cases generated on: 2008-09-26 00:09:32 : 1222376552*/
+/* MembersController Test cases generated on: 2009-04-18 12:04:05 : 1240045625*/
 App::import('Controller', 'Members');
 
 class TestMembers extends MembersController {
@@ -12,6 +12,7 @@ class MembersControllerTest extends CakeTestCase {
 
 	function setUp() {
 		$this->Members = new TestMembers();
+		$this->Members->constructClasses();
 	}
 
 	function testMembersControllerInstance() {

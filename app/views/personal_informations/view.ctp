@@ -21,6 +21,11 @@
 			<?php echo $personalInformation['PersonalInformation']['email_2']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Lotr Fwd Email'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $personalInformation['PersonalInformation']['lotr_fwd_email']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Address'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $personalInformation['PersonalInformation']['address']; ?>
@@ -54,6 +59,21 @@
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Current School Company'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $personalInformation['PersonalInformation']['current_school_company']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Latest School Graduated'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $personalInformation['PersonalInformation']['latest_school_graduated']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Latest Year Graduated'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $personalInformation['PersonalInformation']['latest_year_graduated']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Job Assignment'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $personalInformation['PersonalInformation']['job_assignment']; ?>
 			&nbsp;
 		</dd>
 	</dl>

@@ -1,6 +1,6 @@
 <?php 
 /* SVN FILE: $Id$ */
-/* PersonalInformationsController Test cases generated on: 2008-09-26 00:09:05 : 1222376765*/
+/* PersonalInformationsController Test cases generated on: 2009-04-18 12:04:35 : 1240045715*/
 App::import('Controller', 'PersonalInformations');
 
 class TestPersonalInformations extends PersonalInformationsController {
@@ -12,6 +12,7 @@ class PersonalInformationsControllerTest extends CakeTestCase {
 
 	function setUp() {
 		$this->PersonalInformations = new TestPersonalInformations();
+		$this->PersonalInformations->constructClasses();
 	}
 
 	function testPersonalInformationsControllerInstance() {

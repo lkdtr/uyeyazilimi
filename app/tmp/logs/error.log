@@ -1,1 +1,4 @@
 
+2009-04-18 12:42:08 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\uye\cake\basics.php:111) in [CORE\cake\libs\controller\controller.php, line 640]
+2009-04-18 13:18:23 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\uye\cake\basics.php:312) in [CORE\cake\libs\controller\controller.php, line 640]
+2009-04-18 13:19:32 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\uye\cake\basics.php:111) in [CORE\cake\libs\controller\controller.php, line 640]
