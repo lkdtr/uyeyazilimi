@@ -1,13 +1,79 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.7
+-- version 3.1.1
 -- http://www.phpmyadmin.net
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 07 Ekim 2008 saat 02:02:07
--- Sunucu sürümü: 5.0.51
--- PHP Sürümü: 5.2.6
+-- Üretim Zamanı: 18 Nisan 2009 saat 10:35:18
+-- Sunucu sürümü: 5.1.30
+-- PHP Sürümü: 5.2.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Veritabanı: `betauye`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) unsigned NOT NULL,
+  `lotr_alias` varchar(65) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `password` char(32) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `accounts_FKIndex1` (`member_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `leave_details`
+--
+
+CREATE TABLE IF NOT EXISTS `leave_details` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) unsigned NOT NULL,
+  `leave_year` year(4) NOT NULL,
+  `leave_decision_date` date NOT NULL,
+  `leave_decision_number` int(10) unsigned NOT NULL,
+  `note` text COLLATE utf8_turkish_ci,
+  PRIMARY KEY (`id`),
+  KEY `Table_10_FKIndex1` (`member_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `maillists`
+--
+
+CREATE TABLE IF NOT EXISTS `maillists` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `maillist_name` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `maillist_address` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `maillist_description` text COLLATE utf8_turkish_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `maillists_members`
+--
+
+CREATE TABLE IF NOT EXISTS `maillists_members` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) unsigned NOT NULL,
+  `list_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lists_members_FKIndex1` (`list_id`),
+  KEY `lists_members_FKIndex2` (`member_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -16,21 +82,33 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `members` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `uye_no` int(10) unsigned default NULL,
-  `tckimlikno` char(11) collate utf8_turkish_ci default NULL,
-  `name` varchar(30) collate utf8_turkish_ci default NULL,
-  `lastname` varchar(30) collate utf8_turkish_ci default NULL,
-  `gender` char(1) collate utf8_turkish_ci default NULL,
-  `date_of_birth` date default NULL,
-  `lotr_alias` varchar(65) collate utf8_turkish_ci default NULL,
-  `password` char(32) collate utf8_turkish_ci default NULL,
-  `member_type` enum('member','treasurer','board_member') collate utf8_turkish_ci default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uye_no` int(10) unsigned DEFAULT NULL,
+  `tckimlikno` char(11) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `lastname` varchar(30) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `gender` char(1) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `member_type` enum('member','treasurer','board_member') COLLATE utf8_turkish_ci DEFAULT NULL,
+  `member_card_status` enum('Ýstemiyor','Ýstiyor','Güncel Adres Bekleniyor','Dijital Fotoðraf Bekleniyor','Basýlacak','Baskýya Gitti','Postaya Verilecek') COLLATE utf8_turkish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `members_unique1` (`uye_no`),
-  KEY `members_unique2` (`tckimlikno`),
-  KEY `members_unique3` (`lotr_alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
+  KEY `members_unique2` (`tckimlikno`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo yapısı: `membership_fees`
+--
+
+CREATE TABLE IF NOT EXISTS `membership_fees` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fee_year` year(4) DEFAULT NULL,
+  `yearly_fee_amount` float DEFAULT NULL,
+  `enterence_fee` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -39,12 +117,12 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 CREATE TABLE IF NOT EXISTS `password_confirmations` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `member_id` int(10) unsigned NOT NULL,
-  `hash` char(32) collate utf8_turkish_ci default NULL,
-  `created` timestamp NULL default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `password_confirmations_FKIndex1` (`member_id`)
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `account_id` int(10) unsigned NOT NULL,
+  `hash` char(32) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `password_confirmations_FKIndex1` (`account_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -54,31 +132,40 @@ CREATE TABLE IF NOT EXISTS `password_confirmations` (
 --
 
 CREATE TABLE IF NOT EXISTS `payments` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `member_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`id`),
+  `amount` float DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_method` enum('elden','havale','kredi_karti','bilinmiyor') COLLATE utf8_turkish_ci DEFAULT NULL,
+  `receipt_number` varchar(15) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `note` text COLLATE utf8_turkish_ci,
+  PRIMARY KEY (`id`),
   KEY `payments_FKIndex1` (`member_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Tablo yapısı: `personal_informations`
+-- Tablo yapısı: `personal_information`
 --
 
-CREATE TABLE IF NOT EXISTS `personal_informations` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `personal_information` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `member_id` int(10) unsigned NOT NULL,
-  `email` varchar(30) collate utf8_turkish_ci default NULL,
-  `email_2` varchar(30) collate utf8_turkish_ci default NULL,
-  `address` varchar(200) collate utf8_turkish_ci default NULL,
-  `city` varchar(60) collate utf8_turkish_ci default NULL,
-  `country` varchar(60) collate utf8_turkish_ci default 'Türkiye',
-  `home_number` varchar(25) collate utf8_turkish_ci default NULL,
-  `mobile_number` varchar(25) collate utf8_turkish_ci default NULL,
-  `work_number` varchar(25) collate utf8_turkish_ci default NULL,
-  `current_school_company` varchar(60) collate utf8_turkish_ci default NULL,
-  PRIMARY KEY  (`id`),
+  `email` varchar(30) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `email_2` varchar(30) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `lotr_fwd_email` varchar(30) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `city` varchar(60) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `country` varchar(60) COLLATE utf8_turkish_ci DEFAULT 'Türkiye',
+  `home_number` varchar(25) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `mobile_number` varchar(25) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `work_number` varchar(25) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `current_school_company` varchar(60) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `latest_school_graduated` varchar(60) COLLATE utf8_turkish_ci DEFAULT NULL,
+  `latest_year_graduated` year(4) DEFAULT NULL,
+  `job_assignment` varchar(60) COLLATE utf8_turkish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `contact_information_FKIndex1` (`member_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
@@ -89,27 +176,27 @@ CREATE TABLE IF NOT EXISTS `personal_informations` (
 --
 
 CREATE TABLE IF NOT EXISTS `preferences` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `member_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `preferences_FKIndex1` (`member_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Tablo yapısı: `registration_informations`
+-- Tablo yapısı: `registration_details`
 --
 
-CREATE TABLE IF NOT EXISTS `registration_informations` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `registration_details` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `member_id` int(10) unsigned NOT NULL,
-  `registration_year` year(4) default NULL,
-  `registration_decision_number` int(10) unsigned default NULL,
-  `registration_decision_date` date default NULL,
-  `photos_for_documents` tinyint(1) default NULL,
-  `registration_form` tinyint(1) default NULL,
-  `notes` text collate utf8_turkish_ci,
-  PRIMARY KEY  (`id`),
+  `registration_year` year(4) DEFAULT NULL,
+  `registration_decision_number` int(10) unsigned DEFAULT NULL,
+  `registration_decision_date` date DEFAULT NULL,
+  `photos_for_documents` tinyint(1) DEFAULT NULL,
+  `registration_form` tinyint(1) DEFAULT NULL,
+  `note` text COLLATE utf8_turkish_ci,
+  PRIMARY KEY (`id`),
   KEY `membership_information_FKIndex1` (`member_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci AUTO_INCREMENT=1 ;
