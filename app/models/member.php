@@ -3,8 +3,17 @@ class Member extends AppModel {
 
 	var $name = 'Member';
 	var $validate = array(
-		'uye_no' => array('numeric'),
-		'tckimlikno' => array('numeric')
+		'uye_no' => array(
+			'numeric'=>array('rule'=>'numeric'),
+			'unique'=>array('rule'=>array('limitDuplicates',1))
+		),
+		'name' => array('rule'=>array('minLength',1)),
+		'lastname' => array('rule'=>array('minLength',1)),
+		'lotr_alias' => array('rule'=>array('minLength',1)),
+		'gender' => array('in_list'=>array(
+							 'rule' => array('inList', array('E', 'K'))
+							 )),
+
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -89,6 +98,13 @@ class Member extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	    
+	function limitDuplicates($data, $limit){
+        $existing_count = $this->find( 'count', array('conditions' => array('Member.uye_no'=>$data), 'recursive' => -1));
+        return $existing_count < $limit;
+    }
+	
 
 }
 ?>
