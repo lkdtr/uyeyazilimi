@@ -32,24 +32,30 @@ class AccountsController extends AppController {
 		$this->set(compact('members'));
 	}
 
-	function edit($id = null) {
+	function change_password($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Account', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
+			$this->data['Account']['password']=md5($this->data['Account']['password']);
+			$this->data['Account']['confirm_password']=md5($this->data['Account']['confirm_password']);
+			if($this->data['Account']['password']!=$this->data['Account']['confirm_password']){
+				$this->Session->setFlash(__('Password do not match.', true));
+			}
+			$account=$this->Account->read(null,$this->data['Account']['id']);
 			if ($this->Account->save($this->data)) {
-				$this->Session->setFlash(__('The Account has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->Session->setFlash(__('Password has been changed', true));
+				$this->redirect(array('controller'=>'members','action'=>'view',$account['Account']['member_id']));
 			} else {
-				$this->Session->setFlash(__('The Account could not be saved. Please, try again.', true));
+				$this->data=$account;
+				$this->Session->setFlash(__('Password could not be changed. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Account->read(null, $id);
+			$this->data['Account']['password']="";
 		}
-		$members = $this->Account->Member->find('list');
-		$this->set(compact('members'));
 	}
 
 	function delete($id = null) {
@@ -60,6 +66,19 @@ class AccountsController extends AppController {
 		if ($this->Account->del($id)) {
 			$this->Session->setFlash(__('Account deleted', true));
 			$this->redirect(array('action'=>'index'));
+		}
+	}
+	
+	function toggle_active($id){
+		$account=$this->Account->read(null,$id);
+		if(!empty($account)){
+			$this->Account->toggleAccount($id);
+			if($account['Account']['active']) $this->Session->setFlash(__('Account deactivated', true));
+			else $this->Session->setFlash(__('Account activated', true));
+			$this->redirect(array('controller'=>'members','action'=>'view',$account['Member']['id']));
+		}
+		else{
+			$this->redirect(array('controller'=>'members','action'=>'index'));
 		}
 	}
 	

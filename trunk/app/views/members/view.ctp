@@ -51,54 +51,35 @@
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Edit Member', true), array('action'=>'edit', $member['Member']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete Member', true), array('action'=>'delete', $member['Member']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $member['Member']['id'])); ?> </li>
 		<li><?php echo $html->link(__('List Members', true), array('action'=>'index')); ?> </li>
 		<li><?php echo $html->link(__('New Member', true), array('action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Accounts', true), array('controller'=> 'accounts', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Account', true), array('controller'=> 'accounts', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Leave Details', true), array('controller'=> 'leave_details', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Leave Detail', true), array('controller'=> 'leave_details', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Personal Informations', true), array('controller'=> 'personal_informations', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Personal Information', true), array('controller'=> 'personal_informations', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Registration Details', true), array('controller'=> 'registration_details', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Registration Detail', true), array('controller'=> 'registration_details', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Payments', true), array('controller'=> 'payments', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Payment', true), array('controller'=> 'payments', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Preferences', true), array('controller'=> 'preferences', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Preference', true), array('controller'=> 'preferences', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Maillists', true), array('controller'=> 'maillists', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Maillist', true), array('controller'=> 'maillists', 'action'=>'add')); ?> </li>
 	</ul>
 </div>
 	<div class="related">
-		<h3><?php  __('Related Accounts');?></h3>
-	<?php if (!empty($member['Account'])):?>
+		<h3><?php  __('Account Information');?></h3>
 		<dl>	<?php $i = 0; $class = ' class="altrow"';?>
-			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id');?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-	<?php echo $member['Account']['id'];?>
-&nbsp;</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Member Id');?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-	<?php echo $member['Account']['member_id'];?>
-&nbsp;</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Lotr Alias');?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 	<?php echo $member['Account']['lotr_alias'];?>
 &nbsp;</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Password');?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-	<?php echo $member['Account']['password'];?>
-&nbsp;</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Active');?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-	<?php echo $member['Account']['active'];?>
+	<?php 
+	if($member['Account']['active']){
+		echo __('Active',true).' (';
+		echo $html->link(__('Deactivate', true), array('controller'=> 'accounts', 'action'=>'toggle_active', $member['Account']['id']));
+		echo ')';
+	}else{
+		echo __('Inactive',true).' (';
+		echo $html->link(__('Activate', true), array('controller'=> 'accounts', 'action'=>'toggle_active', $member['Account']['id']));
+		echo ')';
+	}
+	?>
 &nbsp;</dd>
 		</dl>
-	<?php endif; ?>
 		<div class="actions">
 			<ul>
-				<li><?php echo $html->link(__('Edit Account', true), array('controller'=> 'accounts', 'action'=>'edit', $member['Account']['id'])); ?></li>
+				<li><?php echo $html->link(__('Change Password', true), array('controller'=> 'accounts', 'action'=>'change_password', $member['Account']['id'])); ?></li>
 			</ul>
 		</div>
 	</div>

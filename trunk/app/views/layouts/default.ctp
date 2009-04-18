@@ -34,7 +34,8 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
-
+		echo $javascript->link('prototype');
+		echo $javascript->link('scriptaculous');
 		echo $html->css('cake.generic');
 
 		echo $scripts_for_layout;

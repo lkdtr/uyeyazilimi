@@ -7,31 +7,57 @@
 		echo $form->input('tckimlikno');
 		echo $form->input('name');
 		echo $form->input('lastname');
-		echo $form->input('gender');
-		echo $form->input('date_of_birth');
-		echo $form->input('member_type');
-		echo $form->input('member_card_status');
-		echo $form->input('Maillist');
+		echo $form->input('Account.lotr_alias');
+		echo $form->input('gender',array('options'=>array('E'=>__('Man',true),'K'=>__('Woman',true))));
+		echo $form->input('date_of_birth',array('empty'=>true));
+		echo $form->input('member_type',array('options'=>array('member'=>__('Member',true),'admin'=>__('Admin',true))));
+		echo $form->input('member_card_status',array('options'=>array('İstemiyor'=>'İstemiyor','İstiyor'=>'İstiyor','Güncel Adres Bekleniyor'=>'Güncel Adres Bekleniyor','Dijital Fotoğraf Bekleniyor'=>'Dijital Fotoğraf Bekleniyor','Basılacak'=>'Basılacak','Baskıya Gitti'=>'Baskıya Gitti','Postaya Verilecek'=>'Postaya Verilecek')));
 	?>
 	</fieldset>
+	<fieldset>
+ 		<legend><?php __('Registration Details');?></legend>
+ 		<div class="input text">
+ 	<?php 
+		//echo $form->input('RegistrationDetail.registration_year',array('type'=>'date',''));
+		echo $form->label('RegistrationDetail.registration_year');
+		echo $form->year('RegistrationDetail.registration_year',2000,date('Y'),null,false);
+		echo $form->error('RegistrationDetail.registration_year');
+	?></div>
+	<?php 
+		echo $form->input('RegistrationDetail.registration_decision_number');
+		echo $form->input('RegistrationDetail.registration_decision_date',array('empty'=>true,'minYear'=>2000,'maxYear'=>date('Y')));
+		echo $form->input('RegistrationDetail.photos_for_documents');
+		echo $form->input('RegistrationDetail.registration_form');
+		echo $form->input('RegistrationDetail.note');
+	?>
+ 	</fieldset>	
+	<fieldset> 	
+ 		<legend><?php __('Personal Information');?></legend>
+ 		<?php
+		echo $form->input('PersonalInformation.email');
+		echo $form->input('PersonalInformation.email_2');
+		echo $form->input('PersonalInformation.lotr_fwd_email');
+		echo $form->input('PersonalInformation.address',array('type'=>'textarea'));
+		echo $form->input('PersonalInformation.city');
+		echo $form->input('PersonalInformation.country',array('value'=>'Türkiye'));
+		echo $form->input('PersonalInformation.home_number');
+		echo $form->input('PersonalInformation.mobile_number');
+		echo $form->input('PersonalInformation.work_number');
+		echo $form->input('PersonalInformation.current_school_company');
+		echo $form->input('PersonalInformation.job_assignment');
+		echo $form->input('PersonalInformation.latest_school_graduated');?>
+ 		<div class="input text">
+ 	<?php 
+		//echo $form->input('RegistrationDetail.registration_year',array('type'=>'date',''));
+		echo $form->label('PersonalInformation.latest_year_graduated');
+		echo $form->year('PersonalInformation.latest_year_graduated',date('Y')-80,date('Y')+1,null,false);
+		echo $form->error('PersonalInformation.latest_year_graduated');
+	?></div>
+ 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('List Members', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Accounts', true), array('controller'=> 'accounts', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Account', true), array('controller'=> 'accounts', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Leave Details', true), array('controller'=> 'leave_details', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Leave Detail', true), array('controller'=> 'leave_details', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Personal Informations', true), array('controller'=> 'personal_informations', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Personal Information', true), array('controller'=> 'personal_informations', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Registration Details', true), array('controller'=> 'registration_details', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Registration Detail', true), array('controller'=> 'registration_details', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Payments', true), array('controller'=> 'payments', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Payment', true), array('controller'=> 'payments', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Preferences', true), array('controller'=> 'preferences', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Preference', true), array('controller'=> 'preferences', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Maillists', true), array('controller'=> 'maillists', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Maillist', true), array('controller'=> 'maillists', 'action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('Cancel', true), array('action'=>'index'));?></li>
 	</ul>
 </div>

@@ -32,6 +32,11 @@ class Account extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	function toggleAccount($id){
+		//account disable edilmesi sırasında yapılması gereken başka işler varsa burda yapılabilir.
+		return $this->toggleBoolean('active',$id);
+	}
 
 }
 ?>
