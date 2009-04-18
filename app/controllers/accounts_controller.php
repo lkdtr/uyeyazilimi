@@ -63,6 +63,64 @@ class AccountsController extends AppController {
 		}
 	}
 	
+	function new_member(){
+		$this->pageTitle="Yeni Parola Oluşturma";
+		//import sanitization class, cake-style
+		App::import('Sanitize');
+		//get the alias
+		$UserName = $this->data['Account']['lotr_alias'];
+		//delete everything non-alphanumeric except period (.)
+        $UserName = Sanitize::paranoid($UserName, array('.')); 
+        if (!empty($UserName)) {
+        	//lets get the user data from alias, the password must be NULL
+        	//so we dont overwrite previous password
+        	$this->Account->recursive=-1;
+        	$user=$this->Account->find('first',array('conditions'=>array('Account.lotr_alias'=>$UserName,'Account.password IS NULL')));
+	        if (empty($user)) {
+   				$this->Session->setFlash('Böyle bir üye bulunamadı veya üyeye daha önce parola atanmış. Parolanızı unuttuysanız "Parolamı Unuttum"a tıklayın.');
+				$this->redirect(array('action'=>'index'));
+        	} else {
+				$this->set('user',$user);
+	    		$NewPassword = $this->__generatePassword();
+	    		$this->Email->to = $UserName.'@linux.org.tr';
+	    		$this->Email->subject = 'Linux Kullanıcıları Derneği Üye Sistemi Parolanız';
+	    		$this->Email->replyTo = $this->defaultEmailAddreses['reply-to'];
+	    		$this->Email->from = $this->defaultEmailAddreses['from'];
+	    		$this->Email->template = 'new_member_password'; //in /views/elements/email/text/new_member_password.ctp
+	    		$this->Email->sendAs = 'text'; 
+	    		//set password
+	    		$this->set('Password',$NewPassword);
+	    
+	    		/*
+	    		 * SMTP Options
+	    		 * Enable if we are sending via SMTP
+	    		 
+	    		$this->Email->smtpOptions = array(
+	    			'port'=>'25', 
+	    			'timeout'=>'30',
+	    			'host' => 'localhost',);
+	    		
+	    		/* Set delivery method 
+	    		$this->Email->delivery = 'smtp';*/
+			
+	    		/* Do not pass any args to send() */
+			
+	    		/* Check for SMTP errors. */
+	    		//$this->set('smtp-errors', $this->Email->smtpError);
+	            $user['Account']['password']= Security::hash($NewPassword,'md5',false);//şifreyi md5 kullanarak salt değer eklemeden hashler
+       			$this->Account->create();
+       			//save only password without validation
+	            if($this->Account->save($user,false,array('password'))){
+   		    		//send mail after saving
+	            	$this->Email->send();
+   	   				$this->Session->setFlash('Parolanız oluşturulmuş ve e-posta adresinize gönderilmiştir.');
+					$this->redirect(array('action'=>'index'));
+	            }
+	            $this->Session->setFlash('Parolanız oluşturulurken bir hata oluşmuştur. Lütfen tekrar deneyiniz.');
+	        }
+        }
+	}	
+	
 	function forgot_my_password() {
 		//sayfa başlığını belirle
 		$this->pageTitle="Parolamı Unuttum";
@@ -118,8 +176,8 @@ class AccountsController extends AppController {
 		$incominghash = Sanitize::paranoid($incominghash);
 		App::import('Model','PasswordConfirmation'); 
 		$passwordConfirmation = & new PasswordConfirmation(); 
-		$memberId=$passwordConfirmation->checkAndDelete($incominghash);
-			if (is_numeric($memberId)) { 
+		$accountId=$passwordConfirmation->checkAndDelete($incominghash);
+			if (is_numeric($accountId)) { 
 				$this->Session->setFlash('Yeni parola talebiniz iptal edilmiştir.');
 				$this->redirect(array('action'=>'index'));				
 			}
