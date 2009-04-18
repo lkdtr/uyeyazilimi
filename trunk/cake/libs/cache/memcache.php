@@ -1,41 +1,39 @@
 <?php
-/* SVN FILE: $Id: memcache.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: memcache.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * Memcache storage engine for cache
  *
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.libs.cache
- * @since			CakePHP(tm) v 1.2.0.4933
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.libs.cache
+ * @since         CakePHP(tm) v 1.2.0.4933
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Memcache storage engine for cache
  *
- * @package		cake
- * @subpackage	cake.cake.libs.cache
+ * @package       cake
+ * @subpackage    cake.cake.libs.cache
  */
 class MemcacheEngine extends CacheEngine {
 /**
  * Memcache wrapper.
  *
- * @var object
+ * @var Memcache
  * @access private
  */
 	var $__Memcache = null;
@@ -74,6 +72,7 @@ class MemcacheEngine extends CacheEngine {
 			$this->settings['servers'] = array($this->settings['servers']);
 		}
 		if (!isset($this->__Memcache)) {
+			$return = false;
 			$this->__Memcache =& new Memcache();
 			foreach ($this->settings['servers'] as $server) {
 				$parts = explode(':', $server);
@@ -83,10 +82,10 @@ class MemcacheEngine extends CacheEngine {
 					$port = $parts[1];
 				}
 				if ($this->__Memcache->addServer($host, $port)) {
-					return true;
+					$return = true;
 				}
 			}
-			return false;
+			return $return;
 		}
 		return true;
 	}
@@ -101,8 +100,8 @@ class MemcacheEngine extends CacheEngine {
  */
 	function write($key, &$value, $duration) {
 		$expires = time() + $duration;
-		$this->__Memcache->set($key.'_expires', $expires, $this->settings['compress'], $duration);
-		return $this->__Memcache->set($key, $value, $this->settings['compress'], $duration);
+		$this->__Memcache->set($key.'_expires', $expires, $this->settings['compress'], $expires);
+		return $this->__Memcache->set($key, $value, $this->settings['compress'], $expires);
 	}
 /**
  * Read a key from the cache

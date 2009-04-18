@@ -1,36 +1,34 @@
 <?php
-/* SVN FILE: $Id: xcache.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: xcache.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * Xcache storage engine for cache.
  *
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.libs.cache
- * @since			CakePHP(tm) v 1.2.0.4947
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.libs.cache
+ * @since         CakePHP(tm) v 1.2.0.4947
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Xcache storage engine for cache
  *
- * @link http://trac.lighttpd.net/xcache/ Xcache
- * @package		cake
- * @subpackage	cake.cake.libs.cache
+ * @link          http://trac.lighttpd.net/xcache/ Xcache
+ * @package       cake
+ * @subpackage    cake.cake.libs.cache
  */
 class XcacheEngine extends CacheEngine {
 /**
@@ -108,16 +106,13 @@ class XcacheEngine extends CacheEngine {
  * @access public
  */
 	function clear() {
-		$result = true;
 		$this->__auth();
-		for ($i = 0, $max = xcache_count(XC_TYPE_VAR); $i < $max; $i++) {
-			if (!xcache_clear_cache(XC_TYPE_VAR, $i)) {
-				$result = false;
-				break;
-			}
+		$max = xcache_count(XC_TYPE_VAR);
+		for ($i = 0; $i < $max; $i++) {
+			xcache_clear_cache(XC_TYPE_VAR, $i);
 		}
 		$this->__auth(true);
-		return $result;
+		return true;
 	}
 /**
  * Populates and reverses $_SERVER authentication values

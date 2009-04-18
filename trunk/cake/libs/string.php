@@ -1,36 +1,34 @@
 <?php
-/* SVN FILE: $Id: string.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: string.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * String handling methods.
  *
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *			1785 E. Sahara Avenue, Suite 490-204
- *			Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.libs
- * @since			CakePHP(tm) v 1.2.0.5551
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.libs
+ * @since         CakePHP(tm) v 1.2.0.5551
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * String handling methods.
  *
  *
- * @package		cake
- * @subpackage	cake.cake.libs
+ * @package       cake
+ * @subpackage    cake.cake.libs
  */
 class String extends Object {
 /**
@@ -129,7 +127,7 @@ class String extends Object {
  * @static
  */
 	function tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')') {
-		if(empty($data) || is_array($data)) {
+		if (empty($data) || is_array($data)) {
 			return $data;
 		}
 
@@ -210,12 +208,13 @@ class String extends Object {
  * @param string $options An array of options, see description above
  * @return string
  * @access public
+ * @static
  */
 	function insert($str, $data, $options = array()) {
-		$options = array_merge(
-			array('before' => ':', 'after' => null, 'escape' => '\\', 'format' => null, 'clean' => false),
-			$options
+		$defaults = array(
+			'before' => ':', 'after' => null, 'escape' => '\\', 'format' => null, 'clean' => false
 		);
+		$options += $defaults;
 		$format = $options['format'];
 
 		if (!isset($format)) {
@@ -232,7 +231,7 @@ class String extends Object {
 
 		if (array_keys($data) === array_keys(array_values($data))) {
 			$offset = 0;
-			while ($pos = strpos($str, '?', $offset)) {
+			while (($pos = strpos($str, '?', $offset)) !== false) {
 				$val = array_shift($data);
 				$offset = $pos + strlen($val);
 				$str = substr_replace($str, $val, $pos, 1);
@@ -267,6 +266,7 @@ class String extends Object {
  * @param string $options
  * @return string
  * @access public
+ * @static
  */
 	function cleanInsert($str, $options) {
 		$clean = $options['clean'];
@@ -282,7 +282,7 @@ class String extends Object {
 		switch ($clean['method']) {
 			case 'html':
 				$clean = array_merge(array(
-					'word' => '[\w,]+',
+					'word' => '[\w,.]+',
 					'andText' => true,
 					'replacement' => '',
 				), $clean);
@@ -300,7 +300,7 @@ class String extends Object {
 				break;
 			case 'text':
 				$clean = array_merge(array(
-					'word' => '[\w,]+',
+					'word' => '[\w,.]+',
 					'gap' => '[\s]*(?:(?:and|or)[\s]*)?',
 					'replacement' => '',
 				), $clean);

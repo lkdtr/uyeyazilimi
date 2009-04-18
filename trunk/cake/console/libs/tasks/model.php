@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: model.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: model.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * The ModelTask handles creating and updating models files.
  *
@@ -7,31 +7,29 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.console.libs.tasks
- * @since			CakePHP(tm) v 1.2
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.console.libs.tasks
+ * @since         CakePHP(tm) v 1.2
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 App::import('Model', 'ConnectionManager');
 /**
  * Task class for creating and updating model files.
  *
- * @package		cake
- * @subpackage	cake.cake.console.libs.tasks
+ * @package       cake
+ * @subpackage    cake.cake.console.libs.tasks
  */
 class ModelTask extends Shell {
 /**
@@ -48,7 +46,6 @@ class ModelTask extends Shell {
  * @access public
  */
 	var $path = MODELS;
-
 /**
  * tasks
  *
@@ -411,7 +408,7 @@ class ModelTask extends Shell {
 									if ($type === 'belongsTo') {
 										$alias = 'Parent' . $associations[$type][$i]['alias'];
 									}
-									if($type === 'hasOne' || $type === 'hasMany') {
+									if ($type === 'hasOne' || $type === 'hasMany') {
 										$alias = 'Child' . $associations[$type][$i]['alias'];
 									}
 
@@ -573,13 +570,13 @@ class ModelTask extends Shell {
 				$belongsToCount = count($associations['belongsTo']);
 
 				for ($i = 0; $i < $belongsToCount; $i++) {
-					$out .= "\t\t\t'{$associations['belongsTo'][$i]['alias']}' => ";
-					$out .= "array('className' => '{$associations['belongsTo'][$i]['className']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'foreignKey' => '{$associations['belongsTo'][$i]['foreignKey']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'conditions' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'fields' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'order' => ''\n";
-					$out .= "\t\t\t)";
+					$out .= "\t\t'{$associations['belongsTo'][$i]['alias']}' => array(\n";
+					$out .= "\t\t\t'className' => '{$associations['belongsTo'][$i]['className']}',\n";
+					$out .= "\t\t\t'foreignKey' => '{$associations['belongsTo'][$i]['foreignKey']}',\n";
+					$out .= "\t\t\t'conditions' => '',\n";
+					$out .= "\t\t\t'fields' => '',\n";
+					$out .= "\t\t\t'order' => ''\n";
+					$out .= "\t\t)";
 					if ($i + 1 < $belongsToCount) {
 						$out .= ",";
 					}
@@ -594,14 +591,14 @@ class ModelTask extends Shell {
 				$hasOneCount = count($associations['hasOne']);
 
 				for ($i = 0; $i < $hasOneCount; $i++) {
-					$out .= "\t\t\t'{$associations['hasOne'][$i]['alias']}' => ";
-					$out .= "array('className' => '{$associations['hasOne'][$i]['className']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'foreignKey' => '{$associations['hasOne'][$i]['foreignKey']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'dependent' => false,\n";
-					$out .= "\t\t\t\t\t\t\t\t'conditions' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'fields' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'order' => ''\n";
-					$out .= "\t\t\t)";
+					$out .= "\t\t'{$associations['hasOne'][$i]['alias']}' => array(\n";
+					$out .= "\t\t\t'className' => '{$associations['hasOne'][$i]['className']}',\n";
+					$out .= "\t\t\t'foreignKey' => '{$associations['hasOne'][$i]['foreignKey']}',\n";
+					$out .= "\t\t\t'dependent' => false,\n";
+					$out .= "\t\t\t'conditions' => '',\n";
+					$out .= "\t\t\t'fields' => '',\n";
+					$out .= "\t\t\t'order' => ''\n";
+					$out .= "\t\t)";
 					if ($i + 1 < $hasOneCount) {
 						$out .= ",";
 					}
@@ -616,19 +613,19 @@ class ModelTask extends Shell {
 				$hasManyCount = count($associations['hasMany']);
 
 				for ($i = 0; $i < $hasManyCount; $i++) {
-					$out .= "\t\t\t'{$associations['hasMany'][$i]['alias']}' => ";
-					$out .= "array('className' => '{$associations['hasMany'][$i]['className']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'foreignKey' => '{$associations['hasMany'][$i]['foreignKey']}',\n";
-					$out .= "\t\t\t\t\t\t\t\t'dependent' => false,\n";
-					$out .= "\t\t\t\t\t\t\t\t'conditions' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'fields' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'order' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'limit' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'offset' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'exclusive' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'finderQuery' => '',\n";
-					$out .= "\t\t\t\t\t\t\t\t'counterQuery' => ''\n";
-					$out .= "\t\t\t)";
+					$out .= "\t\t'{$associations['hasMany'][$i]['alias']}' => array(\n";
+					$out .= "\t\t\t'className' => '{$associations['hasMany'][$i]['className']}',\n";
+					$out .= "\t\t\t'foreignKey' => '{$associations['hasMany'][$i]['foreignKey']}',\n";
+					$out .= "\t\t\t'dependent' => false,\n";
+					$out .= "\t\t\t'conditions' => '',\n";
+					$out .= "\t\t\t'fields' => '',\n";
+					$out .= "\t\t\t'order' => '',\n";
+					$out .= "\t\t\t'limit' => '',\n";
+					$out .= "\t\t\t'offset' => '',\n";
+					$out .= "\t\t\t'exclusive' => '',\n";
+					$out .= "\t\t\t'finderQuery' => '',\n";
+					$out .= "\t\t\t'counterQuery' => ''\n";
+					$out .= "\t\t)";
 					if ($i + 1 < $hasManyCount) {
 						$out .= ",";
 					}
@@ -642,21 +639,21 @@ class ModelTask extends Shell {
 				$hasAndBelongsToManyCount = count($associations['hasAndBelongsToMany']);
 
 				for ($i = 0; $i < $hasAndBelongsToManyCount; $i++) {
-					$out .= "\t\t\t'{$associations['hasAndBelongsToMany'][$i]['alias']}' => ";
-					$out .= "array('className' => '{$associations['hasAndBelongsToMany'][$i]['className']}',\n";
-					$out .= "\t\t\t\t\t\t'joinTable' => '{$associations['hasAndBelongsToMany'][$i]['joinTable']}',\n";
-					$out .= "\t\t\t\t\t\t'foreignKey' => '{$associations['hasAndBelongsToMany'][$i]['foreignKey']}',\n";
-					$out .= "\t\t\t\t\t\t'associationForeignKey' => '{$associations['hasAndBelongsToMany'][$i]['associationForeignKey']}',\n";
-					$out .= "\t\t\t\t\t\t'unique' => true,\n";
-					$out .= "\t\t\t\t\t\t'conditions' => '',\n";
-					$out .= "\t\t\t\t\t\t'fields' => '',\n";
-					$out .= "\t\t\t\t\t\t'order' => '',\n";
-					$out .= "\t\t\t\t\t\t'limit' => '',\n";
-					$out .= "\t\t\t\t\t\t'offset' => '',\n";
-					$out .= "\t\t\t\t\t\t'finderQuery' => '',\n";
-					$out .= "\t\t\t\t\t\t'deleteQuery' => '',\n";
-					$out .= "\t\t\t\t\t\t'insertQuery' => ''\n";
-					$out .= "\t\t\t)";
+					$out .= "\t\t'{$associations['hasAndBelongsToMany'][$i]['alias']}' => array(\n";
+					$out .= "\t\t\t'className' => '{$associations['hasAndBelongsToMany'][$i]['className']}',\n";
+					$out .= "\t\t\t'joinTable' => '{$associations['hasAndBelongsToMany'][$i]['joinTable']}',\n";
+					$out .= "\t\t\t'foreignKey' => '{$associations['hasAndBelongsToMany'][$i]['foreignKey']}',\n";
+					$out .= "\t\t\t'associationForeignKey' => '{$associations['hasAndBelongsToMany'][$i]['associationForeignKey']}',\n";
+					$out .= "\t\t\t'unique' => true,\n";
+					$out .= "\t\t\t'conditions' => '',\n";
+					$out .= "\t\t\t'fields' => '',\n";
+					$out .= "\t\t\t'order' => '',\n";
+					$out .= "\t\t\t'limit' => '',\n";
+					$out .= "\t\t\t'offset' => '',\n";
+					$out .= "\t\t\t'finderQuery' => '',\n";
+					$out .= "\t\t\t'deleteQuery' => '',\n";
+					$out .= "\t\t\t'insertQuery' => ''\n";
+					$out .= "\t\t)";
 					if ($i + 1 < $hasAndBelongsToManyCount) {
 						$out .= ",";
 					}
@@ -709,20 +706,22 @@ class ModelTask extends Shell {
 			}
 
 			$out = "App::import('Model', '$import');\n\n";
-			$out .= "class Test{$className} extends {$className} {\n";
-			$out .= "\tvar \$cacheSources = false;\n";
-			$out .= "\tvar \$useDbConfig  = 'test_suite';\n}\n\n";
 			$out .= "class {$className}TestCase extends CakeTestCase {\n";
 			$out .= "\tvar \${$className} = null;\n";
 			$out .= "\tvar \$fixtures = array($fixture);\n\n";
-			$out .= "\tfunction start() {\n\t\tparent::start();\n\t\t\$this->{$className} = new Test{$className}();\n\t}\n\n";
+			$out .= "\tfunction startTest() {\n";
+			$out .= "\t\t\$this->{$className} =& ClassRegistry::init('{$className}');\n";
+			$out .= "\t}\n\n";
 			$out .= "\tfunction test{$className}Instance() {\n";
-			$out .= "\t\t\$this->assertTrue(is_a(\$this->{$className}, '{$className}'));\n\t}\n\n";
+			$out .= "\t\t\$this->assertTrue(is_a(\$this->{$className}, '{$className}'));\n";
+			$out .= "\t}\n\n";
 			$out .= "\tfunction test{$className}Find() {\n";
 			$out .= "\t\t\$this->{$className}->recursive = -1;\n";
 			$out .= "\t\t\$results = \$this->{$className}->find('first');\n\t\t\$this->assertTrue(!empty(\$results));\n\n";
-			$out .= "\t\t\$expected = array('$className' => array(\n$results\n\t\t\t));\n";
-			$out .= "\t\t\$this->assertEqual(\$results, \$expected);\n\t}\n}\n";
+			$out .= "\t\t\$expected = array('$className' => array(\n$results\n\t\t));\n";
+			$out .= "\t\t\$this->assertEqual(\$results, \$expected);\n";
+			$out .= "\t}\n";
+			$out .= "}\n";
 
 			$path = MODEL_TESTS;
 			if (isset($this->plugin)) {
@@ -863,7 +862,7 @@ class ModelTask extends Shell {
 								$type = $value;
 								$value = array('type'=> $type);
 							}
-							$col = "\t\t\t'{$field}' => array('type'=>'" . $value['type'] . "', ";
+							$col = "\t\t'{$field}' => array('type'=>'" . $value['type'] . "', ";
 
 							switch ($value['type']) {
 								case 'integer':
@@ -893,25 +892,17 @@ class ModelTask extends Shell {
 								break;
 								case 'text':
 									$insert =
-									'\'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,
-									phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam,
-									vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit,
-									feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
-									Orci aliquet, in lorem et velit maecenas luctus, wisi nulla at, mauris nam ut a, lorem et et elit eu.
-									Sed dui facilisi, adipiscing mollis lacus congue integer, faucibus consectetuer eros amet sit sit,
-									magna dolor posuere. Placeat et, ac occaecat rutrum ante ut fusce. Sit velit sit porttitor non enim purus,
-									id semper consectetuer justo enim, nulla etiam quis justo condimentum vel, malesuada ligula arcu. Nisl neque,
-									ligula cras suscipit nunc eget, et tellus in varius urna odio est. Fuga urna dis metus euismod laoreet orci,
-									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
-									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
-									feugiat lacinia mauris sed, lacinia et felis.\'';
+									"'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida,";
+									$insert .= "phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam,";
+									$insert .= "vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit,";
+									$insert .= "feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.'";
 								break;
 							}
-							$records[] = "\t\t\t'$field'  => $insert";
+							$records[] = "\t\t'$field'  => $insert";
 							unset($value['type']);
 							$col .= join(', ',  $schema->__values($value));
 						} else {
-							$col = "\t\t\t'indexes' => array(";
+							$col = "\t\t'indexes' => array(";
 							$props = array();
 							foreach ((array)$value as $key => $index) {
 								$props[] = "'{$key}' => array(".join(', ',  $schema->__values($index)).")";
@@ -923,11 +914,11 @@ class ModelTask extends Shell {
 					}
 					$out .= join(",\n", $cols);
 				}
-				$out .= "\n\t\t\t);\n";
+				$out .= "\n\t);\n";
 			}
 		}
 		$records = join(",\n", $records);
-		$out .= "\tvar \$records = array(array(\n$records\n\t\t\t));\n";
+		$out .= "\tvar \$records = array(array(\n$records\n\t));\n";
 		$out .= "}\n";
 		$path = TESTS . DS . 'fixtures' . DS;
 		if (isset($this->plugin)) {
@@ -939,7 +930,7 @@ class ModelTask extends Shell {
 		$content = "<?php \n/* SVN FILE: $header$ */\n/* ". $model ." Fixture generated on: " . date('Y-m-d H:m:s') . " : ". time() . "*/\n{$out}?>";
 		$this->out("\nBaking test fixture for $model...");
 		if ($this->createFile($path . $filename, $content)) {
-			return $records;
+			return str_replace("\t\t", "\t\t\t", $records);
 		}
 		return false;
 	}

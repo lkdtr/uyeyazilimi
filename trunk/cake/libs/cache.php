@@ -1,44 +1,39 @@
 <?php
-/* SVN FILE: $Id: cache.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: cache.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * Caching for CakePHP.
  *
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.libs
- * @since			CakePHP(tm) v 1.2.0.4933
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-/**
- * Included libraries.
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.libs
+ * @since         CakePHP(tm) v 1.2.0.4933
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Caching for CakePHP.
  *
- * @package		cake
- * @subpackage	cake.cake.libs
+ * @package       cake
+ * @subpackage    cake.cake.libs
  */
 class Cache extends Object {
 /**
  * Cache engine to use
  *
- * @var object
+ * @var CacheEngine
  * @access protected
  */
 	var $_Engine = null;
@@ -147,10 +142,6 @@ class Cache extends Object {
  * @static
  */
 	function engine($name = 'File', $settings = array()) {
-		if (!$name || Configure::read('Cache.disable')) {
-			return false;
-		}
-
 		$cacheClass = $name . 'Engine';
 		$_this =& Cache::getInstance();
 		if (!isset($_this->_Engine[$name])) {
@@ -175,7 +166,7 @@ class Cache extends Object {
  *
  * @param mixed $settings Optional string for simple name-value pair or array
  * @param string $value Optional for a simple name-value pair
- * @return array of settings 
+ * @return array of settings
  * @access public
  * @static
  */
@@ -218,31 +209,28 @@ class Cache extends Object {
 	function gc() {
 		$_this =& Cache::getInstance();
 		$config = $_this->config();
-		extract($config);
-		$_this->_Engine[$engine]->gc();
+		$_this->_Engine[$config['engine']]->gc();
 	}
 /**
  * Write data for key into cache
  *
  * @param string $key Identifier for the data
  * @param mixed $value Data to be cached - anything except a resource
- * @param mixed $config Optional - string configuration name, a duration for expiration,
- *				or array('config' => 'string configuration name', 'duration' => 'duration for expiration')
+ * @param string $config Optional - string configuration name
  * @return boolean True if the data was successfully cached, false on failure
  * @access public
  * @static
  */
 	function write($key, $value, $config = null) {
 		$_this =& Cache::getInstance();
-		$thisDuration = null;
+
 		if (is_array($config)) {
 			extract($config);
 		} else if ($config && (is_numeric($config) || is_numeric($config[0]) || (isset($config[1]) && is_numeric($config[1])))) {
-			$thisDuration = $config;
 			$config = null;
 		}
 
-		if (isset($_this->__config[$config])) {
+		if ($config && isset($_this->__config[$config])) {
 			$settings = $_this->set($_this->__config[$config]);
 		} else {
 			$settings = $_this->settings();
@@ -263,13 +251,6 @@ class Cache extends Object {
 
 		if (is_resource($value)) {
 			return false;
-		}
-
-		if ($thisDuration !== null) {
-			if (!is_numeric($thisDuration)) {
-				$thisDuration = strtotime($thisDuration) - time();
-			}
-			$duration = $thisDuration;
 		}
 
 		if ($duration < 1) {
@@ -311,7 +292,7 @@ class Cache extends Object {
 		}
 		$success = $_this->_Engine[$engine]->read($settings['prefix'] . $key);
 
-		if ($config !== $_this->__name) {
+		if ($config !== null && $config !== $_this->__name) {
 			$settings = $_this->set();
 		}
 		return $success;
@@ -422,8 +403,8 @@ class Cache extends Object {
 /**
  * Storage engine for CakePHP caching
  *
- * @package		cake
- * @subpackage	cake.cake.libs
+ * @package       cake
+ * @subpackage    cake.cake.libs
  */
 class CacheEngine extends Object {
 /**
