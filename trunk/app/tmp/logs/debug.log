@@ -17,3 +17,5 @@
 2009-04-18 13:19:32 Debug: Notice (8): Undefined variable: accountId in [APP\controllers\accounts_controller.php, line 98]
 2009-04-18 13:20:27 Debug: Notice (8): Undefined variable: member in [APP\views\elements\email\text\new_password.ctp, line 1]
 2009-04-18 13:20:27 Debug: Notice (8): Undefined variable: member in [APP\views\elements\email\text\new_password.ctp, line 5]
+2009-04-18 13:27:59 Debug: Notice (8): Undefined index:  Member in [APP\controllers\accounts_controller.php, line 71]
+2009-04-18 13:28:45 Debug: Notice (8): Undefined index:  Member in [APP\views\elements\email\text\new_member_password.ctp, line 1]
