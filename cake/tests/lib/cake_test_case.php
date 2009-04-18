@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: cake_test_case.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: cake_test_case.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * Short description for file.
  *
@@ -8,23 +8,21 @@
  * PHP versions 4 and 5
  *
  * CakePHP(tm) Tests <https://trac.cakephp.org/wiki/Developement/TestSuite>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  *  Licensed under The Open Group Test Suite License
  *  Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
- * @package			cake
- * @subpackage		cake.cake.tests.libs
- * @since			CakePHP(tm) v 1.2.0.4667
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          https://trac.cakephp.org/wiki/Developement/TestSuite CakePHP(tm) Tests
+ * @package       cake
+ * @subpackage    cake.cake.tests.libs
+ * @since         CakePHP(tm) v 1.2.0.4667
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
 if (!class_exists('dispatcher')) {
 	require CAKE . 'dispatcher.php';
@@ -35,8 +33,8 @@ App::import('Vendor', 'simpletest' . DS . 'unit_tester');
 /**
  * Short description for class.
  *
- * @package    cake
- * @subpackage cake.cake.tests.lib
+ * @package       cake
+ * @subpackage    cake.cake.tests.lib
  */
 class CakeTestDispatcher extends Dispatcher {
 	var $controller;
@@ -65,8 +63,8 @@ class CakeTestDispatcher extends Dispatcher {
 /**
  * Short description for class.
  *
- * @package    cake
- * @subpackage cake.cake.tests.lib
+ * @package       cake
+ * @subpackage    cake.cake.tests.lib
  */
 class CakeTestCase extends UnitTestCase {
 /**
@@ -179,7 +177,7 @@ class CakeTestCase extends UnitTestCase {
 						$object =& ClassRegistry::init($name);
 						//switch back to specified datasource.
 						$object->setDataSource($params['connection']);
-						$db =& ConnectionManager::getDataSource($object->useDbConfig);						
+						$db =& ConnectionManager::getDataSource($object->useDbConfig);
 						$db->cacheSources = false;
 
 						$models[$object->alias] = array(
@@ -225,7 +223,7 @@ class CakeTestCase extends UnitTestCase {
  * * @param array $params	Additional parameters as sent by testAction().
  */
 	function endController(&$controller, $params = array()) {
-		if (isset($this->db) && isset($this->_actionFixtures) && !empty($this->_actionFixtures)) {
+		if (isset($this->db) && isset($this->_actionFixtures) && !empty($this->_actionFixtures) && $this->dropTables) {
 			foreach ($this->_actionFixtures as $fixture) {
 				$fixture->drop($this->db);
 			}
@@ -234,13 +232,20 @@ class CakeTestCase extends UnitTestCase {
 /**
  * Executes a Cake URL, and can get (depending on the $params['return'] value):
  *
- * 1. 'result': Whatever the action returns (and also specifies $this->params['requested'] for controller)
- * 2. 'view': The rendered view, without the layout
- * 3. 'contents': The rendered view, within the layout.
- * 4. 'vars': the view vars
- *
- * @param string $url	Cake URL to execute (e.g: /articles/view/455)
- * @param array $params	Parameters, or simply a string of what to return
+ * Params:
+ * - 'return' has several possible values:
+ *   1. 'result': Whatever the action returns (and also specifies $this->params['requested'] for controller)
+ *   2. 'view': The rendered view, without the layout
+ *   3. 'contents': The rendered view, within the layout.
+ *   4. 'vars': the view vars
+ * 
+ * - 'fixturize' - Set to true if you want to copy model data from 'connection' to the test_suite connection
+ * - 'data' - The data you want to insert into $this->data in the controller.
+ * - 'connection' - Which connection to use in conjunction with fixturize (defaults to 'default')
+ * - 'method' - What type of HTTP method to simulate (defaults to post)
+ * 
+ * @param string $url Cake URL to execute (e.g: /articles/view/455)
+ * @param mixed $params Parameters (see above), or simply a string of what to return
  * @return mixed Whatever is returned depending of requested result
  * @access public
  */
@@ -256,7 +261,6 @@ class CakeTestCase extends UnitTestCase {
 		if (is_string($params)) {
 			$params = array('return' => $params);
 		}
-
 		$params = array_merge($default, $params);
 
 		$toSave = array(
@@ -271,9 +275,7 @@ class CakeTestCase extends UnitTestCase {
 				? array_intersect_key($_GET, $toSave)
 				: $this->__savedGetData;
 
-		$data = (!empty($params['data']))
-					? $params['data']
-					: array();
+		$data = (!empty($params['data'])) ? $params['data'] : array();
 
 		if (strtolower($params['method']) == 'get') {
 			$_GET = array_merge($this->__savedGetData, $data);
@@ -377,6 +379,7 @@ class CakeTestCase extends UnitTestCase {
 			foreach ($this->_fixtures as $fixture) {
 				if (in_array($fixture->table, $sources)) {
 					$fixture->drop($this->db);
+					$fixture->create($this->db);
 				} elseif (!in_array($fixture->table, $sources)) {
 					$fixture->create($this->db);
 				}
@@ -411,7 +414,9 @@ class CakeTestCase extends UnitTestCase {
  * @access public
  */
 	function after($method) {
-		if (isset($this->_fixtures) && isset($this->db) && !in_array(strtolower($method), array('start', 'end'))) {
+		$isTestMethod = !in_array(strtolower($method), array('start', 'end'));
+
+		if (isset($this->_fixtures) && isset($this->db) && $isTestMethod) {
 			foreach ($this->_fixtures as $fixture) {
 				$fixture->truncate($this->db);
 			}
@@ -436,14 +441,17 @@ class CakeTestCase extends UnitTestCase {
  * @access public
  */
 	function getTests() {
-		$methods = array_diff(parent::getTests(), array('testAction', 'testaction'));
-		$methods = array_merge(array_merge(array('start', 'startCase'), $methods), array('endCase', 'end'));
-		return $methods;
+		return array_merge(
+			array('start', 'startCase'),
+			array_diff(parent::getTests(), array('testAction', 'testaction')),
+			array('endCase', 'end')
+		);
 	}
 /**
  * Chooses which fixtures to load for a given test
  *
- * @param string $fixture Each parameter is a model name that corresponds to a fixture, i.e. 'Post', 'Author', etc.
+ * @param string $fixture Each parameter is a model name that corresponds to a
+ *                        fixture, i.e. 'Post', 'Author', etc.
  * @access public
  * @see CakeTestCase::$autoFixtures
  */
@@ -456,14 +464,16 @@ class CakeTestCase extends UnitTestCase {
 				$fixture->truncate($this->db);
 				$fixture->insert($this->db);
 			} else {
-				trigger_error("Non-existent fixture class {$class} referenced in test", E_USER_WARNING);
+				trigger_error("Referenced fixture class {$class} not found", E_USER_WARNING);
 			}
 		}
 	}
 /**
- * Takes an array $expected and generates a regex from it to match the provided $string. Samples for $expected:
+ * Takes an array $expected and generates a regex from it to match the provided $string.
+ * Samples for $expected:
  *
- * Checks for an input tag with a name attribute (contains any value) and an id attribute that contains 'my-input':
+ * Checks for an input tag with a name attribute (contains any non-empty value) and an id
+ * attribute that contains 'my-input':
  * 	array('input' => array('name', 'id' => 'my-input'))
  *
  * Checks for two p elements with some text in them:
@@ -476,15 +486,15 @@ class CakeTestCase extends UnitTestCase {
  * 		'/p'
  *	)
  *
- * You can also specify a pattern expression as part of the attribute values, or the tag being defined,
- * if you prepend the value with preg: and enclose it with slashes, like so:
+ * You can also specify a pattern expression as part of the attribute values, or the tag
+ * being defined, if you prepend the value with preg: and enclose it with slashes, like so:
  *	array(
  *  	array('input' => array('name', 'id' => 'preg:/FieldName\d+/')),
  *  	'preg:/My\s+field/'
  *	)
  *
- * Important: This function is very forgiving about whitespace and also accepts any permutation of attribute order.
- * It will also allow whitespaces between specified tags.
+ * Important: This function is very forgiving about whitespace and also accepts any
+ * permutation of attribute order. It will also allow whitespaces between specified tags.
  *
  * @param string $string An HTML/XHTML/XML string
  * @param array $expected An array, see above
@@ -507,8 +517,11 @@ class CakeTestCase extends UnitTestCase {
 			if (is_string($tags) && $tags{0} == '<') {
 				$tags = array(substr($tags, 1) => array());
 			} elseif (is_string($tags)) {
-				if (preg_match('/^\*?\//', $tags, $match)) {
+				$tagsTrimmed = preg_replace('/\s+/m', '', $tags);
+
+				if (preg_match('/^\*?\//', $tags, $match) && $tagsTrimmed !== '//') {
 					$prefix = array(null, null);
+
 					if ($match[0] == '*/') {
 						$prefix = array('Anything, ', '.*?');
 					}
@@ -555,7 +568,7 @@ class CakeTestCase extends UnitTestCase {
 							$attr = $val;
 							$val = '.+?';
 							$explanations[] = sprintf('Attribute "%s" present', $attr);
-						} else if (!empty($val) && preg_match('/^preg\:\/(.+)\/$/i', $val, $matches)) {
+						} elseif (!empty($val) && preg_match('/^preg\:\/(.+)\/$/i', $val, $matches)) {
 							$quotes = '"?';
 							$val = $matches[1];
 							$explanations[] = sprintf('Attribute "%s" matches "%s"', $attr, $val);
@@ -689,7 +702,7 @@ class CakeTestCase extends UnitTestCase {
 			if (strpos($fixture, 'core.') === 0) {
 				$fixture = substr($fixture, strlen('core.'));
 				foreach (Configure::corePaths('cake') as $key => $path) {
-					$fixturePaths[] = $path . DS . 'tests' . DS . 'fixtures';
+					$fixturePaths[] = $path . 'tests' . DS . 'fixtures';
 				}
 			} elseif (strpos($fixture, 'app.') === 0) {
 				$fixture = substr($fixture, strlen('app.'));

@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: object.php 7690 2008-10-02 04:56:53Z nate $ */
+/* SVN FILE: $Id: object.php 8120 2009-03-19 20:25:10Z gwoo $ */
 /**
  * Object class, allowing __construct and __destruct in PHP4.
  *
@@ -8,24 +8,22 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.cake.libs
- * @since			CakePHP(tm) v 0.2.9
- * @version			$Revision: 7690 $
- * @modifiedby		$LastChangedBy: nate $
- * @lastmodified	$Date: 2008-10-02 00:56:53 -0400 (Thu, 02 Oct 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.cake.libs
+ * @since         CakePHP(tm) v 0.2.9
+ * @version       $Revision: 8120 $
+ * @modifiedby    $LastChangedBy: gwoo $
+ * @lastmodified  $Date: 2009-03-19 13:25:10 -0700 (Thu, 19 Mar 2009) $
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Object class, allowing __construct and __destruct in PHP4.
@@ -33,14 +31,14 @@
  * Also includes methods for logging and the special method RequestAction,
  * to call other Controllers' Actions from anywhere.
  *
- * @package		cake
- * @subpackage	cake.cake.libs
+ * @package       cake
+ * @subpackage    cake.cake.libs
  */
 class Object {
 /**
  * Log object
  *
- * @var object
+ * @var CakeLog
  * @access protected
  */
 	var $_log = null;
@@ -94,7 +92,10 @@ class Object {
 		if (in_array('return', $extra, true)) {
 			$extra = array_merge($extra, array('return' => 0, 'autoRender' => 1));
 		}
-		$params = array_merge(array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1, 'url' => array()), $extra);
+		if (is_array($url) && !isset($extra['url'])) {
+			$extra['url'] = array();
+		}
+		$params = array_merge(array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1), $extra);
 		$dispatcher = new Dispatcher;
 		return $dispatcher->dispatch($url, $params);
 	}
@@ -247,7 +248,11 @@ class Object {
 		$objectArray = array(&$object);
 		$data = str_replace('\\', '\\\\', serialize($objectArray));
 		$data = '<?php $' . $name . ' = \'' . str_replace('\'', '\\\'', $data) . '\' ?>';
-		cache($file, $data, '+1 day');
+		$duration = '+999 days';
+		if (Configure::read() >= 1) {
+			$duration = '+10 seconds';
+		}
+		cache($file, $data, $duration);
 	}
 /**
  * Open the persistent class file for reading
@@ -262,18 +267,20 @@ class Object {
 		$file = CACHE . 'persistent' . DS . strtolower($name) . '.php';
 		include($file);
 
-		switch($type) {
+		switch ($type) {
 			case 'registry':
 				$vars = unserialize(${$name});
 				foreach ($vars['0'] as $key => $value) {
-					App::import('Model', Inflector::classify($key));
+					if (strpos($key, '_behavior') !== false) {
+						App::import('Behavior', Inflector::classify(substr($key, 0, -9)));
+					} else {
+						App::import('Model', Inflector::classify($key));
+					}
+					unset ($value);
 				}
 				unset($vars);
 				$vars = unserialize(${$name});
 				foreach ($vars['0'] as $key => $value) {
-					foreach ($vars['0'][$key]->Behaviors->_attached as $behavior) {
-						App::import('Behavior', $behavior);
-					}
 					ClassRegistry::addObject($key, $value);
 					unset ($value);
 				}
