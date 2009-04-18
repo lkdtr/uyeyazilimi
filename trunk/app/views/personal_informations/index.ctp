@@ -12,6 +12,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('member_id');?></th>
 	<th><?php echo $paginator->sort('email');?></th>
 	<th><?php echo $paginator->sort('email_2');?></th>
+	<th><?php echo $paginator->sort('lotr_fwd_email');?></th>
 	<th><?php echo $paginator->sort('address');?></th>
 	<th><?php echo $paginator->sort('city');?></th>
 	<th><?php echo $paginator->sort('country');?></th>
@@ -19,6 +20,9 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('mobile_number');?></th>
 	<th><?php echo $paginator->sort('work_number');?></th>
 	<th><?php echo $paginator->sort('current_school_company');?></th>
+	<th><?php echo $paginator->sort('latest_school_graduated');?></th>
+	<th><?php echo $paginator->sort('latest_year_graduated');?></th>
+	<th><?php echo $paginator->sort('job_assignment');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -43,6 +47,9 @@ foreach ($personalInformations as $personalInformation):
 			<?php echo $personalInformation['PersonalInformation']['email_2']; ?>
 		</td>
 		<td>
+			<?php echo $personalInformation['PersonalInformation']['lotr_fwd_email']; ?>
+		</td>
+		<td>
 			<?php echo $personalInformation['PersonalInformation']['address']; ?>
 		</td>
 		<td>
@@ -62,6 +69,15 @@ foreach ($personalInformations as $personalInformation):
 		</td>
 		<td>
 			<?php echo $personalInformation['PersonalInformation']['current_school_company']; ?>
+		</td>
+		<td>
+			<?php echo $personalInformation['PersonalInformation']['latest_school_graduated']; ?>
+		</td>
+		<td>
+			<?php echo $personalInformation['PersonalInformation']['latest_year_graduated']; ?>
+		</td>
+		<td>
+			<?php echo $personalInformation['PersonalInformation']['job_assignment']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $personalInformation['PersonalInformation']['id'])); ?>

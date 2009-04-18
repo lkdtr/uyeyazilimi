@@ -7,6 +7,7 @@
 		echo $form->input('member_id');
 		echo $form->input('email');
 		echo $form->input('email_2');
+		echo $form->input('lotr_fwd_email');
 		echo $form->input('address');
 		echo $form->input('city');
 		echo $form->input('country');
@@ -14,6 +15,9 @@
 		echo $form->input('mobile_number');
 		echo $form->input('work_number');
 		echo $form->input('current_school_company');
+		echo $form->input('latest_school_graduated');
+		echo $form->input('latest_year_graduated');
+		echo $form->input('job_assignment');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

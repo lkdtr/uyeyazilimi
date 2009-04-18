@@ -2,6 +2,8 @@
 class PersonalInformation extends AppModel {
 
 	var $name = 'PersonalInformation';
+	var $table="personal_information";
+	var $useTable="personal_information";
 	var $validate = array(
 		'member_id' => array('numeric'),
 		'email' => array('email'),
