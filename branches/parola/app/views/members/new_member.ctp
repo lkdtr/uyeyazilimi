@@ -5,3 +5,4 @@
 	echo $form->input('lotr_alias',array('label'=>"ad.soyad@linux.org.tr biçimindeki LKD e-posta adresinizin sadece <strong>ad.soyad</strong> kısmını giriniz.",'after'=>'@linux.org.tr','style'=>'clear:none;float:left;width:300px;'));     
 	echo $form->end('Parolamı Gönder!'); 
 ?> 
+<p>Eğer adresinize e-posta ulaşmazsa, dernek kayıtlarında eski bir e-posta adresiniz kayıtlı olabilir. Bu durumda lütfen uye@lkd.org.tr adresiyle bağlantıya geçerek iletişim bilgilerinizi güncelleyiniz.</p>
