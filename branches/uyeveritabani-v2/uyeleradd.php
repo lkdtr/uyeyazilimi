@@ -493,8 +493,8 @@ return true;
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
  <td bgcolor="#F5F5F5">
- <input type="radio" name="x_liste_uyeligi" checked value=1>Üye Ol&nbsp;
- <input type="radio" name="x_liste_uyeligi" value=0>Üye Olma&nbsp;
+ <input type="radio" name="x_liste_uyeligi" value=1>Üye Ol&nbsp;
+ <input type="radio" name="x_liste_uyeligi" checked value=0>Üye Olma&nbsp;
 </tr>
 
 <tr>
@@ -572,7 +572,7 @@ return true;
 <td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_bolum" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_mezuniyet_bolum); ?>">&nbsp;</td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">İletiŞim Adresi&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">İletişim Adresi&nbsp;</td>
 <td bgcolor="#F5F5F5"><textarea name="x_is_addr" cols="35" rows="4"><?php echo @$x_is_addr ?></textarea>&nbsp;</td>
 </tr>
 <tr>
