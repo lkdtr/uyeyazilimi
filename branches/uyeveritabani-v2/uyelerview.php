@@ -130,6 +130,10 @@ switch ($a)
 		$x_gonullu = @$row["gonullu"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
 		$x_oylama = @$row["oylama"];
+		$x_trac_listesi = @$row["trac_listesi"];
+		$x_haber_alinamiyor = @$row["haber_alinamiyor"];
+		$x_kimlik_gizli = @$row["kimlik_gizli"];
+		$x_kimlik_durumu = @$row["kimlik_durumu"];
 		mysql_free_result($rs);
 		break;
 }
@@ -179,6 +183,26 @@ switch ($a)
 </tr>
 
 <tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kayıt tarihi&nbsp;</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_tarihi"; ?>&nbsp;</td>
+</tr>
+
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
+<td bgcolor="#F5F5F5"><?php
+switch ($x_cinsiyet) {
+	case "e":
+		echo "erkek";
+		break;
+	case "m":
+		echo "kadın";
+		break;
+}
+?>
+&nbsp;</td>
+</tr>
+
+<tr>
  <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
@@ -218,23 +242,49 @@ switch ($a)
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kayıt tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo "$x_kayit_tarihi"; ?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi&nbsp;</td>
+  <?
+    echo "<td bgcolor=\"#F5F5F5\">";
+    if( $x_trac_listesi == 1 )
+    	echo "Üye";
+    else
+    	echo "Üye Değil";
+
+    echo "&nbsp;</td>";
+  ?>
 </tr>
+
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php
-switch ($x_cinsiyet) {
-	case "e":
-		echo "erkek";
-		break;
-	case "m":
-		echo "kadın";
-		break;
-}
-?>
-&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
+  <?
+    echo "<td bgcolor=\"#F5F5F5\">";
+    if( $x_haber_alınamıyor == 1 )
+    	echo "Evet";
+    else
+    	echo "Hayır";
+
+    echo "&nbsp;</td>";
+  ?>
 </tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimliğinin Gizlenmesini İstiyor&nbsp;</td>
+  <?
+    echo "<td bgcolor=\"#F5F5F5\">";
+    if( $x_kimlik_gizli == 1 )
+    	echo "Evet";
+    else
+    	echo "Hayır";
+
+    echo "&nbsp;</td>";
+  ?>
+</tr>
+
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">Kimlik Durumu&nbsp;</td>
+<td bgcolor="#F5F5F5"><?php echo "$x_kimlik_durumu"; ?>&nbsp;</td>
+</tr>
+
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Kurum&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo $x_kurum; ?>&nbsp;</td>
