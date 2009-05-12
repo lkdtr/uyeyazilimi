@@ -164,6 +164,10 @@ CREATE TABLE IF NOT EXISTS `uyeler` (
   `gonullu` tinyint(1) unsigned NOT NULL default '1',
   `artik_uye_degil` tinyint(1) unsigned NOT NULL default '0',
   `oylama` tinyint(1) unsigned NOT NULL default '1',
+  `trac_listesi` tinyint(1) unsigned NOT NULL default '0',
+  `haber_alinamiyor` tinyint(1) unsigned NOT NULL default '0',
+  `kimlik_gizli` tinyint(1) unsigned NOT NULL default '0',
+  `kimlik_durumu` enum('Var/İstemiyor','İstiyor','Dijital Fotoğraf Bekleniyor','Basılacak','Basıldı','Güncel Adres Bekleniyor','Postaya Verilecek') NOT NULL default 'Var/İstemiyor',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `TCKimlikNo` (`TCKimlikNo`,`Uye_karar_no`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
