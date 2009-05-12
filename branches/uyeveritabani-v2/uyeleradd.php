@@ -126,6 +126,10 @@ switch ($a) {
 			$x_liste_uyeligi = @$row["liste_uyeligi"];
 			$x_gonullu = @$row["gonullu"];
 			$x_oylama = @$row["oylama"];
+			$trac_listesi = @$row["trac_listesi"];
+			$haber_alinamiyor = @$row["haber_alinamiyor"];
+			$kimlik_gizli = @$row["kimlik_gizli"];
+			$kimlik_durumu = @$row["kimlik_durumu"];
 		}
 		mysql_free_result($rs);
 		break;
@@ -164,6 +168,10 @@ switch ($a) {
 		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
 		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
 		$x_oylama = @strip_tags($_POST["x_oylama"]);
+		$x_trac_listesi = @strip_tags($_POST["x_trac_listesi"]);
+		$x_haber_alinamiyor = @strip_tags($_POST["x_haber_alinamiyor"]);
+		$x_kimlik_gizli = @strip_tags($_POST["x_kimlik_gizli"]);
+		$x_kimlik_durumu = @strip_tags($_POST["x_kimlik_durumu"]);
 
 
 		// check file size
@@ -331,6 +339,25 @@ switch ($a) {
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 		$fieldList["Notlar"] = $theValue;
 
+                // trac_listesi
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_trac_listesi) : $x_trac_listesi;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["trac_listesi"] = $theValue;
+
+                // haber_alinamiyor
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_haber_alinamiyor) : $x_haber_alinamiyor;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["haber_alinamiyor"] = $theValue;
+
+                // kimlik_gizli
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_gizli) : $x_kimlik_gizli;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["kimlik_gizli"] = $theValue;
+
+                // kimlik_durumu
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_durumu) : $x_kimlik_durumu;
+		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+		$fieldList["kimlik_durumu"] = $theValue;
 
 		// Resim
 			if (is_uploaded_file($_FILES["x_Resim"]["tmp_name"])) {
@@ -358,7 +385,7 @@ switch ($a) {
 		$strsql .= implode(",", array_values($fieldList));
 		$strsql .= ")";
 		mysql_query($strsql, $conn) or die(mysql_error());
-		
+
 		// bir de e-posta alias'ini baska bir tabloya yazalim -- dfisek
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
 		mysql_select_db(DB_MAIL,$conn_mail);
@@ -483,6 +510,40 @@ return true;
  <input type="radio" name="x_oylama" checked value=1>Katıl&nbsp;
  <input type="radio" name="x_oylama" value=0>Katılma&nbsp;
 </tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <input type="radio" name="x_trac_listesi" value=1>Katıl&nbsp;
+ <input type="radio" name="x_trac_listesi" checked value=0>Katılma&nbsp;
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <input type="radio" name="x_haber_alinamiyor" value=1>Evet&nbsp;
+ <input type="radio" name="x_haber_alinamiyor" checked value=0>Hayır&nbsp;
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimliği Gizli&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <input type="radio" name="x_kimlik_gizli" value=1>Evet&nbsp;
+ <input type="radio" name="x_kimlik_gizli" checked value=0>Hayır&nbsp;
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Durumu&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <input type="radio" name="x_kimlik_durumu" checked value="Var/İstemiyor">Var/İstemiyor&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="İstiyor">İstiyor&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="Dijital Fotoğraf Bekleniyor">Dijital Fotoğraf Bekleniyor&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="Basılacak">Basılacak&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="Basıldı">Basıldı&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="Güncel Adres Bekleniyor">Güncel Adres Bekleniyor&nbsp;
+ <input type="radio" name="x_kimlik_durumu" value="Postaya Verilecek">Postaya Verilecek&nbsp;
+</tr>
+
 
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
