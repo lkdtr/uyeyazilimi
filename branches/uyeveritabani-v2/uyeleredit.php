@@ -112,6 +112,10 @@ $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
 $x_gonullu = @$_POST["x_gonullu"];
 $x_artik_uye_degil = @$_POST["x_artik_uye_degil"];
 $x_oylama = @$_POST["x_oylama"];
+$x_trac_listesi = @$_POST["x_trac_listesi"];
+$x_haber_alinamiyor = @$_POST["x_haber_alinamiyor"];
+$x_kimlik_gizli = @$_POST["x_kimlik_gizli"];
+$x_kimlik_durumu = @$_POST["x_kimlik_durumu"];
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
@@ -167,6 +171,10 @@ switch ($a)
 		$x_gonullu = @$row["gonullu"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
 		$x_oylama = @$row["oylama"];
+		$x_trac_listesi = @$row["trac_listesi"];
+		$x_haber_alinamiyor = @$row["haber_alinamiyor"];
+		$x_kimlik_gizli = @$row["kimlik_gizli"];
+		$x_kimlik_durumu = @$row["kimlik_durumu"];
 		mysql_free_result($rs);
 		break;
 	case "U": // update
@@ -216,6 +224,10 @@ switch ($a)
 		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
 		$x_artik_uye_degil = @strip_tags($_POST["x_artik_uye_degil"]);
 		$x_oylama = @strip_tags($_POST["x_oylama"]);
+		$x_trac_listesi = @strip_tags($_POST["x_trac_listesi"]);
+		$x_haber_alinamiyor = @strip_tags($_POST["x_haber_alinamiyor"]);
+		$x_kimlik_gizli = @strip_tags($_POST["x_kimlik_gizli"]);
+		$x_kimlik_durumu = @strip_tags($_POST["x_kimlik_durumu"]);
 
 		// check file size
 		$EW_MaxFileSize = @strip_tags($_POST["EW_MaxFileSize"]);
@@ -428,6 +440,26 @@ switch ($a)
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Notlar) : $x_Notlar;
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 		$fieldList["Notlar"] = $theValue;
+
+                // trac_listesi
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_trac_listesi) : $x_trac_listesi;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["trac_listesi"] = $theValue;
+
+                // haber_alinamiyor
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_haber_alinamiyor) : $x_haber_alinamiyor;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["haber_alinamiyor"] = $theValue;
+
+                // kimlik_gizli
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_gizli) : $x_kimlik_gizli;
+                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                $fieldList["kimlik_gizli"] = $theValue;
+
+                // kimlik_durumu
+                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_durumu) : $x_kimlik_durumu;
+                $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+                $fieldList["kimlik_durumu"] = $theValue;
 		
 		} // Adminlik kontrolunun sonu
 
@@ -870,6 +902,39 @@ return true;
  <td bgcolor="#F5F5F5"><input type="radio" name="x_oylama"<?php if ($x_oylama == 1) { echo " checked"; } ?> value=1><?php echo "Katıl"; ?>
   <input type="radio" name="x_oylama"<?php if ($x_oylama == 0) { echo " checked"; } ?> value=0><?php echo "Katılma"; ?>
 &nbsp;</td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Trac Listesi&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="radio" name="x_trac_listesi"<?php if ($x_trac_listesi == 1) { echo " checked"; } ?> value=1><?php echo "Üye"; ?>
+  <input type="radio" name="x_trac_listesi"<?php if ($x_trac_listesi == 0) { echo " checked"; } ?> value=0><?php echo "Üye Değil"; ?>
+&nbsp;</td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="radio" name="x_haber_alinamiyor"<?php if ($x_haber_alinamiyor == 1) { echo " checked"; } ?> value=1><?php echo "Evet"; ?>
+  <input type="radio" name="x_haber_alinamiyor"<?php if ($x_haber_alinamiyor == 0) { echo " checked"; } ?> value=0><?php echo "Hayır"; ?>
+&nbsp;</td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimliğinin Gizlenmesini İstiyor&nbsp;</td>
+ <td bgcolor="#F5F5F5"><input type="radio" name="x_kimlik_gizli"<?php if ($x_kimlik_gizli == 1) { echo " checked"; } ?> value=1><?php echo "Evet"; ?>
+  <input type="radio" name="x_kimlik_gizli"<?php if ($x_kimlik_gizli == 0) { echo " checked"; } ?> value=0><?php echo "Hayır"; ?>
+&nbsp;</td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik Durumu&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+  <?php
+   $kimlik_durumu_dizisi = array("Var/İstemiyor", "İstiyor", "Dijital Fotoğraf Bekleniyor", "Basılacak", "Basıldı", "Güncel Adres Bekleniyor", "Postaya Verilecek");
+   foreach ($kimlik_durumu_dizisi as $i) {
+  ?>
+  <input type="radio" name="x_kimlik_durumu"<?php if ($x_kimlik_durumu == $i) { echo " checked"; } ?> value="<?php echo $i; ?>"><?php echo $i; ?>&nbsp;
+  <?php } ?>
+ </td>
 </tr>
 
 <tr>
