@@ -258,7 +258,7 @@ switch ($x_cinsiyet) {
  <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
-    if( $x_haber_alınamıyor == 1 )
+    if( $x_haber_alinamiyor == 1 )
     	echo "Evet";
     else
     	echo "Hayır";
