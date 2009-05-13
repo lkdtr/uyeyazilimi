@@ -32,7 +32,7 @@
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");
                mysql_query("SET NAMES 'utf8'");
 
-	$Sorgu = "SELECT uye_id,uye_ad,uye_soyad,kayit_tarihi FROM uyeler ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
+	$Sorgu = "SELECT uye_id,uye_ad,uye_soyad,kayit_tarihi FROM uyeler WHERE artik_uye_degil = 0 ORDER BY uye_ad"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
 
 	echo "<html>\n";
