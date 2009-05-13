@@ -39,7 +39,9 @@
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Baglanti kurulamadi");
         @mysql_select_db(DB) or die("Veritabani secilemedi");
-        $Sorgu = "SELECT uye_id,uye_ad,uye_soyad,alias FROM uyeler WHERE kimlik_basildi = 0 AND Resim != ''";
+        mysql_query("SET NAMES 'utf8'");
+
+        $Sorgu = "SELECT uye_id,uye_ad,uye_soyad,alias FROM uyeler WHERE kimlik_durumu = 'Basılacak'";
         $Sonuc = @mysql_query($Sorgu) or die(mysql_error());
         mysql_close($Baglanti); 
 	while( $Bilgi = mysql_fetch_array($Sonuc) )
