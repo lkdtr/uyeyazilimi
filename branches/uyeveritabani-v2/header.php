@@ -81,6 +81,7 @@ else {
    </table>
    <div class="anylinkcss" id="anylinkmenu1">
     <a href="rapor_haber_alinamayanlar.php" class="navbeyaz">Haber Alınamayanlar</a>
+    <a href="rapor_ayrilan_uyeler.php" class="navbeyaz">Ayrılanlar</a>
     <a href="csv.php" class="navbeyaz">Kimlik için CSV</a>
     <a href="tumkimlik.php" class="navbeyaz">Kimlik için HTML (tümü)</a>
     <a href="odemeyenler.php" target="_blank" class="navbeyaz">Ödemeleri Eksik Olanlar (CSV)</a>
