@@ -149,7 +149,7 @@ switch ($a)
 <h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
 <?php } ?>
 
-<?php if( $x_artik_uye_degil == 1 ) { ?>
+<?php if( $x_haber_alinamiyor == 1 ) { ?>
 <h1 align="center"><font color="blue">ÜYEDEN HABER ALINAMAMAKTADIR</font></h1>
 <?php } ?>
 
