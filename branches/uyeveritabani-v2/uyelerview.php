@@ -149,6 +149,10 @@ switch ($a)
 <h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
 <?php } ?>
 
+<?php if( $x_artik_uye_degil == 1 ) { ?>
+<h1 align="center"><font color="blue">ÜYEDEN HABER ALINAMAMAKTADIR</font></h1>
+<?php } ?>
+
 <form>
 <table align="center" width="60%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 
