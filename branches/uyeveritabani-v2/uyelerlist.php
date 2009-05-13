@@ -443,24 +443,22 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 		$x_PassWord = @$row["PassWord"];
 		$x_Resim = @$row["Resim"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
+		$x_haber_alinamiyor = @$row["haber_alinamiyor"];
 ?>
 <tr bgcolor="<?php echo $bgcolor; ?>">
 <?php
  if ($x_artik_uye_degil)
-  {
-   echo '<td><font color=red>' . $x_uye_id . '</font></td>&nbsp;';
-   echo '<td><font color=red>' . $x_uye_ad . '</font></td>&nbsp;';
-   echo '<td><font color=red>' . $x_uye_soyad . '</font></td>&nbsp;';
-   echo '<td><font color=red>' . $x_eposta1 . '</font></td>&nbsp;';
-  }
+  $renk = 'red';
+ elseif ($x_haber_alinamiyor)
+  $renk = 'blue';
  else
-  {
+  $renk = 'black';
+
+ echo '<td><font color=' . $renk . '>' . $x_uye_id . '</font></td>&nbsp;';
+ echo '<td><font color=' . $renk . '>' . $x_uye_ad . '</font></td>&nbsp;';
+ echo '<td><font color=' . $renk . '>' . $x_uye_soyad . '</font></td>&nbsp;';
+ echo '<td><font color=' . $renk . '>' . $x_eposta1 . '</font></td>&nbsp;';
 ?>
-<td><?php echo $x_uye_id; ?>&nbsp;</td>
-<td><?php echo $x_uye_ad; ?>&nbsp;</td>
-<td><?php echo $x_uye_soyad; ?>&nbsp;</td>
-<td><?php echo $x_eposta1; ?>&nbsp;</td>
-<?php } ?>
 <?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyelerview.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
