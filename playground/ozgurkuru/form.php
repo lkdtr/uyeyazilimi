@@ -65,7 +65,7 @@ function durumlar($user_info)
 
 
 
-
+durumlar();
 ?>
 
 
@@ -108,7 +108,7 @@ function durumlar($user_info)
             <td><input type='text' name='txt_sehir' value='<?php echo $user_info['sehir']; ?>'/></td>
         </tr>
         <tr>
-            <td>Liste Üyeliği (LKD Üye listesine kayıt durumu): Şuanki durumunuz <?php echo durum($liste_durum); ?></td>
+            <td>Liste Üyeliği (LKD Üye listesine kayıt durumu): Şuanki durumunuz <?php echo $liste_durum; ?></td>
             <td>
                 <select name='text_liste'>
                     <option value='1'>Kayıt Olmak İstiyorum</option>
@@ -117,11 +117,38 @@ function durumlar($user_info)
             </td>
         </tr>
         <tr>
-            <td>Gönüllü Durumu (LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php gonulluluk(); ?></td>
+            <td>Gönüllü Durumu (LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
             <td>
                 <select name='text_gonullu'>
                     <option value='1'>Gönüllü Olmak İstiyorum</option>
                     <option value='0'>Gönüllü Olmak İstemiyorum</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Oylama Durumu (Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
+            <td>
+                <select name='text_oylama'>
+                    <option value='1'>Katılmak İstiyorum</option>
+                    <option value='0'>Katılmak İstemiyorum</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Trac Liste Kaydı (Trac mail listesine kayıt durumunuz DİKKAT YÜKSEK TRAFİK): Şuanki durumunuz <?php echo $trac_durum; ?></td>
+            <td>
+                <select name='text_gonullu'>
+                    <option value='1'>Kayıt Olmak İstiyorum</option>
+                    <option value='0'>Kayıt Olmak İstemiyorum</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Kimlik Durumu (Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
+            <td>
+                <select name='text_gonullu'>
+                    <option value='1'>Evet</option>
+                    <option value='0'>Hayır</option>
                 </select>
             </td>
         </tr>
