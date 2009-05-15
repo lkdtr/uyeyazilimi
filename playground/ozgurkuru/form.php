@@ -1,7 +1,7 @@
 <?php
 @require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
-@mysql_connect("$HOST","$USER","$PASS");
-@mysql_select_db("$DB");
+@mysql_connect(HOST,USER,PASS);
+@mysql_select_db(DB);
 $slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
 $query='SELECT * FROM uyeler WHERE alias="' . $slug . '@linux.org.tr"';
