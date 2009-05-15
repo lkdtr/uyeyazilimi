@@ -1,5 +1,5 @@
 <?php
-@require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
+@require('dbconnect.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
 $slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
 $query='SELECT * FROM uyeler WHERE alias="' . $slug . '@linux.org.tr"';

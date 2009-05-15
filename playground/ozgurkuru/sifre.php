@@ -1,5 +1,5 @@
 <?php
-@require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
+@require('dbconnect.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
 $slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
 $new_pass1 = $_POST['text_parola1'];
