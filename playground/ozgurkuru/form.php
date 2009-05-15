@@ -1,6 +1,6 @@
 <?php
 @require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
-
+$slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
 $query='SELECT * FROM uyeler WHERE alias="' . $slug . '@linux.org.tr"';
 $result=mysql_query($query);
@@ -158,12 +158,12 @@ durumlar();
         </form>
         <form action='sifre.php' method='post'>
         <tr>
-            <td>Yeni Şifreniz:</td>
-            <td><input type='password' name='text_sifre1'/></td>
+            <td>Yeni Parolanız:</td>
+            <td><input type='password' name='text_parola1'/></td>
         </tr>
         <tr>
-            <td>Şifrenizi Tekrar Giriniz:</td>
-            <td><input type='password' name='text_sifre2'/></td>
+            <td>Parolanızı Tekrar Giriniz:</td>
+            <td><input type='password' name='text_parola2'/></td>
         </tr>
         <tr>
             <td colspan='2'><input type='submit' value='Değiştir'/></td>
