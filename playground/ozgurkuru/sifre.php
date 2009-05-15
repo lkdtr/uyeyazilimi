@@ -1,5 +1,7 @@
 <?php
-@require('dbconnect.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
+@require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
+@mysql_connect("$HOST","$USER","$PASS");
+@mysql_select_db("$DB");
 $slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
 $new_pass1 = $_POST['text_parola1'];
