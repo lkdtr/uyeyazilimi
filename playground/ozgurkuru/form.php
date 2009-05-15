@@ -146,7 +146,7 @@ durumlar();
         <tr>
             <td>Kimlik Durumu (Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
             <td>
-                <select name='text_gonullu'>
+                <select name='text_kimlik'>
                     <option value='1'>Evet</option>
                     <option value='0'>Hayır</option>
                 </select>
