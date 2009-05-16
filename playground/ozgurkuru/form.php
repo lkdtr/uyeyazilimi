@@ -112,7 +112,7 @@ durumlar();
         <tr>
             <td>Liste Üyeliği (LKD Üye listesine kayıt durumu): Şuanki durumunuz <?php echo $liste_durum; ?></td>
             <td>
-                <select name='text_liste'>
+                <select name='txt_liste'>
                     <option value='1'>Kayıt Olmak İstiyorum</option>
                     <option value='0'>Kayıt Olmak İstemiyorum</option>
                 </select>
@@ -121,7 +121,7 @@ durumlar();
         <tr>
             <td>Gönüllü Durumu (LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
             <td>
-                <select name='text_gonullu'>
+                <select name='txt_gonullu'>
                     <option value='1'>Gönüllü Olmak İstiyorum</option>
                     <option value='0'>Gönüllü Olmak İstemiyorum</option>
                 </select>
@@ -130,7 +130,7 @@ durumlar();
         <tr>
             <td>Oylama Durumu (Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
             <td>
-                <select name='text_oylama'>
+                <select name='txt_oylama'>
                     <option value='1'>Katılmak İstiyorum</option>
                     <option value='0'>Katılmak İstemiyorum</option>
                 </select>
@@ -139,7 +139,7 @@ durumlar();
         <tr>
             <td>Trac Liste Kaydı (Trac mail listesine kayıt durumunuz DİKKAT YÜKSEK TRAFİK): Şuanki durumunuz <?php echo $trac_durum; ?></td>
             <td>
-                <select name='text_gonullu'>
+                <select name='txt_trac'>
                     <option value='1'>Kayıt Olmak İstiyorum</option>
                     <option value='0'>Kayıt Olmak İstemiyorum</option>
                 </select>
@@ -148,7 +148,7 @@ durumlar();
         <tr>
             <td>Kimlik Durumu (Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
             <td>
-                <select name='text_kimlik'>
+                <select name='txt_kimlik'>
                     <option value='1'>Evet</option>
                     <option value='0'>Hayır</option>
                 </select>
@@ -161,11 +161,11 @@ durumlar();
         <form action='sifre.php' method='post'>
         <tr>
             <td>Yeni Parolanız:</td>
-            <td><input type='password' name='text_parola1'/></td>
+            <td><input type='password' name='txt_parola1'/></td>
         </tr>
         <tr>
             <td>Parolanızı Tekrar Giriniz:</td>
-            <td><input type='password' name='text_parola2'/></td>
+            <td><input type='password' name='txt_parola2'/></td>
         </tr>
         <tr>
             <td colspan='2'><input type='submit' value='Değiştir'/></td>
