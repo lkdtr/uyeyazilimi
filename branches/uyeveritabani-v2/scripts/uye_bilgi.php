@@ -96,6 +96,10 @@
     <td bgcolor="#F5F5F5"><?php echo $user_info['eposta1']; ?>&nbsp;</td>
    </tr>
    <tr>
+    <td bgcolor="#466176"><font color="#FFFFFF">Yaşadığı Şehir&nbsp;</td>
+    <td bgcolor="#F5F5F5"><?php echo $user_info['sehir']; ?>&nbsp;</td>
+   </tr>
+   <tr>
     <td bgcolor="#466176"><font color="#FFFFFF">Üyelik Başlangıç Yılı&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['kayit_tarihi']; ?>&nbsp;</td>
    </tr>
@@ -133,6 +137,21 @@
     ?>
    </tr>
    <tr>
+    <td bgcolor="#466176"><font color="#FFFFFF">İsminin Gizli Kalmasını&nbsp;</td>
+    <?php
+     echo "<td bgcolor=\"#F5F5F5\">";
+     if( $user_info['kimlik_gizli'] == 1 )
+      echo "İstiyor";
+     else
+      echo "İstemiyor";
+     echo "&nbsp;</td>";
+    ?>
+   </tr>
+   <tr>
+    <td bgcolor="#466176"><font color="#FFFFFF">Üye Kartı&nbsp;</td>
+    <td bgcolor="#F5F5F5"><?php echo $user_info['kimlik_durumu']; ?>&nbsp;</td>
+   </tr>
+   <tr>
     <td bgcolor="#466176"><font color="#FFFFFF">Aidat Borcu&nbsp;(*)</td>
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
@@ -143,7 +162,7 @@
      echo "</td>";
     ?>
    </tr>
-   <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi bir-iki hafta gecikmeli olarak burada görebilirsiniz.</p></td></tr>
+   <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi gecikmeli olarak burada görebilirsiniz.</p></td></tr>
   </table>
 
   <p>&nbsp;</p>
