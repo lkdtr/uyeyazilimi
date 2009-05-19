@@ -82,6 +82,8 @@ else {
    <div class="anylinkcss" id="anylinkmenu1">
     <a href="rapor_haber_alinamayanlar.php" class="navbeyaz">Haber Alınamayanlar</a>
     <a href="rapor_ayrilan_uyeler.php" class="navbeyaz">Ayrılanlar</a>
+    <a href="rapor_kimlik_fotoistenecek_csv.php" class="navbeyaz">Kimlik Fotoğrafı (Hiç Yok) için CSV</a>
+    <a href="rapor_kimlik_yenifotoistenecek_csv.php" class="navbeyaz">Kimlik Fotoğrafı (Yenisi İstenecek) için CSV</a>
     <a href="rapor_kimlik_baski_csv.php" class="navbeyaz">Kimlik Baskısı için CSV</a>
     <a href="rapor_aidat_odemesi_bulunanlar.php" target="_blank" class="navbeyaz">Ödemeleri Eksik Olanlar (CSV)</a>
     <a href="rapor_odemeler_genel_durum.php" target="_blank" class="navbeyaz">Ödemeler Genel Durum (HTML)</a>
@@ -90,4 +92,3 @@ else {
   </tr>
   <tr>
    <td bgcolor="#D6DDE7">
-
