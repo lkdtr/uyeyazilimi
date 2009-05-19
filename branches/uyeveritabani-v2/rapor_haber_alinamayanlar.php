@@ -34,12 +34,14 @@
 
 	$Sorgu = "SELECT uye_id,uye_ad,uye_soyad,eposta1,eposta2,kayit_tarihi FROM uyeler WHERE haber_alinamiyor = 1 ORDER BY uye_id"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
+        $Sayi = mysql_num_rows($Sonuc);
 
 	echo "<html>\n";
 	echo " <head><title>LKD - Haber Alınamayan Üye Listesi</title>\n";
 	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
 	echo " </head>\n";
 	echo "<body>\n";
+        echo '<p>Toplam Haber Alınamayan Üye Sayısı : ' . $Sayi . '</p>';
 
 	echo "<table bgcolor=\"#D6DDE7\" border=0 bgcolor=\"white\" cellpadding=3 cellspacing=1>\n";
 	echo " <tr bgcolor=\"#466176\">\n";

@@ -34,6 +34,7 @@
 
 	$Sorgu = "SELECT uye_id,uye_ad,uye_soyad FROM uyeler WHERE artik_uye_degil = 1 ORDER BY uye_id"; //Uyeleri Toptan bir alalim
         $Sonuc = mysql_query($Sorgu) or die(mysql_error());
+        $Sayi = mysql_num_rows($Sonuc);
 
 	echo "<html>\n";
 	echo " <head><title>LKD - Ayrılan Üyelerin Listesi</title>\n";
@@ -41,6 +42,7 @@
 	echo " </head>\n";
 	echo "<body>\n";
 
+        echo '<p>Toplam Ayrılan Üye Sayısı : ' . $Sayi . '</p>';
 	echo "<table bgcolor=\"#D6DDE7\" border=0 bgcolor=\"white\" cellpadding=3 cellspacing=1>\n";
 	echo " <tr bgcolor=\"#466176\">\n";
 	echo "  <td align=\"left\"><font color=\"#ffffff\">Ad Soyad</font></td>\n";
