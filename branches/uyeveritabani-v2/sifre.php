@@ -1,11 +1,12 @@
+
 <?php
 @require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
 @mysql_connect(HOST,USER,PASS);
 @mysql_select_db(DB);
 $slug = $_SERVER['PHP_AUTH_USER'];
 /* üye bilgileri */
-$new_pass1 = @strip_tags($_POST['txt_parola1']);
-$new_pass2 = @strip_tags($_POST['txt_parola2']);
+$new_pass1 = mysql_real_escape_string(@strip_tags($_POST['txt_parola1']));
+$new_pass2 = mysql_real_escape_string(@strip_tags($_POST['txt_parola2']));
 if($new_pass1 == $new_pass2)
 {
 $new_pass = md5($new_pass1);
