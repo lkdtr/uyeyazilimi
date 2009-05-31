@@ -9,7 +9,10 @@
    $query = 'UPDATE ticket_change SET oldvalue = "' . $newlogin . '" WHERE field = "owner" AND oldvalue = "' . $oldlogin . '";';
    $query .= 'UPDATE ticket_change SET newvalue = "' . $newlogin . '" WHERE field = "owner" AND newvalue = "' . $oldlogin . '";';
 
-   // The rest
+   // cc fields are lists, containing other logins/e-mails as well
+   $query .= 'UPDATE ticket SET cc = REPLACE("cc", "' . $oldlogin .  '", "' . $newlogin . '") WHERE cc LIKE "%' . $oldlogin . '%";';
+
+   // the rest
    $trac_affected_tables = array ( array ('attachment', 'author'),
                                    array ('component', 'owner'),
                                    array ('permission', 'username'),
