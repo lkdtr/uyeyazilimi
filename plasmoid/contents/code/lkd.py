@@ -24,8 +24,7 @@ class LKDParser():
 		self.settings = settings
 		self.infos = {}
 
-	def getHTML():
-		# Path php dosyasının son konumuna göre düzeltilmeli
+	def getHTML(self):
 		path = 'https://uye.lkd.org.tr/uye_plasmoid.php'
 		
 		passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -38,11 +37,7 @@ class LKDParser():
 		return pagehandle.read()
 
 	def getInfo(self):
-		# Gerçek PHP dosyası kullanılmaya başlanınca aşağıdaki satır kullanılmalı
-		#element = ElementTree.XML(self.getHTML())
-
-		# Geçici PHP çözüm :)
-		element = ElementTree.XML(urllib2.urlopen('http://efeciftci.com/plasmoid/lkd-uye/uye_plasmoid.php').read())
+		element = ElementTree.XML(self.getHTML())
 		for subelement in element:
 			self.infos[subelement.tag] = subelement.text
 		return self.infos

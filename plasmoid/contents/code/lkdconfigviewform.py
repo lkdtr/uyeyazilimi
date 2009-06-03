@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lkdconfigviewform.ui'
 #
-# Created: Mon Jun  1 02:56:52 2009
+# Created: Wed Jun  3 17:17:11 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -22,17 +22,23 @@ class Ui_Dialog(object):
         self.checkBox = QtGui.QCheckBox(self.groupBox)
         self.checkBox.setChecked(True)
         self.checkBox.setObjectName("checkBox")
-        self.gridLayout.addWidget(self.checkBox, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.checkBox, 1, 0, 1, 1)
         self.checkBox_2 = QtGui.QCheckBox(self.groupBox)
         self.checkBox_2.setChecked(True)
         self.checkBox_2.setObjectName("checkBox_2")
-        self.gridLayout.addWidget(self.checkBox_2, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.checkBox_2, 2, 0, 1, 1)
         self.checkBox_3 = QtGui.QCheckBox(self.groupBox)
+        self.checkBox_3.setChecked(True)
         self.checkBox_3.setObjectName("checkBox_3")
-        self.gridLayout.addWidget(self.checkBox_3, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.checkBox_3, 3, 0, 1, 1)
         self.checkBox_4 = QtGui.QCheckBox(self.groupBox)
+        self.checkBox_4.setChecked(True)
         self.checkBox_4.setObjectName("checkBox_4")
-        self.gridLayout.addWidget(self.checkBox_4, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.checkBox_4, 4, 0, 1, 1)
+        self.label = QtGui.QLabel(self.groupBox)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
         self.verticalLayout.addWidget(self.groupBox)
         spacerItem = QtGui.QSpacerItem(20, 139, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
@@ -47,4 +53,5 @@ class Ui_Dialog(object):
         self.checkBox_2.setText(QtGui.QApplication.translate("Dialog", "Üye &numarası", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBox_3.setText(QtGui.QApplication.translate("Dialog", "Üye olduğu &yıl", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBox_4.setText(QtGui.QApplication.translate("Dialog", "Aidat &borcu", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("Dialog", "(henüz çalışmıyor)", None, QtGui.QApplication.UnicodeUTF8))
 

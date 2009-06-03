@@ -36,10 +36,9 @@ class LKDUyeApplet(plasmascript.Applet):
 
 		# Plasmoid yapılandırması
 		self.layout = QGraphicsGridLayout(self.applet)
-		self.resize(240, 280)
 		self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
 		self.setHasConfigurationInterface(True)
-		self.setMinimumSize(240, 204)
+		self.setMinimumSize(300, 204)
 		self.theme = Plasma.Svg(self)
 		self.theme.setImagePath("widgets/background")
 
@@ -133,6 +132,8 @@ class LKDUyeApplet(plasmascript.Applet):
 				wallet.writePassword(self.settings['uye_ad'], self.settings['uye_parola'])
 				self.readInfo()
 
+			wallet = None
+
 	def walletOpened(self, status):
 		if status:
 			if self.wallet.hasFolder("lkd-uye"):
@@ -154,7 +155,7 @@ class LKDUyeApplet(plasmascript.Applet):
 			self.uyead2.setText(uyebilgileri['ad'])
 			self.uyeno2.setText(uyebilgileri['no'])
 			self.uyeyil2.setText(uyebilgileri['yil'])
-			self.uyeborc2.setText(uyebilgileri['borc'] + ' TL')
+			self.uyeborc2.setText(uyebilgileri['aidat'])
 
 def CreateApplet(parent):
 	return LKDUyeApplet(parent)

@@ -1,0 +1,9 @@
+- Görünüm ayarlarındaki değişiklikler plasmoid üzerinde etkin hale getirilecek
+- Üye ayarları sayfasında ad ve parola boş bırakıldığında uyarı çıkınca pencere
+  kapanmasın
+- Plasmoid üzerinde üye bilgileri için QGraphicsGridLayout yerine daha iyi bir
+  çözüm getirilmeli veya bilgiler güncellendiğinde sol-sağ sütun genişlikleri
+  otomatik ayarlanır hale gelmeli
+- Değişken vs. isimleri Türkçe'ye çevrilmeli
+- KWallet açıl(a)madığı zaman kullanıcı bilgilerinin bir conf dosyasında
+  tutulması sağlanmalı

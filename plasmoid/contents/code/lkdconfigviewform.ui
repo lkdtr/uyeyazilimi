@@ -20,7 +20,7 @@
       <string>Görünüm Ayarları</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QCheckBox" name="checkBox">
         <property name="text">
          <string>Üye &amp;adı</string>
@@ -30,7 +30,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QCheckBox" name="checkBox_2">
         <property name="text">
          <string>Üye &amp;numarası</string>
@@ -40,17 +40,33 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QCheckBox" name="checkBox_3">
         <property name="text">
          <string>Üye olduğu &amp;yıl</string>
         </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QCheckBox" name="checkBox_4">
         <property name="text">
          <string>Aidat &amp;borcu</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>(henüz çalışmıyor)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
