@@ -35,7 +35,7 @@ class LKDUyeApplet(plasmascript.Applet):
 		self.settings = {}
 
 		# Plasmoid yapılandırması
-		self.layout = QGraphicsGridLayout(self. applet)
+		self.layout = QGraphicsGridLayout(self.applet)
 		self.resize(240, 280)
 		self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
 		self.setHasConfigurationInterface(True)
@@ -44,37 +44,33 @@ class LKDUyeApplet(plasmascript.Applet):
 		self.theme.setImagePath("widgets/background")
 
 		# Linux Kullanıcıları Derneği amblemi
-		self.lkdlogo = Plasma.Label(self.applet)
+		self.lkdlogo = Plasma.Label()
 		self.lkdlogo.setImage('%scontents/lkd.png' % self.package().path())
 		self.lkdlogo.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
 
 		# Üye bilgilerinin görüneceği kutu
-		self.infoFrame = Plasma.Frame(self.applet)
+		self.infoFrame = Plasma.Frame()
 		self.infoFrame.setFrameShadow(3)
 
 		# Üye Adı
-		self.uyead1 = Plasma.Label(self.applet)
+		self.uyead1 = Plasma.Label()
 		self.uyead1.setText(u'Üye Adı:')
-		self.uyead2 = Plasma.Label(self.applet)
-		self.uyead2.setText(u'        ')
+		self.uyead2 = Plasma.Label()
 
 		# Üye Numarası
-		self.uyeno1 = Plasma.Label(self.applet)
+		self.uyeno1 = Plasma.Label()
 		self.uyeno1.setText(u'Üye Numarası:')
-		self.uyeno2 = Plasma.Label(self.applet)
-		self.uyeno2.setText(u'        ')
+		self.uyeno2 = Plasma.Label()
 
 		# Üye Olduğu Yıl
-		self.uyeyil1 = Plasma.Label(self.applet)
+		self.uyeyil1 = Plasma.Label()
 		self.uyeyil1.setText(u'Üyelik Başlangıç Yılı:')
-		self.uyeyil2 = Plasma.Label(self.applet)
-		self.uyeyil2.setText(u'        ')
+		self.uyeyil2 = Plasma.Label()
 
 		# Aidat Borcu
-		self.uyeborc1 = Plasma.Label(self.applet)
+		self.uyeborc1 = Plasma.Label()
 		self.uyeborc1.setText(u'Aidat borcu:')
-		self.uyeborc2 = Plasma.Label(self.applet)
-		self.uyeborc2.setText(u'        ')
+		self.uyeborc2 = Plasma.Label()
 
 		# Üye bilgilerinin kendi kutularına yerleştirilmesi
 		self.infoLayout = QGraphicsGridLayout(self.infoFrame)
@@ -159,7 +155,6 @@ class LKDUyeApplet(plasmascript.Applet):
 			self.uyeno2.setText(uyebilgileri['no'])
 			self.uyeyil2.setText(uyebilgileri['yil'])
 			self.uyeborc2.setText(uyebilgileri['borc'] + ' TL')
-			self.infoLayout.updateGeometry()
 
 def CreateApplet(parent):
 	return LKDUyeApplet(parent)

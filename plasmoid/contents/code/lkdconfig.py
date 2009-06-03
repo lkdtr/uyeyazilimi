@@ -36,6 +36,5 @@ class LKDConfig(QWidget, Ui_Dialog):
 
 		settings['uye_ad'] = self.uyead.text()
 		settings['uye_parola'] = self.uyeparola.text()
-		type(self)
 
 		return settings
