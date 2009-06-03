@@ -33,7 +33,7 @@ class LKDParser():
 		authhandler = urllib2.HTTPBasicAuthHandler(passman)
 		opener = urllib2.build_opener(authhandler)
 		urllib2.install_opener(opener)
-		pagehandle = urllib2.urlopen(yol)
+		pagehandle = urllib2.urlopen(path)
 
 		return pagehandle.read()
 
