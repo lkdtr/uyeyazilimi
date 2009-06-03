@@ -23,18 +23,18 @@ from PyKDE4.kdeui import *
 from lkdconfigform import Ui_Dialog
 
 class LKDConfig(QWidget, Ui_Dialog):
-	def __init__(self, parent, settings):
-		QWidget.__init__(self)
-		self.setupUi(self)
+    def __init__(self, parent, settings):
+        QWidget.__init__(self)
+        self.setupUi(self)
 
-		if settings != {}:
-			self.uyead.setText(settings['uye_ad'])
-			self.uyeparola.setText(settings['uye_parola'])
+        if settings != {}:
+            self.uyead.setText(settings['uye_ad'])
+            self.uyeparola.setText(settings['uye_parola'])
 
-	def exportSettings(self):
-		settings = {}
+    def exportSettings(self):
+        settings = {}
 
-		settings['uye_ad'] = self.uyead.text()
-		settings['uye_parola'] = self.uyeparola.text()
+        settings['uye_ad'] = self.uyead.text()
+        settings['uye_parola'] = self.uyeparola.text()
 
-		return settings
+        return settings
