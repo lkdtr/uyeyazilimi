@@ -28,134 +28,145 @@ from lkdconfigview import LKDConfigView
 from lkd import LKDParser
 
 class LKDUyeApplet(plasmascript.Applet):
-	def __init__(self,parent,args=None):
-		plasmascript.Applet.__init__(self,parent)
+    def __init__(self,parent,args=None):
+        plasmascript.Applet.__init__(self,parent)
 
-	def init(self):
-		self.settings = {}
+    def init(self):
+        self.settings = {}
 
-		# Plasmoid yapılandırması
-		self.layout = QGraphicsGridLayout(self.applet)
-		self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
-		self.setHasConfigurationInterface(True)
-		self.setMinimumSize(300, 204)
-		self.theme = Plasma.Svg(self)
-		self.theme.setImagePath("widgets/background")
+        # Plasmoid yapılandırması
+        self.layout = QGraphicsGridLayout(self.applet)
+        self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
+        self.setHasConfigurationInterface(True)
+        self.setMinimumSize(300, 204)
+        self.theme = Plasma.Svg(self)
+        self.theme.setImagePath("widgets/background")
 
-		# Linux Kullanıcıları Derneği amblemi
-		self.lkdlogo = Plasma.Label()
-		self.lkdlogo.setImage('%scontents/lkd.png' % self.package().path())
-		self.lkdlogo.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
+        # Linux Kullanıcıları Derneği amblemi
+        self.lkdlogo = Plasma.Label()
+        self.lkdlogo.setImage('%scontents/lkd.png' % self.package().path())
+        self.lkdlogo.setAlignment(Qt.AlignVCenter | Qt.AlignCenter)
 
-		# Üye bilgilerinin görüneceği kutu
-		self.infoFrame = Plasma.Frame()
-		self.infoFrame.setFrameShadow(3)
+        # Üye bilgilerinin görüneceği kutu
+        self.infoFrame = Plasma.Frame()
+        self.infoFrame.setFrameShadow(3)
 
-		# Üye Adı
-		self.uyead1 = Plasma.Label()
-		self.uyead1.setText(u'Üye Adı:')
-		self.uyead2 = Plasma.Label()
+        # Üye Adı
+        self.uyead1 = Plasma.Label()
+        self.uyead1.setText(u'Üye Adı:')
+        self.uyead2 = Plasma.Label()
 
-		# Üye Numarası
-		self.uyeno1 = Plasma.Label()
-		self.uyeno1.setText(u'Üye Numarası:')
-		self.uyeno2 = Plasma.Label()
+        # Üye Numarası
+        self.uyeno1 = Plasma.Label()
+        self.uyeno1.setText(u'Üye Numarası:')
+        self.uyeno2 = Plasma.Label()
 
-		# Üye Olduğu Yıl
-		self.uyeyil1 = Plasma.Label()
-		self.uyeyil1.setText(u'Üyelik Başlangıç Yılı:')
-		self.uyeyil2 = Plasma.Label()
+        # Üye Olduğu Yıl
+        self.uyeyil1 = Plasma.Label()
+        self.uyeyil1.setText(u'Üyelik Başlangıç Yılı:')
+        self.uyeyil2 = Plasma.Label()
 
-		# Aidat Borcu
-		self.uyeborc1 = Plasma.Label()
-		self.uyeborc1.setText(u'Aidat borcu:')
-		self.uyeborc2 = Plasma.Label()
+        # Aidat Borcu
+        self.uyeborc1 = Plasma.Label()
+        self.uyeborc1.setText(u'Aidat borcu:')
+        self.uyeborc2 = Plasma.Label()
 
-		# Üye bilgilerinin kendi kutularına yerleştirilmesi
-		self.infoLayout = QGraphicsGridLayout(self.infoFrame)
-		self.infoLayout.addItem(self.uyead1, 0, 0)
-		self.infoLayout.addItem(self.uyead2, 0, 1)
-		self.infoLayout.addItem(self.uyeno1, 1, 0)
-		self.infoLayout.addItem(self.uyeno2, 1, 1)
-		self.infoLayout.addItem(self.uyeyil1, 2, 0)
-		self.infoLayout.addItem(self.uyeyil2, 2, 1)
-		self.infoLayout.addItem(self.uyeborc1, 3, 0)
-		self.infoLayout.addItem(self.uyeborc2, 3, 1)
-		self.infoLayout.setColumnMinimumWidth(1, 90)
+        # Üye bilgilerinin kendi kutularına yerleştirilmesi
+        self.infoLayout = QGraphicsGridLayout(self.infoFrame)
+        self.infoLayout.addItem(self.uyead1, 0, 0)
+        self.infoLayout.addItem(self.uyead2, 0, 1)
+        self.infoLayout.addItem(self.uyeno1, 1, 0)
+        self.infoLayout.addItem(self.uyeno2, 1, 1)
+        self.infoLayout.addItem(self.uyeyil1, 2, 0)
+        self.infoLayout.addItem(self.uyeyil2, 2, 1)
+        self.infoLayout.addItem(self.uyeborc1, 3, 0)
+        self.infoLayout.addItem(self.uyeborc2, 3, 1)
+        self.infoLayout.setColumnMinimumWidth(1, 90)
 
-		# Dernek amblemi ve üye bilgilerinin plasmoid'e yerleştirilmesi
-		self.layout.addItem(self.lkdlogo, 0, 0)
-		self.layout.addItem(self.infoFrame, 1, 0)
-		# Amblem dosyasının yüksekliği değiştirildiğinde
-		# aşağıdaki satır da uygun şekilde değiştirilmeli
-		self.layout.setRowFixedHeight(0, 80)
+        # Dernek amblemi ve üye bilgilerinin plasmoid'e yerleştirilmesi
+        self.layout.addItem(self.lkdlogo, 0, 0)
+        self.layout.addItem(self.infoFrame, 1, 0)
+        # Amblem dosyasının yüksekliği değiştirildiğinde
+        # aşağıdaki satır da uygun şekilde değiştirilmeli
+        self.layout.setRowFixedHeight(0, 80)
 
-		self.wallet = KWallet.Wallet.openWallet(KWallet.Wallet.LocalWallet(), 0, 1)
-		if self.wallet <> None:
-			self.connect(self.wallet, SIGNAL("walletOpened(bool)"), self.walletOpened)
+        self.wallet = KWallet.Wallet.openWallet(KWallet.Wallet.LocalWallet(), 0, 1)
+        if self.wallet <> None:
+            self.connect(self.wallet, SIGNAL("walletOpened(bool)"), self.walletOpened)
 
-	def constraintsEvent(self, constraints):
-		self.setBackgroundHints(self.TranslucentBackground)
+    def constraintsEvent(self, constraints):
+        self.setBackgroundHints(self.TranslucentBackground)
 
-	def createConfigurationInterface(self, parent):
-		# Üye bilgileri sayfası
-		self.lkdconfig = LKDConfig(self, self.settings)
-		p = parent.addPage(self.lkdconfig, u'Üye Bilgileri')
-		p.setIcon(KIcon(self.package().path() + 'contents/icon.svgz'))
+    def createConfigurationInterface(self, parent):
+        # Üye bilgileri sayfası
+        self.lkdconfig = LKDConfig(self, self.settings)
+        p = parent.addPage(self.lkdconfig, u'Üye Bilgileri')
+        p.setIcon(KIcon(self.package().path() + 'contents/icon.svgz'))
 
-		self.connect(parent, SIGNAL("okClicked()"), self.configAccepted)
+        self.connect(parent, SIGNAL("okClicked()"), self.configAccepted)
 
-		# Görünüm ayarları sayfası
-		self.lkdconfigview = LKDConfigView()
-		p = parent.addPage(self.lkdconfigview, u'Görünüm')
-		p.setIcon(KIcon('preferences-other'))
+        # Görünüm ayarları sayfası
+        self.lkdconfigview = LKDConfigView()
+        p = parent.addPage(self.lkdconfigview, u'Görünüm')
+        p.setIcon(KIcon('preferences-other'))
 
-	def showConfigurationInterface(self):
-		dialog = KPageDialog()
-		dialog.setFaceType(KPageDialog.List)
-		dialog.setButtons( KDialog.ButtonCode(KDialog.Ok | KDialog.Cancel) )
-		self.createConfigurationInterface(dialog)
-		dialog.exec_()
+    def showConfigurationInterface(self):
+        dialog = KPageDialog()
+        dialog.setFaceType(KPageDialog.List)
+        dialog.setButtons( KDialog.ButtonCode(KDialog.Ok | KDialog.Cancel) )
+        self.createConfigurationInterface(dialog)
+        dialog.exec_()
 
-	def configAccepted(self):
-		self.settings = self.lkdconfig.exportSettings()
+    def checkAccount(self):
+        uyebilgileri = LKDParser(self.settings).getInfo()
+        if uyebilgileri.has_key('error'):
+            if uyebilgileri['error'] == 401:
+                QMessageBox.critical(None, 'Hata', u'Üye bilgileri hatalı.', QMessageBox.Ok)
+            return False
+        else:
+            return uyebilgileri
 
-		if (self.settings['uye_ad'] == '') | (self.settings['uye_parola'] == ''):
-			QMessageBox.critical(None, 'Hata', u'Üye bilgileri boş bırakılamaz.', QMessageBox.Ok)
-			# pencere kapanmasın burada
-		else:
-			wallet = KWallet.Wallet.openWallet(KWallet.Wallet.LocalWallet(), 0)
-			if wallet <> None:
-				if not wallet.hasFolder("lkd-uye"):
-					wallet.createFolder("lkd-uye")
-				wallet.setFolder("lkd-uye")
-				wallet.writePassword(self.settings['uye_ad'], self.settings['uye_parola'])
-				self.readInfo()
 
-			wallet = None
+    def configAccepted(self):
+        self.settings = self.lkdconfig.exportSettings()
 
-	def walletOpened(self, status):
-		if status:
-			if self.wallet.hasFolder("lkd-uye"):
-				self.wallet.setFolder("lkd-uye")
-				if len(self.wallet.entryList()) == 0:
-					self.showConfigurationInterface()
-				else:
-					self.settings['uye_ad'] = self.wallet.entryList()[0]
-					passwd = QString()
-					self.wallet.readPassword(self.settings['uye_ad'], passwd)
-					self.settings['uye_parola'] = passwd
-					self.readInfo()
-			else:
-				self.showConfigurationInterface()
+        if (self.settings['uye_ad'] == '') | (self.settings['uye_parola'] == ''):
+            QMessageBox.critical(None, 'Hata', u'Üye bilgileri boş bırakılamaz.', QMessageBox.Ok)
+            # pencere kapanmasın burada
+        else:
+            wallet = KWallet.Wallet.openWallet(KWallet.Wallet.LocalWallet(), 0)
+            if wallet <> None:
+                if not wallet.hasFolder("lkd-uye"):
+                    wallet.createFolder("lkd-uye")
+                wallet.setFolder("lkd-uye")
+                wallet.writePassword(self.settings['uye_ad'], self.settings['uye_parola'])
+                self.readInfo()
 
-	def readInfo(self):
-		if (self.settings['uye_ad'] != '') & (self.settings['uye_parola'] != ''):
-			uyebilgileri = LKDParser(self.settings).getInfo()
-			self.uyead2.setText(uyebilgileri['ad'])
-			self.uyeno2.setText(uyebilgileri['no'])
-			self.uyeyil2.setText(uyebilgileri['yil'])
-			self.uyeborc2.setText(uyebilgileri['aidat'])
+            wallet = None
+
+    def walletOpened(self, status):
+        if status:
+            if self.wallet.hasFolder("lkd-uye"):
+                self.wallet.setFolder("lkd-uye")
+                if len(self.wallet.entryList()) == 0:
+                    self.showConfigurationInterface()
+                else:
+                    self.settings['uye_ad'] = self.wallet.entryList()[0]
+                    passwd = QString()
+                    self.wallet.readPassword(self.settings['uye_ad'], passwd)
+                    self.settings['uye_parola'] = passwd
+                    self.readInfo()
+            else:
+                self.showConfigurationInterface()
+
+    def readInfo(self):
+        if (self.settings['uye_ad'] != '') & (self.settings['uye_parola'] != ''):
+            uyebilgileri = self.checkAccount()
+            if uyebilgileri.has_key('ad'):
+                self.uyead2.setText(uyebilgileri['ad'])
+                self.uyeno2.setText(uyebilgileri['no'])
+                self.uyeyil2.setText(uyebilgileri['yil'])
+                self.uyeborc2.setText(uyebilgileri['aidat'])
 
 def CreateApplet(parent):
-	return LKDUyeApplet(parent)
+    return LKDUyeApplet(parent)

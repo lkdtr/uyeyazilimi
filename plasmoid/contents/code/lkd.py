@@ -20,24 +20,32 @@ from xml.etree import ElementTree
 import urllib2
 
 class LKDParser():
-	def __init__(self, settings):
-		self.settings = settings
-		self.infos = {}
+    def __init__(self, settings):
+        self.settings = settings
+        self.infos = {}
 
-	def getHTML(self):
-		path = 'https://uye.lkd.org.tr/uye_plasmoid.php'
-		
-		passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-		passman.add_password(None, path, self.settings['uye_ad'], self.settings['uye_parola'])
-		authhandler = urllib2.HTTPBasicAuthHandler(passman)
-		opener = urllib2.build_opener(authhandler)
-		urllib2.install_opener(opener)
-		pagehandle = urllib2.urlopen(path)
+    def getHTML(self):
+        path = 'https://uye.lkd.org.tr/uye_plasmoid.php'
+        
+        try:
+            passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+            passman.add_password(None, path, self.settings['uye_ad'], self.settings['uye_parola'])
+            authhandler = urllib2.HTTPBasicAuthHandler(passman)
+            opener = urllib2.build_opener(authhandler)
+            urllib2.install_opener(opener)
+            pagehandle = urllib2.urlopen(path)
+            return pagehandle.read()
 
-		return pagehandle.read()
+        except urllib2.HTTPError, msg:
+            if "401" in str(msg):
+                return 401
 
-	def getInfo(self):
-		element = ElementTree.XML(self.getHTML())
-		for subelement in element:
-			self.infos[subelement.tag] = subelement.text
-		return self.infos
+
+    def getInfo(self):
+        if self.getHTML() == 401:
+            self.infos['error'] = 401
+        else:
+            element = ElementTree.XML(self.getHTML())
+            for subelement in element:
+                self.infos[subelement.tag] = subelement.text
+        return self.infos
