@@ -31,6 +31,12 @@ class LKDConfig(QWidget, Ui_Dialog):
             self.uyead.setText(settings['uye_ad'])
             self.uyeparola.setText(settings['uye_parola'])
 
+        self.connect(self.label_3, SIGNAL('linkActivated(QString)'), self.loadUrl)
+
+    def loadUrl(self, url):
+        import os
+        os.popen('xdg-open %s' % url)
+
     def exportSettings(self):
         settings = {}
 

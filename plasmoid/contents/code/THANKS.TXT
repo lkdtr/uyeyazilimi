@@ -1,0 +1,3 @@
+Fahri Tuğrul GÜRKAYNAK <ftugrul -at- gmail.com>
+ - Üye bilgilerinin çekildiği web sayfası
+ - Üye bilgileri için XML ayrıştırıcısı
