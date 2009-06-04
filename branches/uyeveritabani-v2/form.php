@@ -11,56 +11,79 @@ $user_info = mysql_fetch_array($result);
  * lkd üye listesi ile ilgili fonksiyon 
  * form alanında karışıklık yaratmaması için fonksiyon olarak tanımladım
  */
+
 function durumlar($user_info)
 {
     //liste üyelik durumu
     if($user_info['liste_uyeligi'] == 1)
     {
         $liste_durum = "Listeye kayıtlısınız";
+        $lo1 = "Selected";
+        $lo2 = "";
     }
     else
     {
         $liste_durum="Listeye kayıtlı değilsiniz";
+        $lo1 = "";
+        $lo2 = "Selected";
     }
 
     //gönüllülük durumu
     if($user_info['gonullu']==1)
     {
         $gonullu_durum = "Gönüllü olarak çalışmalara katılmak istiyorsunuz";
+        $go1 = "Selected";
+        $go2 = "";
     }
     else
     {
         $gonullu_durum = "Gönüllü olarak çalışmalara katılmak istemiyorsunuz";
+        $go1 = "";
+        $go2 = "Selected";
+
     }
 
     //kimlik durumu
     if($user_info['kimlik_gizli'] == 1)
     {
         $kimlik_durum = "Kimliğiniz gizli durumda";
+        $ko1 = "Selected";
+        $ko2 = "";
     }
     else
     {
         $kimlik_durum = "Kimliğiniz açık durumda";
+        $ko1 = "";
+        $ko2 = "Selected";
     }
 
     //oylama durumu
     if($user_info['oylama'] == 1)
     {
         $oylama_durum = "Oylamalara katılıyorsunuz";
+        $oo1 = "Selected";
+        $oo2 = "";
     }
     else
     {
         $oylama_durum = "Oylamalara katılmıyorsunuz";
+        $oo1 = "";
+        $oo2 = "Selected";
     }
 
     //trac durumu
     if($user_info['trac_listesi'] ==1)
     {
         $trac_durum = "Trac üyesine kayıtlısınız";
+        $to1 = "Selected";
+        $to2 = "";
     }
     else
     {
         $trac_durum = "Trac üyesine kayıtlı değilsiniz";
+        $to1 = "";
+        $to2 = "Selected";
+
     }
 }
 
@@ -78,7 +101,7 @@ durumlar();
         <title></title>
     </head>
     <body>
-    Hoşlgeniz, <?php $user_info['uye_adi']; ?><br/>
+    Hoşlgeniz, <?php $user_info['uye_ad']; ?><br/>
     <table>
         <form action='bilgi_duzenle.php' method="post">
         <tr>
@@ -113,8 +136,8 @@ durumlar();
             <td>Liste Üyeliği (LKD Üye listesine kayıt durumu): Şuanki durumunuz <?php echo $liste_durum; ?></td>
             <td>
                 <select name='txt_liste'>
-                    <option value='1'>Kayıt Olmak İstiyorum</option>
-                    <option value='0'>Kayıt Olmak İstemiyorum</option>
+                    <option value='1' slected='<?php echo $lo1;?>'>Kayıt Olmak İstiyorum</option>
+                    <option value='0' slected='<?php echo $lo2;?>'>Kayıt Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -122,8 +145,8 @@ durumlar();
             <td>Gönüllü Durumu (LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
             <td>
                 <select name='txt_gonullu'>
-                    <option value='1'>Gönüllü Olmak İstiyorum</option>
-                    <option value='0'>Gönüllü Olmak İstemiyorum</option>
+                    <option value='1' slected='<?php echo $go1;?>'>Gönüllü Olmak İstiyorum</option>
+                    <option value='0' slected='<?php echo $go2;?>'>Gönüllü Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -131,8 +154,8 @@ durumlar();
             <td>Oylama Durumu (Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
             <td>
                 <select name='txt_oylama'>
-                    <option value='1'>Katılmak İstiyorum</option>
-                    <option value='0'>Katılmak İstemiyorum</option>
+                    <option value='1' slected='<?php echo $oo1;?>'>Katılmak İstiyorum</option>
+                    <option value='0' slected='<?php echo $oo2;?>'>Katılmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -140,8 +163,8 @@ durumlar();
             <td>Trac Liste Kaydı (Trac mail listesine kayıt durumunuz DİKKAT YÜKSEK TRAFİK): Şuanki durumunuz <?php echo $trac_durum; ?></td>
             <td>
                 <select name='txt_trac'>
-                    <option value='1'>Kayıt Olmak İstiyorum</option>
-                    <option value='0'>Kayıt Olmak İstemiyorum</option>
+                    <option value='1' slected='<?php echo $to1;?>'>Kayıt Olmak İstiyorum</option>
+                    <option value='0' slected='<?php echo $to2;?>'>Kayıt Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -149,8 +172,8 @@ durumlar();
             <td>Kimlik Durumu (Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
             <td>
                 <select name='txt_kimlik'>
-                    <option value='1'>Evet</option>
-                    <option value='0'>Hayır</option>
+                    <option value='1' slected='<?php echo $ko1;?>'>Evet</option>
+                    <option value='0' slected='<?php echo $ko2;?>'>Hayır</option>
                 </select>
             </td>
         </tr>
