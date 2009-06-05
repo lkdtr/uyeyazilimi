@@ -109,8 +109,8 @@ durumlar();
             <td><?php echo $user_info['uye_id']; ?></td>
         </tr>
         <tr>
-            <td>Üye Adı:</td>
-            <td><?php echo $user_info['uye_adi'] . $user_info['uye_soyad']; ?></td>
+            <td>Adı Soyadı:</td>
+            <td><?php echo $user_info['uye_ad'] . $user_info['uye_soyad']; ?></td>
         </tr>
         <tr>
             <td>E-Posta Adresi 1:</td>
@@ -129,11 +129,11 @@ durumlar();
             <td><input type='text' name='txt_telefon2' value='<?php echo $user_info['Telefon2']; ?>'/></td>
         </tr>
         <tr>
-            <td>Şehir:</td>
+            <td>Yaşadığı Şehir:</td>
             <td><input type='text' name='txt_sehir' value='<?php echo $user_info['sehir']; ?>'/></td>
         </tr>
         <tr>
-            <td>Liste Üyeliği (LKD Üye listesine kayıt durumu): Şuanki durumunuz <?php echo $liste_durum; ?></td>
+            <td>LKD Üye Listesi: Şuanki durumunuz <?php echo $liste_durum; ?></td>
             <td>
                 <select name='txt_liste'>
                     <option value='1' slected='<?php echo $lo1;?>'>Kayıt Olmak İstiyorum</option>
@@ -142,7 +142,7 @@ durumlar();
             </td>
         </tr>
         <tr>
-            <td>Gönüllü Durumu (LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
+            <td>Gönüllü Çalışmalar(LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
             <td>
                 <select name='txt_gonullu'>
                     <option value='1' slected='<?php echo $go1;?>'>Gönüllü Olmak İstiyorum</option>
@@ -151,7 +151,7 @@ durumlar();
             </td>
         </tr>
         <tr>
-            <td>Oylama Durumu (Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
+            <td>Elektronik Oylamalar(Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
             <td>
                 <select name='txt_oylama'>
                     <option value='1' slected='<?php echo $oo1;?>'>Katılmak İstiyorum</option>
@@ -169,7 +169,7 @@ durumlar();
             </td>
         </tr>
         <tr>
-            <td>Kimlik Durumu (Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
+            <td>Kimlik Gizliliği(Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
             <td>
                 <select name='txt_kimlik'>
                     <option value='1' slected='<?php echo $ko1;?>'>Evet</option>
