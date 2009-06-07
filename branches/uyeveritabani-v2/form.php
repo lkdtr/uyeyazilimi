@@ -136,8 +136,8 @@ durumlar();
             <td>LKD Üye Listesi: Şuanki durumunuz <?php echo $liste_durum; ?></td>
             <td>
                 <select name='txt_liste'>
-                    <option value='1' slected='<?php echo $lo1;?>'>Kayıt Olmak İstiyorum</option>
-                    <option value='0' slected='<?php echo $lo2;?>'>Kayıt Olmak İstemiyorum</option>
+                    <option value='1' <?php echo $lo1;?>>Kayıt Olmak İstiyorum</option>
+                    <option value='0' <?php echo $lo2;?>>Kayıt Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -145,8 +145,8 @@ durumlar();
             <td>Gönüllü Çalışmalar(LKD çalışmalarına gönüllü olmak istermisiniz): Şuanki durumunuz <?php echo $gonullu_durum; ?></td>
             <td>
                 <select name='txt_gonullu'>
-                    <option value='1' slected='<?php echo $go1;?>'>Gönüllü Olmak İstiyorum</option>
-                    <option value='0' slected='<?php echo $go2;?>'>Gönüllü Olmak İstemiyorum</option>
+                    <option value='1' <?php echo $go1;?>>Gönüllü Olmak İstiyorum</option>
+                    <option value='0' <?php echo $go2;?>>Gönüllü Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -154,8 +154,8 @@ durumlar();
             <td>Elektronik Oylamalar(Elektronik oylamalara katılmak istermisiniz): Şuanki durumunuz <?php echo $oylama_durum; ?></td>
             <td>
                 <select name='txt_oylama'>
-                    <option value='1' slected='<?php echo $oo1;?>'>Katılmak İstiyorum</option>
-                    <option value='0' slected='<?php echo $oo2;?>'>Katılmak İstemiyorum</option>
+                    <option value='1' <?php echo $oo1;?>>Katılmak İstiyorum</option>
+                    <option value='0' <?php echo $oo2;?>>Katılmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -163,8 +163,8 @@ durumlar();
             <td>Trac Liste Kaydı (Trac mail listesine kayıt durumunuz DİKKAT YÜKSEK TRAFİK): Şuanki durumunuz <?php echo $trac_durum; ?></td>
             <td>
                 <select name='txt_trac'>
-                    <option value='1' slected='<?php echo $to1;?>'>Kayıt Olmak İstiyorum</option>
-                    <option value='0' slected='<?php echo $to2;?>'>Kayıt Olmak İstemiyorum</option>
+                    <option value='1' <?php echo $to1;?>>Kayıt Olmak İstiyorum</option>
+                    <option value='0' <?php echo $to2;?>>Kayıt Olmak İstemiyorum</option>
                 </select>
             </td>
         </tr>
@@ -172,8 +172,8 @@ durumlar();
             <td>Kimlik Gizliliği(Kimliğiniz diğer üyeler tarafından görülebilsin mi?): Şuanki durum <?php echo $kimlik_durum; ?></td>
             <td>
                 <select name='txt_kimlik'>
-                    <option value='1' slected='<?php echo $ko1;?>'>Evet</option>
-                    <option value='0' slected='<?php echo $ko2;?>'>Hayır</option>
+                    <option value='1' <?php echo $ko1;?>>Evet</option>
+                    <option value='0' <?php echo $ko2;?>>Hayır</option>
                 </select>
             </td>
         </tr>
