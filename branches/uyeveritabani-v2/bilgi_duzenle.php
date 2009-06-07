@@ -9,7 +9,7 @@ $baglanti =mysql_connect(HOST,USER,PASS);
 
 $slug = $_SERVER['PHP_AUTH_USER'];
 $uyeBilgi = 'SELECT eposta1,alias FROM uyeler WHERE alias="' .$slug .'@linux.org.tr"';
-$rs = mysql_query($uyeBilgi) or die(mysql_error());
+$rs = mysql_query($uyeBilgi);
 $eskimail= mysql_fetch_assoc($rs);
 
 $updateUye='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail1'])) . '",
@@ -25,14 +25,14 @@ $updateUye='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_tag
         WHERE alias="' . $slug . '@linux.org.tr" ';
 
 $updateMail = 'UPDATE forwardings SET source="'. $slug .'@linux.org.tr" WHERE destination = "'. $eskimail[eposta1].'"';
-$rs = mysql_query($updateMail) or die(mysql_error());
-if($resultUye AND $resultUye)
+$resultMail = mysql_query($updateMail);
+
+if($resultMail AND $rs)
 {
-    echo "Bilgileriniz güncellenmiştir";
+    echo "Bilgileriniz değiştirilmiştir";
 }
 else
 {
-    echo "Bilgileriniz güncellenirken bir sorun oluştu";
+    echo "Bilgileriniz değiştirilirken bir hata olmuştur";
 }
-
 ?>
