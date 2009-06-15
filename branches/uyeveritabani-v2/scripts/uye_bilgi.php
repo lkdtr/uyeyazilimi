@@ -56,6 +56,7 @@
  <head>
   <title><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'] ?> .:. LKD Üye Bilgi Sayfası</title>
   <link rel="StyleSheet" href="stil.css" type="text/css">
+  <link rel="SytleSheet" href="../uyeduzenle.css" type="text/css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <script type="text/javascript">
    function toggleLayer( whichLayer )
@@ -81,6 +82,7 @@
   <p><table><tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Üye Bilgi Sayfası</h1></td></tr></table></p>
 
   <!-- Uyenin Kendi Bilgilerini Gosterelim -->
+  <div id="info">
   <table width="350">
    <tr><td colspan="2"><p align="justify">Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.<br>&nbsp;</p></td></tr>
    <tr>
@@ -164,11 +166,17 @@
    </tr>
    <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi gecikmeli olarak burada görebilirsiniz.</p></td></tr>
   </table>
+  </div>
+  <div id="edit" style="display: none;">
+	<?php 
+		@include("../form.php");
+    ?>
+  </div>
 
   <p>&nbsp;</p>
 
   <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
-  <p>&nbsp;</p>
+  <p><a href="javascript:toggleLayer('edit')">Bilgi Düzenle</a></p>
   <div style="display: none;" id="OdemeDetaylari">
   <!-- Uyenin Aidat Odeme Detaylarini Gosterelim -->
 <?php
