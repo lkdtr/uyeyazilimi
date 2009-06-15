@@ -94,3 +94,14 @@ input {
 	text-decoration:none;
 	color: #FFCC00;
 }
+
+#edit {
+	position: relative;
+	float: right;
+	
+}
+
+#info {
+	position: relative;
+	float: left;
+}
