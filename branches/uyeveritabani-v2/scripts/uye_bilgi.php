@@ -56,7 +56,6 @@
  <head>
   <title><?php echo $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'] ?> .:. LKD Üye Bilgi Sayfası</title>
   <link rel="StyleSheet" href="stil.css" type="text/css">
-  <link rel="SytleSheet" href="../uyeduzenle.css" type="text/css">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <script type="text/javascript">
    function toggleLayer( whichLayer )
