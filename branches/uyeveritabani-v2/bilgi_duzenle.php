@@ -3,9 +3,9 @@
 $baglanti =mysql_connect(HOST,USER,PASS);
 @mysql_select_db(DB,$baglanti);
 @mysql_set_charset('utf8',$baglanti);
-@mysql_connect(HOST_MAIL,USER_MAIL,PASS_MAIL);
-@mysql_select_db(DB_MAIL);
-
+$baglanti_postfix=mysql_connect(HOST_MAIL,USER_MAIL,PASS_MAIL);
+@mysql_select_db(DB_MAIL,$baglanti_postfix);
+@mysql_set_charset('utf8',$baglanti_postfix);
 
 $slug = $_SERVER['PHP_AUTH_USER'];
 $uyeBilgi = 'SELECT eposta1,alias FROM uyeler WHERE alias="' .$slug .'@linux.org.tr"';
