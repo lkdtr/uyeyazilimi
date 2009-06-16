@@ -177,16 +177,11 @@
    </tr>
    <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi gecikmeli olarak burada görebilirsiniz.</p></td></tr>
   </table>
-  </div>
-  <div id="edit" style="display: none;">
-    <!-- Uyenin Bilgi Degistirme Formu-->
-   <?php @include("uye_bilgi_form.inc.php"); ?>
-  </div>
+  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
+  <p><a href="javascript:toggleLayer('edit')">Bilgi Düzenle</a></p>
 
   <p>&nbsp;</p>
 
-  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
-  <p><a href="javascript:toggleLayer('edit')">Bilgi Düzenle</a></p>
   <div style="display: none;" id="OdemeDetaylari">
   <!-- Uyenin Aidat Odeme Detaylarini Gosterelim -->
 <?php
@@ -264,6 +259,11 @@
 ?>
     </table>
    </div>
+  </div>
+  </div>
+  <div id="edit" style="display: none;">
+    <!-- Uyenin Bilgi Degistirme Formu-->
+   <?php @include("uye_bilgi_form.inc.php"); ?>
   </div>
  </body>
 </html>
