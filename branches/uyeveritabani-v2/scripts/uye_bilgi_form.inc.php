@@ -1,12 +1,4 @@
 <?php
-@require('db.php'); //veri tabanı bilgilerini bu dosyadan çektiğimi varsayıyorum.
-@mysql_connect(HOST,USER,PASS);
-@mysql_select_db(DB);
-$slug = $_SERVER['PHP_AUTH_USER'];
-/* üye bilgileri */
-$query='SELECT * FROM uyeler WHERE alias="' . $slug . '@linux.org.tr"';
-$result=mysql_query($query);
-$user_info = mysql_fetch_array($result);
 /*
  * lkd üye listesi ile ilgili fonksiyon 
  * form alanında karışıklık yaratmaması için fonksiyon olarak tanımladım
@@ -95,12 +87,6 @@ durumlar();
 
 
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
     Hoşlgeniz, <?php $user_info['uye_ad']; ?><br/>
     <table>
         <form action='uye_bilgi_duzenle.php' method="post">
@@ -195,6 +181,3 @@ durumlar();
         </tr>
         </form>
     </table>
-    
-    </body>
-</html>
