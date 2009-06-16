@@ -180,9 +180,7 @@
   </div>
   <div id="edit" style="display: none;">
     <!-- Uyenin Bilgi Degistirme Formu-->
-	<?php 
-		@include("form.php");
-    ?>
+   <?php @include("uye_bilgi_form.inc.php"); ?>
   </div>
 
   <p>&nbsp;</p>

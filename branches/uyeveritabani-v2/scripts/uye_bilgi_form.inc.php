@@ -103,7 +103,7 @@ durumlar();
     <body>
     Hoşlgeniz, <?php $user_info['uye_ad']; ?><br/>
     <table>
-        <form action='bilgi_duzenle.php' method="post">
+        <form action='uye_bilgi_duzenle.php' method="post">
         <tr>
             <td bgcolor="#466176">Üye Numarası:</td>
             <td bgcolor="#F5F5F5"><?php echo $user_info['uye_id']; ?></td>
@@ -181,7 +181,7 @@ durumlar();
             <td bgcolor="#466176" colspan='2'><input type='submit' value='Değiştir'/></td>
         </tr>
         </form>
-        <form action='sifre.php' method='post'>
+        <form action='uye_bilgi_parola_degistir.php' method='post'>
         <tr>
             <td>Yeni Parolanız:</td>
             <td><input type='password' name='txt_parola1'/></td>
