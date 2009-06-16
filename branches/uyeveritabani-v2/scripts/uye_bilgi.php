@@ -167,8 +167,9 @@
   </table>
   </div>
   <div id="edit" style="display: none;">
+    <!-- Uyenin Bilgi Degistirme Formu-->
 	<?php 
-		@include("../form.php");
+		@include("form.php");
     ?>
   </div>
 

@@ -27,4 +27,9 @@ $uyeGuncelle='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_t
 $mailGuncelle = 'UPDATE forwardings SET source="'. $uye .'@linux.org.tr" WHERE destination = "'. $eskimail[eposta1].'"';
 $mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_postfix) or die (mysql_error());
 
+if($mailGuncelleSorgu && $uyeBilgiSorgu)
+{
+	$mesaj = "Güncelleme başarılı.";
+}
+
 ?>
