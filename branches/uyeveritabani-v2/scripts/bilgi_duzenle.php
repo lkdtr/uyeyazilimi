@@ -30,6 +30,7 @@ $mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_postfix) or die (mysql_
 if($mailGuncelleSorgu && $uyeBilgiSorgu)
 {
 	$mesaj = "Güncelleme başarılı.";
+	header("Location: uye_bilgi.php?mesaj=$mesaj"); // yonlendirmeyi bilgi_php ye yapip mesaji orada gosterelim
 }
 
 ?>

@@ -85,6 +85,18 @@
   <table width="350">
    <tr><td colspan="2"><p align="justify">Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.<br>&nbsp;</p></td></tr>
    <tr>
+		<td colspan="2">
+			<!-- Bilgi degistirme basarili oldu ise mesaj gosterilsin. -->
+			<?php
+				$mesaj = $_GET[mesaj];
+				if(!empty($mesaj))
+				{
+					echo $mesaj;
+				}
+			?>
+		</td>
+   </tr>
+   <tr>
     <td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
     <td bgcolor="#F5F5F5"><?php echo $user_info['uye_id']; ?>&nbsp;</td>
    </tr>
