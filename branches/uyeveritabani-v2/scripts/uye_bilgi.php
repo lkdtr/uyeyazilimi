@@ -83,7 +83,7 @@
   <!-- Uyenin Kendi Bilgilerini Gosterelim -->
   <div id="info">
   <table width="350">
-   <tr><td colspan="2"><p align="justify">Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Bu bilgilerden değiştirmek istedikleriniz olursa ya da hatalı bir bilgi bulunduğunu düşünüyorsanız, lütfen <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.<br>&nbsp;</p></td></tr>
+   <tr><td colspan="2"><p align="justify">Dernek üyesi olarak bilgilerinizi aşağıda bulabilirsiniz. Dernek üyeliğinizle ilgili soru(n)larınız için <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresinden dernek üye işleri ekibi ile bağlantıya geçiniz.<br>&nbsp;</p></td></tr>
    <tr>
 		<td colspan="2">
 			<!-- Bilgi degistirme basarili oldu ise mesaj gosterilsin. -->
@@ -150,6 +150,17 @@
     ?>
    </tr>
    <tr>
+    <td bgcolor="#466176"><font color="#FFFFFF">Trac Bildirim E-posta Listesi&nbsp;</td>
+    <?php
+     echo "<td bgcolor=\"#F5F5F5\">";
+     if( $user_info['trac_listesi'] == 1 )
+      echo "Üye";
+     else
+      echo "Üye Değil";
+     echo "&nbsp;</td>";
+    ?>
+   </tr>
+   <tr>
     <td bgcolor="#466176"><font color="#FFFFFF">İsminin Gizli Kalmasını&nbsp;</td>
     <?php
      echo "<td bgcolor=\"#F5F5F5\">";
@@ -177,8 +188,7 @@
    </tr>
    <tr><td colspan="2">&nbsp;<p align="justify">(*) Aidat ödemeleriniz gerçek zamanlı değil, bankadan döküm alınarak elle işlenmektedir. Ödemelerinizi gecikmeli olarak burada görebilirsiniz.</p></td></tr>
   </table>
-  <p><a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
-  <p><a href="javascript:toggleLayer('edit')">Bilgi Düzenle</a></p>
+  <p><a href="javascript:toggleLayer('edit')">Bilgi/Parola Değiştir</a> - <a href="javascript:toggleLayer('OdemeDetaylari')">Aidat Ödeme Detaylarınız</a></p>
 
   <p>&nbsp;</p>
 
