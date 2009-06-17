@@ -97,11 +97,12 @@ input {
 
 #edit {
 	position: relative;
-	float: right;
+	float: left;
 	
 }
 
 #info {
 	position: relative;
 	float: left;
+	margin-right:10px;
 }
