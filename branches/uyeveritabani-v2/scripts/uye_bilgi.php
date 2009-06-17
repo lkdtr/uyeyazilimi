@@ -91,7 +91,7 @@
 				$mesaj = $_GET[mesaj];
 				if(!empty($mesaj))
 				{
-					echo $mesaj;
+					echo "<p align=center><b><font color=red>$mesaj</b></font></p>";
 				}
 			?>
 		</td>
