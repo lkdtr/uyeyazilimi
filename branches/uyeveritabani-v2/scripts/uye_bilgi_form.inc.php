@@ -4,8 +4,6 @@
  * form alanında karışıklık yaratmaması için fonksiyon olarak tanımladım
  */
 
-function durumlar($user_info)
-{
     //liste üyelik durumu
     if($user_info['liste_uyeligi'] == 1)
     {
@@ -67,10 +65,7 @@ function durumlar($user_info)
         $to2 = "Selected";
 
     }
-}
 
-
- durumlar();
 ?>
 
     <table>
