@@ -8,9 +8,6 @@ $baglanti_postfix=mysql_connect(HOST_MAIL,USER_MAIL,PASS_MAIL);
 @mysql_set_charset('utf8',$baglanti_postfix);
 
 $uye = $_SERVER['PHP_AUTH_USER'];
-$uyeBilgi = 'SELECT eposta1,alias FROM uyeler WHERE alias="' .$uye .'@linux.org.tr"';
-$uyeBilgiSorgu = mysql_query($uyeBilgi,$baglanti_uye) or die (mysql_error());
-$eskimail= mysql_fetch_assoc($uyeBilgiSorgu);
 
 $uyeGuncelle='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail1'])) . '",
                           eposta2 = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail2'])) .'",
@@ -23,8 +20,10 @@ $uyeGuncelle='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_t
                           oylama = "' . mysql_real_escape_string(@strip_tags($_POST['txt_oylama'])) .'",
                           trac_listesi = "' . mysql_real_escape_string(@strip_tags($_POST['txt_trac'])) .'"
         WHERE alias="' . $uye . '@linux.org.tr"';
+$uyeGuncelleSorgu = mysql_query($uyeGuncelle,$baglanti_uye) or die (mysql_error());
+@mysql_close($baglanti_uye);
 
-$mailGuncelle = 'UPDATE forwardings SET source="'. $uye .'@linux.org.tr" WHERE destination = "'. $eskimail[eposta1].'"';
+$mailGuncelle = 'UPDATE forwardings SET destination = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail1'])) . '" WHERE source="'. $uye . '@linux.org.tr"';
 $mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_postfix) or die (mysql_error());
 
 if($mailGuncelleSorgu && $uyeBilgiSorgu)
