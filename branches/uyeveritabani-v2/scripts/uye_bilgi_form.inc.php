@@ -1,8 +1,5 @@
 <?php
-/*
- * lkd üye listesi ile ilgili fonksiyon 
- * form alanında karışıklık yaratmaması için fonksiyon olarak tanımladım
- */
+ // Üye bilgileri degistirme formu, uye_bilgi.php parcasi
 
     //liste üyelik durumu
     if($user_info['liste_uyeligi'] == 1)
