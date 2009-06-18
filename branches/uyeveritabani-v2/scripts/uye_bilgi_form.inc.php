@@ -124,7 +124,7 @@
         </tr>
         <tr>
             <td bgcolor="#466176"><font color="#FFFFFF">Trac Bildirim E-posta Listesi</font><br>
-	    <font color="#FF0000">Yüksek trafikli</font></td>
+	    <font color="#66CCFF">(Yüksek Trafikli)</font></td>
             <td bgcolor="#F5F5F5">
                 <select name='txt_trac'>
                     <option value='1' <?php echo $to1;?>>Üye</option>

@@ -6,7 +6,7 @@ $yeni_sifre2 = @strip_tags($_POST['txt_parola2']);
 
 $yeni_sifre = md5($yeni_sifre1);
 
-if (empty($yeni_sifre))
+if (empty($yeni_sifre1))
 {
     $mesaj = "Parola alanı boş olamaz.";
 }
