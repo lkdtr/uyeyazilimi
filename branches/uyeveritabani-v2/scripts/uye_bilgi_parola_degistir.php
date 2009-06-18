@@ -6,7 +6,11 @@ $yeni_sifre2 = @strip_tags($_POST['txt_parola2']);
 
 $yeni_sifre = md5($yeni_sifre1);
 
-if($yeni_sifre1 == $yeni_sifre2)
+if (empty($yeni_sifre))
+{
+    $mesaj = "Parola alanı boş olamaz.";
+}
+else if($yeni_sifre1 == $yeni_sifre2)
 {
  // Veritabani baglantisi
  @require('db.php');
