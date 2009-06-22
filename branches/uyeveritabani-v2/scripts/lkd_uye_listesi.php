@@ -10,7 +10,7 @@
  mysql_query("SET NAMES 'utf8'");
 
  // uyenin kisisel bilgilerini alalim
- $query = 'SELECT uye_id,uye_ad,uye_soyad,sehir,kimlik_gizli,haber_alinamiyor FROM uyeler WHERE artik_uye_degil = 0';
+ $query = 'SELECT uye_id,uye_ad,uye_soyad,sehir,kimlik_gizli,haber_alinamiyor FROM uyeler WHERE artik_uye_degil = 0 ORDER BY uye_id';
  $result = mysql_query($query);
  $rowno = mysql_num_rows($result);
 
