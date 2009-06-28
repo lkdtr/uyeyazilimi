@@ -13,7 +13,7 @@ if (empty($yeni_sifre1))
 else if($yeni_sifre1 == $yeni_sifre2)
 {
  // Veritabani baglantisi
- @require('db.php');
+ @require('uye_bilgi_config.inc.php');
  $baglanti_sifre=mysql_connect(HOST,USER,PASS);
 
  // Uye veritabaninda parola degistirelim

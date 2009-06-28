@@ -15,7 +15,7 @@
  $slug = $_SERVER['PHP_AUTH_USER'];    // kullanici adi
  
  // veritabani baglantisi
- require('db.php');
+ require('uye_bilgi_config.inc.php');
  $conn = mysql_connect(HOST, USER, PASS);
  mysql_select_db(DB) or die(mysql_error());
  mysql_query("SET NAMES 'utf8'");

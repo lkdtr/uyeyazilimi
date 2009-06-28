@@ -1,5 +1,5 @@
 <?php
-@require('db.php');    // veritabanı erisim bilgileri
+@require('uye_bilgi_config.inc.php');    // veritabanı erisim bilgileri
 
 $uye = $_SERVER['PHP_AUTH_USER'];    // kullanici adi
 
