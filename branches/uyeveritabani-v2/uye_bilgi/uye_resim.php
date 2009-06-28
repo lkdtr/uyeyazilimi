@@ -12,14 +12,21 @@ header("Content-type: image/jpeg");
  mysql_query("SET NAMES 'utf8'");
 
  // uyenin kisisel bilgilerini alalim
- $query = 'SELECT uye_id FROM uyeler WHERE alias = "' . $slug . '@linux.org.tr"';
+ $query = 'SELECT Resim FROM uyeler WHERE alias = "' . $slug . '@linux.org.tr"';
  $result = mysql_query($query);
- $user_info = mysql_fetch_row($result);
+ $img_result = mysql_fetch_row($result);
 
  // veritabanindan alacagimizi aldik
  mysql_close($conn);
 
-$im = file_get_contents(IMGDIR . '/' . $user_info[0]. '.jpg');
+ if( $img_result[0] == Null ) {
+     $img_filename = "0.jpg";
+ }
+ else {
+     $img_filename = $img_result[0];
+ }
+
+$im = file_get_contents(IMGDIR . '/' . $img_filename);
 echo $im;
 ?>
 
