@@ -111,15 +111,12 @@ switch ($a) {
 			$x_semt = @$row["semt"]; 
 			$x_sehir = @$row["sehir"]; 
 			$x_pkod = @$row["pkod"]; 
-			$x_PassWord = @$row["PassWord"]; 
 			$x_Resim = @$row["Resim"]; 
 			$x_Telefon1 = @$row["Telefon1"];
 			$x_Telefon2 = @$row["Telefon2"];
 			$x_TCKimlikNo = @$row["TCKimlikNo"];
 			$x_Uye_karar_no = @$row["Uye_karar_no"];
 			$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-			$x_kimlik_basildi = @$row["kimlik_basildi"];
-			$x_kimlik_iletildi = @$row["kimlik_iletildi"];
 			$x_vesikalik_foto = @$row["vesikalik_foto"];
 			$x_Uye_formu = @$row["Uye_formu"];
 			$x_Notlar = @$row["Notlar"];
@@ -154,14 +151,11 @@ switch ($a) {
 		$x_semt = @strip_tags($_POST["x_semt"]);
 		$x_sehir = @strip_tags($_POST["x_sehir"]);
 		$x_pkod = @strip_tags($_POST["x_pkod"]);
-		$x_PassWord = @$_POST["x_PassWord"];
 		$x_Telefon1 = @strip_tags($_POST["x_Telefon1"]);
 		$x_Telefon2 = @strip_tags($_POST["x_Telefon2"]);
 		$x_TCKimlikNo = @strip_tags($_POST["x_TCKimlikNo"]);
 		$x_Uye_karar_no = @strip_tags($_POST["x_Uye_karar_no"]);
 		$x_Uye_karar_tarih = @strip_tags($_POST["x_Uye_karar_tarih"]);
-		$x_kimlik_basildi = @strip_tags($_POST["x_kimlik_basildi"]);
-		$x_kimlik_iletildi = @strip_tags($_POST["x_kimlik_iletildi"]);
 		$x_vesikalik_foto = @strip_tags($_POST["x_vesikalik_foto"]);
 		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
 		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
@@ -284,11 +278,6 @@ switch ($a) {
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 		$fieldList["pkod"] = $theValue;
 
-		// PassWord
-		//$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_PassWord) : $x_PassWord;
-		$theValue = ($theValue != "") ? " '" . md5($theValue) . "'" : "NULL";
-		$fieldList["PassWord"] = $theValue;
-
 		// Telefon1
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Telefon1) : $x_Telefon1;
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
@@ -313,16 +302,6 @@ switch ($a) {
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_tarih) : $x_Uye_karar_tarih;
 		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
 		$fieldList["Uye_karar_tarih"] = $theValue;
-
-		// kimlik_basildi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_basildi) : $x_kimlik_basildi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["kimlik_basildi"] = $theValue;
-
-		// kimlik_iletildi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_iletildi) : $x_kimlik_iletildi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["kimlik_iletildi"] = $theValue;
 
 		// vesikalik_foto
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_vesikalik_foto) : $x_vesikalik_foto;
@@ -394,7 +373,7 @@ switch ($a) {
 		mysql_query($strsql, $conn_mail) or die(mysql_error());
 		mysql_close($conn_mail);
 
-                // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
+                // isim / alias bilgisini bir de yeni uye veritabanina yazalim
                 $slug = explode('@',$x_alias);
 		mysql_select_db(DB_PWD,$conn);
 		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\")";
@@ -435,10 +414,6 @@ if (EW_this.x_uye_soyad && !EW_hasValue(EW_this.x_uye_soyad, "TEXT" )) {
         }
 if (EW_this.x_cinsiyet && !EW_hasValue(EW_this.x_cinsiyet, "RADIO" )) {
             if (!EW_onError(EW_this, EW_this.x_cinsiyet, "RADIO", "Cinsiyet ?"))
-                return false; 
-        }
-if (EW_this.x_PassWord && !EW_hasValue(EW_this.x_PassWord, "PASSWORD" )) {
-            if (!EW_onError(EW_this, EW_this.x_PassWord, "PASSWORD", "Sifre Eksik"))
                 return false; 
         }
 return true;
@@ -587,10 +562,6 @@ return true;
 <td bgcolor="#466176"><font color="#FFFFFF">Posta kodu&nbsp;</td>
 <td bgcolor="#F5F5F5"><input type="text" name="x_pkod" size="30" maxlength="5" value="<?php echo htmlspecialchars(@$x_pkod); ?>">&nbsp;</td>
 </tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Parola&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="password" name="x_PassWord" value="<?php echo @$x_PassWord ?>" size=30 maxlength=100>&nbsp;</td>
-</tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Telefon 1&nbsp;</td>
@@ -619,22 +590,6 @@ return true;
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100>&nbsp;<small>(Yıl-Ay-Gün)</small></td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Basıldı&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_kimlik_basildi" value=1>Evet&nbsp;
- <input type="radio" name="x_kimlik_basildi" checked value=0>Hayır&nbsp;
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik iletildi&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_kimlik_iletildi" value=1>Evet&nbsp;
- <input type="radio" name="x_kimlik_iletildi" checked value=0>Hayır&nbsp;
 </tr>
 
 

@@ -102,8 +102,6 @@ $x_Telefon2 = @$_POST["x_Telefon2"];
 $x_TCKimlikNo = @$_POST["x_TCKimlikNo"];
 $x_Uye_karar_no = @$_POST["x_Uye_karar_no"];
 $x_Uye_karar_tarih = @$_POST["x_Uye_karar_tarih"];
-$x_kimlik_basildi = @$_POST["x_kimlik_basildi"];
-$x_kimlik_iletildi = @$_POST["x_kimlik_iletildi"];
 $x_vesikalik_foto = @$_POST["x_vesikalik_foto"];
 $x_Uye_formu = @$_POST["x_Uye_formu"];
 $x_Notlar = @$_POST["x_Notlar"];
@@ -161,8 +159,6 @@ switch ($a)
 		$x_TCKimlikNo = @$row["TCKimlikNo"];
 		$x_Uye_karar_no = @$row["Uye_karar_no"];
 		$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-		$x_kimlik_basildi = @$row["kimlik_basildi"];
-		$x_kimlik_iletildi = @$row["kimlik_iletildi"];
 		$x_vesikalik_foto = @$row["vesikalik_foto"];
 		$x_Uye_formu = @$row["Uye_formu"];
 		$x_Notlar = @$row["Notlar"];
@@ -214,8 +210,6 @@ switch ($a)
 		$x_TCKimlikNo = @strip_tags($_POST["x_TCKimlikNo"]);
 		$x_Uye_karar_no = @strip_tags($_POST["x_Uye_karar_no"]);
 		$x_Uye_karar_tarih = @strip_tags($_POST["x_Uye_karar_tarih"]);
-		$x_kimlik_basildi = @strip_tags($_POST["x_kimlik_basildi"]);
-		$x_kimlik_iletildi = @strip_tags($_POST["x_kimlik_iletildi"]);
 		$x_vesikalik_foto = @strip_tags($_POST["x_vesikalik_foto"]);
 		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
 		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
@@ -415,16 +409,6 @@ switch ($a)
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_tarih) : $x_Uye_karar_tarih;
 		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
 		$fieldList["Uye_karar_tarih"] = $theValue;
-
-		// kimlik_basildi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_basildi) : $x_kimlik_basildi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["kimlik_basildi"] = $theValue;
-
-		// kimlik_iletildi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_iletildi) : $x_kimlik_iletildi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["kimlik_iletildi"] = $theValue;
 
 		// vesikalik_foto
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_vesikalik_foto) : $x_vesikalik_foto;
@@ -975,61 +959,6 @@ return true;
   <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 1) { echo " checked"; } ?> value=1><?php echo "<font color=red>EVET</font> (Dikkat! Arayüzden Geri Dönülemez!)"; ?>
  </td>
 </tr>
-
-<tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik Basıldı&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) {
-  	echo "<td bgcolor=\"#F5F5F5\">";
-	echo "<input type=\"radio\" name=\"x_kimlik_basildi\" ";
-	if( $x_kimlik_basildi == 1 )
-		echo "checked";
-	echo " value=1>Evet&nbsp;";
-	echo "<input type=\"radio\" name=\"x_kimlik_basildi\" ";
-	if( $x_kimlik_basildi == 0 )
-		echo "checked";
-	echo " value=0>Hayır&nbsp;</td>";
-  
-       } else {
- 	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-	   
-	   if( $x_kimlik_basildi == 1 )
-	   	echo "Evet";
-	   else
-	   	echo "Hayır";
-	   
-	   echo "</td>";
-	   }
-  ?>
-		
-</tr>
-
-
-<tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kimlik iletildi&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) {
-  	echo "<td bgcolor=\"#F5F5F5\">";
-	echo "<input type=\"radio\" name=\"x_kimlik_iletildi\" ";
-	if( $x_kimlik_iletildi == 1 )
-		echo "checked";
-	echo " value=1>Evet&nbsp;";
-	echo "<input type=\"radio\" name=\"x_kimlik_iletildi\" ";
-	if( $x_kimlik_iletildi == 0 )
-		echo "checked";
-	echo " value=0>Hayır&nbsp;</td>";
-  
-       } else {
- 	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-	   
-	   if( $x_kimlik_iletildi == 1 )
-	   	echo "Evet";
-	   else
-	   	echo "Hayır";
-	   
-	   echo "</td>";
-	   }
-  ?>
-</tr>
-
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar için  Fotoğraf&nbsp;</td>

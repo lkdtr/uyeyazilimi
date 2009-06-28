@@ -155,8 +155,6 @@ CREATE TABLE IF NOT EXISTS `uyeler` (
   `TCKimlikNo` varchar(15) default NULL,
   `Uye_karar_no` int(11) unsigned default NULL,
   `Uye_karar_tarih` date default NULL,
-  `kimlik_basildi` tinyint(1) unsigned default '0',
-  `kimlik_iletildi` tinyint(1) unsigned default '0',
   `vesikalik_foto` tinyint(1) unsigned default '0',
   `Uye_formu` tinyint(1) unsigned default '1',
   `Notlar` text,

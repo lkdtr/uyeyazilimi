@@ -393,9 +393,6 @@ if (@$_GET["start"] <> "") {
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td class="navbeyaz">Düzenle</td>
 <?php } ?>
-<?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
-<td class="navbeyaz">Sil</td>
-<?php } ?>
 <td class="navbeyaz">Aidat</td>
 </tr>
 <?php
@@ -466,10 +463,6 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 <?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyeleredit.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
-<td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyelerdelete.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
-"><img src='images/delete.gif' alt='Sil' width='16' height='16' border='0'></a></td>
 <?php } ?>
 <td align="center"><a href="odemelerlist.php?x_uye_id=<?echo $x_uye_id;?>"><img border=0 src="./images/para.gif"></a></td>
 </tr>

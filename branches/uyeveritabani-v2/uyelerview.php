@@ -120,8 +120,6 @@ switch ($a)
 		$x_TCKimlikNo = @$row["TCKimlikNo"];
 		$x_Uye_karar_no = @$row["Uye_karar_no"];
 		$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-		$x_kimlik_basildi = @$row["kimlik_basildi"];
-		$x_kimlik_iletildi = @$row["kimlik_iletildi"];
 		$x_vesikalik_foto = @$row["vesikalik_foto"];
 		$x_Uye_formu = @$row["Uye_formu"];
 		$x_Notlar = @$row["Notlar"];
@@ -347,34 +345,6 @@ switch ($x_cinsiyet) {
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih)?>&nbsp;</td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Basıldı&nbsp;</td>
-  <?
-    echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-    if( $x_kimlik_basildi == 1 )
-    	echo "Evet";
-    else
-    	echo "Hayır";
-
-    echo "</td>";
-  ?>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik iletildi&nbsp;</td>
-  <?
-    echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-    if( $x_kimlik_iletildi == 1 )
-    	echo "Evet";
-    else
-    	echo "Hayır";
-
-    echo "</td>";
-  ?>
 </tr>
 
 
