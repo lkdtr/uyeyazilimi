@@ -271,6 +271,15 @@
    </div>
   </div>
   </div>
+  <div id="foto">
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <?php
+    if (isset($_SERVER['HTTP_USER_AGENT']) && (!strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')))
+     echo "&nbsp;<br>";
+   ?>
+   <img src="uye_resim.php" class="siyahcerceve">
+  </div>
   <div id="edit" style="display: none;">
     <!-- Uyenin Bilgi Degistirme Formu-->
    <?php @include("uye_bilgi_form.inc.php"); ?>

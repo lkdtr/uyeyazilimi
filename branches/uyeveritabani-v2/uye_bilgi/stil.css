@@ -20,6 +20,12 @@ input {
 	color: #333333;
 }
 
+#foto {
+	position: relative;
+	float: left;
+	margin-right:10px;
+}
+
 #edit {
 	position: relative;
 	float: left;
@@ -30,4 +36,8 @@ input {
 	position: relative;
 	float: left;
 	margin-right:10px;
+}
+
+img.siyahcerceve {
+        border: 3px black solid;
 }
