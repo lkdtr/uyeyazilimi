@@ -538,7 +538,9 @@ switch ($a)
 			$updateSQL .= " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
 
   		$rs = mysql_query($updateSQL, $conn) or die(mysql_error());
-		
+
+              if(!$row_eski['artik_uye_degil']) // eger artik uye olmayan birinin kaydi duzenleniyorsa, diger veritabaninda zaten kaydi kalmamistir, bu kismi atla
+               {		
 		// alias tablosunu da guncelleyelim - once birini sonra digerini guncellemeli, baska anahtar yok tabloda
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
 		mysql_select_db(DB_MAIL, $conn_mail);
@@ -596,7 +598,7 @@ switch ($a)
                   $strsql = 'DELETE FROM session WHERE sid = "' . $slug[0] . '"';
                   mysql_query($strsql, $conn) or die(mysql_error());
                  }
-
+               }
 		ob_end_clean();
 		
 		header("Location: uyelerview.php?key=$tkey");
