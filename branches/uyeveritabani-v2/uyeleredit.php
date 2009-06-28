@@ -102,10 +102,13 @@ $x_Telefon2 = @$_POST["x_Telefon2"];
 $x_TCKimlikNo = @$_POST["x_TCKimlikNo"];
 $x_Uye_karar_no = @$_POST["x_Uye_karar_no"];
 $x_Uye_karar_tarih = @$_POST["x_Uye_karar_tarih"];
+$x_Ayrilma_karar_no = @$_POST["x_Ayrilma_karar_no"];
+$x_Ayrilma_karar_tarih = @$_POST["x_Ayrilma_karar_tarih"];
 $x_vesikalik_foto = @$_POST["x_vesikalik_foto"];
 $x_Uye_formu = @$_POST["x_Uye_formu"];
 $x_Notlar = @$_POST["x_Notlar"];
 $x_kayit_tarihi = @$_POST["x_kayit_tarihi"];
+$x_ayrilma_tarihi = @$_POST["x_ayrilma_tarihi"];
 $x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
 $x_gonullu = @$_POST["x_gonullu"];
 $x_artik_uye_degil = @$_POST["x_artik_uye_degil"];
@@ -159,10 +162,13 @@ switch ($a)
 		$x_TCKimlikNo = @$row["TCKimlikNo"];
 		$x_Uye_karar_no = @$row["Uye_karar_no"];
 		$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
+		$x_Ayrilma_karar_no = @$row["Ayrilma_karar_no"];
+		$x_Ayrilma_karar_tarih = @$row["Ayrilma_karar_tarih"];
 		$x_vesikalik_foto = @$row["vesikalik_foto"];
 		$x_Uye_formu = @$row["Uye_formu"];
 		$x_Notlar = @$row["Notlar"];
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
+		$x_ayrilma_tarihi = @$row["ayrilma_tarihi"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
 		$x_gonullu = @$row["gonullu"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
@@ -181,7 +187,7 @@ switch ($a)
     }
 	
 		// Guncellemeden once bir eski kaydi saglama alalimk
-		$strselectsql = "SELECT eposta1,alias FROM uyeler WHERE uye_id=$_POST[x_uye_id]";
+		$strselectsql = "SELECT eposta1,alias,artik_uye_degil FROM uyeler WHERE uye_id=$_POST[x_uye_id]";
 		$rs = mysql_query($strselectsql, $conn) or die(mysql_error());
 		$row_eski = mysql_fetch_array($rs);
 	
@@ -210,10 +216,13 @@ switch ($a)
 		$x_TCKimlikNo = @strip_tags($_POST["x_TCKimlikNo"]);
 		$x_Uye_karar_no = @strip_tags($_POST["x_Uye_karar_no"]);
 		$x_Uye_karar_tarih = @strip_tags($_POST["x_Uye_karar_tarih"]);
+		$x_Ayrilma_karar_no = @strip_tags($_POST["x_Ayrilma_karar_no"]);
+		$x_Ayrilma_karar_tarih = @strip_tags($_POST["x_Ayrilma_karar_tarih"]);
 		$x_vesikalik_foto = @strip_tags($_POST["x_vesikalik_foto"]);
 		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
 		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
 		$x_kayit_tarihi = @strip_tags($_POST["x_kayit_tarihi"]);
+		$x_ayrilma_tarihi = @strip_tags($_POST["x_ayrilma_tarihi"]);
 		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
 		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
 		$x_artik_uye_degil = @strip_tags($_POST["x_artik_uye_degil"]);
@@ -409,6 +418,21 @@ switch ($a)
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_tarih) : $x_Uye_karar_tarih;
 		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
 		$fieldList["Uye_karar_tarih"] = $theValue;
+
+		// ayrilma_tarihi
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_ayrilma_tarihi) : $x_ayrilma_tarihi;
+		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+		$fieldList["ayrilma_tarihi"] = $theValue;
+
+		// Ayrilma_karar_no
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Ayrilma_karar_no) : $x_Ayrilma_karar_no;
+		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+		$fieldList["Ayrilma_karar_no"] = $theValue;
+
+		// Ayrilma_karar_tarih
+		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Ayrilma_karar_tarih) : $x_Ayrilma_karar_tarih;
+		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
+		$fieldList["Ayrilma_karar_tarih"] = $theValue;
 
 		// vesikalik_foto
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_vesikalik_foto) : $x_vesikalik_foto;
@@ -961,7 +985,40 @@ return true;
 </tr>
 
 <tr>
- <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar için  Fotoğraf&nbsp;</td>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma tarihi&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+ <?php
+  if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
+ ?>
+ <input type="text" name="x_ayrilma_tarihi" value="<?php echo strip_tags(@$x_ayrilma_tarihi); ?>">
+ <? } else {
+ 	echo strip_tags(@$x_ayrilma_tarihi);
+	}
+ ?>
+ </td>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma Karar No&nbsp;</td>
+ <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
+  <td bgcolor="#F5F5F5"><input type="text" name="x_Ayrilma_karar_no" value="<?php echo strip_tags(@$x_Ayrilma_karar_no); ?>">&nbsp;</td>
+ <?} else { ?>
+  <td bgcolor="#F5F5F5">&nbsp;<?php echo strip_tags(@$x_Ayrilma_karar_no); ?>&nbsp;</td>
+ <? } ?>
+</tr>
+
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma Karar Tarihi&nbsp;</td>
+ <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
+  <td bgcolor="#F5F5F5"><input type="text" name="x_Ayrilma_karar_tarih" value="<?php echo strip_tags(@$x_Ayrilma_karar_tarih); ?>">&nbsp; <small>(Yıl-Ay-Gün)</small></td>
+ <?} else { ?>
+  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_tarih); ?></td>
+ <? } ?>
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf&nbsp;</td>
  <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { 
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_vesikalik_foto\" ";
