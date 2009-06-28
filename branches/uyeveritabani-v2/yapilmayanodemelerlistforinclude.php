@@ -31,14 +31,18 @@ else
 if( $x_UyeId == "" )
 	return;
 	
-$sql1 = "SELECT kayit_tarihi,eposta1 FROM uyeler WHERE uye_id='".$x_UyeId."'";
+$sql1 = "SELECT kayit_tarihi,ayrilma_tarihi,eposta1 FROM uyeler WHERE uye_id='".$x_UyeId."'";
 $rs1 = mysql_query($sql1);
 $row1 = @mysql_fetch_array($rs1);
 $x_EmailOfTheUser = $row1["eposta1"];
 $KayitTarihi = $row1["kayit_tarihi"];
+$AyrilmaTarihi = $row1["ayrilma_tarihi"];
 
 // Yapilmis olmasi gereken toplam miktari aldiralim
-$strsql = "SELECT SUM(miktar) FROM aidat_miktar WHERE yil >= '". $KayitTarihi ."'";
+if($AyrilmaTarihi)
+ $strsql = "SELECT SUM(miktar) FROM aidat_miktar WHERE yil BETWEEN '". $KayitTarihi ."' AND '". $AyrilmaTarihi . "'";
+else
+ $strsql = "SELECT SUM(miktar) FROM aidat_miktar WHERE yil >= '". $KayitTarihi ."'";
 $rs = mysql_query($strsql);
 $Gecici = @mysql_fetch_array($rs);
 $Toplam = $Gecici[0];
