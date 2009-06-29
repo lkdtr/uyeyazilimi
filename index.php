@@ -60,6 +60,15 @@
 
         </table>
     </form>
+<br/>
+<p>
+<strong>Derneğe banka yoluyla da bağış/aidat ödemesi yapabilirsiniz:</strong>
+Garanti Bankası
+
+Kızılay Şubesi (Şube No: 082)
+
+Hesap Numarası : 6298573
+</p>
 </center>
 </body>
 </html>
