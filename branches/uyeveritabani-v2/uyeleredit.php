@@ -492,6 +492,24 @@ switch ($a)
 			else
 				$DosyaAdi = $_SESSION["uy_status_UserID"];
 
+			$uploadedfile = $_FILES["x_Resim"]["tmp_name"];
+
+			$src = imagecreatefromjpeg($uploadedfile);
+
+			// Capture the original size of the uploaded image
+			list($width,$height)=getimagesize($uploadedfile);
+			
+			$newwidth=150;
+			$newheight=($height/$width)*$newwidth;
+			$tmp=imagecreatetruecolor($newwidth,$newheight);
+			
+			// this line actually does the image resizing, copying from the original
+			// image into the $tmp image
+			imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
+			
+			// now write the resized image to disk.
+			$filename = $UyeResimlerDizin . "/w150/". $DosyaAdi . ".$Uzanti";
+			imagejpeg($tmp,$filename,100);
 
      		$destfile = './' . $UyeResimlerDizin . '/' . $DosyaAdi . ".$Uzanti";
 
