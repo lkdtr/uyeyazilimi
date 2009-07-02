@@ -97,6 +97,7 @@ $x_pkod = @$_POST["x_pkod"];
 $x_AuthLevel = @$_POST["x_AuthLevel"];
 $x_PassWord = @$_POST["x_PassWord"];
 $x_Resim = @$_POST["x_Resim"];
+$x_Uye_formu = @$_POST["x_Uye_formu"];
 $x_Telefon1 = @$_POST["x_Telefon1"];
 $x_Telefon2 = @$_POST["x_Telefon2"];
 $x_TCKimlikNo = @$_POST["x_TCKimlikNo"];
@@ -157,6 +158,7 @@ switch ($a)
 		$x_pkod = @$row["pkod"];
 		$x_PassWord = @$row["PassWord"];
 		$x_Resim = @$row["Resim"];
+		$x_Uye_formu = @$row["Uye_formu"];
 		$x_Telefon1 = @$row["Telefon1"];
 		$x_Telefon2 = @$row["Telefon2"];
 		$x_TCKimlikNo = @$row["TCKimlikNo"];
@@ -240,6 +242,15 @@ switch ($a)
 			}
 		}
 		$a_x_Resim = @strip_tags($_POST["a_x_Resim"]);
+
+		// check file size
+		$EW_MaxFileSize = @strip_tags($_POST["EW_MaxFileSize"]);
+		if (!empty($_FILES["x_Uye_formu"]["size"])) {
+			if (!empty($EW_MaxFileSize) && $_FILES["x_Uye_formu"]["size"] > $EW_MaxFileSize) {
+				die("Max. file upload size exceeded");
+			}
+		}
+		$a_x_Uye_formu= @strip_tags($_POST["a_x_Uye_formu"]);
 		
 		// degerleri array'e atalim
 
@@ -525,6 +536,44 @@ switch ($a)
 			}
 
 		}
+
+
+		// Form
+
+		if ($a_x_Uye_formu == "2") { // cikart
+
+			unlink("$UyeFormlarDizin/$x_uye_id.tif");
+
+			$fieldList["Uye_formu"] = "NULL";
+
+			$fieldList["Uye_formu"] = "NULL";
+
+
+		} else if ($a_x_Uye_formu== "3") { // guncelle
+
+			if (is_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"])) {
+			$Gecici = explode(".", $_FILES["x_Uye_formu"]["name"]);
+			$Uzanti = strtolower($Gecici[ count($Gecici)-1 ]);
+			if( !eregi("tif", $Uzanti) )
+				die("Dosyaniz tif degil!");
+
+				$DosyaAdi = $x_uye_id;
+
+     		$destfile = './' . $UyeFormlarDizin . '/' . $DosyaAdi . ".$Uzanti";
+
+     		if (!move_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"], $destfile)) // dosyayi yerine gonderemediysek...
+
+     			die("Dosya gondermediniz veya dosya yerine yerlestirilemedi!" . $destfile);
+
+
+				$fieldList["Uye_formu"] = " '" . $DosyaAdi . ".$Uzanti" . "'";
+
+				unlink($_FILES["x_Uye_formu"]["tmp_name"]);
+
+			}
+
+		}
+
 
 		if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
 
@@ -1066,28 +1115,22 @@ return true;
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Formu&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { 
-  	echo "<td bgcolor=\"#F5F5F5\">";
-	echo "<input type=\"radio\" name=\"x_Uye_formu\" ";
-	if( $x_Uye_formu == 1 )
-		echo "checked";
-	echo " value=1>Var&nbsp;";
-	echo "<input type=\"radio\" name=\"x_Uye_formu\" ";
-	if( $x_Uye_formu == 0 )
-		echo "checked";
-	echo " value=0>Yok&nbsp;</td>";
-  
- } else {
- 	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-	   
-	   if( $x_Uye_formu == 1 )
-	   	echo "Evet";
-	   else
-	   	echo "Hayır";
-	   
-	   echo "</td>";
-	   }
+ <td bgcolor="#F5F5F5">
+<input type="radio" name="a_x_Uye_formu" value="1" checked>Olduğu gibi bırak&nbsp;<input type="radio" name="a_x_Uye_formu" value="2">Sil&nbsp;<input type="radio" name="a_x_Uye_formu" value="3">Değiştir<br>
+<input type="file" name="x_Uye_formu" onChange="if (this.form.a_x_Resim[2]) this.form.a_x_Resim[2].checked=true;">&nbsp;(tif)</td>
+
+</tr>
+
+<tr>
+ <td align="right" bgcolor="#666666">&nbsp;</td>
+ <td bgcolor="#F5F5F5">
+  <?php if ($x_Uye_formu != "") { ?>
+  <a target="_blank" href="<?php echo "$UyeFormlarDizin/$x_Uye_formu"; ?>">Formu İndir</a>
+  <?php } else {
+                echo "Daha önce form yüklenmedi";
+               }
   ?>
+ </td>
 </tr>
 
 
@@ -1113,7 +1156,7 @@ if (@$_SESSION["uy_status_UserLevel"] == -1) {
  <td bgcolor="#F5F5F5">
   <?php if ($x_Resim != "") { ?>
   <a target="_blank" href="uye_resimler/<?php echo "$x_Resim"; ?>">
-   <img width=200 src="uye_resimler/<?php echo "$x_Resim"; ?>" border="0">
+   <img width="150" src="uye_resimler/w150/<?php echo "$x_Resim"; ?>" border="0">
   </a>
   <?php } else {
                 echo "Daha önce resim yüklenmedi";
