@@ -18,166 +18,66 @@
 	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 	 */
 ?>
-<?php session_start(); ?>
 <?php
-define("DEFAULT_LOCALE", "tr_TR");
-@setlocale(LC_ALL, DEFAULT_LOCALE);
+ require('header.php');
 ?>
-<?php include ("db.php") ?>
-<?php
-if( $_SESSION["uy_status_UserLevel"] ) // Kullanicinin Login oldugunu ispat etmek icin
-	header("Location: duyurusonlist.php");
-
-if (@$_POST["submit"] <> "") {
-	$validpwd = False;
-	// degiskenler hazirlaniyor
-	$userid = addslashes($_POST["userid"]);
-//	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
-	$passwd = addslashes($_POST["passwd"]);
-//	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
-	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
-	mysql_select_db(DB) or die("seçemedi");
-	mysql_query("SET NAMES 'utf8'");
-
-	$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
-	if ($row = mysql_fetch_array($rs)) {
-		if (strtoupper($row["AdminPass"]) == strtoupper($passwd)) {
-			$validpwd = True;
-  			$_SESSION["uy_status_UserLevel"] = -1; //
-		}
-	}
-	if (!$validpwd) {
-		$conn = mysql_connect(HOST, USER, PASS);
-		mysql_select_db(DB);
-		mysql_query("SET NAMES 'utf8'");
-
-		$Sorgu = "SELECT * FROM uyeler WHERE (eposta1 = '" . $userid . "')"
-			. " OR (alias = '". $userid ."')"; //Alias da kabul
-		$rs = mysql_query($Sorgu) or die(mysql_error());
-		if ($row = mysql_fetch_array($rs)) {
-			if ($row["PassWord"] == md5($passwd)) {
-				$_SESSION["uy_status_User"] = $row["eposta1"];
-				$_SESSION["uy_status_UserID"] = $row["uye_id"];
-				// Aslinda artik tabloda AuthLevel yok. Ama eski yazilimin cogu yerinde
-				// bu deger kontrol ediliyor. O yuzden "simdilik" bu cozumu uyguladim
-				$_SESSION["uy_status_UserLevel"] = 1;
-
-				$validpwd = True;
-			}
-		} 
-		
-		mysql_free_result($rs);
-		mysql_close($conn);
-	}
-	if ($validpwd) {
-		// cerezci geldi haniimm!
-		if (@$_POST["rememberme"] <> "") {
-			setCookie("uy_userid", $userid, time()+365*24*60*60); // cerez son kullanma tarihi kutunun uzerindedir...
-		}
-		$_SESSION["uy_status"] = "login";
-		//header("Location: uyelerlist.php");  // Yonlendirmek istediginiz sayfayi yaziniz...
-
-		/* eklenti yaptigim yer */
-		//***************************************************************************************
-			//header("Location: duyurularview.php");
-			header("Location: duyurusonlist.php");
 
 
-		//***************************************************************************************
+<br><p>
+<table width="96%" align="center" border="1" cellpadding="0" cellspacing="5">
+<tbody><tr><td height="100%" valign="top" width="33%">
+	<table height="100%" width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tbody><tr>
+			<td height="35" width="100%" bgcolor="#466176">
+				<font color="white">Üye Veritabanı Sistemi ile İlgili</font>
+			</td>
+		</tr><tr>
+			<td valign="top"><b>
 
-// Baska bir sayfadan login kutularini koyacaksaniz burayi degistiriniz. Session olaylarina dikkat ediniz.
-	}
-	} else {
-	$validpwd = True;
-}
-?>
-<html>
-<head>
-	<title>LKD ÜYE VERİTABANI</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="StyleSheet" href="stil.css" type="text/css">
-</head>
-<script language="JavaScript" src="ew.js"></script>
-<script language="JavaScript">
-<!-- start JavaScript
-function  EW_checkMyForm(EW_this) {
-if (!EW_hasValue(EW_this.userid, "TEXT")) {
-	if (!EW_onError(EW_this, EW_this.userid, "TEXT", "Lütfen ID Giriniz"))
-		return false;
-}
-if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
-	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Şifre Giriniz"))
-		return false;
-}
-return true;
-}
-
-// end JavaScript -->
-</script>
-<body leftmargin=0 topmargin=0 marginheight=0 marginwidth=0>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;">
-<link href="stil.css" rel="stylesheet" type="text/css">
-</head>
-<body bgcolor="#ffffff">
+LKD Üye Sistemi			</b></td>
+		</tr>
+		<tr>
+			<td height="90%" valign="top">
+				Üye veritabanına <b>isim.soyisim@linux.org.tr</b> e-posta adresinizle giriş yapabilirsiniz.
 <br>
-<table width="780" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#466176" style="border-collapse:collapse "><tr><td>
-<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" style="border-collapse:collapse ">
-  <tr>
-   <td><table align="left" border="0" cellpadding="0" cellspacing="0" width="780">
-	  <tr>
-	   <td><img name="index_r1_c1" src="images/index_r1_c1.jpg" width="189" height="118" border="0" alt=""></td>
-	   <td><img name="index_r1_c2" src="images/index_r1_c2.jpg" width="266" height="118" border="0" alt=""></td>
-	   <td><img name="index_r1_c3" src="images/index_r1_c3.jpg" width="325" height="118" border="0" alt=""></td>
-	  </tr>
-	</table></td>
-  </tr>
-  <tr>
-	<td height="81" background="#F8F8F8">
-<!-- LOGIN FORMU VE LINKLER BAS -->
-<form action="index.php" method="post" onSubmit="return EW_checkMyForm(this);">
-<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><table width="100%"  border="0" cellpadding="3" cellspacing="0">
-      <tr>
-        <td height="10" colspan="3"></td>
-        </tr>
-      <tr>
-        <td width="75" align="right">E-posta</td>
-        <td width="100" align="left"><input name="userid" type="text" id="email" value="
-	<?php echo (@$_COOKIE["uy_userid"]) ? (@$_COOKIE["uy_userid"]) : "@linux.org.tr"; ?>
-	"></td>
-        <td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
-      </tr>
-      <tr>
-        <td width="75" align="right">Parola</td>
-        <td width="100" align="left"><input type="password" name="passwd"></td>
-        <td><input type="submit" name="submit" value="Giriş">
-		<?php if (!$validpwd) {?>
-		<font color="#FF0000">Yanlış e-posta veya parola
-		<?php }?>
-		</td>
-      </tr>
-    </table></td>
-    <td width="40%" align="center">
-    Kullanıcı adı olarak gireceğiniz e-posta adresi, isim.soyisim@linux.org.tr biçiminde olmalıdır.<br>
-	<a href="sifrehatirlat.php">Parolanızı unuttuysanız tıklayınız.</a></td>
-    </tr>
-</table></form>
-   </td>
-  </tr>
-  <tr>
-   <td height="1" bgcolor="#466176"></td>
-  </tr>
-  <tr>
-   <td bgcolor="#D6DDE7">
-<!-- ANA ICERIK BAS -->
-	&nbsp;
+<br><b>Üye bilgilerinizin güncellenmesi gerekmektedir.</b> Lütfen üye veritabanındaki bilgilerinizi <img src="images/edit.gif" align="absmiddle"> simgesine tıklayarak güncelleyiniz.
+
+<br>
+<br>Dernekle ilgili bilgilere ulaşabileceğiniz wiki tarzında bir web sitesi <a href="http://uye.lkd.org.tr/uye/">http://uye.lkd.org.tr/uye/</a> adresinde test yayınında. Üye veritabanı için kullandığınız isim/parolanız ile giriş yapabilirsiniz.
+<br>
+<br>Üyelikle ilgili <b>her türlü soru(nu)nuz için</b> <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> e-posta adresi ile bağlantı kurabilirsiniz.		</td></tr><tr>
+		</tr>
+	</tbody></table>
+</td>
+<td height="100%" valign="top" width="33%">
+	<table height="100%" width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tbody><tr>
+			<td height="35" width="100%" bgcolor="#466176">
+
+				<font color="white">Üye aidatları</font>
+			</td>
+		</tr><tr>
+			<td valign="top"><b>
+LKD Üye Sistemi			</b></td>
+		</tr>
+		<tr>
+			<td height="90%" valign="top">
+
+				<b>Üye aidatlarınızı</b> artık haftalık olarak güncellenen  üye veritabanı aracılığıyla takip edebiliyorsunuz.
+<br>
+<br>Aidat ödemelerinizi derneğin banka hesabına yapabilirsiniz.
+<br>
+<br>Linux Kullanıcıları Derneği
+<br>Garanti Bankası, Kızılay Şubesi (Şube No: 082)
+<br>Hesap No : 6298573
+<br>
+<br>Yaptığınız ödemenin açıklama bölümüne isminizi yazmayı ve <a href="mailto:uye@lkd.org.tr">uye@lkd.org.tr</a> adresine ödemenizi bildiren bir e-posta atmayı unutmayın.		</td></tr><tr>
+                </tr>
+	</table>
+</td>
+</table>
+
+<br></p>
 <?php
-	require_once "duyurusonlistforinclude.php";
-	require_once "footer.php";
+ require('footer.php');
 ?>
-</td></tr></table>
-</body>
-</html>
