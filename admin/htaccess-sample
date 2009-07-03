@@ -1,0 +1,33 @@
+#
+# Yonetim arayuzune erisebilecek uyelerin http dogrulamasi ile giris yapmasini saglayan IP kisitli ornek bir .htaccess dosyasi
+# Ayarlar duzenlenmis halinin admin dizininin kokune, .htaccess ismiyle yerlestirilmesi gerekir
+#
+
+ErrorDocument 401 *****
+
+AuthType Basic
+AuthName "*****"
+AuthMySQLHost *****
+AuthMySQLUser *****
+AuthMySQLPassword *****
+AuthMySQLDB *****
+AuthMySQLUserTable *****
+AuthMySQLNameField *****
+AuthMySQLPasswordField *****
+AuthMySQLPwEncryption md5
+AuthMySQLEnable On
+
+Require user ad1.soyad1 ad2.soyad2 ad3.soyad3
+order deny,allow
+
+# ad1.soyad1 IP'leri
+allow from x.y.z.t
+
+# ad2.soyad2 IP'leri
+allow from a.b.c.d
+allow from e.f.g.h
+
+# ad3.soyad3 IP'leri
+allow from i.j.k.l
+
+deny from all
