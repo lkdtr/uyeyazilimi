@@ -1,5 +1,7 @@
 <?php
 	/*
+	 *  175-193 numarali satirlar arasindaki blogu duzenledim - dfisek
+	 *
 	 *  LKD Uye Veritabani
 	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
 	 *
@@ -25,20 +27,16 @@ define("DEFAULT_LOCALE", "tr_TR");
 ?>
 <?php include ("db.php") ?>
 <?php
-if( $_SESSION["uy_status_UserLevel"] ) // Kullanicinin Login oldugunu ispat etmek icin
-	header("Location: duyurusonlist.php");
 
-if (@$_POST["submit"] <> "") {
+if (@$_POST["submit"] <> "") { 
 	$validpwd = False;
 	// degiskenler hazirlaniyor
-	$userid = addslashes($_POST["userid"]);
-//	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
-	$passwd = addslashes($_POST["passwd"]);
-//	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
+	$userid = @$_POST["userid"];
+	$userid = (get_magic_quotes_gpc()) ? stripslashes($userid) : $userid;
+	$passwd = @$_POST["passwd"];
+	$passwd = (get_magic_quotes_gpc()) ? stripslashes($passwd) : $passwd;
 	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
 	mysql_select_db(DB) or die("seçemedi");
-	mysql_query("SET NAMES 'utf8'");
-
 	$rs = mysql_query("SELECT * FROM yoneticiler WHERE AdminAd = '" . $userid . "'") or die(mysql_error());
 	if ($row = mysql_fetch_array($rs)) {
 		if (strtoupper($row["AdminPass"]) == strtoupper($passwd)) {
@@ -49,23 +47,15 @@ if (@$_POST["submit"] <> "") {
 	if (!$validpwd) {
 		$conn = mysql_connect(HOST, USER, PASS);
 		mysql_select_db(DB);
-		mysql_query("SET NAMES 'utf8'");
-
-		$Sorgu = "SELECT * FROM uyeler WHERE (eposta1 = '" . $userid . "')"
-			. " OR (alias = '". $userid ."')"; //Alias da kabul
-		$rs = mysql_query($Sorgu) or die(mysql_error());
+		$rs = mysql_query("SELECT * FROM uyeler WHERE eposta1 = '" . $userid . "'") or die(mysql_error());
 		if ($row = mysql_fetch_array($rs)) {
-			if ($row["PassWord"] == md5($passwd)) {
+			if (strtoupper($row["PassWord"]) == strtoupper($passwd)) {
 				$_SESSION["uy_status_User"] = $row["eposta1"];
 				$_SESSION["uy_status_UserID"] = $row["uye_id"];
-				// Aslinda artik tabloda AuthLevel yok. Ama eski yazilimin cogu yerinde
-				// bu deger kontrol ediliyor. O yuzden "simdilik" bu cozumu uyguladim
-				$_SESSION["uy_status_UserLevel"] = 1;
-
+				$_SESSION["uy_status_UserLevel"] = $row["AuthLevel"];
 				$validpwd = True;
 			}
-		} 
-		
+		}
 		mysql_free_result($rs);
 		mysql_close($conn);
 	}
@@ -106,7 +96,7 @@ if (!EW_hasValue(EW_this.userid, "TEXT")) {
 		return false;
 }
 if (!EW_hasValue(EW_this.passwd, "PASSWORD")) {
-	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Şifre Giriniz"))
+	if (!EW_onError(EW_this, EW_this.passwd, "PASSWORD", "Parola Giriniz"))
 		return false;
 }
 return true;
@@ -146,8 +136,7 @@ return true;
       <tr>
         <td width="75" align="right">E-posta</td>
         <td width="100" align="left"><input name="userid" type="text" id="email" value="
-	<?php echo (@$_COOKIE["uy_userid"]) ? (@$_COOKIE["uy_userid"]) : "@linux.org.tr"; ?>
-	"></td>
+	<?php echo ($_COOKIE["uy_userid"] != "") ? @$_COOKIE["uy_userid"] : "@linux.org.tr" ?>"></td>
         <td><input type="checkbox" name="rememberme" value="true">Beni Hatırla (Çerez Kullanılır)</td>
       </tr>
       <tr>
@@ -161,8 +150,7 @@ return true;
       </tr>
     </table></td>
     <td width="40%" align="center">
-    Kullanıcı adı olarak gireceğiniz e-posta adresi, isim.soyisim@linux.org.tr biçiminde olmalıdır.<br>
-	<a href="sifrehatirlat.php">Parolanızı unuttuysanız tıklayınız.</a></td>
+	</td>
     </tr>
 </table></form>
    </td>
@@ -173,9 +161,65 @@ return true;
   <tr>
    <td bgcolor="#D6DDE7">
 <!-- ANA ICERIK BAS -->
-	&nbsp;
 <?php
-	require_once "duyurusonlistforinclude.php";
+if(!($_POST["email"] && $_POST["button1"])) {
+?>
+<form action="sifrehatirlat.php" method="post">
+<br>
+<table align="center" width="80%">
+<?php if($_POST["email"] == "" && isset($_POST["email"])) {?>
+<tr><td colspan="2" align="center"><font color="red"><b>E-posta adresinizi girmelisiniz!</b></font></td></tr>
+<?php } ?>
+<tr><td colspan=2>
+Parolanız e-posta adresinize gönderilecektir.</td></tr>
+<tr><td align="right"><b>E-posta : </b></td><td><input type="text" name="email" size="50"></td></tr>
+<tr><td></td><td align="left"><input type="submit" value="Gönder" name="button1"></td></tr>
+</table>
+</form>
+<?php } else {
+	$conn = mysql_connect(HOST, USER, PASS) or die("Veritabanına bağlanamadık");
+	mysql_select_db(DB) or die("seçemedi");
+	$Sorgu = "SELECT uye_ad,uye_soyad,eposta1,PassWord FROM uyeler WHERE (eposta1='". addslashes($_POST["email"]) ."')"
+	       . " OR (alias = '". addslashes($_POST["email"]) ."')";
+	$rs = mysql_query($Sorgu) or die(mysql_error());
+	$row = mysql_fetch_row($rs);
+
+	$passChars = "qwertyuopasdfghjklizxcvbnmQWERTYUOPASDFGHIJKLZXCVBNM0123456789";
+	$rndPass = "";
+	
+	for( $passCnt = 0; $passCnt < 10; $passCnt++ ) {
+		$rndPass .= $passChars[ rand()%strlen($passChars) ];
+	}
+	
+
+	$content = "Sayın $row[0] $row[1],\r\n\r\n";
+//	$content .= "Bu e-posta, Linux Kullanıcıları Derneği Üye Veritabanı için yeni bir parola istediğiniz için gönderilmiştir. Eğer kendiniz böyle bir istekte bulunmadıysanız, mesajı dikkate almayabilirsiniz.\r\n\r\n";
+	$content .= "Bu e-posta, Linux Kullanıcıları Derneği Üye Veritabanı için yeni bir parola istediğiniz için gönderilmiştir. Eğer kendiniz böyle bir istekte bulunmadıysanız, lütfen yeni parolanızı kaydediniz..\r\n\r\n";
+	$content .= "Yeni Parolanız : $rndPass\r\n\r\n";
+	//$content .= "Parolanız : $row[3]\r\n\r\n";
+	$content .= "Parolanızı sisteme giriş yaptıktan sonra değiştirebilirsiniz.\r\n\r\n";
+	$content .= "Üyelikle ilgili her türlü sorununuz için uye@lkd.org.tr adresi ile bağlantı kurabilirsiniz.";
+
+	$headers = "From: LKD Uyelik Sistemi <uye@lkd.org.tr>\r\nContent-type: text/plain; charset=ISO-8859-9";
+	$to = "$row[2]";
+	if(time() > $_SESSION["Sifre_Mail_Time"]+(5*60) || 1) {
+		echo "<br>Mailiniz Gönderilmiştir. Teşekkür Ederiz.";
+		$_SESSION["Sifre_Mail_Time"] = time();
+		
+		$Sorgu = "UPDATE uyeler SET passWord = '". md5($rndPass) ."' WHERE (eposta1='". addslashes($_POST["email"]) ."')"
+		       . " OR (alias = '". addslashes($_POST["email"]) ."') LIMIT 1";
+		mysql_query($Sorgu) or die(mysql_error());
+
+		mail($to, "Parola Hatirlatma Mesaji", $content, $headers);
+		
+	} else {
+		echo "<br>Yeni bir mail atabilmek için bir süre beklemelisiniz!";
+		$_SESSION["Sifre_Mail_Time"] = time();
+	}
+	// acilacak
+ }
+?>
+<?php
 	require_once "footer.php";
 ?>
 </td></tr></table>
