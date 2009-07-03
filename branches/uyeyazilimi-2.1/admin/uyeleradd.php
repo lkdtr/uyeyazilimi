@@ -176,6 +176,14 @@ switch ($a) {
 			}
 		}
 
+		// check file size
+		$EW_MaxFileSize = @$_POST["EW_MaxFileSize"];
+		if (!empty($_FILES["x_Uye_formu"]["size"])) {
+			if (!empty($EW_MaxFileSize) && $_FILES["x_Uye_formu"]["size"] > $EW_MaxFileSize) {
+				die("Max. file upload size exceeded");
+			}
+		}
+
 		// degerleri array'e atalim
 
 		// uye_id
@@ -340,19 +348,65 @@ switch ($a) {
 
 		// Resim
 			if (is_uploaded_file($_FILES["x_Resim"]["tmp_name"])) {
-			 $Gecici = explode(".", $_FILES["x_Resim"]["name"]);
-                         $Uzanti = strtolower($Gecici[ count($Gecici)-1 ]);
-                         $DosyaAdi = $x_uye_id;
+			$Gecici = explode(".", $_FILES["x_Resim"]["name"]);
+            $Uzanti = strtolower($Gecici[ count($Gecici)-1 ]);
+            if( !eregi("jpg|jpeg", $Uzanti) )
+                die("Dosyaniz jpg veya jpeg degil!");
 
+            $DosyaAdi = $x_uye_id;
 
-                $destfile = addslashes(dirname($_SERVER["PATH_TRANSLATED"])) . "/".  $UyeResimlerDizin . "/" . $DosyaAdi . ".$Uzanti";			
+            $uploadedfile = $_FILES["x_Resim"]["tmp_name"];
+
+            $src = imagecreatefromjpeg($uploadedfile);
+
+            // Capture the original size of the uploaded image
+            list($width,$height)=getimagesize($uploadedfile);
+            
+            $newwidth=150;
+            $newheight=($height/$width)*$newwidth;
+            $tmp=imagecreatetruecolor($newwidth,$newheight);
+            
+            // this line actually does the image resizing, copying from the original
+            // image into the $tmp image
+            imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
+            
+            // now write the resized image to disk.
+            $filename = $UyeResimlerDizin . "/w150/". $DosyaAdi . ".$Uzanti";
+            imagejpeg($tmp,$filename,100);
+
+            #$destfile = addslashes(dirname($_SERVER["PATH_TRANSLATED"])) . "/".  $UyeResimlerDizin . "/" . $DosyaAdi . ".$Uzanti";			
+            $destfile = './' . $UyeResimlerDizin . '/' . $DosyaAdi . ".$Uzanti";
  
      		if (!move_uploaded_file($_FILES["x_Resim"]["tmp_name"], $destfile)) // dosyayi yerine gonderelim...
-     			die("You didn't upload a file or the file couldn't be moved to" . $destfile);
+     			die("Dosya gondermediniz veya dosya yerine yerlestirilemedi!" . $destfile);
 				$theName = (!get_magic_quotes_gpc()) ? addslashes($_FILES["x_Resim"]["name"]) : $_FILES["x_Resim"]["name"];
-				 $fieldList["Resim"] = " '" . $DosyaAdi . ".$Uzanti" . "'";
-				unlink($_FILES["x_Resim"]["tmp_name"]);
+                $fieldList["Resim"] = " '" . $DosyaAdi . ".$Uzanti" . "'";
+				#unlink($_FILES["x_Resim"]["tmp_name"]);
 			}
+            
+        // Form
+            
+            if (is_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"])) {
+            $Gecici = explode(".", $_FILES["x_Uye_formu"]["name"]);
+            $Uzanti = strtolower($Gecici[ count($Gecici)-1 ]);
+            if( !eregi("tif|tiff", $Uzanti) )
+                die("Dosyaniz tif degil!");
+
+                $DosyaAdi = $x_uye_id;
+
+            $destfile = './' . $UyeFormlarDizin . '/' . $DosyaAdi . ".$Uzanti";
+
+            if (!move_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"], $destfile)) // dosyayi yerine gonderemediysek...
+
+                die("Dosya gondermediniz veya dosya yerine yerlestirilemedi!" . $destfile);
+
+
+                $fieldList["Uye_formu"] = " '" . $DosyaAdi . ".$Uzanti" . "'";
+
+                #unlink($_FILES["x_Uye_formu"]["tmp_name"]);
+            }
+            
+            
 		if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
 			$fieldList["uye_id"] = " '" . $_SESSION["uy_status_UserID"] . "'";
 		}
@@ -603,9 +657,8 @@ return true;
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_Uye_formu" checked value=1>Var&nbsp;
- <input type="radio" name="x_Uye_formu" value=0>Yok&nbsp;
+ <td bgcolor="#F5F5F5"><?php $x_Uye_formu = ""; // temizlik ?>
+ <input type="file" name="x_Uye_formu">&nbsp;</td>
 </tr>
 
 <tr>

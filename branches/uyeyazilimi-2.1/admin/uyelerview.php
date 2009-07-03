@@ -370,7 +370,7 @@ switch ($x_cinsiyet) {
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
     if( $x_Uye_formu )
-    	echo "<a target=\"_blank\" href=\"uye_formlar/$x_uye_id.tif\">Var</a>";
+    	echo "<a target=\"_blank\" href=\"$UyeFormlarDizin/$x_uye_id.tif\">Var</a>";
     else
     	echo "Yok";
 
@@ -426,8 +426,8 @@ case "1":
 <td bgcolor="#466176"><font color="#FFFFFF">Resim&nbsp;</td>
 <td bgcolor="#F5F5F5">
 <?php if ($x_Resim != "") { ?>
-<a target="_blank" href="uye_resimler/<?php echo "$x_Resim"; ?>">
-<img width=200 src="uye_resimler/<?php echo "$x_Resim"; ?>" border="0">
+<a target="_blank" href="<?php echo "$UyeResimlerDizin/$x_Resim"; ?>">
+<img width="150" src="<?php echo "$UyeResimlerDizin/w150/$x_Resim"; ?>" border="0">
 </a>
 <?php } else {
 		echo "Resim Yüklenmedi";
