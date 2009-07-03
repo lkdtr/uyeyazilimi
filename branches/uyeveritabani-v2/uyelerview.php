@@ -369,7 +369,7 @@ switch ($x_cinsiyet) {
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-    if( $x_Uye_formu == 1 )
+    if( $x_Uye_formu )
     	echo "<a target=\"_blank\" href=\"uye_formlar/$x_uye_id.tif\">Var</a>";
     else
     	echo "Yok";
