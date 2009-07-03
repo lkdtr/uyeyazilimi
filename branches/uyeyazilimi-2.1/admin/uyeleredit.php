@@ -554,7 +554,7 @@ switch ($a)
 			if (is_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"])) {
 			$Gecici = explode(".", $_FILES["x_Uye_formu"]["name"]);
 			$Uzanti = strtolower($Gecici[ count($Gecici)-1 ]);
-			if( !eregi("tif", $Uzanti) )
+			if( !eregi("tif|tiff", $Uzanti) )
 				die("Dosyaniz tif degil!");
 
 				$DosyaAdi = $x_uye_id;
@@ -1117,7 +1117,7 @@ return true;
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Formu&nbsp;</td>
  <td bgcolor="#F5F5F5">
 <input type="radio" name="a_x_Uye_formu" value="1" checked>Olduğu gibi bırak&nbsp;<input type="radio" name="a_x_Uye_formu" value="2">Sil&nbsp;<input type="radio" name="a_x_Uye_formu" value="3">Değiştir<br>
-<input type="file" name="x_Uye_formu" onChange="if (this.form.a_x_Resim[2]) this.form.a_x_Resim[2].checked=true;">&nbsp;(tif)</td>
+<input type="file" name="x_Uye_formu" onChange="if (this.form.a_x_Uye_formu[2]) this.form.a_x_Uye_formu[2].checked=true;">&nbsp;(tif)</td>
 
 </tr>
 
