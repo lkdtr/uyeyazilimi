@@ -87,6 +87,7 @@ else {
     <a href="rapor_kimlik_baski_csv.php" class="navbeyaz">Kimlik Baskısı için CSV</a>
     <a href="rapor_aidat_odemesi_bulunanlar.php" target="_blank" class="navbeyaz">Ödemeleri Eksik Olanlar (CSV)</a>
     <a href="rapor_odemeler_genel_durum.php" target="_blank" class="navbeyaz">Ödemeler Genel Durum (HTML)</a>
+    <a href="rapor_uyedefteri_csv.php" target="_blank" class="navbeyaz">Üye Defteri İçin Aidat Dökümü (CSV)</a>
   </div> 
    </td>
   </tr>
