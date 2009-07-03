@@ -18,10 +18,6 @@
 	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 	 */
 
-	session_start();
-	if( $_SESSION["uy_status_UserLevel"] != -1 )
-	    header("Location: index.php");
-
 	header("Pragma: public"); // required
 	header("Expires: 0");
 	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -31,11 +27,7 @@
 	header("Content-Transfer-Encoding: binary");
 	//header("Content-Length: ".filesize($filename));	
 	
-	define("DEFAULT_LOCALE", "tr_TR");
-	@setlocale(LC_ALL, DEFAULT_LOCALE);
-	session_start();
 	include("db.php");
-	include("ayar.php");
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Baglanti kurulamadi");
         @mysql_select_db(DB) or die("Veritabani secilemedi");

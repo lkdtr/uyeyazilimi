@@ -18,15 +18,7 @@
 	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 	 */
 	 
-	session_start();
-	if( $_SESSION["uy_status_UserLevel"] != -1 )
-		header("Location: index.php");
-
-	define("DEFAULT_LOCALE", "tr_TR");
-	@setlocale(LC_ALL, DEFAULT_LOCALE);
-	session_start();
 	include("db.php");
-	include("ayar.php");
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");
@@ -42,26 +34,6 @@
 	header("Content-Disposition: attachment; filename=odemeyenler.". date("dmY"). ".csv;");
 	header("Content-Transfer-Encoding: binary");
 
-/*
-	echo "<html>\n";
-	echo " <head><title>LKD - Genel Ödeme Listesi</title>\n";
-	echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
-	echo " </head>\n";
-	echo "<body>\n";
-
-	echo "<table bgcolor=\"#D6DDE7\" border=0 bgcolor=\"white\" cellpadding=3 cellspacing=1>\n";
-	echo " <tr bgcolor=\"#466176\">\n";
-	echo "  <td align=\"left\"><font color=\"#ffffff\">Ad Soyad</font></td>\n";
-	echo "  <td align=\"left\"><font color=\"#ffffff\">Alias</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Üye Numarası</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Kayıt Tarihi</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Yaptığı Ödeme</font></td>\n";
-	echo "  <td align=\"center\"><font color=\"#ffffff\">Yapması Gereken Ödeme</font></td>\n";
-	echo " </tr>\n";
-
-	$Renkler = array("#ffffff", "#f5f5f5"); // Okunmasi kolaylassin
-	$RenkSec = 0;
-*/
 	echo "Ad Soyad;Alias;Üye Numarası;Kayıt Tarihi;Yaptığı Ödeme;Yapması Gereken Ödeme;\n";
 	while( $Bilgi = mysql_fetch_array($Sonuc) ) { // Her uye icin hesaplamalar yapcaz
 		$Renk = $Renkler[ ++$RenkSec%2 ];

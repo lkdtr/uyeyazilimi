@@ -18,15 +18,7 @@
 	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 	 */
 	 
-	session_start();
-	if( $_SESSION["uy_status_UserLevel"] != -1 )
-		header("Location: index.php");
-
-	define("DEFAULT_LOCALE", "tr_TR");
-	@setlocale(LC_ALL, DEFAULT_LOCALE);
-	session_start();
 	include("db.php");
-	include("ayar.php");
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");
