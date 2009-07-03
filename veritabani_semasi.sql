@@ -1,16 +1,4 @@
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Veritabanı: `uyetakip`
---
-
 -- --------------------------------------------------------
 
 --
@@ -22,43 +10,6 @@ CREATE TABLE IF NOT EXISTS `aidat_miktar` (
   `yil` int(4) NOT NULL default '0',
   `miktar` int(10) NOT NULL default '0',
   PRIMARY KEY  (`aidat_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Tablo yapısı: `bildiriler`
---
-
-CREATE TABLE IF NOT EXISTS `bildiriler` (
-  `BildiriID` int(9) NOT NULL auto_increment,
-  `BildiriBaslik` varchar(255) NOT NULL default '',
-  `BildiriText` text,
-  `BildiriTarih` date NOT NULL default '0000-00-00',
-  `BildiriAktif` enum('Aktif','Pasif') NOT NULL default 'Aktif',
-  `StatikSayfa` varchar(100) default '',
-  `BildiriURL` varchar(255) default '',
-  `BildiriTur` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`BildiriID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Tablo yapısı: `duyurular`
---
-
-CREATE TABLE IF NOT EXISTS `duyurular` (
-  `DuyuruID` int(9) NOT NULL auto_increment,
-  `DuyuruTur` varchar(255) NOT NULL default '',
-  `DuyuruBaslik` varchar(255) NOT NULL default '',
-  `DuyuruOzet` text,
-  `DuyuruText` text,
-  `DuyuruTarih` date NOT NULL default '0000-00-00',
-  `DuyuruSonTarih` date NOT NULL default '0000-00-00',
-  `DuyuruAktif` enum('Aktif','Pasif','Gizli') NOT NULL default 'Pasif',
-  `StatikSayfa` varchar(100) default '',
-  PRIMARY KEY  (`DuyuruID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -130,15 +81,3 @@ CREATE TABLE IF NOT EXISTS `uyeler` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
-
---
--- Tablo yapısı: `yoneticiler`
---
-
-CREATE TABLE IF NOT EXISTS `yoneticiler` (
-  `AdminID` int(5) NOT NULL auto_increment,
-  `AdminAd` varchar(100) NOT NULL default '',
-  `AdminPass` varchar(100) NOT NULL default '',
-  `AdminMail` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`AdminID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
