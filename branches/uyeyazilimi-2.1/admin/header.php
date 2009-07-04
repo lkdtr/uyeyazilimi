@@ -3,9 +3,9 @@
 <head>
 <title>LKD ÜYE VERİTABANI</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="StyleSheet" href="stil.css" type="text/css">
-<link rel="StyleSheet" href="anylink.css" type="text/css">
-<script type="text/javascript" src="anylink.js"></script>
+<link rel="StyleSheet" href="css/stil.css" type="text/css">
+<link rel="StyleSheet" href="css/anylink.css" type="text/css">
+<script type="text/javascript" src="js/anylink.js"></script>
 </head>
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" style="border-collapse:collapse ">
   <tr>

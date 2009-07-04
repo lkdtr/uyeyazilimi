@@ -129,8 +129,8 @@ switch ($a) {
 ?>
 <?php include ("header.php") ?>
 <p><br><br><a href="odemelerlist.php">Listeye Dön</a></p>
-<script language="JavaScript" src="ew.js"></script>
-<script language="JavaScript" src="popcalendar.js"></script>
+<script language="JavaScript" src="js/ew.js"></script>
+<script language="JavaScript" src="js/popcalendar.js"></script>
 <script language="JavaScript">
 <!-- start Javascript
 function  EW_checkMyForm(EW_this) {

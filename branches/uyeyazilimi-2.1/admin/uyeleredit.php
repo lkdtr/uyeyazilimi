@@ -608,7 +608,7 @@ switch ($a)
 
 <?php include ("header.php") ?>
 
-<script language="JavaScript" src="ew.js"></script>
+<script language="JavaScript" src="js/ew.js"></script>
 
 <script language="JavaScript">
 
