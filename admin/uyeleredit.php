@@ -1,66 +1,18 @@
 <?php
+session_start();
 
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
-?>
-<?php session_start(); ?>
-<?php
 define("DEFAULT_LOCALE", "tr_TR");
 @setlocale(LC_ALL, DEFAULT_LOCALE);
-?>
-<?php if (@$_SESSION["uy_status"] <> "login") header("Location: index.php") ?>
-<?php
-$UyeResimlerDizin="uye_resimler";
-// kullanici haklari
-define("ewAllowAdd", 1, true);
-define("ewAllowDelete", 2, true);
-define("ewAllowEdit", 4, true);
-define("ewAllowView", 8, true);
-define("ewAllowList", 8, true);
-define("ewAllowSearch", 8, true);
-define("ewAllowAdmin", 16, true);
-$ew_SecTable[0] = 12;
-$ew_SecTable[1] = 13;
-$ew_SecTable[2] = 8;
-$ew_SecTable[3] = 15;
 
-// tablo haklari
-$ewCurSec = 0; // baslangic Sec degeri
-$ewCurIdx = intval(@$_SESSION["uy_status_UserLevel"]);
-if ($ewCurIdx == -1) { //
-	$ewCurSec = 31;
-} elseif ($ewCurIdx > 0 && $ewCurIdx <= 4) {
-	$ewCurSec = $ew_SecTable[$ewCurIdx-1];
-}
-if (($ewCurSec & ewAllowedit) <> ewAllowedit) header("Location: uyelerlist.php");
-?>
-<?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: index.php"); ?>
-<?php
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // gecmis zaman olurki
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // herdaim gunceliz
 header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
-?>
-<?php include ("db.php") ?>
-<?php include ("ayar.php") ?>
-<?php
+
+include ("db.php");
+include ("ayar.php");
+
 ob_start();
 $key = @intval($_GET["key"]);
 if (empty($key)) {
@@ -94,7 +46,6 @@ $x_is_addr = @$_POST["x_is_addr"];
 $x_semt = @$_POST["x_semt"];
 $x_sehir = @$_POST["x_sehir"];
 $x_pkod = @$_POST["x_pkod"];
-$x_AuthLevel = @$_POST["x_AuthLevel"];
 $x_PassWord = @$_POST["x_PassWord"];
 $x_Resim = @$_POST["x_Resim"];
 $x_Uye_formu = @$_POST["x_Uye_formu"];
@@ -129,9 +80,6 @@ switch ($a)
 	case "I": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
 		$strsql = "SELECT * FROM uyeler WHERE id=" . $tkey;
-    if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
-    }
 		$rs = mysql_query($strsql, $conn) or die(mysql_error());
 		if (!($row = mysql_fetch_array($rs))) {
      	ob_end_clean();
@@ -184,9 +132,6 @@ switch ($a)
 	case "U": // update
 
 			$tkey = "" . $key . "";
-    if (@$_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
-    }
 	
 		// Guncellemeden once bir eski kaydi saglama alalimk
 		$strselectsql = "SELECT eposta1,alias,artik_uye_degil FROM uyeler WHERE uye_id=$_POST[x_uye_id]";
@@ -389,7 +334,6 @@ switch ($a)
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
 		$fieldList["oylama"] = $theValue;
 		
-		if (@$_SESSION["uy_status_UserLevel"] == -1) { // Admin degilse asagidaki degerler eklenmesin!
 		// cinsiyet
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_cinsiyet) : $x_cinsiyet;
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
@@ -480,8 +424,6 @@ switch ($a)
                 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
                 $fieldList["kimlik_durumu"] = $theValue;
 		
-		} // Adminlik kontrolunun sonu
-
 		// Resim
 
 		if ($a_x_Resim == "2") { // cikart
@@ -575,13 +517,6 @@ switch ($a)
 		}
 
 
-		if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-
-			$fieldList["uye_id"] = " '" . $_SESSION["uy_status_UserID"] . "'";
-
-		}
-
-
 
 		// update
 
@@ -601,9 +536,6 @@ switch ($a)
 		
 		$updateSQL .= " WHERE id=". $tkey ;
 		
-		if( $_SESSION["uy_status_UserLevel"] <> -1) // Mini bir guvenlik onlemi
-			$updateSQL .= " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
-
   		$rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 
               if(!$row_eski['artik_uye_degil']) // eger artik uye olmayan birinin kaydi duzenleniyorsa, diger veritabaninda zaten kaydi kalmamistir, bu kismi atla
@@ -777,28 +709,14 @@ return true;
 <tr>
 <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ad&nbsp;</td>
 <td bgcolor="#F5F5F5">
-<?php
- if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
-?>
 <input type="text" name="x_uye_ad" size="30" maxlength="99" value="<?php echo strip_tags(@$x_uye_ad); ?>">&nbsp;
-<? } else {
-	echo strip_tags(@$x_uye_ad); 
-	}
-?>
 </td>
 </tr>
 
 <tr>
 <td align="right" bgcolor="#666666"><font color="#FFFFFF">Soyad&nbsp;</td>
 <td bgcolor="#F5F5F5">
-<?php
- if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
-?>
 <input type="text" name="x_uye_soyad" size="30" maxlength="99" value="<?php echo strip_tags(@$x_uye_soyad); ?>">&nbsp;
-<? } else {
-	echo strip_tags(@$x_uye_soyad); 
-	}
-?>
 </td>
 </tr>
 
@@ -824,30 +742,13 @@ return true;
 <td align="right" bgcolor="#666666"><font color="#FFFFFF">E-posta LKD&nbsp;</td>
 
 <td bgcolor="#F5F5F5">
-<?php
- if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
-?>
 <input type="text" name="x_alias" value="<?php echo strip_tags(@$x_alias); ?>"><a href="mailto:<?php echo $x_alias; ?>"><?php echo $x_alias; ?></a>&nbsp;</td>
-<?
-} else { //Doruk Fisek'in Katkilari ile... 
-?>
-<input type="hidden" name="x_alias" value="<?php echo strip_tags(@$x_alias); ?>"><a href="mailto:<?php echo $x_alias; ?>"><?php echo $x_alias; ?></a>&nbsp;</td>
-<?php
-}
-?>
 </tr>
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Kayıt tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5">
- <?php
-  if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
- ?>
  <input type="text" name="x_kayit_tarihi" value="<?php echo strip_tags(@$x_kayit_tarihi); ?>">
- <? } else {
- 	echo strip_tags(@$x_kayit_tarihi);
-	}
- ?>
  </td>
 </tr>
 
@@ -855,7 +756,7 @@ return true;
 
 <td align="right" bgcolor="#666666"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
 
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) {
+   <?php
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_cinsiyet\" ";
 	if( $x_cinsiyet == "e" )
@@ -865,18 +766,7 @@ return true;
 	if( $x_cinsiyet == "m" )
 		echo "checked";
 	echo " value=\"m\">kadın&nbsp;</td>";
-  
-       } else {
- 	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-	   
-	   if( $x_cinsiyet == "e" )
-	   	echo "erkek";
-	   else
-	   	echo "kadın";
-	   
-	   echo "</td>";
-	   }
-  ?>
+    ?>
 
 </tr>
 
@@ -1028,21 +918,13 @@ return true;
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
   <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_no" value="<?php echo strip_tags(@$x_Uye_karar_no); ?>">&nbsp;</td>
- <?} else { ?>
-  <td bgcolor="#F5F5F5">&nbsp;<?php echo strip_tags(@$x_Uye_karar_no); ?>&nbsp;</td>
- <? } ?>
 </tr>
 
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
   <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo strip_tags(@$x_Uye_karar_tarih); ?>">&nbsp; <small>(Yıl-Ay-Gün)</small></td>
- <?} else { ?>
-  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih); ?></td>
- <? } ?>
 </tr>
 
 <tr>
@@ -1056,39 +938,24 @@ return true;
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma tarihi&nbsp;</td>
  <td bgcolor="#F5F5F5">
- <?php
-  if (@$_SESSION["uy_status_UserLevel"] == -1) { // Eger Admin ise alias degistirebilsin...
- ?>
  <input type="text" name="x_ayrilma_tarihi" value="<?php echo strip_tags(@$x_ayrilma_tarihi); ?>">
- <? } else {
- 	echo strip_tags(@$x_ayrilma_tarihi);
-	}
- ?>
  </td>
 </tr>
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma Karar No&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
   <td bgcolor="#F5F5F5"><input type="text" name="x_Ayrilma_karar_no" value="<?php echo strip_tags(@$x_Ayrilma_karar_no); ?>">&nbsp;</td>
- <?} else { ?>
-  <td bgcolor="#F5F5F5">&nbsp;<?php echo strip_tags(@$x_Ayrilma_karar_no); ?>&nbsp;</td>
- <? } ?>
 </tr>
 
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Ayrılma Karar Tarihi&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { ?>
   <td bgcolor="#F5F5F5"><input type="text" name="x_Ayrilma_karar_tarih" value="<?php echo strip_tags(@$x_Ayrilma_karar_tarih); ?>">&nbsp; <small>(Yıl-Ay-Gün)</small></td>
- <?} else { ?>
-  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_tarih); ?></td>
- <? } ?>
 </tr>
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf&nbsp;</td>
- <?php if (@$_SESSION["uy_status_UserLevel"] == -1) { 
+  <?php
   	echo "<td bgcolor=\"#F5F5F5\">";
 	echo "<input type=\"radio\" name=\"x_vesikalik_foto\" ";
 	if( $x_vesikalik_foto == 1 )
@@ -1098,17 +965,6 @@ return true;
 	if( $x_vesikalik_foto == 0 )
 		echo "checked";
 	echo " value=0>Yok&nbsp;</td>";
-  
- } else {
- 	   echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
-	   
-	   if( $x_vesikalik_foto == 1 )
-	   	echo "Evet";
-	   else
-	   	echo "Hayır";
-	   
-	   echo "</td>";
-	   }
   ?>
 </tr>
 
@@ -1134,14 +990,10 @@ return true;
 </tr>
 
 
-<?php
-if (@$_SESSION["uy_status_UserLevel"] == -1) {
-?>
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Notlar&nbsp;</td>
  <td bgcolor="#F5F5F5"><textarea name="x_Notlar" rows="4" cols="34"><?php echo strip_tags(@$x_Notlar); ?></textarea></td>
 </tr>
-<?php } ?>
 
 <tr>
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Resim&nbsp;</td>

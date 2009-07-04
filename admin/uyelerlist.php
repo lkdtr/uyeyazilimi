@@ -1,58 +1,8 @@
-<?php
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
-?>
 <?php session_start(); ?>
 <?php
 define("DEFAULT_LOCALE", "tr_TR");
 @setlocale(LC_ALL, DEFAULT_LOCALE);
 ?>
-<?php if (@$_SESSION["uy_status"] <> "login") header("Location: login.php") ?>
-<?php 
-
-// kullanici haklari
-define("ewAllowAdd", 1, true);
-define("ewAllowDelete", 2, true);
-define("ewAllowEdit", 4, true);
-define("ewAllowView", 8, true);
-define("ewAllowList", 8, true);
-define("ewAllowSearch", 8, true);
-define("ewAllowAdmin", 16, true);
-$ew_SecTable[0] = 12;
-$ew_SecTable[1] = 13;
-$ew_SecTable[2] = 8;
-$ew_SecTable[3] = 15;
-
-// tablo haklari
-$ewCurSec = 0; // baslangic Secim degeri
-if( @$_SESSION["uy_status_UserLevel"] == "" )
-	$ewCurIdx = 1;
-else
-	$ewCurIdx = intval(@$_SESSION["uy_status_UserLevel"]);
-
-if ($ewCurIdx == -1) { // 
-	$ewCurSec = 31;
-} elseif ($ewCurIdx > 0 && $ewCurIdx <= 4) { 
-	$ewCurSec = $ew_SecTable[$ewCurIdx-1];
-}
-?>
-<?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: index.php"); ?>
 <?php
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // gecmis zaman olurki
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // herdaim gunceliz
@@ -283,12 +233,6 @@ if ($DefaultFilter <> "") {
 if ($dbwhere <> "" ) {
 	$whereClause .= "(" . $dbwhere . ") AND ";
 }
-if (($ewCurSec & ewAllowList) <> ewAllowList) {
-	$whereClause .= "(0=1) AND ";
-}
-if (@$_SESSION["uy_status_UserLevel"] <> -1) { //yonetici degil!
-	$whereClause .= "(uye_id = " . @$_SESSION["uy_status_UserID"] . ") AND ";
-}
 if (substr($whereClause, -5) == " AND ") {
 	$whereClause = substr($whereClause, 0, strlen($whereClause)-5);
 }
@@ -336,38 +280,24 @@ if (@$_GET["start"] <> "") {
 ?>
 <?php include ("header.php") ?>
 <br>
-<?php /*<table border=1 bordercolor="#666666" cellspacing="0" cellpadding="5" width="96%" bgcolor="#FFFFCC" align="center"><tr><td style="text-align:justify">
-<b>Üye Bilgilerinizin Güncellenmesi Gerekmektedir.</b> Yeni Üye Veritabanı Programımıza üye bilgilerinin güncellenmesi için yardımınıza ihtiyacımız var. <img src="images/edit.gif" align="absmiddle"> simgesine tıklayarak bilgilerinizi güncelleyebilirsiniz.
-<br>
-<b>Aidat Ödemeleri ile ilgili...</b> Üye kayıt tarihleri (Derneğe üye olduğunuz tarih) ve ödeme bilgileriniz güncelleninceye kadar epey borçlu görünebilirsiniz. Bu konuda da yardıma ihtiyacımız var, veri girişi konusunda çalışabilecek gönüllü arkadaşlarımızın web-cg@linux.org.tr adresine mail atmalari yeterli olacaktır.</td></tr></table>*/?>
-<br>
-<? if ($_SESSION["uy_status_UserLevel"] <> 1) { /* Admin degil ise Aramayi gosterme */ ?>
 <form action="uyelerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
-		<td>Hızlı Arama (*)</td>
+		<td>Hızlı Arama</td>
 		<td>
 			<input type="text" name="psearch" size="20">
 			<input type="Submit" name="Submit" value="Git">
 			&nbsp;&nbsp;<a href="uyelerlist.php?cmd=reset">Tümünü Göster</a>
-			&nbsp;&nbsp;<a href="uyelersrch.php">Detaylı Arama</a>
 		</td>
-		<?php
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-?>
 <td rowspan="2" width="40%" align="center">
 <a href="uyeleradd.php"><img src="images/uye.png" alt="Yeni Üye Ekle" border="0"><br>Yeni Üye Ekle</a>
 </td>
-<?php
-	}
-?>
 	</tr>
 		<tr><td>&nbsp;</td>
 		<td><input type="radio" name="psearchtype" value="" checked>Tam Uyuşma&nbsp;&nbsp;<input type="radio" name="psearchtype" value="AND">Tüm Kelimeler&nbsp;&nbsp;<input type="radio" name="psearchtype" value="OR">Herhangi biri</td>
 	</tr>
 </table>
 </form>
-<? } ?>
 <form method="post">
 <table width="100%" align="center" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr bgcolor="#455F76">
@@ -387,12 +317,8 @@ if (@$_GET["start"] <> "") {
 <a href="uyelerlist.php?order=<?php echo urlencode("eposta1"); ?>"><font color="#FFFFFF">E-posta<?php if ($OrderBy == "eposta1") { ?><font face="Webdings">&nbsp;<?php echo (@$_SESSION["uyeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["uyeler_OT"] == "DESC") ? "(-)" : "") ?>
 <?php } ?></a>
 </td>
-<?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td class="navbeyaz">Gör</td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td class="navbeyaz">Düzenle</td>
-<?php } ?>
 <td class="navbeyaz">Aidat</td>
 </tr>
 <?php
@@ -456,14 +382,10 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
  echo '<td><font color=' . $renk . '>' . $x_uye_soyad . '</font></td>&nbsp;';
  echo '<td><font color=' . $renk . '>' . $x_eposta1 . '</font></td>&nbsp;';
 ?>
-<?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyelerview.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td align="center"><a href="<?php echo (!is_null(@$row["id"])) ? "uyeleredit.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
-<?php } ?>
 <td align="center"><a href="odemelerlist.php?x_uye_id=<?echo $x_uye_id;?>"><img border=0 src="./images/para.gif"></a></td>
 </tr>
 <?php
@@ -477,7 +399,6 @@ while (($row = @mysql_fetch_array($rs)) && ($recCount < $stopRec)) {
 @mysql_free_result($rs);
 mysql_close($conn);
 ?>
-<? if ($_SESSION["uy_status_UserLevel"] <> 1) { /* ekleme izni varsa, admindir... kayit navigasyon bas */ ?>
 <table border="0" cellspacing="0" cellpadding="10"><tr><td>
 <?php
 if ($totalRecs > 0) {
@@ -539,13 +460,7 @@ if ($totalRecs > 0) {
 <?php
 	} // else kapat
 ?>
-<?php 
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-?>
 	<td><a href="uyeleradd.php"><img src="images/addnew.gif" alt="Add new" width="20" height="15" border="0"></a></td>
-<?php
- 	} 
-?>
 	<td>&nbsp;of <?php echo intval(($totalRecs-1)/$displayRecs) + 1; ?></td>
 	</td></tr></table>	
 </form>	
@@ -566,30 +481,13 @@ if ($totalRecs > 0) {
 <?php 
 } else {
 ?>
-<?php 
-	if (($ewCurSec & ewAllowList) == ewAllowList) {
-?>
 	Eşleşen Kayıt Bulunamadı!
-<?php 
-	} else {
-?>
-	Burayi Gormeye İzniniz Yok! Bir hata oldugunu dusunuyorsaniz bilgi@lkd.org.tr adresine mail atiniz.
-<?php
-	}
-?>
 <p>
-<?php
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-?>
 <a href="uyeleradd.php"><img src="images/addnew.gif" alt="Add new" width="20" height="15" border="0"></a>
-<?php
-	}
-?>
 </p>
 <?php 
 }
 ?>
 </td></tr></table>
-<? } /* kayit navigasyon son */ ?>
 <br>
 <?php include ("footer.php") ?>

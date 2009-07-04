@@ -1,65 +1,18 @@
 <?php
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
-?>
-<?php session_start(); ?>
-<?php
+session_start();
+
 define("DEFAULT_LOCALE", "tr_TR");
 @setlocale(LC_ALL, DEFAULT_LOCALE);
-?>
-<?php if (@$_SESSION["uy_status"] <> "login") header("Location: login.php") ?>
-<?php 
 
-// kullanici haklari
-define("ewAllowAdd", 1, true);
-define("ewAllowDelete", 2, true);
-define("ewAllowEdit", 4, true);
-define("ewAllowView", 8, true);
-define("ewAllowList", 8, true);
-define("ewAllowSearch", 8, true);
-define("ewAllowAdmin", 16, true);
-$ew_SecTable[0] = 12;
-$ew_SecTable[1] = 13;
-$ew_SecTable[2] = 8;
-$ew_SecTable[3] = 15;
-
-// tablo haklari
-$ewCurSec = 0; // baslangic Sec degeri
-$ewCurIdx = intval(@$_SESSION["uy_status_UserLevel"]);
-if ($ewCurIdx == -1) { // 
-	$ewCurSec = 31;
-} elseif ($ewCurIdx > 0 && $ewCurIdx <= 4) { 
-	$ewCurSec = $ew_SecTable[$ewCurIdx-1];
-}
-if (($ewCurSec & ewAllowadd) <> ewAllowadd) header("Location: uyelerlist.php");
-?>
-<?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: login.php"); ?>
-<?php
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // gecmis zaman olurki
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // herdaim gunceliz
 header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1 
 header("Cache-Control: post-check=0, pre-check=0", false); 
 header("Pragma: no-cache"); // HTTP/1.0 
-?>
-<?php include ("db.php") ?>
-<?php include ("ayar.php") ?>
-<?php
+
+include ("db.php");
+include ("ayar.php");
+
 ob_start();
 
 // get action
@@ -83,9 +36,6 @@ switch ($a) {
 	case "C": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
 		$strsql = "SELECT * FROM uyeler WHERE id=" . $tkey;
-    if ($_SESSION["uy_status_UserLevel"] <> -1) { //yonetici degil!
-			$strsql .= " AND (uye_id = " . $_SESSION["uy_status_UserID"] . ")";
-    }
 		$rs = mysql_query($strsql, $conn);
 		if (mysql_num_rows($rs) == 0) {
 			ob_end_clean();
@@ -407,10 +357,6 @@ switch ($a) {
             }
             
             
-		if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$fieldList["uye_id"] = " '" . $_SESSION["uy_status_UserID"] . "'";
-		}
-
 		// vt ye yazma zamani
 		$strsql = "INSERT INTO uyeler (";
 		$strsql .= implode(",", array_keys($fieldList));
@@ -419,7 +365,7 @@ switch ($a) {
 		$strsql .= ")";
 		mysql_query($strsql, $conn) or die(mysql_error());
 
-		// bir de e-posta alias'ini baska bir tabloya yazalim -- dfisek
+		// bir de e-posta alias'ini bir de alias tablosuna yazalim
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
 		mysql_select_db(DB_MAIL,$conn_mail);
                 mysql_query("SET NAMES 'utf8'", $conn_mail);
@@ -486,11 +432,8 @@ return true;
 </tr>
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php if (($ewCurSec & ewAllowAdmin) == ewAllowAdmin) { // system admin ?>
+<td bgcolor="#F5F5F5">
 <input type="text" name="x_uye_id" size="30" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
-<?php } else { // yonetici degil! ?>
-<?php $x_uye_id = $_SESSION["uy_status_UserID"]; ?><?php echo $x_uye_id; ?><input type="hidden" name="x_uye_id" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
-<?php } ?>
 &nbsp;</td>
 </tr>
 <tr>
