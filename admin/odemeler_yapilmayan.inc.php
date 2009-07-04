@@ -1,22 +1,4 @@
 <?php
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
 
 // Sayfayi Include edenlerin olasi Uye_Id aktarimlarini yakala
 if( $_GET["x_uye_id"] ) 
@@ -47,16 +29,9 @@ $rs = mysql_query($strsql);
 $Gecici = @mysql_fetch_array($rs);
 $Toplam = $Gecici[0];
 
-// 2002'den once gecerli olan bir tuzuk maddesi ile ilgili odeme
-// Detaylar icin Doruk Fisek lutfen ;)
+// 2002 ve oncesinde dernekte giris aidati aliniyordu
 if( $KayitTarihi <= 2002 )
 	$Toplam += 5; // YTL
-
-//echo $strsql; // SQL cumlesini debug etmek icin commenti kaldirin
-//$rs = mysql_query($strsql);
-//$totalRecs = intval(@mysql_num_rows($rs));
-
-//
 
 if( $Toplam > $x_AidatToplam) {
 ?>
@@ -71,7 +46,7 @@ if( $Toplam > $x_AidatToplam) {
 <tr bgcolor="<?php echo $bgcolor; ?>">
   <td>
    <?php 
-   echo "<a target=\"_blank\" href=\"odemeler.php?tarih=$KayitTarihi\">". FormatCurrency($Toplam,0,-2,-2,-2) ."</a>"; 
+   echo "<a target=\"_blank\" href=\"aidat_dokumu.php?tarih=$KayitTarihi\">". FormatCurrency($Toplam,0,-2,-2,-2) ."</a>"; 
    ?>
   </td>
  <td><?php echo FormatCurrency($x_AidatToplam,0,-2,-2,-2); ?></td>

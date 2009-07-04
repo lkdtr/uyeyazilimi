@@ -1,62 +1,18 @@
 <?php
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
-?>
-<?php session_start(); ?>
-<?php
+session_start();
+
 define("DEFAULT_LOCALE", "tr_TR");
 @setlocale(LC_ALL, DEFAULT_LOCALE);
-?>
-<?php if (@$_SESSION["uy_status"] <> "login") header("Location: login.php") ?>
-<?php 
 
-// kullanici haklari
-define("ewAllowAdd", 1, true);
-define("ewAllowDelete", 2, true);
-define("ewAllowEdit", 4, true);
-define("ewAllowView", 8, true);
-define("ewAllowList", 8, true);
-define("ewAllowSearch", 8, true);
-define("ewAllowAdmin", 16, true);
-$ew_SecTable[0] = 8;
-
-// tablo haklari
-$ewCurSec = 0; // baslangic Sec degeri
-$ewCurIdx = intval(@$_SESSION["uy_status_UserLevel"]);
-if ($ewCurIdx == -1) { // 
-	$ewCurSec = 31;
-} elseif ($ewCurIdx > 0 && $ewCurIdx <= 1) { 
-	$ewCurSec = $ew_SecTable[$ewCurIdx-1];
-}
-if (($ewCurSec & ewAllowedit) <> ewAllowedit) header("Location: odemelerlist.php");
-?>
-<?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: login.php"); ?>
-<?php
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // gecmis zaman olurki
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // herdaim gunceliz
 header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1 
 header("Cache-Control: post-check=0, pre-check=0", false); 
 header("Pragma: no-cache"); // HTTP/1.0 
-?>
-<?php include ("db.php") ?>
-<?php include ("ayar.php") ?>
-<?php
+
+include ("db.php");
+include ("ayar.php");
+
 ob_start();
 $key = @$_GET["key"];
 if (empty($key)) {
@@ -92,9 +48,6 @@ switch ($a)
 	case "I": // gosterilecek bir kayit  var
 		$tkey = "" . $key . "";
 		$strsql = "SELECT * FROM odemeler WHERE id=" . $tkey;
-    if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
-    }
 		$rs = mysql_query($strsql) or die(mysql_error());
 		if (!($row = mysql_fetch_array($rs))) {
      	ob_end_clean();
@@ -114,9 +67,6 @@ switch ($a)
 		break;
 	case "U": // update
 		$tkey = "" . $key . "";
-    if (@$_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$strsql = $strsql . " AND (uye_id = " . @$_SESSION["uy_status_UserID"] . ")";
-    }
 
 		// form degerleri...
 		$x_uye_id = @$_POST["x_uye_id"];
@@ -182,9 +132,6 @@ switch ($a)
 				unlink($_FILES["x_makbuz"]["tmp_name"]);
 			}
 		}
-		if ($_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil!
-			$fieldList["uye_id"] = " '" . $_SESSION["uy_status_UserID"] . "'";
-		}
 
 		// update
 		$updateSQL = "UPDATE odemeler SET ";
@@ -248,7 +195,7 @@ return true;
 <table width="60%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">uye id&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php if (($ewCurSec & ewAllowAdmin) == ewAllowAdmin) { // system admin ?>
+<td bgcolor="#F5F5F5">
 <?php
 $x_uye_idList = "";
 $sqlwrk = "SELECT uye_id, uye_ad, uye_soyad, eposta1 FROM uyeler";
@@ -266,21 +213,6 @@ if ($rswrk) {
 @mysql_free_result($rswrk);
 echo $x_uye_idList ;
 ?>
-<?php } else { // yonetici degil! ?>
-<?php $x_uye_id = $_SESSION["uy_status_UserID"]; ?>
-<?php
-if (!is_null($x_uye_id)) {
-	$sqlwrk = "SELECT * FROM uyeler";
-	$sqlwrk .= " WHERE uye_id = " . $x_uye_id;
-	$rswrk = mysql_query($sqlwrk);
-	if ($rswrk && $rowwrk = mysql_fetch_array($rswrk)) {
-		echo $rowwrk["eposta1"];
-	}
-	@mysql_free_result($rswrk);
-}
-?>
-<input type="hidden" name="x_uye_id" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
-<?php } ?>
 <input type="hidden" name="x_uye_id" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
 &nbsp;</td>
 </tr>
