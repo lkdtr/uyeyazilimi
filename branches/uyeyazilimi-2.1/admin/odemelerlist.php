@@ -1,65 +1,20 @@
 <?php
-	/*
-	 *  LKD Uye Veritabani
-	 *  Copyright (C) 2004  R. Tolga KORKUNCKAYA (tolga@mavibilgisayar.com)
-	 *
-	 *  This program is free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  This program is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU Library General Public License for more details.
-	 *
-	 *  You should have received a copy of the GNU General Public License
-	 *  along with this program; if not, write to the Free Software
-	 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-	 */
-?>
-<?php session_start(); ?>
-<?php
+session_start();
+
 define("DEFAULT_LOCALE", "tr_TR");
 @setlocale(LC_ALL, DEFAULT_LOCALE);
-?>
-<?php if (@$_SESSION["uy_status"] <> "login") header("Location: login.php") ?>
-<?php
 
-// kullanici haklari
-define("ewAllowAdd", 1, true);
-define("ewAllowDelete", 2, true);
-define("ewAllowEdit", 4, true);
-define("ewAllowView", 8, true);
-define("ewAllowList", 8, true);
-define("ewAllowSearch", 8, true);
-define("ewAllowAdmin", 16, true);
-$ew_SecTable[0] = 8;
-
-// tablo haklari
-$ewCurSec = 0; // baslangic guvenlik degeri
-$ewCurIdx = intval(@$_SESSION["uy_status_UserLevel"]);
-if ($ewCurIdx == -1) { //
-	$ewCurSec = 31;
-} elseif ($ewCurIdx > 0 && $ewCurIdx <= 1) {
-	$ewCurSec = $ew_SecTable[$ewCurIdx-1];
-}
-?>
-<?php if (@$_SESSION["uy_status_UserID"] == "" && @$_SESSION["uy_status_UserLevel"] <> -1 ) header("Location: login.php"); ?>
-<?php
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // gecmis zaman olurki
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // herdaim gunceliz
 header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
-?>
-<?php include ("db.php") ?>
-<?php include ("ayar.php") ?>
-<?php
+
+include ("db.php");
+include ("ayar.php");
 
 // Eger Tek kullaniciya bakilacaksa arama degerlerini sifirlayalim
 // Yoksa tek uyeninkiler de cikmiyor
-// Ince ayrintiyi yakaladigi icin "Tesekkurler dfisek"
 if( $_GET["x_uye_id"] )
 	$_SESSION["odemeler_searchwhere"] = "";
 
@@ -72,61 +27,6 @@ $a_search = "";
 $b_search = "";
 $whereClause = "";
 
-// detayli arama kriterleri
-/*
-// field "miktar"
-$x_miktar = @$_GET["x_miktar"];
-$z_miktar = @$_GET["z_miktar"];
-$z_miktar = (get_magic_quotes_gpc()) ? stripslashes($z_miktar) : $z_miktar;
-$arrfieldopr = explode(",", $z_miktar);
-if ($x_miktar <> "" && count($arrfieldopr) >= 3) {
-	$x_miktar = (!get_magic_quotes_gpc()) ? addslashes($x_miktar) : $x_miktar;
-	$a_search = $a_search . "miktar " . $arrfieldopr[0] . " " . $arrfieldopr[1] . $x_miktar . $arrfieldopr[2] . " AND ";
-}
-
-// field "tur"
-$x_tur = @$_GET["x_tur"];
-$z_tur = @$_GET["z_tur"];
-$z_tur = (get_magic_quotes_gpc()) ? stripslashes($z_tur) : $z_tur;
-$arrfieldopr = explode(",", $z_tur);
-if ($x_tur <> "" && count($arrfieldopr) >= 3) {
-	$x_tur = (!get_magic_quotes_gpc()) ? addslashes($x_tur) : $x_tur;
-	$a_search = $a_search . "tur " . $arrfieldopr[0] . " " . $arrfieldopr[1] . $x_tur . $arrfieldopr[2] . " AND ";
-}
-
-// field "tarih"
-$x_tarih = @$_GET["x_tarih"];
-$z_tarih = @$_GET["z_tarih"];
-$z_tarih = (get_magic_quotes_gpc()) ? stripslashes($z_tarih) : $z_tarih;
-$arrfieldopr = explode(",", $z_tarih);
-if ($x_tarih <> "" && count($arrfieldopr) >= 3) {
-	$x_tarih = (!get_magic_quotes_gpc()) ? addslashes($x_tarih) : $x_tarih;
-	$a_search = $a_search . "tarih " . $arrfieldopr[0] . " " . $arrfieldopr[1] . $x_tarih . $arrfieldopr[2] . " AND ";
-}
-
-// field "notlar"
-$x_notlar = @$_GET["x_notlar"];
-$z_notlar = @$_GET["z_notlar"];
-$z_notlar = (get_magic_quotes_gpc()) ? stripslashes($z_notlar) : $z_notlar;
-$arrfieldopr = explode(",", $z_notlar);
-if ($x_notlar <> "" && count($arrfieldopr) >= 3) {
-	$x_notlar = (!get_magic_quotes_gpc()) ? addslashes($x_notlar) : $x_notlar;
-	$a_search = $a_search . "notlar " . $arrfieldopr[0] . " " . $arrfieldopr[1] . $x_notlar . $arrfieldopr[2] . " AND ";
-}
-
-// field "odemeyolu"
-$x_odemeyolu = @$_GET["x_odemeyolu"];
-$z_odemeyolu = @$_GET["z_odemeyolu"];
-$z_odemeyolu = (get_magic_quotes_gpc()) ? stripslashes($z_odemeyolu) : $z_odemeyolu;
-$arrfieldopr = explode(",", $z_odemeyolu);
-if ($x_odemeyolu <> "" && count($arrfieldopr) >= 3) {
-	$x_odemeyolu = (!get_magic_quotes_gpc()) ? addslashes($x_odemeyolu) : $x_odemeyolu;
-	$a_search = $a_search . "odemeyolu " . $arrfieldopr[0] . " " . $arrfieldopr[1] . $x_odemeyolu . $arrfieldopr[2] . " AND ";
-}
-if (strlen($a_search) > 4) {
-	$a_search = substr($a_search, 0, strlen($a_search)-4);
-}
-*/
 // basit arama kriterleri
 $pSearch = @$_GET["psearch"];
 $pSearchType = @$_GET["psearchtype"];
@@ -252,12 +152,6 @@ if ($DefaultFilter <> "") {
 if ($dbwhere <> "" ) {
 	$whereClause .= "(" . $dbwhere . ") AND ";
 }
-if (($ewCurSec & ewAllowList) <> ewAllowList) {
-	$whereClause .= "(0=1) AND ";
-}
-if (@$_SESSION["uy_status_UserLevel"] <> -1) { // yonetici degil ise
-	$whereClause .= "(uye_id = " . @$_SESSION["uy_status_UserID"] . ") AND ";
-}
 if (substr($whereClause, -5) == " AND ") {
 	$whereClause = substr($whereClause, 0, strlen($whereClause)-5);
 }
@@ -267,26 +161,8 @@ if ($whereClause <> "") {
 if ($_GET["x_uye_id"] <> "") {
 // filtre
 	$IsimFilter = $_GET["x_uye_id"];
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-		$strsql .= " WHERE uye_id = '$IsimFilter'";
-	}
+	$strsql .= " WHERE uye_id = '$IsimFilter'";
 }
-/*
-// fixme: burasi sadece odeme detayli aramasini duzeltmek icin var, 
-// anlayacagin bug duzeltmek icin kendimiz bug yazdik hehe :( 
-// simdi basit arama calismiyor iyi mi?
-if ($_GET["x_uye_id"] <> "") {
-	$IsimFilter = $_GET["x_uye_id"];
-		if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-			if (($_GET["x_miktar"] <> "") || ($_GET["x_tarih"] <> "") || ($_GET["x_notlar"] <> "") || ($_GET["x_odemeyolu"] <> "") || ($_GET["x_miktar"] <> "")) { 
-				$strsql .= " AND uye_id = '$IsimFilter'";
-			}
-			else {
-				$strsql .= " WHERE uye_id = '$IsimFilter'";
-			}
-	}
-}
-*/
 
 if ($OrderBy <> "") {
 	$strsql .= " ORDER BY " . $OrderBy . " " . @$_SESSION["odemeler_OT"];
@@ -295,7 +171,6 @@ if ($OrderBy <> "") {
 $rs = mysql_query($strsql);
 $totalRecs = intval(@mysql_num_rows($rs));
 
-//
 if (@$_GET["start"] <> "") {
 	$startRec = $_GET["start"];
 	$_SESSION["odemeler_REC"] = $startRec;
@@ -325,16 +200,14 @@ if (@$_GET["start"] <> "") {
 }
 ?>
 <?php include ("header.php") ?>
-<? if ($_SESSION["uy_status_UserLevel"] <> 1) { /* ekleme izni varsa, admindir... kayit navigasyon bas */ ?>
 <form action="odemelerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
-		<td>Hızlı Arama (*)</td>
+		<td>Hızlı Arama</td>
 		<td>
 			<input type="text" name="psearch" size="20">
 			<input type="Submit" name="Submit" value="Git">
 			&nbsp;&nbsp;<a href="odemelerlist.php?cmd=reset">Tümünü Göster</a>
-			<!--&nbsp;&nbsp;<a href="odemelersrch.php">Detaylı Arama</a>-->
 		</td>
 	</tr>
 		<tr><td>&nbsp;</td>
@@ -342,15 +215,7 @@ if (@$_GET["start"] <> "") {
 	</tr>
 </table>
 </form>
-<? 
 
-} /* admin degilse odemelerde aramayi gostermeyelim... son */
- if ($_SESSION["uy_status_UserLevel"] <> -1) {
- 	$_GET["key"] = $_GET["x_uye_id"];
- 	if($_GET["cmd"] == "resetall")
- 		$_GET["key"] = $_SESSION["uy_status_UserID"];
- }
-?>
 <form method="post">
 <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 <tr bgcolor="#466176">
@@ -370,18 +235,10 @@ if (@$_GET["start"] <> "") {
 <a href="odemelerlist.php?order=<?php echo urlencode("tarih"); ?>"><font color="#FFFFFF">Tarih&nbsp;<?php if ($OrderBy == "tarih") { ?><font face="Webdings"><?php echo (@$_SESSION["odemeler_OT"] == "ASC") ? "(+)" : ((@$_SESSION["odemeler_OT"] == "DESC") ? "(-)" : "") ?>
 <?php } ?></a>
 </td>
-<?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td>&nbsp;</td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td>&nbsp;</td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td>&nbsp;</td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
 <td>&nbsp;</td>
-<?php } ?>
 </tr>
 <?php
 
@@ -453,22 +310,14 @@ switch ($x_tur) {
 ?>
 &nbsp;</td>
 <td><?php echo FormatDateTime($x_tarih,7); ?>&nbsp;</td>
-<?php If (($ewCurSec & ewAllowView) == ewAllowView) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemelerview.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/browse.gif' alt='Gör' width='16' height='16' border='0'></a></td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowEdit) == ewAllowEdit) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemeleredit.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/edit.gif' alt='Düzenle' width='16' height='16' border='0'></a></td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowAdd) == ewAllowAdd) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemeleradd.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/copy.gif' alt='Kopyala' width='16' height='16' border='0'></a></td>
-<?php } ?>
-<?php If (($ewCurSec & ewAllowDelete) == ewAllowDelete) { ?>
 <td><a href="<?php echo (!is_null(@$row["id"])) ? "odemelerdelete.php?key=".urlencode($row["id"]) : "javascript:alert('Invalid Record! Key is null');";	?>
 "><img src='images/delete.gif' alt='Sil' width='16' height='16' border='0'></a></td>
-<?php } ?>
 </tr>
 <?php
 	}
@@ -489,9 +338,8 @@ switch ($x_tur) {
 </table>
 </form>
 <?php
-	include ("yapilmayanodemelerlistforinclude.php");
+	include ("odemeler_yapilmayan.inc.php");
 ?>
-<? if ($_SESSION["uy_status_UserLevel"] <> 1) { /* admin ise kayit navigasyon bas */ ?>
 <table border="0" cellspacing="0" cellpadding="10"><tr><td>
 <?php
 if ($totalRecs > 0) {
@@ -553,13 +401,7 @@ if ($totalRecs > 0) {
 <?php
 	}
 ?>
-<?php
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-?>
 	<td><a href="odemeleradd.php"><img src="images/addnew.gif" alt="Add new" width="20" height="15" border="0"></a></td>
-<?php
- 	}
-?>
 	<td>&nbsp;of <?php echo intval(($totalRecs-1)/$displayRecs) + 1; ?></td>
 	</td></tr></table>
 </form>
@@ -580,31 +422,16 @@ if ($totalRecs > 0) {
 <?php
 } else {
 ?>
-<?php
-	if (($ewCurSec & ewAllowList) == ewAllowList) {
-?>
 	Eşleşen Kayıt Bulunamadı!
-<?php
-	} else {
-?>
-	İzniniz Yok
-<?php
-	}
-?>
 <p>
-<?php
-	if (($ewCurSec & ewAllowAdd) == ewAllowAdd) {
-?>
 <a href="odemeleradd.php"><img src="images/addnew.gif" alt="Add new" width="20" height="15" border="0"></a>
-<?php
-	}
-?>
 </p>
 <?php
 }
 ?>
 </td></tr></table>
-<? } /* Kayit navig son*/ 
+
+<?php
 // baglantiyi kes ve result bosalt
 @mysql_free_result($rs);
 mysql_close($conn);
