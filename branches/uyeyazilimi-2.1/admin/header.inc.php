@@ -1,7 +1,7 @@
 <?php error_reporting(0); ?>
 <html>
 <head>
-<title>LKD ÜYE VERİTABANI</title>
+<title>LKD Üye Yazılımı Yönetim Arayüzü</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link rel="StyleSheet" href="css/stil.css" type="text/css">
 <link rel="StyleSheet" href="css/anylink.css" type="text/css">

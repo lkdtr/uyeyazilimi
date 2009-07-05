@@ -10,8 +10,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 ?>
-<?php include ("db.php") ?>
-<?php include ("ayar.php") ?>
+<?php require ('ayarlar.inc.php') ?>
+<?php require ('fonksiyonlar.inc.php') ?>
 <?php
 ob_start();
 $key = @intval($_GET["key"]);
@@ -89,7 +89,7 @@ switch ($a)
 		break;
 }
 ?>
-<?php include ("header.php") ?>
+<?php require ('header.inc.php') ?>
 <br>
 <div align="center">
  <a href="uyelerlist.php"><img border=0 title="Listeye Dön" alt="Listeye Dön" src="images/ed_undo.gif"></a>
@@ -370,4 +370,4 @@ switch ($x_cinsiyet) {
 </table>
 </form>
 <p>
-<?php include ("footer.php") ?>
+<?php require ('footer.inc.php') ?>

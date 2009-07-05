@@ -10,8 +10,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 
-include ("db.php");
-include ("ayar.php");
+require ('ayarlar.inc.php');
+require ('fonksiyonlar.inc.php');
 
 // Eger Tek kullaniciya bakilacaksa arama degerlerini sifirlayalim
 // Yoksa tek uyeninkiler de cikmiyor
@@ -199,7 +199,7 @@ if (@$_GET["start"] <> "") {
 	}
 }
 ?>
-<?php include ("header.php") ?>
+<?php require ('header.inc.php') ?>
 <form action="odemelerlist.php">
 <table border="0" cellspacing="0" cellpadding="4">
 	<tr>
@@ -338,7 +338,7 @@ switch ($x_tur) {
 </table>
 </form>
 <?php
-	include ("odemeler_yapilmayan.inc.php");
+	require ("odemeler_yapilmayan.inc.php");
 ?>
 <table border="0" cellspacing="0" cellpadding="10"><tr><td>
 <?php
@@ -435,5 +435,5 @@ if ($totalRecs > 0) {
 // baglantiyi kes ve result bosalt
 @mysql_free_result($rs);
 mysql_close($conn);
-include ("footer.php");
+require ('footer.inc.php');
 ?>

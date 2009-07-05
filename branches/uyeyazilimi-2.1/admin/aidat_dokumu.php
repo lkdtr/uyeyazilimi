@@ -2,9 +2,9 @@
 	define("DEFAULT_LOCALE", "tr_TR");
 	@setlocale(LC_ALL, DEFAULT_LOCALE);
 	session_start();
-	include("db.php");
-	include("ayar.php");
-	include("header.php");
+	require('ayarlar.inc.php');
+	require('fonksiyonlar.inc.php');
+	require('header.inc.php');
 
 	$KayitTarihi = $_GET["tarih"] ? addslashes($_GET["tarih"]) : "2000";
 	$KayitUcreti = 5; // YTL
@@ -53,5 +53,5 @@
 	mysql_free_result($Sonuc);
 
 	echo "</table>";
-	include("footer.php");
+	require('footer.inc.php');
 ?>

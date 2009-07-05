@@ -10,8 +10,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 
-include ("db.php");
-include ("ayar.php");
+require ('ayarlar.inc.php');
+require ('fonksiyonlar.inc.php');
 
 ob_start();
 $key = @intval($_GET["key"]);
@@ -606,7 +606,7 @@ switch ($a)
 
 ?>
 
-<?php include ("header.php") ?>
+<?php require ('header.inc.php') ?>
 
 <script language="JavaScript" src="js/ew.js"></script>
 
@@ -1031,4 +1031,4 @@ return true;
 
 </form>
 
-<?php include ("footer.php") ?>
+<?php require ('footer.inc.php') ?>

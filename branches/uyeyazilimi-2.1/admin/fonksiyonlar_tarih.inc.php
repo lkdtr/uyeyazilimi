@@ -1,11 +1,7 @@
 <?php
-/*
-Fonksiyon ve ayarlar...
-*/
-$MakbuzDizin="makbuzlar";
-$UyeResimlerDizin="uye_resimler";
-$UyeFormlarDizin="uye_formlar";
-define("DEFAULT_CURRENCY_SYMBOL", " YTL");
+// Tarih, para, sayi formatlama fonksiyonlari
+
+define("DEFAULT_CURRENCY_SYMBOL", " TL");
 define("DEFAULT_MON_DECIMAL_POINT", ".");
 define("DEFAULT_MON_THOUSANDS_SEP", ",");
 define("DEFAULT_POSITIVE_SIGN", "");
