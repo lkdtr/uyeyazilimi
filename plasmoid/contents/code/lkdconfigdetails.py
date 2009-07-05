@@ -27,9 +27,10 @@ class LKDConfigDetails(QWidget, Ui_Dialog):
         QWidget.__init__(self)
         self.setupUi(self)
 
-        self.label_2.setText(uyebilgileri['no'])
-        self.label_4.setText(uyebilgileri['ad'])
-        self.label_6.setText(uyebilgileri['eposta'])
-        self.label_8.setText(uyebilgileri['sehir'])
-        self.label_10.setText(uyebilgileri['yil'])
-        self.label_12.setText(uyebilgileri['aidat'])
+        if uyebilgileri.has_key('no'):
+            self.label_2.setText(uyebilgileri['no'])
+            self.label_4.setText(uyebilgileri['ad'])
+            self.label_6.setText(uyebilgileri['eposta'])
+            self.label_8.setText(uyebilgileri['sehir'])
+            self.label_10.setText(uyebilgileri['yil'])
+            self.label_12.setText(uyebilgileri['aidat'])
