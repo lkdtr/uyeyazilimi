@@ -20,27 +20,16 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyKDE4.kdeui import *
 
-from lkdconfigform import Ui_Dialog
+from lkdconfigdetailsform import Ui_Dialog
 
-class LKDConfig(QWidget, Ui_Dialog):
-    def __init__(self, parent, settings):
+class LKDConfigDetails(QWidget, Ui_Dialog):
+    def __init__(self, parent, uyebilgileri):
         QWidget.__init__(self)
         self.setupUi(self)
 
-        if settings.has_key('uye_ad') & settings.has_key('uye_parola'):
-            self.uyead.setText(settings['uye_ad'])
-            self.uyeparola.setText(settings['uye_parola'])
-
-        self.connect(self.label_3, SIGNAL('linkActivated(QString)'), self.loadUrl)
-
-    def loadUrl(self, url):
-        import os
-        os.popen('xdg-open %s' % url)
-
-    def exportSettings(self):
-        settings = {}
-
-        settings['uye_ad'] = self.uyead.text()
-        settings['uye_parola'] = self.uyeparola.text()
-
-        return settings
+        self.label_2.setText(uyebilgileri['no'])
+        self.label_4.setText(uyebilgileri['ad'])
+        self.label_6.setText(uyebilgileri['eposta'])
+        self.label_8.setText(uyebilgileri['sehir'])
+        self.label_10.setText(uyebilgileri['yil'])
+        self.label_12.setText(uyebilgileri['aidat'])

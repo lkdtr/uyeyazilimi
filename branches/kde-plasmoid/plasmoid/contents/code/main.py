@@ -24,7 +24,7 @@ from PyKDE4.kdeui import *
 from PyKDE4.kio import *
 
 from lkdconfig import LKDConfig
-from lkdconfigview import LKDConfigView
+from lkdconfigdetails import LKDConfigDetails
 from lkd import LKDParser
 
 class LKDUyeApplet(plasmascript.Applet):
@@ -32,13 +32,15 @@ class LKDUyeApplet(plasmascript.Applet):
         plasmascript.Applet.__init__(self,parent)
 
     def init(self):
+        self.lc = self.config()
         self.settings = {}
+        self.uyebilgileri = {}
 
         # Plasmoid yapılandırması
         self.layout = QGraphicsGridLayout(self.applet)
         self.setAspectRatioMode(Plasma.IgnoreAspectRatio)
         self.setHasConfigurationInterface(True)
-        self.setMinimumSize(300, 204)
+        self.setMinimumSize(300, 164)
         self.theme = Plasma.Svg(self)
         self.theme.setImagePath("widgets/background")
 
@@ -61,27 +63,12 @@ class LKDUyeApplet(plasmascript.Applet):
         self.uyeno1.setText(u'Üye Numarası:')
         self.uyeno2 = Plasma.Label()
 
-        # Üye Olduğu Yıl
-        self.uyeyil1 = Plasma.Label()
-        self.uyeyil1.setText(u'Üyelik Başlangıç Yılı:')
-        self.uyeyil2 = Plasma.Label()
-
-        # Aidat Borcu
-        self.uyeborc1 = Plasma.Label()
-        self.uyeborc1.setText(u'Aidat borcu:')
-        self.uyeborc2 = Plasma.Label()
-
         # Üye bilgilerinin kendi kutularına yerleştirilmesi
         self.infoLayout = QGraphicsGridLayout(self.infoFrame)
         self.infoLayout.addItem(self.uyead1, 0, 0)
         self.infoLayout.addItem(self.uyead2, 0, 1)
         self.infoLayout.addItem(self.uyeno1, 1, 0)
         self.infoLayout.addItem(self.uyeno2, 1, 1)
-        self.infoLayout.addItem(self.uyeyil1, 2, 0)
-        self.infoLayout.addItem(self.uyeyil2, 2, 1)
-        self.infoLayout.addItem(self.uyeborc1, 3, 0)
-        self.infoLayout.addItem(self.uyeborc2, 3, 1)
-        self.infoLayout.setColumnMinimumWidth(1, 90)
 
         # Dernek amblemi ve üye bilgilerinin plasmoid'e yerleştirilmesi
         self.layout.addItem(self.lkdlogo, 0, 0)
@@ -93,6 +80,9 @@ class LKDUyeApplet(plasmascript.Applet):
         self.wallet = KWallet.Wallet.openWallet(KWallet.Wallet.LocalWallet(), 0, 1)
         if self.wallet <> None:
             self.connect(self.wallet, SIGNAL("walletOpened(bool)"), self.walletOpened)
+        
+    def paintInterface(self, painter, option, rect):
+        self.infoLayout.setColumnMinimumWidth(1, self.infoFrame.size().width()/2)
 
     def constraintsEvent(self, constraints):
         self.setBackgroundHints(self.TranslucentBackground)
@@ -100,15 +90,15 @@ class LKDUyeApplet(plasmascript.Applet):
     def createConfigurationInterface(self, parent):
         # Üye bilgileri sayfası
         self.lkdconfig = LKDConfig(self, self.settings)
-        p = parent.addPage(self.lkdconfig, u'Üye Bilgileri')
-        p.setIcon(KIcon(self.package().path() + 'contents/icon.svgz'))
+        p = parent.addPage(self.lkdconfig, u'Üyelik Bilgileri')
+        p.setIcon(KIcon('preferences-contact-list'))
 
         self.connect(parent, SIGNAL("okClicked()"), self.configAccepted)
 
-        # Görünüm ayarları sayfası
-        self.lkdconfigview = LKDConfigView()
-        p = parent.addPage(self.lkdconfigview, u'Görünüm')
-        p.setIcon(KIcon('preferences-other'))
+        # Üye detayları sayfası
+        self.lkdconfigdetails = LKDConfigDetails(self, self.uyebilgileri)
+        p = parent.addPage(self.lkdconfigdetails, u'Üye Detayları')
+        p.setIcon(KIcon('preferences-desktop-user'))
 
     def showConfigurationInterface(self):
         dialog = KPageDialog()
@@ -125,7 +115,6 @@ class LKDUyeApplet(plasmascript.Applet):
             return False
         else:
             return uyebilgileri
-
 
     def configAccepted(self):
         self.settings = self.lkdconfig.exportSettings()
@@ -161,12 +150,10 @@ class LKDUyeApplet(plasmascript.Applet):
 
     def readInfo(self):
         if (self.settings['uye_ad'] != '') & (self.settings['uye_parola'] != ''):
-            uyebilgileri = self.checkAccount()
-            if uyebilgileri.has_key('ad'):
-                self.uyead2.setText(uyebilgileri['ad'])
-                self.uyeno2.setText(uyebilgileri['no'])
-                self.uyeyil2.setText(uyebilgileri['yil'])
-                self.uyeborc2.setText(uyebilgileri['aidat'])
+            self.uyebilgileri = self.checkAccount()
+            if self.uyebilgileri.has_key('ad'):
+                self.uyead2.setText(self.uyebilgileri['ad'])
+                self.uyeno2.setText(self.uyebilgileri['no'])
 
 def CreateApplet(parent):
     return LKDUyeApplet(parent)
