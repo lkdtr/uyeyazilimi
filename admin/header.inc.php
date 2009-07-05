@@ -25,9 +25,10 @@
    <td height="19" bgcolor="#466176">
 	<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
      <tr>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Üye Listesi</a></td>
-       <td><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Yapılan Ödemeler</a></td>
-       <td align="center"><img src="images/navicon_truncu.gif" width="16" height="9"><a href="#" onMouseOver="dropdownmenu(this, event, 'anylinkmenu1')" class="navbeyaz">Raporlar</a></td>
+       <td width="120"><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Üye Listesi</a></td>
+       <td width="160"><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Yapılan Ödemeler</a></td>
+       <td width="100"><img src="images/navicon_truncu.gif" width="16" height="9"><a href="#" onMouseOver="dropdownmenu(this, event, 'anylinkmenu1')" class="navbeyaz">Raporlar</a></td>
+       <td align="right"><font color="white"><?php echo $_SERVER['PHP_AUTH_USER']; ?></font></td>
      </tr>
    </table>
    <div class="anylinkcss" id="anylinkmenu1">
