@@ -1,8 +1,8 @@
 <?php
 	define("DEFAULT_LOCALE", "tr_TR");
 	@setlocale(LC_ALL, DEFAULT_LOCALE);
-	include("db.php");
-	include("ayar.php");
+	require('ayarlar.inc.php');
+	require('fonksiyonlar.inc.php');
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");

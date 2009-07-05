@@ -1,5 +1,5 @@
 <?php
-	include("db.php");
+	require('ayarlar.inc.php');
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
         @mysql_select_db(DB) or die("Veritabanı seçilemedi");

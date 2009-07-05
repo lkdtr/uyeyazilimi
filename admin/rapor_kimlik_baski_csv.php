@@ -8,7 +8,7 @@
 	header("Content-Transfer-Encoding: binary");
 	//header("Content-Length: ".filesize($filename));	
 	
-	include("db.php");
+	require('ayarlar.inc.php');
 
         $Baglanti = @mysql_connect(HOST, USER, PASS) or die("Baglanti kurulamadi");
         @mysql_select_db(DB) or die("Veritabani secilemedi");

@@ -1,5 +1,5 @@
 <?php
- require('header.php');
+ require('header.inc.php');
 ?>
 
 
@@ -59,5 +59,5 @@ LKD Üye Sistemi			</b></td>
 
 <br></p>
 <?php
- require('footer.php');
+ require('footer.inc.php');
 ?>

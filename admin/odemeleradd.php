@@ -10,8 +10,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false); 
 header("Pragma: no-cache"); // HTTP/1.0 
 
-include ("db.php");
-include ("ayar.php");
+require ('ayarlar.inc.php');
+require ('fonksiyonlar.inc.php');
 
 ob_start();
 
@@ -127,7 +127,7 @@ switch ($a) {
 		break;
 }
 ?>
-<?php include ("header.php") ?>
+<?php require ('header.inc.php') ?>
 <p><br><br><a href="odemelerlist.php">Listeye Dön</a></p>
 <script language="JavaScript" src="js/ew.js"></script>
 <script language="JavaScript" src="js/popcalendar.js"></script>
@@ -262,4 +262,4 @@ echo $x_odemeyoluList;
 <p>
 <input type="submit" name="Action" value="EKLE">
 </form>
-<?php include ("footer.php") ?>
+<?php require ('footer.inc.php') ?>

@@ -1,5 +1,5 @@
 <?php
-	include("db.php");
+	require('ayarlar.inc.php');
 
 	if( isset($_GET["x"]) && isset($_GET["y"]) ) { // Aralik verilmisse csv ciktisini bastir
 
@@ -29,7 +29,7 @@
 		echo " </form>\n";
 		echo "</table>\n";
 	} else {
-		include("header.php");
+		require('header.inc.php');
 		echo "<table align=\"center\" border=\"0\" cellspacing=\"1\" cellpadding=\"10\">\n";
 		echo " <tr bgcolor=\"#466176\">\n";
 		echo " <td align=\"center\"><b><font color=\"#ffffff\">Baslangic</font></b></td>\n";
