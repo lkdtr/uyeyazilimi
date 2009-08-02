@@ -1,0 +1,19 @@
+#
+# Dernek uyelerinin sisteme giris yapmalarini saglayan http dogrulamasini saglayan ornek bir .htaccess dosyasi
+# Ayarlar duzenlenmis halinin admin dizininin kokune, .htaccess ismiyle yerlestirilmesi gerekir
+#
+
+ErrorDocument 401 *****
+
+AuthName "*****"
+AuthType Basic
+AuthMySQLHost *****
+AuthMySQLUser *****
+AuthMySQLPassword *****
+AuthMySQLDB *****
+AuthMySQLUserTable *****
+AuthMySQLNameField *****
+AuthMySQLPasswordField *****
+AuthMySQLPwEncryption md5
+AuthMySQLEnable On
+require valid-user
