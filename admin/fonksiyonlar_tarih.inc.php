@@ -235,7 +235,7 @@ function FormatCurrency($amount, $NumDigitsAfterDecimal, $IncludeLeadingDigit, $
 
 	// set defaults if locale is not set
 	//if (empty($currency_symbol)) $currency_symbol = DEFAULT_CURRENCY_SYMBOL;
-		$currency_symbol = " YTL"; // Uyum sorunundan elle atiyoruz
+		$currency_symbol = " TL"; // Uyum sorunundan elle atiyoruz
 	if (empty($mon_decimal_point)) $mon_decimal_point = DEFAULT_MON_DECIMAL_POINT;
 	if (empty($mon_thousands_sep)) $mon_thousands_sep = DEFAULT_MON_THOUSANDS_SEP;
 	if (empty($positive_sign)) $positive_sign = DEFAULT_POSITIVE_SIGN;
