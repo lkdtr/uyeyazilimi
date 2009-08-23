@@ -19,12 +19,16 @@ $uyeGuncelle='UPDATE uyeler SET eposta1 = "' . mysql_real_escape_string(@strip_t
                           trac_listesi = "' . mysql_real_escape_string(@strip_tags($_POST['txt_trac'])) .'"
         WHERE alias="' . $uye . '@linux.org.tr"';
 $uyeGuncelleSorgu = mysql_query($uyeGuncelle,$baglanti_uye);
+
+# E-posta aliaslarinin bulundugu tabloyu guncelleyelim
+@mysql_select_db(DB_MAIL,$baglanti_uye);
+$mailGuncelle = 'UPDATE forwardings SET destination = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail1'])) . '" WHERE source="'. $uye . '@linux.org.tr"';
+$mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_uye);
 @mysql_close($baglanti_uye);
 
-# E-posta sunucusunda uyenin alias'ini guncelleyelim
+# Tasinma/replikasyon calismalari sirasinda senkronizasyon kaybedilmemesi icin bir de e-posta sunucusundaki tabloyu guncelleyelim
 $baglanti_postfix=mysql_connect(HOST_MAIL,USER_MAIL,PASS_MAIL);
 @mysql_select_db(DB_MAIL,$baglanti_postfix);
-$mailGuncelle = 'UPDATE forwardings SET destination = "' . mysql_real_escape_string(@strip_tags($_POST['txt_mail1'])) . '" WHERE source="'. $uye . '@linux.org.tr"';
 $mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_postfix);
 mysql_close($baglanti_postfix);
 
