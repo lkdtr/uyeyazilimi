@@ -541,29 +541,34 @@ switch ($a)
               if(!$row_eski['artik_uye_degil']) // eger artik uye olmayan birinin kaydi duzenleniyorsa, diger veritabaninda zaten kaydi kalmamistir, bu kismi atla
                {		
 		// alias tablosunu da guncelleyelim - once birini sonra digerini guncellemeli, baska anahtar yok tabloda
+                mysql_select_db(DB_MAIL, $conn);
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
 		mysql_select_db(DB_MAIL, $conn_mail);
                 mysql_query("SET NAMES 'utf8'", $conn_mail);
 		if($row_eski[alias] != $x_alias)
 		 {
 		  $updateSQL = "UPDATE forwardings SET source='$x_alias' WHERE destination = '$row_eski[eposta1]'";
+		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		  
 		  if($row_eski[eposta1] != $x_eposta1)		// eger hem alias hem eposta guncelleniyorsa, guncellenen alias'i anahtar almak gerek
 		   {
 		    $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$x_alias'";
+		    $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 		    $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		   }
 		 }
 		elseif($row_eski[eposta1] != $x_eposta1)	// sadece eposta guncelleniyorsa, eski alias'i anahtar almak gerek
 		 {
 		  $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$row_eski[alias]'";
+		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 		  $rs = mysql_query($updateSQL, $conn_mail) or die(mysql_error());
 		 }
                 // Uye, uyelikten ayrildiysa e-postasi postfix veritabanindan kaldiralim -- artik kullanmasin
                 if($x_artik_uye_degil)
                  {
                   $strsql = "DELETE FROM forwardings WHERE source='$x_alias'";
+                  mysql_query($strsql, $conn) or die(mysql_error());
                   mysql_query($strsql, $conn_mail) or die(mysql_error());
                  }
 

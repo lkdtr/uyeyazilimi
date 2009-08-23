@@ -366,10 +366,12 @@ switch ($a) {
 		mysql_query($strsql, $conn) or die(mysql_error());
 
 		// bir de e-posta alias'ini bir de alias tablosuna yazalim
+		mysql_select_db(DB_MAIL,$conn);
                 $conn_mail = mysql_connect(HOST_MAIL, USER_MAIL, PASS_MAIL);
 		mysql_select_db(DB_MAIL,$conn_mail);
                 mysql_query("SET NAMES 'utf8'", $conn_mail);
 		$strsql = "INSERT INTO forwardings VALUES('$_POST[x_alias]',$fieldList[eposta1])";
+		mysql_query($strsql, $conn) or die(mysql_error());
 		mysql_query($strsql, $conn_mail) or die(mysql_error());
 		mysql_close($conn_mail);
 
