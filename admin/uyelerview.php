@@ -100,7 +100,6 @@ switch ($a)
 
 <?php if( $x_artik_uye_degil == 1 ) { ?>
 <h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
-<div align="center">Üye hesabı kapanış zaman damgası:  <?php echo "$x_kayit_kapanis_tarih"; ?></div><br/>
 <?php } ?>
 
 <?php if( $x_haber_alinamiyor == 1 ) { ?>
@@ -138,11 +137,6 @@ switch ($a)
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">LKD e-posta</td>
 <td bgcolor="#F5F5F5"><?php echo "$x_alias"; ?></td>
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye hesabı açılış zaman damgası</td>
- <td bgcolor="#F5F5F5"><?php echo "$x_kayit_acilis_tarih"; ?></td>
 </tr>
 
 <tr>
@@ -296,6 +290,10 @@ switch ($x_cinsiyet) {
  <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Telefon2)?></td>
 </tr>
 
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye Hesabı Açılış</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_acilis_tarih"; ?></td>
+</tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No</td>
@@ -337,6 +335,11 @@ switch ($x_cinsiyet) {
 </tr>
 
 <?php if($x_artik_uye_degil == 1) { ?>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye Hesabı Kapanış</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_kapanis_tarih"; ?></td>
+</tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma tarihi</td>
