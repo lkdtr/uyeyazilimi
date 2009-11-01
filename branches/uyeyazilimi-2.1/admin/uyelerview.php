@@ -100,7 +100,7 @@ switch ($a)
 
 <?php if( $x_artik_uye_degil == 1 ) { ?>
 <h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
-<div align="center">Üyelikten ayrılma zaman damgası: <?php echo "$x_kayit_kapanis_tarih"; ?></div><br/>
+<div align="center">Üye hesabı kapanış zaman damgası:  <?php echo "$x_kayit_kapanis_tarih"; ?></div><br/>
 <?php } ?>
 
 <?php if( $x_haber_alinamiyor == 1 ) { ?>
@@ -111,47 +111,47 @@ switch ($a)
 <table align="center" width="60%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_uye_id; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası</td>
+<td bgcolor="#F5F5F5"><?php echo $x_uye_id; ?></td>
 </tr>
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">TC Kimlik No&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_TCKimlikNo)?>&nbsp;</td>
-</tr>
-
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ad&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_uye_ad; ?>&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Soyad&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_uye_soyad; ?>&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">E-posta 1&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_eposta1; ?>&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">E-posta 2&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_eposta2; ?>&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">LKD e-posta&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo "$x_alias"; ?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">TC Kimlik No</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_TCKimlikNo)?></td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kayıt açılış zaman damgası&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo "$x_kayit_acilis_tarih"; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Ad</td>
+<td bgcolor="#F5F5F5"><?php echo $x_uye_ad; ?></td>
+</tr>
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">Soyad</td>
+<td bgcolor="#F5F5F5"><?php echo $x_uye_soyad; ?></td>
+</tr>
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">E-posta 1</td>
+<td bgcolor="#F5F5F5"><?php echo $x_eposta1; ?></td>
+</tr>
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">E-posta 2</td>
+<td bgcolor="#F5F5F5"><?php echo $x_eposta2; ?></td>
+</tr>
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">LKD e-posta</td>
+<td bgcolor="#F5F5F5"><?php echo "$x_alias"; ?></td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kayıt tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo "$x_kayit_tarihi"; ?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye hesabı açılış zaman damgası</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_acilis_tarih"; ?></td>
 </tr>
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kayıt tarihi</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_tarihi"; ?></td>
+</tr>
+
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet</td>
 <td bgcolor="#F5F5F5"><?php
 switch ($x_cinsiyet) {
 	case "e":
@@ -162,11 +162,11 @@ switch ($x_cinsiyet) {
 		break;
 }
 ?>
-&nbsp;</td>
+</td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_liste_uyeligi == 1 )
@@ -174,12 +174,12 @@ switch ($x_cinsiyet) {
     else
     	echo "Üye Değil";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_gonullu == 1 )
@@ -187,12 +187,12 @@ switch ($x_cinsiyet) {
     else
     	echo "Katılma";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Elektronik Oylamalar&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Elektronik Oylamalar</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_oylama == 1 )
@@ -200,12 +200,12 @@ switch ($x_cinsiyet) {
     else
     	echo "Katılma";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_trac_listesi == 1 )
@@ -213,12 +213,12 @@ switch ($x_cinsiyet) {
     else
     	echo "Üye Değil";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_haber_alinamiyor == 1 )
@@ -226,12 +226,12 @@ switch ($x_cinsiyet) {
     else
     	echo "Hayır";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimliğinin Gizlenmesini İstiyor&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kimliğinin Gizlenmesini İstiyor</td>
   <?
     echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_kimlik_gizli == 1 )
@@ -239,80 +239,80 @@ switch ($x_cinsiyet) {
     else
     	echo "Hayır";
 
-    echo "&nbsp;</td>";
+    echo "</td>";
   ?>
 </tr>
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Kimlik Durumu&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo "$x_kimlik_durumu"; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Kimlik Durumu</td>
+<td bgcolor="#F5F5F5"><?php echo "$x_kimlik_durumu"; ?></td>
 </tr>
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Kurum&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_kurum; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Kurum</td>
+<td bgcolor="#F5F5F5"><?php echo $x_kurum; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Görev&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_gorev; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Görev</td>
+<td bgcolor="#F5F5F5"><?php echo $x_gorev; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet</td>
+<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yılı&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_yil; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yılı</td>
+<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_yil; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bölüm&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_bolum; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bölüm</td>
+<td bgcolor="#F5F5F5"><?php echo $x_mezuniyet_bolum; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">İletişim Adresi&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo str_replace(chr(10), "<br>" ,@$x_is_addr . "") ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">İletişim Adresi</td>
+<td bgcolor="#F5F5F5"><?php echo str_replace(chr(10), "<br>" ,@$x_is_addr . "") ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Semt&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_semt; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Semt</td>
+<td bgcolor="#F5F5F5"><?php echo $x_semt; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Şehir&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_sehir; ?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Şehir</td>
+<td bgcolor="#F5F5F5"><?php echo $x_sehir; ?></td>
 </tr>
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Posta kodu&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php echo $x_pkod; ?>&nbsp;</td>
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Telefon 1&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Telefon1)?>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Posta kodu</td>
+<td bgcolor="#F5F5F5"><?php echo $x_pkod; ?></td>
 </tr>
 
-
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Telefon 2&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Telefon2)?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Telefon 1</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Telefon1)?></td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_no)?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Telefon 2</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Telefon2)?></td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih)?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_no)?></td>
 </tr>
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Uye_karar_tarih)?></td>
+</tr>
+
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf</td>
   <?
-    echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
+    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_vesikalik_foto == 1 )
     	echo "Var";
     else
@@ -324,9 +324,9 @@ switch ($x_cinsiyet) {
 
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu</td>
   <?
-    echo "<td bgcolor=\"#F5F5F5\">&nbsp;";
+    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_Uye_formu )
     	echo "<a target=\"_blank\" href=\"$UyeFormlarDizin/$x_uye_id.tif\">Var</a>";
     else
@@ -339,29 +339,29 @@ switch ($x_cinsiyet) {
 <?php if($x_artik_uye_degil == 1) { ?>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo "$x_ayrilma_tarihi"; ?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma tarihi</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_ayrilma_tarihi"; ?></td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma Karar No&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_no)?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma Karar No</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_no)?></td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma Karar Tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_tarih)?>&nbsp;</td>
+ <td bgcolor="#466176"><font color="#FFFFFF">Ayrılma Karar Tarihi</td>
+ <td bgcolor="#F5F5F5"><?php echo strip_tags(@$x_Ayrilma_karar_tarih)?></td>
 </tr>
 
 <?php } ?>
 
  <tr>
-  <td bgcolor="#466176"><font color="#FFFFFF">Notlar&nbsp;</td>
+  <td bgcolor="#466176"><font color="#FFFFFF">Notlar</td>
   <td bgcolor="#F5F5F5"><? echo strip_tags(@$x_Notlar); ?></td>
  </tr>
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Resim&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Resim</td>
 <td bgcolor="#F5F5F5">
 <?php if ($x_Resim != "") { ?>
 <a target="_blank" href="<?php echo "$UyeResimlerDizin/$x_Resim"; ?>">
@@ -373,7 +373,7 @@ switch ($x_cinsiyet) {
 ?>
 
 
-&nbsp;</td>
+</td>
 </tr>
 </table>
 </form>
