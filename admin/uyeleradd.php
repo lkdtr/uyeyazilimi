@@ -296,6 +296,10 @@ switch ($a) {
 		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 		$fieldList["kimlik_durumu"] = $theValue;
 
+        $theValue = date("Y-m-d H:i:s");
+        $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+        $fieldList["kayit_acilis_tarih"] = $theValue;
+
 		// Resim
 			if (is_uploaded_file($_FILES["x_Resim"]["tmp_name"])) {
 			$Gecici = explode(".", $_FILES["x_Resim"]["name"]);

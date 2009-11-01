@@ -329,6 +329,14 @@ switch ($a)
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
 		$fieldList["artik_uye_degil"] = $theValue;
 
+		// Uye, uyelikten ayrildiysa, kayit kapanis zaman damgasi yazalim
+		if($theValue)
+		 {
+		     $theValue = date("Y-m-d H:i:s");
+		     $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+		     $fieldList["kayit_kapanis_tarih"] = $theValue;
+		 }
+
 		// oylama
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_oylama) : $x_oylama;
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
