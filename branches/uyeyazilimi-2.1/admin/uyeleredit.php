@@ -329,14 +329,6 @@ switch ($a)
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
 		$fieldList["artik_uye_degil"] = $theValue;
 
-		// Uye, uyelikten ayrildiysa, kayit kapanis zaman damgasi yazalim
-		if($theValue)
-		 {
-		     $theValue = date("Y-m-d H:i:s");
-		     $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		     $fieldList["kayit_kapanis_tarih"] = $theValue;
-		 }
-
 		// oylama
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_oylama) : $x_oylama;
 		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -575,6 +567,10 @@ switch ($a)
                 // Uye, uyelikten ayrildiysa e-postasi postfix veritabanindan kaldiralim -- artik kullanmasin
                 if($x_artik_uye_degil)
                  {
+                  // Uye, uyelikten ayrildiysa, kayit kapanis zaman damgasi yazalim
+                  $stampSQL = "UPDATE uyeler SET kayit_kapanis_tarih = '" . date("Y-m-d H:i:s") . "' WHERE id=". $tkey ;
+                  $rs = mysql_query($stampSQL, $conn) or die(mysql_error());
+
                   $strsql = "DELETE FROM forwardings WHERE source='$x_alias'";
                   mysql_query($strsql, $conn) or die(mysql_error());
                   mysql_query($strsql, $conn_mail) or die(mysql_error());
