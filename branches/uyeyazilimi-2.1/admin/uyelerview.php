@@ -77,6 +77,8 @@ switch ($a)
 		$x_Notlar = @$row["Notlar"];
 		$x_kayit_tarihi = @$row["kayit_tarihi"];
 		$x_ayrilma_tarihi = @$row["ayrilma_tarihi"];
+		$x_kayit_acilis_tarih= @$row["kayit_acilis_tarih"];
+		$x_kayit_kapanis_tarih= @$row["kayit_kapanis_tarih"];
 		$x_liste_uyeligi = @$row["liste_uyeligi"];
 		$x_gonullu = @$row["gonullu"];
 		$x_artik_uye_degil = @$row["artik_uye_degil"];
@@ -98,6 +100,7 @@ switch ($a)
 
 <?php if( $x_artik_uye_degil == 1 ) { ?>
 <h1 align="center"><font color="red">ÜYE DERNEKTEN AYRILMIŞTIR</font></h1>
+<div align="center">Üyelikten ayrılma zaman damgası: <?php echo "$x_kayit_kapanis_tarih"; ?></div><br/>
 <?php } ?>
 
 <?php if( $x_haber_alinamiyor == 1 ) { ?>
@@ -135,6 +138,11 @@ switch ($a)
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">LKD e-posta&nbsp;</td>
 <td bgcolor="#F5F5F5"><?php echo "$x_alias"; ?>&nbsp;</td>
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Kayıt açılış zaman damgası&nbsp;</td>
+ <td bgcolor="#F5F5F5"><?php echo "$x_kayit_acilis_tarih"; ?>&nbsp;</td>
 </tr>
 
 <tr>
