@@ -44,49 +44,10 @@ switch ($a)
 		}
 
 		// degerleri ayir...
-		$row = mysql_fetch_array($rs);
-		$x_id = @$row["id"];
-		$x_uye_id = @$row["uye_id"];
-		$x_uye_ad = @$row["uye_ad"];
-		$x_uye_soyad = @$row["uye_soyad"];
-		$x_eposta1 = @$row["eposta1"];
-		$x_eposta2 = @$row["eposta2"];
-		$x_alias = @$row["alias"];
-		$x_cinsiyet = @$row["cinsiyet"];
-		$x_kurum = @$row["kurum"];
-		$x_gorev = @$row["gorev"];
-		$x_mezuniyet = @$row["mezuniyet"];
-		$x_mezuniyet_yil = @$row["mezuniyet_yil"];
-		$x_mezuniyet_bolum = @$row["mezuniyet_bolum"];
-		$x_is_addr = @$row["is_addr"];
-		$x_semt = @$row["semt"];
-		$x_sehir = @$row["sehir"];
-		$x_pkod = @$row["pkod"];
-		$x_AuthLevel = @$row["AuthLevel"];
-		$x_PassWord = @$row["PassWord"];
-		$x_Resim = @$row["Resim"];
-		$x_Telefon1 = @$row["Telefon1"];
-		$x_Telefon2 = @$row["Telefon2"];
-		$x_TCKimlikNo = @$row["TCKimlikNo"];
-		$x_Uye_karar_no = @$row["Uye_karar_no"];
-		$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-		$x_Ayrilma_karar_no = @$row["Ayrilma_karar_no"];
-		$x_Ayrilma_karar_tarih = @$row["Ayrilma_karar_tarih"];
-		$x_vesikalik_foto = @$row["vesikalik_foto"];
-		$x_Uye_formu = @$row["Uye_formu"];
-		$x_Notlar = @$row["Notlar"];
-		$x_kayit_tarihi = @$row["kayit_tarihi"];
-		$x_ayrilma_tarihi = @$row["ayrilma_tarihi"];
-		$x_kayit_acilis_tarih= @$row["kayit_acilis_tarih"];
-		$x_kayit_kapanis_tarih= @$row["kayit_kapanis_tarih"];
-		$x_liste_uyeligi = @$row["liste_uyeligi"];
-		$x_gonullu = @$row["gonullu"];
-		$x_artik_uye_degil = @$row["artik_uye_degil"];
-		$x_oylama = @$row["oylama"];
-		$x_trac_listesi = @$row["trac_listesi"];
-		$x_haber_alinamiyor = @$row["haber_alinamiyor"];
-		$x_kimlik_gizli = @$row["kimlik_gizli"];
-		$x_kimlik_durumu = @$row["kimlik_durumu"];
+		$row = mysql_fetch_assoc($rs);
+            foreach ($row as $key => $value) {
+                eval('$x_' . $key . ' = @$row["' . $key . '"];');
+            }
 		mysql_free_result($rs);
 		break;
 }

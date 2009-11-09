@@ -29,46 +29,9 @@ if (empty($a)) {
 }
 
 // get fields from form
-$x_id = @$_POST["x_id"];
-$x_uye_id = @$_POST["x_uye_id"];
-$x_uye_ad = @$_POST["x_uye_ad"];
-$x_uye_soyad = @$_POST["x_uye_soyad"];
-$x_eposta1 = @$_POST["x_eposta1"];
-$x_eposta2 = @$_POST["x_eposta2"];
-$x_alias = @$_POST["x_alias"];
-$x_cinsiyet = @$_POST["x_cinsiyet"];
-$x_kurum = @$_POST["x_kurum"];
-$x_gorev = @$_POST["x_gorev"];
-$x_mezuniyet = @$_POST["x_mezuniyet"];
-$x_mezuniyet_yil = @$_POST["x_mezuniyet_yil"];
-$x_mezuniyet_bolum = @$_POST["x_mezuniyet_bolum"];
-$x_is_addr = @$_POST["x_is_addr"];
-$x_semt = @$_POST["x_semt"];
-$x_sehir = @$_POST["x_sehir"];
-$x_pkod = @$_POST["x_pkod"];
-$x_PassWord = @$_POST["x_PassWord"];
-$x_Resim = @$_POST["x_Resim"];
-$x_Uye_formu = @$_POST["x_Uye_formu"];
-$x_Telefon1 = @$_POST["x_Telefon1"];
-$x_Telefon2 = @$_POST["x_Telefon2"];
-$x_TCKimlikNo = @$_POST["x_TCKimlikNo"];
-$x_Uye_karar_no = @$_POST["x_Uye_karar_no"];
-$x_Uye_karar_tarih = @$_POST["x_Uye_karar_tarih"];
-$x_Ayrilma_karar_no = @$_POST["x_Ayrilma_karar_no"];
-$x_Ayrilma_karar_tarih = @$_POST["x_Ayrilma_karar_tarih"];
-$x_vesikalik_foto = @$_POST["x_vesikalik_foto"];
-$x_Uye_formu = @$_POST["x_Uye_formu"];
-$x_Notlar = @$_POST["x_Notlar"];
-$x_kayit_tarihi = @$_POST["x_kayit_tarihi"];
-$x_ayrilma_tarihi = @$_POST["x_ayrilma_tarihi"];
-$x_liste_uyeligi = @$_POST["x_liste_uyeligi"];
-$x_gonullu = @$_POST["x_gonullu"];
-$x_artik_uye_degil = @$_POST["x_artik_uye_degil"];
-$x_oylama = @$_POST["x_oylama"];
-$x_trac_listesi = @$_POST["x_trac_listesi"];
-$x_haber_alinamiyor = @$_POST["x_haber_alinamiyor"];
-$x_kimlik_gizli = @$_POST["x_kimlik_gizli"];
-$x_kimlik_durumu = @$_POST["x_kimlik_durumu"];
+foreach ($_POST as $keys => $value) {
+        eval('$' . $keys . ' = @$_POST["' . $keys . '"];');
+}
 
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
@@ -81,52 +44,16 @@ switch ($a)
 		$tkey = "" . $key . "";
 		$strsql = "SELECT * FROM uyeler WHERE id=" . $tkey;
 		$rs = mysql_query($strsql, $conn) or die(mysql_error());
-		if (!($row = mysql_fetch_array($rs))) {
+		if (!($row = mysql_fetch_assoc($rs))) {
      	ob_end_clean();
 			header("Location: uyelerlist.php");
 		}
 
 		// degerleri ayir...
-		$x_id = @$row["id"];
-		$x_uye_id = @$row["uye_id"];
-		$x_uye_ad = @$row["uye_ad"];
-		$x_uye_soyad = @$row["uye_soyad"];
-		$x_eposta1 = @$row["eposta1"];
-		$x_eposta2 = @$row["eposta2"];
-		$x_alias = @$row["alias"];
-		$x_cinsiyet = @$row["cinsiyet"];
-		$x_kurum = @$row["kurum"];
-		$x_gorev = @$row["gorev"];
-		$x_mezuniyet = @$row["mezuniyet"];
-		$x_mezuniyet_yil = @$row["mezuniyet_yil"];
-		$x_mezuniyet_bolum = @$row["mezuniyet_bolum"];
-		$x_is_addr = @$row["is_addr"];
-		$x_semt = @$row["semt"];
-		$x_sehir = @$row["sehir"];
-		$x_pkod = @$row["pkod"];
-		$x_PassWord = @$row["PassWord"];
-		$x_Resim = @$row["Resim"];
-		$x_Uye_formu = @$row["Uye_formu"];
-		$x_Telefon1 = @$row["Telefon1"];
-		$x_Telefon2 = @$row["Telefon2"];
-		$x_TCKimlikNo = @$row["TCKimlikNo"];
-		$x_Uye_karar_no = @$row["Uye_karar_no"];
-		$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-		$x_Ayrilma_karar_no = @$row["Ayrilma_karar_no"];
-		$x_Ayrilma_karar_tarih = @$row["Ayrilma_karar_tarih"];
-		$x_vesikalik_foto = @$row["vesikalik_foto"];
-		$x_Uye_formu = @$row["Uye_formu"];
-		$x_Notlar = @$row["Notlar"];
-		$x_kayit_tarihi = @$row["kayit_tarihi"];
-		$x_ayrilma_tarihi = @$row["ayrilma_tarihi"];
-		$x_liste_uyeligi = @$row["liste_uyeligi"];
-		$x_gonullu = @$row["gonullu"];
-		$x_artik_uye_degil = @$row["artik_uye_degil"];
-		$x_oylama = @$row["oylama"];
-		$x_trac_listesi = @$row["trac_listesi"];
-		$x_haber_alinamiyor = @$row["haber_alinamiyor"];
-		$x_kimlik_gizli = @$row["kimlik_gizli"];
-		$x_kimlik_durumu = @$row["kimlik_durumu"];
+        foreach ($row as $keys => $value) {
+            eval('$x_' . $keys . ' = @$row["' . $keys . '"];');
+        }
+
 		mysql_free_result($rs);
 		break;
 	case "U": // update
@@ -139,45 +66,9 @@ switch ($a)
 		$row_eski = mysql_fetch_array($rs);
 	
 		// form degerleri...
-		$x_id = @strip_tags($_POST["x_id"]);
-		$x_uye_id = @strip_tags($_POST["x_uye_id"]);
-		$x_uye_ad = @strip_tags($_POST["x_uye_ad"]);
-		$x_kimlikno = @strip_tags($_POST["kimlikno"]);
-		$x_uye_soyad = @strip_tags($_POST["x_uye_soyad"]);
-		$x_eposta1 = @strip_tags($_POST["x_eposta1"]);
-		$x_eposta2 = @strip_tags($_POST["x_eposta2"]);
-		$x_alias = @strip_tags($_POST["x_alias"]);
-		$x_cinsiyet = @strip_tags($_POST["x_cinsiyet"]);
-		$x_kurum = @strip_tags($_POST["x_kurum"]);
-		$x_gorev = @strip_tags($_POST["x_gorev"]);
-		$x_mezuniyet = @strip_tags($_POST["x_mezuniyet"]);
-		$x_mezuniyet_yil = @strip_tags($_POST["x_mezuniyet_yil"]);
-		$x_mezuniyet_bolum = @strip_tags($_POST["x_mezuniyet_bolum"]);
-		$x_is_addr = @strip_tags($_POST["x_is_addr"]);
-		$x_semt = @strip_tags($_POST["x_semt"]);
-		$x_sehir = @strip_tags($_POST["x_sehir"]);
-		$x_pkod = @strip_tags($_POST["x_pkod"]);
-		$x_PassWord = @$_POST["x_PassWord"];
-		$x_Telefon1 = @strip_tags($_POST["x_Telefon1"]);
-		$x_Telefon2 = @strip_tags($_POST["x_Telefon2"]);
-		$x_TCKimlikNo = @strip_tags($_POST["x_TCKimlikNo"]);
-		$x_Uye_karar_no = @strip_tags($_POST["x_Uye_karar_no"]);
-		$x_Uye_karar_tarih = @strip_tags($_POST["x_Uye_karar_tarih"]);
-		$x_Ayrilma_karar_no = @strip_tags($_POST["x_Ayrilma_karar_no"]);
-		$x_Ayrilma_karar_tarih = @strip_tags($_POST["x_Ayrilma_karar_tarih"]);
-		$x_vesikalik_foto = @strip_tags($_POST["x_vesikalik_foto"]);
-		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
-		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
-		$x_kayit_tarihi = @strip_tags($_POST["x_kayit_tarihi"]);
-		$x_ayrilma_tarihi = @strip_tags($_POST["x_ayrilma_tarihi"]);
-		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
-		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
-		$x_artik_uye_degil = @strip_tags($_POST["x_artik_uye_degil"]);
-		$x_oylama = @strip_tags($_POST["x_oylama"]);
-		$x_trac_listesi = @strip_tags($_POST["x_trac_listesi"]);
-		$x_haber_alinamiyor = @strip_tags($_POST["x_haber_alinamiyor"]);
-		$x_kimlik_gizli = @strip_tags($_POST["x_kimlik_gizli"]);
-		$x_kimlik_durumu = @strip_tags($_POST["x_kimlik_durumu"]);
+        foreach ($_POST as $keys => $value) {
+            eval('$' . $keys . ' = @$_POST["' . $keys . '"];');
+        }
 
 		// check file size
 		$EW_MaxFileSize = @strip_tags($_POST["EW_MaxFileSize"]);
@@ -199,97 +90,35 @@ switch ($a)
 		
 		// degerleri array'e atalim
 
-		// eposta1
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_eposta1) : $x_eposta1;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["eposta1"] = $theValue;
+		// degerleri array'e atalim
+        foreach ($_POST as $key => $value) {
+            if (substr($key, 0, 2) == "x_") {
 
-		// eposta2
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_eposta2) : $x_eposta2;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["eposta2"] = $theValue;
-		
+                eval('$theValue = (!get_magic_quotes_gpc()) ? addslashes($' . $key . ') : $' . $key . ';');
 
-		// kurum
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kurum) : $x_kurum;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["kurum"] = $theValue;
+                switch ($key)
+                {
+                    case "uye_id";
+                    case "liste_uyeligi";
+                    case "gonullu";
+                    case "oylama";
+                    case "Uye_karar_no";
+                    case "vesikalik_foto";
+                    case "Uye_formu";
+                    case "trac_listesi";
+                    case "haber_alinamiyor";
+                    case "kimlik_gizli";
+                        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                    break;
 
-		// gorev
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gorev) : $x_gorev;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["gorev"] = $theValue;
+                    default;
+                        $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+                    break;
+                }
 
-
-		// mezuniyet
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet) : $x_mezuniyet;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["mezuniyet"] = $theValue;
-
-
-
-		// mezuniyet_yil
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet_yil) : $x_mezuniyet_yil;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["mezuniyet_yil"] = $theValue;
-
-
-
-		// mezuniyet_bolum
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet_bolum) : $x_mezuniyet_bolum;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["mezuniyet_bolum"] = $theValue;
-
-
-
-		// is_addr
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_is_addr) : $x_is_addr;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["is_addr"] = $theValue;
-
-
-
-		// semt
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_semt) : $x_semt;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["semt"] = $theValue;
-
-
-
-		// sehir
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_sehir) : $x_sehir;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["sehir"] = $theValue;
-
-
-
-		// pkod
-
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_pkod) : $x_pkod;
-
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-
-		$fieldList["pkod"] = $theValue;
-
-
+                eval('$fieldList["' . substr($key,2) . '"] = $theValue;');
+            }
+        }
 
 		// PassWord
 		if( $x_PassWord ) { // If new password is set
@@ -299,136 +128,10 @@ switch ($a)
 			$fieldList["PassWord"] = $theValue;
 		}
 
-		// Telefon1
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Telefon1) : $x_Telefon1;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Telefon1"] = $theValue;
-		
-		// Telefon2
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Telefon2) : $x_Telefon2;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Telefon2"] = $theValue;
-
-		// TCKimlikNo
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_TCKimlikNo) : $x_TCKimlikNo;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["TCKimlikNo"] = $theValue;
-
-		// liste_uyeligi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_liste_uyeligi) : $x_liste_uyeligi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["liste_uyeligi"] = $theValue;
-
-		// gonullu
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gonullu) : $x_gonullu;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["gonullu"] = $theValue;
-
-		// artik uye degil
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_artik_uye_degil) : $x_artik_uye_degil;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["artik_uye_degil"] = $theValue;
-
-		// oylama
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_oylama) : $x_oylama;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["oylama"] = $theValue;
-		
-		// cinsiyet
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_cinsiyet) : $x_cinsiyet;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["cinsiyet"] = $theValue;
-
-		// alias
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_alias) : $x_alias;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["alias"] = $theValue;
-		
-		// uye_id
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_id) : $x_uye_id;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["uye_id"] = $theValue;
-
-		// uye_ad
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_ad) : $x_uye_ad;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["uye_ad"] = $theValue;
-
-		// uye_soyad
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_soyad) : $x_uye_soyad;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["uye_soyad"] = $theValue;
-
-		// karar_tarihi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kayit_tarihi) : $x_kayit_tarihi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["kayit_tarihi"] = $theValue;
-
-		// Uye_karar_no
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_no) : $x_Uye_karar_no;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["Uye_karar_no"] = $theValue;
-
-		// Uye_karar_tarih
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_tarih) : $x_Uye_karar_tarih;
-		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
-		$fieldList["Uye_karar_tarih"] = $theValue;
-
-		// ayrilma_tarihi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_ayrilma_tarihi) : $x_ayrilma_tarihi;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["ayrilma_tarihi"] = $theValue;
-
-		// Ayrilma_karar_no
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Ayrilma_karar_no) : $x_Ayrilma_karar_no;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["Ayrilma_karar_no"] = $theValue;
-
-		// Ayrilma_karar_tarih
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Ayrilma_karar_tarih) : $x_Ayrilma_karar_tarih;
-		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
-		$fieldList["Ayrilma_karar_tarih"] = $theValue;
-
-		// vesikalik_foto
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_vesikalik_foto) : $x_vesikalik_foto;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["vesikalik_foto"] = $theValue;
-
-		// Uye_formu
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_formu) : $x_Uye_formu;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["Uye_formu"] = $theValue;
-
-		// Notlar
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Notlar) : $x_Notlar;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Notlar"] = $theValue;
-
-                // trac_listesi
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_trac_listesi) : $x_trac_listesi;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["trac_listesi"] = $theValue;
-
-                // haber_alinamiyor
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_haber_alinamiyor) : $x_haber_alinamiyor;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["haber_alinamiyor"] = $theValue;
-
-                // kimlik_gizli
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_gizli) : $x_kimlik_gizli;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["kimlik_gizli"] = $theValue;
-
-                // kimlik_durumu
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_durumu) : $x_kimlik_durumu;
-                $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-                $fieldList["kimlik_durumu"] = $theValue;
 		
 		// Resim
 
 		if ($a_x_Resim == "2") { // cikart
-
-			$fieldList["Resim"] = "NULL";
 
 			$fieldList["Resim"] = "NULL";
 
@@ -488,9 +191,6 @@ switch ($a)
 
 			$fieldList["Uye_formu"] = "NULL";
 
-			$fieldList["Uye_formu"] = "NULL";
-
-
 		} else if ($a_x_Uye_formu== "3") { // guncelle
 
 			if (is_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"])) {
@@ -506,7 +206,6 @@ switch ($a)
      		if (!move_uploaded_file($_FILES["x_Uye_formu"]["tmp_name"], $destfile)) // dosyayi yerine gonderemediysek...
 
      			die("Dosya gondermediniz veya dosya yerine yerlestirilemedi!" . $destfile);
-
 
 				$fieldList["Uye_formu"] = " '" . $DosyaAdi . ".$Uzanti" . "'";
 
