@@ -296,7 +296,7 @@ tryap("E-posta 2", 255, "x_eposta2", "$x_eposta2");
 tryap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
 tryap("Alias", 100, "x_alias", "@linux.org.tr");
 
-radyoyap("LKD Üye Listesi", "x_liste_ueligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
+radyoyap("LKD Üye Listesi", "x_liste_uyeligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
 radyoyap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
 radyoyap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
 radyoyap("Trac Listesi", "x_trac_listesi", 1, array("Katıl" => 1, "Katılma" => 0));
