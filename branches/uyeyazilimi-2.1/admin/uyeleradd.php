@@ -41,82 +41,22 @@ switch ($a) {
 			ob_end_clean();
 			header("Location: uyelerlist.php");
 		} else {
-			$row = mysql_fetch_array($rs);
+			$row = mysql_fetch_assoc($rs);
 
 		// degerleri ayir...
-			$x_uye_id = @$row["uye_id"]; 
-			$x_uye_ad = @$row["uye_ad"]; 
-			$x_uye_soyad = @$row["uye_soyad"]; 
-			$x_eposta1 = @$row["eposta1"]; 
-			$x_eposta2 = @$row["eposta2"]; 
-			$x_kayit_tarihi = @$row["kayit_tarihi"]; 
-			$x_alias = @$row["alias"]; 
-			$x_cinsiyet = @$row["cinsiyet"]; 
-			$x_kurum = @$row["kurum"]; 
-			$x_gorev = @$row["gorev"]; 
-			$x_mezuniyet = @$row["mezuniyet"]; 
-			$x_mezuniyet_yil = @$row["mezuniyet_yil"]; 
-			$x_mezuniyet_bolum = @$row["mezuniyet_bolum"]; 
-			$x_is_addr = @$row["is_addr"]; 
-			$x_semt = @$row["semt"]; 
-			$x_sehir = @$row["sehir"]; 
-			$x_pkod = @$row["pkod"]; 
-			$x_Resim = @$row["Resim"]; 
-			$x_Telefon1 = @$row["Telefon1"];
-			$x_Telefon2 = @$row["Telefon2"];
-			$x_TCKimlikNo = @$row["TCKimlikNo"];
-			$x_Uye_karar_no = @$row["Uye_karar_no"];
-			$x_Uye_karar_tarih = @$row["Uye_karar_tarih"];
-			$x_vesikalik_foto = @$row["vesikalik_foto"];
-			$x_Uye_formu = @$row["Uye_formu"];
-			$x_Notlar = @$row["Notlar"];
-			$x_liste_uyeligi = @$row["liste_uyeligi"];
-			$x_gonullu = @$row["gonullu"];
-			$x_oylama = @$row["oylama"];
-			$trac_listesi = @$row["trac_listesi"];
-			$haber_alinamiyor = @$row["haber_alinamiyor"];
-			$kimlik_gizli = @$row["kimlik_gizli"];
-			$kimlik_durumu = @$row["kimlik_durumu"];
+            foreach ($row as $keys => $values) {
+                eval('$x_' . $keys . ' = @$row["' . $keys . '"];');
+            }
+
 		}
 		mysql_free_result($rs);
 		break;
 	case "A": // ekleme
 
 		// form degerleri temizlik basliyorrr.
-		$x_id = @strip_tags($_POST["x_id"]);
-		$x_uye_id = @strip_tags($_POST["x_uye_id"]);
-		$x_uye_ad = @strip_tags($_POST["x_uye_ad"]);
-		$x_uye_soyad = @strip_tags($_POST["x_uye_soyad"]);
-		$x_eposta1 = @strip_tags($_POST["x_eposta1"]);
-		$x_eposta2 = @strip_tags($_POST["x_eposta2"]);
-		$x_kayit_tarihi = @strip_tags($_POST["x_kayit_tarihi"]);
-		$x_alias = @strip_tags($_POST["x_alias"]);
-		$x_cinsiyet = @strip_tags($_POST["x_cinsiyet"]);
-		$x_kurum = @strip_tags($_POST["x_kurum"]);
-		$x_gorev = @strip_tags($_POST["x_gorev"]);
-		$x_mezuniyet = @strip_tags($_POST["x_mezuniyet"]);
-		$x_mezuniyet_yil = @strip_tags($_POST["x_mezuniyet_yil"]);
-		$x_mezuniyet_bolum = @strip_tags($_POST["x_mezuniyet_bolum"]);
-		$x_is_addr = @strip_tags($_POST["x_is_addr"]);
-		$x_semt = @strip_tags($_POST["x_semt"]);
-		$x_sehir = @strip_tags($_POST["x_sehir"]);
-		$x_pkod = @strip_tags($_POST["x_pkod"]);
-		$x_Telefon1 = @strip_tags($_POST["x_Telefon1"]);
-		$x_Telefon2 = @strip_tags($_POST["x_Telefon2"]);
-		$x_TCKimlikNo = @strip_tags($_POST["x_TCKimlikNo"]);
-		$x_Uye_karar_no = @strip_tags($_POST["x_Uye_karar_no"]);
-		$x_Uye_karar_tarih = @strip_tags($_POST["x_Uye_karar_tarih"]);
-		$x_vesikalik_foto = @strip_tags($_POST["x_vesikalik_foto"]);
-		$x_Uye_formu = @strip_tags($_POST["x_Uye_formu"]);
-		$x_Notlar = @strip_tags($_POST["x_Notlar"]);
-		$x_liste_uyeligi = @strip_tags($_POST["x_liste_uyeligi"]);
-		$x_gonullu = @strip_tags($_POST["x_gonullu"]);
-		$x_oylama = @strip_tags($_POST["x_oylama"]);
-		$x_trac_listesi = @strip_tags($_POST["x_trac_listesi"]);
-		$x_haber_alinamiyor = @strip_tags($_POST["x_haber_alinamiyor"]);
-		$x_kimlik_gizli = @strip_tags($_POST["x_kimlik_gizli"]);
-		$x_kimlik_durumu = @strip_tags($_POST["x_kimlik_durumu"]);
-
+        foreach ($_POST as $keys => $values) {
+            eval('$' . $keys .'= @strip_tags($_POST["' . $keys . '"]);');
+        }
 
 		// check file size
 		$EW_MaxFileSize = @$_POST["EW_MaxFileSize"];
@@ -135,166 +75,34 @@ switch ($a) {
 		}
 
 		// degerleri array'e atalim
+        foreach ($_POST as $key => $value) {
+            if (substr($key, 0, 2) == "x_") {
 
-		// uye_id
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_id) : $x_uye_id;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["uye_id"] = $theValue;
+                eval('$theValue = (!get_magic_quotes_gpc()) ? addslashes($' . $key . ') : $' . $key . ';');
 
-		// uye_ad
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_ad) : $x_uye_ad;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["uye_ad"] = $theValue;
+                switch ($key)
+                {
+                    case "uye_id";
+                    case "liste_uyeligi";
+                    case "gonullu";
+                    case "oylama";
+                    case "Uye_karar_no";
+                    case "vesikalik_foto";
+                    case "Uye_formu";
+                    case "trac_listesi";
+                    case "haber_alinamiyor";
+                    case "kimlik_gizli";
+                        $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+                    break;
 
-		// uye_soyad
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_uye_soyad) : $x_uye_soyad;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["uye_soyad"] = $theValue;
+                    default;
+                        $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+                    break;
+                }
 
-		// eposta1
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_eposta1) : $x_eposta1;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["eposta1"] = $theValue;
-
-		// eposta2
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_eposta2) : $x_eposta2;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["eposta2"] = $theValue;
-
-		// kayit_tarihi
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kayit_tarihi) : $x_kayit_tarihi;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["kayit_tarihi"] = $theValue;
-		
-		// alias
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_alias) : $x_alias;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["alias"] = $theValue;
-
-                // liste_uyeligi
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_liste_uyeligi) : $x_liste_uyeligi;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["liste_uyeligi"] = $theValue;
-
-                // gonullu
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gonullu) : $x_gonullu;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["gonullu"] = $theValue;
-
-                // oylama
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_oylama) : $x_oylama;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["oylama"] = $theValue;
-
-		// cinsiyet
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_cinsiyet) : $x_cinsiyet;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "null";
-		$fieldList["cinsiyet"] = $theValue;
-
-		// kurum
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kurum) : $x_kurum;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["kurum"] = $theValue;
-
-		// gorev
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_gorev) : $x_gorev;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["gorev"] = $theValue;
-
-		// mezuniyet
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet) : $x_mezuniyet;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["mezuniyet"] = $theValue;
-
-		// mezuniyet_yil
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet_yil) : $x_mezuniyet_yil;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["mezuniyet_yil"] = $theValue;
-
-		// mezuniyet_bolum
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_mezuniyet_bolum) : $x_mezuniyet_bolum;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["mezuniyet_bolum"] = $theValue;
-
-		// is_addr
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_is_addr) : $x_is_addr;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["is_addr"] = $theValue;
-
-		// semt
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_semt) : $x_semt;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["semt"] = $theValue;
-
-		// sehir
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_sehir) : $x_sehir;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["sehir"] = $theValue;
-
-		// pkod
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_pkod) : $x_pkod;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["pkod"] = $theValue;
-
-		// Telefon1
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Telefon1) : $x_Telefon1;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Telefon1"] = $theValue;
-
-		// Telefon2
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Telefon2) : $x_Telefon2;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Telefon2"] = $theValue;
-
-		// TCKimlikNo
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_TCKimlikNo) : $x_TCKimlikNo;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["TCKimlikNo"] = $theValue;
-
-		// Uye_karar_no
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_no) : $x_Uye_karar_no;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["Uye_karar_no"] = $theValue;
-
-		// Uye_karar_tarih
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_karar_tarih) : $x_Uye_karar_tarih;
-		$theValue = ($theValue != "") ? "'". $theValue . "'": "NULL";
-		$fieldList["Uye_karar_tarih"] = $theValue;
-
-		// vesikalik_foto
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_vesikalik_foto) : $x_vesikalik_foto;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["vesikalik_foto"] = $theValue;
-
-		// Uye_formu
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Uye_formu) : $x_Uye_formu;
-		$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-		$fieldList["Uye_formu"] = $theValue;
-
-		// Notlar
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_Notlar) : $x_Notlar;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["Notlar"] = $theValue;
-
-                // trac_listesi
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_trac_listesi) : $x_trac_listesi;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["trac_listesi"] = $theValue;
-
-                // haber_alinamiyor
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_haber_alinamiyor) : $x_haber_alinamiyor;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["haber_alinamiyor"] = $theValue;
-
-                // kimlik_gizli
-                $theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_gizli) : $x_kimlik_gizli;
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                $fieldList["kimlik_gizli"] = $theValue;
-
-                // kimlik_durumu
-		$theValue = (!get_magic_quotes_gpc()) ? addslashes($x_kimlik_durumu) : $x_kimlik_durumu;
-		$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
-		$fieldList["kimlik_durumu"] = $theValue;
+                eval('$fieldList["' . substr($key,2) . '"] = $theValue;');
+            }
+        }
 
         $theValue = date("Y-m-d H:i:s");
         $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
@@ -427,198 +235,135 @@ return true;
 
 // end JavaScript -->
 </script>
+
+
+<?php
+
+function tryap($label, $maxlength, $key, $var) {
+
+    echo '
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
+<td bgcolor="#F5F5F5"><input type="text" name="' . $key . '" size="30" maxlength="' . $maxlength . '" value="' . htmlspecialchars(@$var) . '"></td></tr>
+';
+
+}
+
+function radyoyap($label, $name, $selected, $parameters) {
+
+    echo '
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
+<td bgcolor="#F5F5F5">';
+
+$arraycount=0;
+foreach ($parameters as $parameter => $value) {
+    echo '
+ <input type="radio" name="' . $name . '" '; if($arraycount == $selected) {echo 'checked ';}; echo 'value=' . $value . '>' . $parameter;
+$arraycount++;
+}
+echo '
+</td></tr>
+';
+
+}
+
+?>
+
 <form onSubmit="return EW_checkMyForm(this);"  action="uyeleradd.php" method="post" enctype="multipart/form-data">
 <input type="hidden" name="EW_MaxFileSize" value="2000000">
 <p>
 <input type="hidden" name="a" value="A">
+
 <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#CCCCCC">
+
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Id&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="hidden" name="x_id" value="<?php echo htmlspecialchars(@$x_id); ?>">&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Id</td>
+<td bgcolor="#F5F5F5"><input type="hidden" name="x_id" value="<?php echo htmlspecialchars(@$x_id); ?>"></td>
 </tr>
+
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Üye Numarası</td>
 <td bgcolor="#F5F5F5">
-<input type="text" name="x_uye_id" size="30" value="<?php echo htmlspecialchars(@$x_uye_id); ?>">
-&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Ad&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_uye_ad" size="30" maxlength="99" value="<?php echo htmlspecialchars(@$x_uye_ad); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Soyad&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_uye_soyad" size="30" maxlength="99" value="<?php echo htmlspecialchars(@$x_uye_soyad); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">E-posta 1&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_eposta1" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_eposta1); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">E-posta 2&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_eposta2" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_eposta2); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Kayıt Tarihi&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_kayit_tarihi" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_kayit_tarihi); ?>">&nbsp;</td>
+<input type="text" name="x_uye_id" size="30" value="<?php echo htmlspecialchars(@$x_uye_id); ?>"></td>
 </tr>
 
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Alias&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_alias" size="30" maxlength="100" value="@linux.org.tr"&nbsp;</td>
-</tr>
+<?php
+tryap("Ad", 99, "x_uye_ad", "$x_uye_ad");
+tryap("Soyad", 99, "x_uye_soyad", "$x_uye_soyad");
+tryap("E-posta 1", 255, "x_eposta1", "$x_eposta1");
+tryap("E-posta 2", 255, "x_eposta2", "$x_eposta2");
+tryap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
+tryap("Alias", 100, "x_alias", "@linux.org.tr");
 
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_liste_uyeligi" value=1>Üye Ol&nbsp;
- <input type="radio" name="x_liste_uyeligi" checked value=0>Üye Olma&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_gonullu" checked value=1>Katıl&nbsp;
- <input type="radio" name="x_gonullu" value=0>Katılma&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Elektronik Oylamalar&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_oylama" checked value=1>Katıl&nbsp;
- <input type="radio" name="x_oylama" value=0>Katılma&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_trac_listesi" value=1>Katıl&nbsp;
- <input type="radio" name="x_trac_listesi" checked value=0>Katılma&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_haber_alinamiyor" value=1>Evet&nbsp;
- <input type="radio" name="x_haber_alinamiyor" checked value=0>Hayır&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimliği Gizli&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_kimlik_gizli" value=1>Evet&nbsp;
- <input type="radio" name="x_kimlik_gizli" checked value=0>Hayır&nbsp;
-</tr>
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Kimlik Durumu&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_kimlik_durumu" checked value="Var/İstemiyor">Var/İstemiyor&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="İstiyor">İstiyor&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="Dijital Fotoğraf Bekleniyor">Dijital Fotoğraf Bekleniyor&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="Basılacak">Basılacak&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="Basıldı">Basıldı&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="Güncel Adres Bekleniyor">Güncel Adres Bekleniyor&nbsp;
- <input type="radio" name="x_kimlik_durumu" value="Postaya Verilecek">Postaya Verilecek&nbsp;
-</tr>
+radyoyap("LKD Üye Listesi", "x_liste_ueligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
+radyoyap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
+radyoyap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
+radyoyap("Trac Listesi", "x_trac_listesi", 1, array("Katıl" => 1, "Katılma" => 0));
+radyoyap("Haber Alınamıyor", "x_haber_alinamiyor", 1, array("Evet" => 1, "Hayır" => 0));
+radyoyap("Kimliği Gizli", "x_kimlik_gizli", 1, array("Evet" => 1, "Hayır" => 0));
+radyoyap("Kimlik Durumu", "x_kimlik_durumu", 0, array("Var/İstemiyor" => "Var/İstemiyor",
+                                                      "İstiyor" => "İstiyor",
+                                                      "Dijital Fotoğraf Bekleniyor" => "Dijital Fotoğraf Bekleniyor",
+                                                      "Basılacak" => "Basılacak",
+                                                      "Basıldı" => "Basıldı",
+                                                      "Güncel Adres Bekleniyor" => "Güncel Adres Bekleniyor",
+                                                      "Postaya Verilecek" => "Postaya Verilecek"));?>
 
 
 <tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Cinsiyet</td>
 <td bgcolor="#F5F5F5"><?php if (empty($x_cinsiyet)) { $x_cinsiyet = "e"; } // varsayilan degeri belirle... ?><input type="radio" name="x_cinsiyet"<?php if ($x_cinsiyet == "e") { echo " checked"; } ?> value="<?php echo htmlspecialchars("e"); ?>">Erkek
 <input type="radio" name="x_cinsiyet"<?php if ($x_cinsiyet == "m") { echo " checked"; } ?> value="<?php echo htmlspecialchars("m"); ?>">Kadın
-&nbsp;</td>
+</td>
 </tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Kurum&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_kurum" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_kurum); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Görev&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_gorev" size="30" maxlength="255" value="<?php echo htmlspecialchars(@$x_gorev); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_mezuniyet); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezuniyet yılı&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_yil" size="30" maxlength="4" value="<?php echo htmlspecialchars(@$x_mezuniyet_yil); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Mezun olunan bölüm&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_mezuniyet_bolum" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_mezuniyet_bolum); ?>">&nbsp;</td>
-</tr>
-<tr>
+
+<?php
+tryap("Kurum", 255, "x_kurum", "$x_kurum");
+tryap("Görev", 255, "x_gorev", "$x_gorev");
+tryap("Mezuniyet", 100, "x_mezuniyet", "$x_mezuniyet");
+tryap("Mezuniyet yılı", 4, "x_mezuniyet_yil", "$x_mezuniyet_yil");
+tryap("Mezun olunan bölüm", 100, "x_mezuniyet_bolum", "$x_mezuniyet_bolum");?>
+
 <td bgcolor="#466176"><font color="#FFFFFF">İletişim Adresi&nbsp;</td>
-<td bgcolor="#F5F5F5"><textarea name="x_is_addr" cols="35" rows="4"><?php echo @$x_is_addr ?></textarea>&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Semt&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_semt" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_semt); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Şehir&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_sehir" size="30" maxlength="100" value="<?php echo htmlspecialchars(@$x_sehir); ?>">&nbsp;</td>
-</tr>
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Posta kodu&nbsp;</td>
-<td bgcolor="#F5F5F5"><input type="text" name="x_pkod" size="30" maxlength="5" value="<?php echo htmlspecialchars(@$x_pkod); ?>">&nbsp;</td>
+<td bgcolor="#F5F5F5">
+<textarea name="x_is_addr" cols="35" rows="4"><?php echo @$x_is_addr ?></textarea></td>
 </tr>
 
+<?php
+tryap("Semt", 100, "x_semt", "$x_semt");
+tryap("Şehir", 100, "x_sehir", "$x_sehir");
+tryap("Posta kodu", 5, "x_pkod", "$x_pkod");
+tryap("Telefon 1", 100, "x_Telefon1", "$x_Telefon1");
+tryap("Telefon 2", 100, "x_Telefon2", "$x_Telefon2");
+tryap("TC Kimlik No", 11, "x_TCKimlikNo", "$x_TCKimlikNo");
+tryap("Üye Karar No", 100, "x_Uye_karar_no", "$x_Uye_karar_no");?>
+
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Telefon 1&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_Telefon1" value="<?php echo @$x_Telefon1 ?>" size=30 maxlength=100>&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
+<td bgcolor="#F5F5F5">
+<input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100><small>(Yıl-Ay-Gün)</small></td>
 </tr>
 
+<?radyoyap("Resmi Evraklar için Fotoğraf", "x_vesikalik_foto", 1, array("Var" => 1, "Yok" => 0));?>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Telefon 2&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_Telefon2" value="<?php echo @$x_Telefon2 ?>" size=30 maxlength=100>&nbsp;</td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">TC Kimlik No&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_TCKimlikNo" value="<?php echo @$x_TCKimlikNo ?>" size=30 maxlength=100>&nbsp;</td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar No&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_no" value="<?php echo @$x_Uye_karar_no ?>" size=30 maxlength=100>&nbsp;</td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
- <td bgcolor="#F5F5F5"><input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100>&nbsp;<small>(Yıl-Ay-Gün)</small></td>
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf&nbsp;</td>
- <td bgcolor="#F5F5F5">
- <input type="radio" name="x_vesikalik_foto" value=1>Var&nbsp;
- <input type="radio" name="x_vesikalik_foto" checked value=0>Yok&nbsp;
-</tr>
-
-
-<tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
- <td bgcolor="#F5F5F5"><?php $x_Uye_formu = ""; // temizlik ?>
- <input type="file" name="x_Uye_formu">&nbsp;</td>
+<td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
+<td bgcolor="#F5F5F5">
+<?$x_Uye_formu = ""; // temizlik ?>
+ <input type="file" name="x_Uye_formu"></td>
 </tr>
 
 <tr>
- <td bgcolor="#466176"><font color="#FFFFFF">Notlar&nbsp;</td>
- <td bgcolor="#F5F5F5"><textarea name="x_Notlar" cols="35" rows="4"><?php echo @$x_Notlar ?></textarea>&nbsp;</td> 
+ <td bgcolor="#466176"><font color="#FFFFFF">Notlar</td>
+ <td bgcolor="#F5F5F5"><textarea name="x_Notlar" cols="35" rows="4"><?php echo @$x_Notlar ?></textarea></td> 
 </tr>
 
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Resim&nbsp;</td>
-<td bgcolor="#F5F5F5"><?php $x_Resim = ""; // temizlik ?>
-<input type="file" name="x_Resim">&nbsp;</td>
+<td bgcolor="#F5F5F5">
+<?php $x_Resim = ""; // temizlik ?>
+<input type="file" name="x_Resim"></td>
 </tr>
 </table>
 <p align=right>
