@@ -9,7 +9,7 @@ Content-Type: text/plain;
             charset="utf-8"
 
 
-Aşağıdaki işler sizden şevkat beklemektedir:
+Aşağıdaki işler sizden şefkat beklemektedir:
 
 %(message)s"""
 
@@ -21,6 +21,6 @@ Content-Type: text/plain;
             charset="utf-8"
 
 
-Sorumlusu olduğunuz bileşendeki aşağıdaki işler sizden şevkat beklemektedir:
+Sorumlusu olduğunuz bileşendeki aşağıdaki işler sizden şefkat beklemektedir:
 
 %(message)s"""
