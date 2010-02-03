@@ -20,6 +20,6 @@ namefrom = "Trac Hatırlatma Mesajı"
 subject = "Tamamlanmayı bekleyen işler"
 
 # Trac Settings
-trac_url = "http://uye.lkd.org.tr"
+trac_url = "https://uye.lkd.org.tr/trac"
 suffix = "@linux.org.tr" # add this suffix to username to create email address
 
