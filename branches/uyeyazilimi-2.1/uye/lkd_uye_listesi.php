@@ -33,9 +33,13 @@
   <p>İsimleri mavi renkle yazılmış üyeler, kendilerinden bir yılı aşkın süredir haber alınamayan dernek üyeleridir. Eğer kendilerini tanıyorsanız, lütfen uye@lkd.org.tr adresiyle bağlantıya geçmelerini rica ediniz.</p>
   <p>Üyelerin yaşadıkları şehirler, kendilerinin son beyanlarıdır, güncelliğini yitirmiş olmaları mümkündür. Kendi yaşadığınız şehri <a href="uye_bilgi.php">üye bilgi sayfası</a>ndan düzenleyebilirsiniz.</p>
   <p>İsminin gizli kalmasını tercih eden üyeler; <a href="uye_bilgi.php">üye bilgi sayfası</a>nda "kimliğimin gizli kalmasını istiyorum" seçeneğini işaretleyebilirler.</p>
+  <p>
+  <?php
+    echo "Toplam üye sayımız: <b> $bu</b>.";
+  ?>
+  </p>
   <p><blockquote>
   <?php
-    echo "Toplam üye sayımız $rowno";
     while($rowno--)
     {
      $user_info = mysql_fetch_array($result);
