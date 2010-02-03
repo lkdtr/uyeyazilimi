@@ -35,7 +35,7 @@
   <p>İsminin gizli kalmasını tercih eden üyeler; <a href="uye_bilgi.php">üye bilgi sayfası</a>nda "kimliğimin gizli kalmasını istiyorum" seçeneğini işaretleyebilirler.</p>
   <p>
   <?php
-    echo "Toplam üye sayımız: <b> $bu</b>.";
+    echo "Toplam üye sayımız: <b> $rowno</b>.";
   ?>
   </p>
   <p><blockquote>
