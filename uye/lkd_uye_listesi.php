@@ -35,7 +35,8 @@
   <p>İsminin gizli kalmasını tercih eden üyeler; <a href="uye_bilgi.php">üye bilgi sayfası</a>nda "kimliğimin gizli kalmasını istiyorum" seçeneğini işaretleyebilirler.</p>
   <p><blockquote>
   <?php
-   while($rowno--)
+    echo "Toplam üye sayımız $rowno";
+    while($rowno--)
     {
      $user_info = mysql_fetch_array($result);
      echo $user_info['uye_id'] . '. ';
