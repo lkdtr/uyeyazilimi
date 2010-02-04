@@ -36,7 +36,7 @@ for ticket in acceptedTickets:
     component = ticket[3]
     summary = ticket[4]
 
-    if not owner in componentOwners.values():
+    if not owner in componentOwners.values() and not owner is None:
         try:
             owners[owner].append( (tid, summary) )
         except KeyError:
@@ -54,7 +54,11 @@ for owner, tickets in owners.iteritems():
     for t in tickets:
         output += "<a href='%s/ticket/%s'>#%s</a> - %s<br>\n" % (trac_url, t[0], t[0], t[1])
 
-    to = owner if owner.__contains__("@") else "%s%s" % (owner, suffix)
+    if owner.__contains__("@"):
+        to = owner
+    else:
+        to = "%s%s" % (owner, suffix)
+
     mailer.send( toTicketOwner % {"mailFrom" : mailfrom,
                                   "nameFrom" : namefrom,
                                   "mailTo" : to,
@@ -68,7 +72,10 @@ for component, tickets in components.iteritems():
     for t in tickets:
         output += "<a href='%s/ticket/%s'>#%s</a> - %s<br>\n" % (trac_url, t[0], t[0], t[1])
 
-    to = componentOwners[component] if componentOwners[component].__contains__("@") else "%s%s" % (componentOwners[component], suffix)
+    if componentOwners[component].__contains__("@"):
+        to = componentOwners[component]
+    else:
+        to = "%s%s" % (componentOwners[component], suffix)
 
     mailer.send( toComponentOwner % {"mailFrom" : mailfrom,
                                      "nameFrom" : namefrom,
