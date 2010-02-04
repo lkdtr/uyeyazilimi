@@ -13,7 +13,7 @@ Content-Type: text/html;
             charset="utf-8"
 
 
-Aşağıdaki işler sizden şefkat beklemektedir:<br><br>
+Linux Kullanıcıları Derneği çalışmalarından üstlendiğiniz aşağıdaki işler sizden şefkat beklemektedir:<br><br>
 
 %(message)s
 --boundary42--
