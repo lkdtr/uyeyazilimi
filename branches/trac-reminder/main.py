@@ -13,6 +13,7 @@ db = MySQLdb.connect(db_server, db_user, db_passwd, db_name)
 
 # get component owners
 cCursor = db.cursor()
+cCursor.execute("SET NAMES utf8")
 cCursor.execute("SELECT name, owner FROM component")
 componentInfo = cCursor.fetchall()
 
@@ -23,6 +24,7 @@ for c in componentInfo:
 
 # get aceepted tickets
 aCursor = db.cursor()
+aCursor.execute("SET NAMES utf8")
 aCursor.execute("SELECT id, owner, reporter, component, summary FROM ticket WHERE status = 'accepted' or status = 'new'")
 acceptedTickets = aCursor.fetchall()
 
