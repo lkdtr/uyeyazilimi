@@ -17,7 +17,7 @@ smtp_password = ""
 
 # Mail Settings
 namefrom = "Trac Hatırlatma Mesajı"
-subject = "Tamamlanmayı bekleyen işler"
+subject = "Tamamlanmayı Bekleyen İşler"
 
 # Trac Settings
 trac_url = "https://uye.lkd.org.tr/trac"

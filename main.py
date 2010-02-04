@@ -52,7 +52,7 @@ for owner, tickets in owners.iteritems():
     output = ""
 
     for t in tickets:
-        output += "%s/ticket/%s - %s" % (trac_url, t[0], t[1])
+        output += "<a href='%s/ticket/%s'>#%s</a> - %s<br>\n" % (trac_url, t[0], t[0], t[1])
 
     to = owner if owner.__contains__("@") else "%s%s" % (owner, suffix)
     mailer.send( toTicketOwner % {"mailFrom" : mailfrom,
@@ -66,11 +66,12 @@ for component, tickets in components.iteritems():
     output = ""
 
     for t in tickets:
-        output += "%s/ticket/%s - %s" % (trac_url, t[0], t[1])
+        output += "<a href='%s/ticket/%s'>#%s</a> - %s<br>\n" % (trac_url, t[0], t[0], t[1])
 
     to = componentOwners[component] if componentOwners[component].__contains__("@") else "%s%s" % (componentOwners[component], suffix)
+
     mailer.send( toComponentOwner % {"mailFrom" : mailfrom,
                                      "nameFrom" : namefrom,
                                      "mailTo" : to,
-                                     "subject" : subject,
+                                     "subject" : "%s Bileşeni İçin %s" % (component, subject),
                                      "message" : output}, to)
