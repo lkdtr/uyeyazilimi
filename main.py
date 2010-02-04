@@ -23,7 +23,7 @@ for c in componentInfo:
 
 # get aceepted tickets
 aCursor = db.cursor()
-aCursor.execute("SELECT id, owner, reporter, component, summary FROM ticket WHERE status = 'accepted'")
+aCursor.execute("SELECT id, owner, reporter, component, summary FROM ticket WHERE status = 'accepted' or status = 'new'")
 acceptedTickets = aCursor.fetchall()
 
 owners = {}
@@ -36,10 +36,11 @@ for ticket in acceptedTickets:
     component = ticket[3]
     summary = ticket[4]
 
-    try:
-        owners[owner].append( (tid, summary) )
-    except KeyError:
-        owners[owner] = [ (tid, summary) ]
+    if not owner in componentOwners.values():
+        try:
+            owners[owner].append( (tid, summary) )
+        except KeyError:
+            owners[owner] = [ (tid, summary) ]
 
     try:
         components[component].append( (tid, summary) )
