@@ -4,6 +4,7 @@
 toTicketOwner = """\
 From: %(nameFrom)s <%(mailFrom)s>
 To: %(mailTo)s
+Reply-To: bilgi@lkd.org.tr
 Subject: %(subject)s
 Content-Type: multipart/alternative; boundary="boundary42"
 
@@ -22,6 +23,7 @@ Linux Kullanıcıları Derneği çalışmalarından üstlendiğiniz aşağıdaki
 toComponentOwner = """\
 From: %(nameFrom)s <%(mailFrom)s>
 To: %(mailTo)s
+Reply-To: bilgi@lkd.org.tr
 Subject: %(subject)s
 MIME-Version: 1.0
 Content-Type: multipart/alternative; boundary="boundary42"
