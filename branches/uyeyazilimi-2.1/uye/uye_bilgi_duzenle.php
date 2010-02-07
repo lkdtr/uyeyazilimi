@@ -26,13 +26,7 @@ $mailGuncelle = 'UPDATE forwardings SET destination = "' . mysql_real_escape_str
 $mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_uye);
 @mysql_close($baglanti_uye);
 
-# Tasinma/replikasyon calismalari sirasinda senkronizasyon kaybedilmemesi icin bir de e-posta sunucusundaki tabloyu guncelleyelim
-$baglanti_postfix=mysql_connect(HOST_MAIL,USER_MAIL,PASS_MAIL);
-@mysql_select_db(DB_MAIL,$baglanti_postfix);
-$mailGuncelleSorgu = mysql_query($mailGuncelle,$baglanti_postfix);
-mysql_close($baglanti_postfix);
-
-if($mailGuncelleSorgu && $uyeGuncelleSorgu)
+if($uyeGuncelleSorgu)
  $mesaj = "Bilgileriniz başarıyla güncellendi.";
 else
  $mesaj = "Bilgi güncellemesinde bir hata oluştu.";
