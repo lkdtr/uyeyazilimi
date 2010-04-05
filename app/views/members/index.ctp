@@ -1,5 +1,4 @@
-<!--<h2>LKD Üye Sistemi Parola Belirleme</h2>-->
-<h2 align="center">LKD Üye Parola Belirleme Arayüzü Şu Anda Bakımdadır<br>Lütfen Daha Sonra Tekrar Deneyin</h2>
+<h2>LKD Üye Sistemi Parola Belirleme</h2>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link('Parolamı Unuttum', array('action'=>'forgot_my_password')); ?> </li>
