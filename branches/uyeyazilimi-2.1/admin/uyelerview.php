@@ -49,8 +49,17 @@ switch ($a)
                 eval('$x_' . $key . ' = @$row["' . $key . '"];');
             }
 		mysql_free_result($rs);
+
+		$sql2 = "SELECT privilege FROM members WHERE uye_no=" . $x_uye_id;
+		$presult = mysql_query($sql2,$conn) or die(mysql_error());
+		$row2 = mysql_fetch_row($presult);
+		$privilege =  $row2[0];
+
+		mysql_free_result($presult);
+
 		break;
 }
+
 ?>
 <?php require ('header.inc.php') ?>
 <br>
@@ -122,80 +131,86 @@ switch ($x_cinsiyet) {
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye Listesi</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_liste_uyeligi == 1 )
     	echo "Üye";
     else
     	echo "Üye Değil";
-
-    echo "</td>";
   ?>
+ </td>
+</tr>
+
+<tr>
+ <td bgcolor="#466176"><font color="#FFFFFF">Yetki</td>
+ <td bgcolor="#F5F5F5">
+  <?
+    if( $privilege == 10 )
+    	echo "Web düzenleyebilir";
+    elseif( $privilege == 0 )
+    	echo "Normal";
+  ?>
+ </td>
 </tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Gönüllü Çalışmalar</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_gonullu == 1 )
     	echo "Katıl";
     else
     	echo "Katılma";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Elektronik Oylamalar</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_oylama == 1 )
     	echo "Katıl";
     else
     	echo "Katılma";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Trac Listesi</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_trac_listesi == 1 )
     	echo "Üye";
     else
     	echo "Üye Değil";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Haber Alınamıyor</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_haber_alinamiyor == 1 )
     	echo "Evet";
     else
     	echo "Hayır";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Kimliğinin Gizlenmesini İstiyor</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_kimlik_gizli == 1 )
     	echo "Evet";
     else
     	echo "Hayır";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <tr>
@@ -270,29 +285,27 @@ switch ($x_cinsiyet) {
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Resmi Evraklar için Fotoğraf</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_vesikalik_foto == 1 )
     	echo "Var";
     else
     	echo "Yok";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 
 <tr>
  <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu</td>
+ <td bgcolor="#F5F5F5">
   <?
-    echo "<td bgcolor=\"#F5F5F5\">";
     if( $x_Uye_formu )
     	echo "<a target=\"_blank\" href=\"$UyeFormlarDizin/$x_uye_id.tif\">Var</a>";
     else
     	echo "Yok";
-
-    echo "</td>";
   ?>
+ </td>
 </tr>
 
 <?php if($x_artik_uye_degil == 1) { ?>

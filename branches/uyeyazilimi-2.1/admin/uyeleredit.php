@@ -55,6 +55,14 @@ switch ($a)
         }
 
 		mysql_free_result($rs);
+
+	        $sql2 = "SELECT privilege FROM members WHERE uye_no=" . $x_uye_id;
+	        $presult = mysql_query($sql2,$conn) or die(mysql_error());
+	        $row2 = mysql_fetch_row($presult);
+	        $privilege =  $row2[0];
+
+	        mysql_free_result($presult);
+
 		break;
 	case "U": // update
 
@@ -117,6 +125,10 @@ switch ($a)
                 }
 
                 eval('$fieldList["' . substr($key,2) . '"] = $theValue;');
+            }
+
+            elseif ($key == "privilege") {
+                $privilege = $value;
             }
         }
 
@@ -274,7 +286,7 @@ switch ($a)
                 $strsql = "SELECT id FROM members WHERE uye_no = $x_uye_id";
                 $rs = mysql_query($strsql, $conn) or die(mysql_error());
                 $id = mysql_fetch_row($rs);
-                $strsql = "UPDATE members SET lotr_alias = \"$slug[0]\", uye_no = $x_uye_id, name = \"$x_uye_ad\", lastname = \"$x_uye_soyad\"";
+                $strsql = "UPDATE members SET lotr_alias = \"$slug[0]\", uye_no = $x_uye_id, name = \"$x_uye_ad\", lastname = \"$x_uye_soyad\", privilege = \"$privilege\"";
                 if ($x_PassWord)
                  $strsql .= ", password = $fieldList[PassWord]";
                 $strsql .= ' WHERE id=' . $id[0];
@@ -556,6 +568,16 @@ return true;
  <td bgcolor="#F5F5F5"><input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 1) { echo " checked"; } ?> value=1><?php echo "Üye Ol"; ?>
   <input type="radio" name="x_liste_uyeligi"<?php if ($x_liste_uyeligi == 0) { echo " checked"; } ?> value=0><?php echo "Üye Olma"; ?>
 &nbsp;</td>
+</tr>
+
+<tr>
+<td bgcolor="#666666"><font color="#FFFFFF">Yetki</td>
+<td bgcolor="#F5F5F5">
+<select name="privilege">
+<option <?if ($privilege==0) {echo 'selected="selected"';}?>value="0">Normal</option>
+<option <?if ($privilege==10) {echo 'selected="selected"';}?>value="10">Web düzenleyebilir</option>
+</select>
+</td>
 </tr>
 
 <tr>
