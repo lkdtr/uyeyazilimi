@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `uyeler` (
   `Ayrilma_karar_no` int(11) unsigned NOT NULL,
   `Ayrilma_karar_tarih` date NOT NULL,
   `kayit_acilis_tarih` DATETIME NULL ,
-  `kayit_kapanis_tarih` DATETIME NULL
+  `kayit_kapanis_tarih` DATETIME NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `TCKimlikNo` (`TCKimlikNo`,`Uye_karar_no`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

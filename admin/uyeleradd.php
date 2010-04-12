@@ -104,6 +104,15 @@ switch ($a) {
             }
         }
 
+	$sql2 = "SELECT privilege FROM members WHERE uye_no=" . $x_uye_id;
+	$presult = mysql_query($sql2,$conn) or die(mysql_error());
+	$row2 = mysql_fetch_row($presult);
+	$privilege =  $row2[0];
+
+	mysql_free_result($presult);
+
+
+
         $theValue = date("Y-m-d H:i:s");
         $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
         $fieldList["kayit_acilis_tarih"] = $theValue;
@@ -185,7 +194,7 @@ switch ($a) {
                 // isim / alias bilgisini bir de yeni uye veritabanina yazalim
                 $slug = explode('@',$x_alias);
 		mysql_select_db(DB_PWD,$conn);
-		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias,email) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\",\"$x_alias\")";
+		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias,email,privilege) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\",\"$x_alias\",\"$privilege\")";
 		mysql_query($strsql, $conn) or die(mysql_error());
 
                 // isim / alias bilgisini bir de Trac veritabanina yazalim
@@ -292,6 +301,19 @@ tryap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
 tryap("Alias", 100, "x_alias", "@linux.org.tr");
 
 radyoyap("LKD Üye Listesi", "x_liste_uyeligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
+
+echo '
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">Yetki</td>
+<td bgcolor="#F5F5F5">
+<select name="privilege">
+<option value="0">Normal</option>
+<option value="10">Web düzenleyebilir</option>
+</select>
+</td>
+</tr>
+';
+
 radyoyap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
 radyoyap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
 radyoyap("Trac Listesi", "x_trac_listesi", 1, array("Katıl" => 1, "Katılma" => 0));
