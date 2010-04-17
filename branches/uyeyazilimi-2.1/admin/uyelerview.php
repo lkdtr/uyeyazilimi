@@ -50,6 +50,7 @@ switch ($a)
             }
 		mysql_free_result($rs);
 
+		mysql_select_db(DB_PWD);
 		$sql2 = "SELECT privilege FROM members WHERE uye_no=" . $x_uye_id;
 		$presult = mysql_query($sql2,$conn) or die(mysql_error());
 		$row2 = mysql_fetch_row($presult);
