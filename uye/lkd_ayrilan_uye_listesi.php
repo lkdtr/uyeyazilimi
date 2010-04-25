@@ -27,7 +27,7 @@
     <tr><td align="left"><img src="/lkd_logo.png"></td><td width="20">&nbsp;</td><td><h1>Ayrılan Üyeler</h1></td></tr>
    </table>
   </p>
-  <p>İsimleri kırmızı renkle yazılmış üyeler, dernekten ayrılırken aidat borcunu(n tamamını) ödememiş üyelerdir.</p>
+  <p>İsimleri kırmızı renkle yazılmış üyeler, dernek kayıtlarına göre aidat borcunu(n tamamını) ödemeden ayrılmış/üyeliği sonlandırılmış üyelerdir.</p>
   <p><blockquote>
   <?php
    while($rowno--)

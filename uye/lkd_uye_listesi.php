@@ -61,5 +61,6 @@
     }
   ?>
   </blockquote></p>
+  <p>Dernekten kendi isteği ile ayrılmış ya da kendisinden yanıt alınamadığı için ilişiği kesilmiş üyelerin bir listesi için <a href="lkd_ayrilan_uye_listesi.php">tıklayın</a>.</p>
  </body>
 </html>
