@@ -33,6 +33,8 @@ foreach ($_POST as $keys => $value) {
         eval('$' . $keys . ' = @$_POST["' . $keys . '"];');
 }
 
+$slug = explode('@', $x_alias);    // lkd kullanici adini lkd e-postasindan alalim
+
 // baglanti hazirlaniyor...
 $conn = mysql_connect(HOST, USER, PASS);
 mysql_select_db(DB, $conn);
@@ -283,7 +285,6 @@ switch ($a)
 
                 // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
                 mysql_select_db(DB_PWD,$conn);
-                $slug = explode('@', $x_alias);
                 $strsql = "SELECT id FROM members WHERE uye_no = $x_uye_id";
                 $rs = mysql_query($strsql, $conn) or die(mysql_error());
                 $id = mysql_fetch_row($rs);
@@ -311,6 +312,13 @@ switch ($a)
                   $strsql = 'DELETE FROM session WHERE sid = "' . $slug[0] . '"';
                   mysql_query($strsql, $conn) or die(mysql_error());
                  }
+               }
+              elseif(!$x_artik_uye_degil)    // uyeligi (yanlislikla?) iptal edilen birinin, uyeligi aktif hale getiriliyor
+               {
+                eposta_yonlendirmesi_ac($x_alias, $x_eposta1);
+                trac_veritabanina_ekle($slug[0], $x_uye_ad, $x_uye_soyad, $x_alias);
+                parola_veritabanina_ekle($x_uye_id, $slug[0], $x_uye_ad, $x_uye_soyad, $x_alias, $privilege);
+                ayrilma_bilgilerini_sifirla($x_uye_id);
                }
 		ob_end_clean();
 		
@@ -655,7 +663,7 @@ return true;
  <td align="right" bgcolor="#666666"><font color="#FFFFFF">Artık Üye Değil&nbsp;</td>
  <td bgcolor="#F5F5F5">
   <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 0) { echo " checked"; } ?> value=0><?php echo "Hayır"; ?>
-  <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 1) { echo " checked"; } ?> value=1><?php echo "<font color=red>EVET</font> (Dikkat! Arayüzden Geri Dönülemez!)"; ?>
+  <input type="radio" name="x_artik_uye_degil"<?php if ($x_artik_uye_degil == 1) { echo " checked"; } ?> value=1><?php echo "<font color=red>EVET</font>"; ?>
  </td>
 </tr>
 
