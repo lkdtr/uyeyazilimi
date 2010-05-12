@@ -28,6 +28,14 @@
              " </head>\n" .
              "<body>\n";
 
+        echo "<ul>\n" .
+             " <li>Tüm (<a href=?liste=tum>HTML</a> | <a href=?liste=tum&bicem=csv>CSV</a>)</li>\n" .
+             " <li>Tüm Aidat Borcu Olan (<a href=?liste=tum_odemesi_bulunan>HTML</a> | <a href=?liste=tum_odemesi_bulunan&bicem=csv>CSV</a>)</li>\n" .
+             " <li>Düzenli Aidat Ödeyen (<a href=?liste=duzenli_aidat>HTML</a> | <a href=?liste=duzenli_aidat&bicem=csv>CSV</a>)<br><font size=-2>&nbsp;&nbsp;Bulunulan yıl dışında aidat ödemesi bulunmayan ve iki yıldan uzun süredir üye olan</font></li>\n" .
+             " <li>Üyelik Sonrası İlk Kez Aidat Ödeyecek (<a href=?liste=ilk_aidat>HTML</a> | <a href=?liste=ilk_aidat&bicem=csv>CSV</a>)<br><font size=-2>&nbsp;&nbsp;Bulunulan yıl dışında aidat ödemesi bulunmayan ve iki yıldan az süredir üye olan</font></li>\n" .
+             " <li>Birikmiş Aidat Borcu Olan (<a href=?liste=birikmis_aidat>HTML</a> | <a href=?liste=birikmis_aidat&bicem=csv>CSV</a>)<br><font size=-2>&nbsp;&nbsp;Birden fazla yıla ait aidat ödemesi bulunan</font></li>\n" .
+             " </ul>\n";
+
         echo "<table bgcolor=\"#D6DDE7\" border=0 bgcolor=\"white\" cellpadding=3 cellspacing=1>\n" .
              " <tr bgcolor=\"#466176\">\n" .
              "  <td align=\"left\"><font color=\"#ffffff\">Ad Soyad</font></td>\n" .
