@@ -104,4 +104,32 @@ function aidat_miktari($yil)
     return $miktar[0];
 }
 
+function form_metin_kutusu_yap($label, $maxlength, $key, $var) {
+
+    echo '
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
+<td bgcolor="#F5F5F5"><input type="text" name="' . $key . '" size="30" maxlength="' . $maxlength . '" value="' . htmlspecialchars(@$var) . '"></td></tr>
+';
+}
+
+function form_radyo_dugmesi_yap($label, $name, $selected, $parameters) {
+
+    echo '
+<tr>
+<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
+<td bgcolor="#F5F5F5">';
+
+$arraycount=0;
+foreach ($parameters as $parameter => $value) {
+    echo '
+ <input type="radio" name="' . $name . '" '; if($arraycount == $selected) {echo 'checked ';}; echo 'value=' . $value . '>' . $parameter;
+$arraycount++;
+}
+echo '
+</td></tr>
+';
+
+}
+
 ?>
