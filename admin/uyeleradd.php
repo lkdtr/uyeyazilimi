@@ -104,12 +104,6 @@ switch ($a) {
             }
         }
 
-	mysql_select_db(DB_PWD, $conn);
-	$sql2 = "SELECT privilege FROM members WHERE uye_no=" . $x_uye_id;
-	$presult = mysql_query($sql2,$conn) or die(mysql_error());
-	$row2 = mysql_fetch_row($presult);
-	$privilege =  $row2[0];
-
 	mysql_free_result($presult);
 	mysql_select_db(DB, $conn);
 
@@ -188,24 +182,12 @@ switch ($a) {
 		$strsql .= ")";
 		mysql_query($strsql, $conn) or die(mysql_error());
 
-		// bir de e-posta alias'ini bir de alias tablosuna yazalim
-		mysql_select_db(DB_MAIL,$conn);
-		$strsql = "INSERT INTO forwardings VALUES('$_POST[x_alias]',$fieldList[eposta1])";
-		mysql_query($strsql, $conn) or die(mysql_error());
+                eposta_yonlendirmesi_ac($x_alias, $x_eposta1);
 
-                // isim / alias bilgisini bir de yeni uye veritabanina yazalim
-                $slug = explode('@',$x_alias);
-		mysql_select_db(DB_PWD,$conn);
-		$strsql = "INSERT INTO members (uye_no,name,lastname,lotr_alias,email,privilege) VALUES($x_uye_id,\"$x_uye_ad\",\"$x_uye_soyad\",\"$slug[0]\",\"$x_alias\",\"$privilege\")";
-		mysql_query($strsql, $conn) or die(mysql_error());
+                $lkd_login = eposta2login($x_alias);
+                parola_veritabanina_ekle($x_uye_id, $lkd_login, $x_uye_ad, $x_uye_soyad, $x_alias, 0);
 
-                // isim / alias bilgisini bir de Trac veritabanina yazalim
-                mysql_select_db(DB_TRAC,$conn);
-                $strsql = 'INSERT INTO session VALUES ("' . $slug[0] . '", 1, 0)';
-                mysql_query($strsql, $conn) or die(mysql_error());
-                $strsql = 'INSERT INTO session_attribute VALUES ("' . $slug[0] . '", 1, "name", "' . $x_uye_ad . ' ' . $x_uye_soyad . '"),
-                                                                ("' . $slug[0] . '", 1, "email", "' . $x_alias . '");';
-                mysql_query($strsql, $conn) or die(mysql_error());
+                trac_veritabanina_ekle($lkd_login, $x_uye_ad, $x_uye_soyad, $x_alias);
 
                 mysql_close($conn);
 		
@@ -303,18 +285,6 @@ tryap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
 tryap("Alias", 100, "x_alias", "@linux.org.tr");
 
 radyoyap("LKD Üye Listesi", "x_liste_uyeligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
-
-echo '
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">Yetki</td>
-<td bgcolor="#F5F5F5">
-<select name="privilege">
-<option value="0">Normal</option>
-<option value="10">Web düzenleyebilir</option>
-</select>
-</td>
-</tr>
-';
 
 radyoyap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
 radyoyap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
