@@ -225,39 +225,6 @@ return true;
 </script>
 
 
-<?php
-
-function tryap($label, $maxlength, $key, $var) {
-
-    echo '
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
-<td bgcolor="#F5F5F5"><input type="text" name="' . $key . '" size="30" maxlength="' . $maxlength . '" value="' . htmlspecialchars(@$var) . '"></td></tr>
-';
-
-}
-
-function radyoyap($label, $name, $selected, $parameters) {
-
-    echo '
-<tr>
-<td bgcolor="#466176"><font color="#FFFFFF">' . $label . '</font></td>
-<td bgcolor="#F5F5F5">';
-
-$arraycount=0;
-foreach ($parameters as $parameter => $value) {
-    echo '
- <input type="radio" name="' . $name . '" '; if($arraycount == $selected) {echo 'checked ';}; echo 'value=' . $value . '>' . $parameter;
-$arraycount++;
-}
-echo '
-</td></tr>
-';
-
-}
-
-?>
-
 <form onSubmit="return EW_checkMyForm(this);"  action="uyeleradd.php" method="post" enctype="multipart/form-data">
 <input type="hidden" name="EW_MaxFileSize" value="2000000">
 <p>
@@ -277,21 +244,21 @@ echo '
 </tr>
 
 <?php
-tryap("Ad", 99, "x_uye_ad", "$x_uye_ad");
-tryap("Soyad", 99, "x_uye_soyad", "$x_uye_soyad");
-tryap("E-posta 1", 255, "x_eposta1", "$x_eposta1");
-tryap("E-posta 2", 255, "x_eposta2", "$x_eposta2");
-tryap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
-tryap("Alias", 100, "x_alias", "@linux.org.tr");
+form_metin_kutusu_yap("Ad", 99, "x_uye_ad", "$x_uye_ad");
+form_metin_kutusu_yap("Soyad", 99, "x_uye_soyad", "$x_uye_soyad");
+form_metin_kutusu_yap("E-posta 1", 255, "x_eposta1", "$x_eposta1");
+form_metin_kutusu_yap("E-posta 2", 255, "x_eposta2", "$x_eposta2");
+form_metin_kutusu_yap("Kayıt Tarihi", 255, "x_kayit_tarihi", "$x_kayit_tarihi");
+form_metin_kutusu_yap("Alias", 100, "x_alias", "@linux.org.tr");
 
-radyoyap("LKD Üye Listesi", "x_liste_uyeligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
+form_radyo_dugmesi_yap("LKD Üye Listesi", "x_liste_uyeligi", 1, array("Üye Ol" => 1, "Üye Olma" => 0));
 
-radyoyap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
-radyoyap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
-radyoyap("Trac Listesi", "x_trac_listesi", 1, array("Katıl" => 1, "Katılma" => 0));
-radyoyap("Haber Alınamıyor", "x_haber_alinamiyor", 1, array("Evet" => 1, "Hayır" => 0));
-radyoyap("Kimliği Gizli", "x_kimlik_gizli", 1, array("Evet" => 1, "Hayır" => 0));
-radyoyap("Kimlik Durumu", "x_kimlik_durumu", 0, array("Var/İstemiyor" => "Var/İstemiyor",
+form_radyo_dugmesi_yap("Gönüllü Çalışmalar", "x_gonullu", 0, array("Katıl" => 1, "Katılma" => 0));
+form_radyo_dugmesi_yap("Elektronik Oylamalar", "x_oylama", 0, array("Katıl" => 1, "Katılma" => 0));
+form_radyo_dugmesi_yap("Trac Listesi", "x_trac_listesi", 1, array("Katıl" => 1, "Katılma" => 0));
+form_radyo_dugmesi_yap("Haber Alınamıyor", "x_haber_alinamiyor", 1, array("Evet" => 1, "Hayır" => 0));
+form_radyo_dugmesi_yap("Kimliği Gizli", "x_kimlik_gizli", 1, array("Evet" => 1, "Hayır" => 0));
+form_radyo_dugmesi_yap("Kimlik Durumu", "x_kimlik_durumu", 0, array("Var/İstemiyor" => "Var/İstemiyor",
                                                       "İstiyor" => "İstiyor",
                                                       "Dijital Fotoğraf Bekleniyor" => "Dijital Fotoğraf Bekleniyor",
                                                       "Basılacak" => "Basılacak",
@@ -308,11 +275,11 @@ radyoyap("Kimlik Durumu", "x_kimlik_durumu", 0, array("Var/İstemiyor" => "Var/�
 </tr>
 
 <?php
-tryap("Kurum", 255, "x_kurum", "$x_kurum");
-tryap("Görev", 255, "x_gorev", "$x_gorev");
-tryap("Mezuniyet", 100, "x_mezuniyet", "$x_mezuniyet");
-tryap("Mezuniyet yılı", 4, "x_mezuniyet_yil", "$x_mezuniyet_yil");
-tryap("Mezun olunan bölüm", 100, "x_mezuniyet_bolum", "$x_mezuniyet_bolum");?>
+form_metin_kutusu_yap("Kurum", 255, "x_kurum", "$x_kurum");
+form_metin_kutusu_yap("Görev", 255, "x_gorev", "$x_gorev");
+form_metin_kutusu_yap("Mezuniyet", 100, "x_mezuniyet", "$x_mezuniyet");
+form_metin_kutusu_yap("Mezuniyet yılı", 4, "x_mezuniyet_yil", "$x_mezuniyet_yil");
+form_metin_kutusu_yap("Mezun olunan bölüm", 100, "x_mezuniyet_bolum", "$x_mezuniyet_bolum");?>
 
 <td bgcolor="#466176"><font color="#FFFFFF">İletişim Adresi&nbsp;</td>
 <td bgcolor="#F5F5F5">
@@ -320,13 +287,13 @@ tryap("Mezun olunan bölüm", 100, "x_mezuniyet_bolum", "$x_mezuniyet_bolum");?>
 </tr>
 
 <?php
-tryap("Semt", 100, "x_semt", "$x_semt");
-tryap("Şehir", 100, "x_sehir", "$x_sehir");
-tryap("Posta kodu", 5, "x_pkod", "$x_pkod");
-tryap("Telefon 1", 100, "x_Telefon1", "$x_Telefon1");
-tryap("Telefon 2", 100, "x_Telefon2", "$x_Telefon2");
-tryap("TC Kimlik No", 11, "x_TCKimlikNo", "$x_TCKimlikNo");
-tryap("Üye Karar No", 100, "x_Uye_karar_no", "$x_Uye_karar_no");?>
+form_metin_kutusu_yap("Semt", 100, "x_semt", "$x_semt");
+form_metin_kutusu_yap("Şehir", 100, "x_sehir", "$x_sehir");
+form_metin_kutusu_yap("Posta kodu", 5, "x_pkod", "$x_pkod");
+form_metin_kutusu_yap("Telefon 1", 100, "x_Telefon1", "$x_Telefon1");
+form_metin_kutusu_yap("Telefon 2", 100, "x_Telefon2", "$x_Telefon2");
+form_metin_kutusu_yap("TC Kimlik No", 11, "x_TCKimlikNo", "$x_TCKimlikNo");
+form_metin_kutusu_yap("Üye Karar No", 100, "x_Uye_karar_no", "$x_Uye_karar_no");?>
 
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Üye Karar Tarihi&nbsp;</td>
@@ -334,7 +301,7 @@ tryap("Üye Karar No", 100, "x_Uye_karar_no", "$x_Uye_karar_no");?>
 <input type="text" name="x_Uye_karar_tarih" value="<?php echo @$x_Uye_karar_tarih ?>" size=30 maxlength=100><small>(Yıl-Ay-Gün)</small></td>
 </tr>
 
-<?radyoyap("Resmi Evraklar için Fotoğraf", "x_vesikalik_foto", 1, array("Var" => 1, "Yok" => 0));?>
+<?php form_radyo_dugmesi_yap("Resmi Evraklar için Fotoğraf", "x_vesikalik_foto", 1, array("Var" => 1, "Yok" => 0));?>
 
 <tr>
 <td bgcolor="#466176"><font color="#FFFFFF">Üye Formu&nbsp;</td>
