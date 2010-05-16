@@ -132,4 +132,74 @@ echo '
 
 }
 
+function trac_veritabanindan_sil($lkd_login)
+{
+    mysql_select_db(DB_TRAC);
+
+    $sorgu = 'DELETE FROM session_attribute WHERE sid = "' . $lkd_login . '"';
+    mysql_query($sorgu) or die(mysql_error());
+    $sorgu = 'DELETE FROM session WHERE sid = "' . $lkd_login . '"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function parola_veritabanindan_sil($uye_no)
+{
+    mysql_select_db(DB_PWD);
+
+    $sorgu = 'DELETE FROM members WHERE uye_no = ' . $uye_no;
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function eposta_yonlendirmesi_sil($lkd_eposta)
+{
+    mysql_select_db(DB_MAIL);
+
+    $sorgu = 'DELETE FROM forwardings WHERE source = "' . $lkd_eposta . '"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function trac_veritabaninda_isim_degistir($lkd_login, $ad, $soyad)
+{
+    mysql_select_db(DB_TRAC);
+
+    $sorgu = 'UPDATE session_attribute SET value = "' . $ad . ' ' . $soyad . '" WHERE sid = "' . $lkd_login . '" AND name = "name"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function parola_veritabanini_guncelle($uye_no, $lkd_login, $ad, $soyad, $parola, $privilege)
+{
+    mysql_select_db(DB_PWD);
+
+    $sorgu = 'UPDATE members SET lotr_alias = "' . $lkd_login . '", name = "' . $ad . '", lastname = "' . $soyad . '", privilege = ' . $privilege;
+    if($parola)
+        $sorgu .= ", password = $parola";
+    $sorgu .= ' WHERE uye_no = ' . $uye_no;
+
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function uye_hesabi_kapanis_zaman_damgasi_yaz($uye_no)
+{
+    mysql_select_db(DB);
+
+    $sorgu = 'UPDATE uyeler SET kayit_kapanis_tarih = "' . date("Y-m-d H:i:s") . '" WHERE uye_id= '. $uye_no;
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function eposta_yonlendirmesi_hedef_eposta_degistir($lkd_eposta, $hedef_eposta)
+{
+    mysql_select_db(DB_MAIL);
+
+    $sorgu = 'UPDATE forwardings SET destination = "' . $hedef_eposta . '" WHERE source = "' . $lkd_eposta . '"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
+function eposta_yonlendirmesi_lkd_eposta_degistir($lkd_eposta, $hedef_eposta)
+{
+    mysql_select_db(DB_MAIL);
+
+    $sorgu = 'UPDATE forwardings SET source = "' . $lkd_eposta . '" WHERE destination = "' . $hedef_eposta . '"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
 ?>
