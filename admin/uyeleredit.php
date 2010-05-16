@@ -267,13 +267,16 @@ switch ($a)
                   {
                       parola_veritabanini_guncelle($x_uye_id, $slug[0], $x_uye_ad, $x_uye_soyad, $fieldList['PassWord'], $privilege);
                       trac_veritabaninda_isim_degistir($slug[0], "$x_uye_ad", "$x_uye_soyad");
-                      // Trac'ta login degistirme destegi uzerinde ayrica ugrasilmasi gerek -> https://svn.linux.org.tr/uyeyazilimi/playground/doruk.fisek/trac_login_change.inc.php
 
-                      // e-posta yonlendirme tablosunu guncellerken, once birini sonra digerini guncellemeli, baska anahtar yok tabloda
-                      if($row_eski[alias] != $x_alias)
+                      if($row_eski[alias] != $x_alias)    // lkd kullanici adi ve lkd e-postasi degisiyor
                       {
+                          $lkd_login_eski = eposta2login($row_eski['alias']);
+                          trac_kullanici_adi_degistir($lkd_login_eski, $slug[0]);
+                          trac_lkd_eposta_degistir($slug[0], $x_alias);
+
                           eposta_yonlendirmesi_lkd_eposta_degistir($x_alias, $row_eski['eposta1']);
 		
+                          // e-posta yonlendirme tablosunu guncellerken, once birini sonra digerini guncellemeli, baska anahtar yok tabloda
                           if($row_eski[eposta1] != $x_eposta1)    // eger hem alias hem eposta guncelleniyorsa, guncellenen alias'i anahtar almak gerek
                               eposta_yonlendirmesi_hedef_eposta_degistir($x_alias, $x_eposta1);
 		      }
