@@ -252,74 +252,43 @@ switch ($a)
 		
   		$rs = mysql_query($updateSQL, $conn) or die(mysql_error());
 
-              if(!$row_eski['artik_uye_degil']) // eger artik uye olmayan birinin kaydi duzenleniyorsa, diger veritabaninda zaten kaydi kalmamistir, bu kismi atla
-               {		
-		// alias tablosunu da guncelleyelim - once birini sonra digerini guncellemeli, baska anahtar yok tabloda
-                mysql_select_db(DB_MAIL, $conn);
-		if($row_eski[alias] != $x_alias)
-		 {
-		  $updateSQL = "UPDATE forwardings SET source='$x_alias' WHERE destination = '$row_eski[eposta1]'";
-		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
-		  
-		  if($row_eski[eposta1] != $x_eposta1)		// eger hem alias hem eposta guncelleniyorsa, guncellenen alias'i anahtar almak gerek
-		   {
-		    $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$x_alias'";
-		    $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
-		   }
-		 }
-		elseif($row_eski[eposta1] != $x_eposta1)	// sadece eposta guncelleniyorsa, eski alias'i anahtar almak gerek
-		 {
-		  $updateSQL = "UPDATE forwardings SET destination='$x_eposta1' WHERE source = '$row_eski[alias]'";
-		  $rs = mysql_query($updateSQL, $conn) or die(mysql_error());
-		 }
-                // Uye, uyelikten ayrildiysa e-postasi postfix veritabanindan kaldiralim -- artik kullanmasin
-                if($x_artik_uye_degil)
-                 {
-                  // Uye, uyelikten ayrildiysa, kayit kapanis zaman damgasi yazalim
-                  $stampSQL = "UPDATE uyeler SET kayit_kapanis_tarih = '" . date("Y-m-d H:i:s") . "' WHERE id=". $tkey ;
-                  $rs = mysql_query($stampSQL, $conn) or die(mysql_error());
+              if(!$row_eski['artik_uye_degil']) // eger artik uye olmayan birinin kaydi duzenleniyorsa, diger veritabanlarinda zaten kaydi kalmamistir, bu kismi atla
+              {		
+                  if($x_artik_uye_degil)    // aktif uyenin dernek uyeligi sonlandirilacaksa
+                  {
+                      uye_hesabi_kapanis_zaman_damgasi_yaz($x_uye_id);
 
-                  $strsql = "DELETE FROM forwardings WHERE source='$x_alias'";
-                  mysql_query($strsql, $conn) or die(mysql_error());
-                 }
+                      // aktif uyelerin kullandigi servislerden kaldiralim
+                      parola_veritabanindan_sil($x_uye_id);
+                      eposta_yonlendirmesi_sil($x_alias);
+                      trac_veritabanindan_sil($slug[0]);
+                  }
+                  else    // aktif uyenin bilgileri guncellenecekse
+                  {
+                      parola_veritabanini_guncelle($x_uye_id, $slug[0], $x_uye_ad, $x_uye_soyad, $fieldList['PassWord'], $privilege);
+                      trac_veritabaninda_isim_degistir($slug[0], "$x_uye_ad", "$x_uye_soyad");
+                      // Trac'ta login degistirme destegi uzerinde ayrica ugrasilmasi gerek -> https://svn.linux.org.tr/uyeyazilimi/playground/doruk.fisek/trac_login_change.inc.php
 
-                // isim / parola / alias bilgisini bir de yeni uye veritabanina yazalim
-                mysql_select_db(DB_PWD,$conn);
-                $strsql = "SELECT id FROM members WHERE uye_no = $x_uye_id";
-                $rs = mysql_query($strsql, $conn) or die(mysql_error());
-                $id = mysql_fetch_row($rs);
-                $strsql = "UPDATE members SET lotr_alias = \"$slug[0]\", uye_no = $x_uye_id, name = \"$x_uye_ad\", lastname = \"$x_uye_soyad\", privilege = \"$privilege\"";
-                if ($x_PassWord)
-                 $strsql .= ", password = $fieldList[PassWord]";
-                $strsql .= ' WHERE id=' . $id[0];
-                mysql_query($strsql, $conn) or die(mysql_error());
-                // Uye, uyelikten ayrildiysa yeni uye veritabanindan kaldiralim -- parola dogrulamasi yapamasin
-                if($x_artik_uye_degil)
-                 {
-                  $strsql = "DELETE FROM members WHERE uye_no = $x_uye_id";
-                  mysql_query($strsql, $conn) or die(mysql_error());
-                 }
-
-                // isim bilgisini bir de Trac veritabaninda guncelleyelim -- alias (trac'daki login) degistirme destegi uzerinde ayrica ugrasilmasi gerek
-                mysql_select_db(DB_TRAC,$conn);
-                $strsql = "UPDATE session_attribute SET value = \"$x_uye_ad $x_uye_soyad\" WHERE sid = \"$slug[0]\" AND name = \"name\"";
-                mysql_query($strsql, $conn) or die(mysql_error());
-                // Uye, uyelikten ayrildiysa, oturum bilgilerini Trac veritabanindan kaldiralim -- Trac'tan e-posta bildirimi gitmesin
-                if($x_artik_uye_degil)
-                 {
-                  $strsql = 'DELETE FROM session_attribute WHERE sid = "' . $slug[0] . '"';
-                  mysql_query($strsql, $conn) or die(mysql_error());
-                  $strsql = 'DELETE FROM session WHERE sid = "' . $slug[0] . '"';
-                  mysql_query($strsql, $conn) or die(mysql_error());
-                 }
-               }
+                      // e-posta yonlendirme tablosunu guncellerken, once birini sonra digerini guncellemeli, baska anahtar yok tabloda
+                      if($row_eski[alias] != $x_alias)
+                      {
+                          eposta_yonlendirmesi_lkd_eposta_degistir($x_alias, $row_eski['eposta1']);
+		
+                          if($row_eski[eposta1] != $x_eposta1)    // eger hem alias hem eposta guncelleniyorsa, guncellenen alias'i anahtar almak gerek
+                              eposta_yonlendirmesi_hedef_eposta_degistir($x_alias, $x_eposta1);
+		      }
+		      elseif($row_eski[eposta1] != $x_eposta1)    // sadece eposta guncelleniyorsa, eski alias'i anahtar almak gerek
+                          eposta_yonlendirmesi_hedef_eposta_degistir($row_eski['alias'], $x_eposta1);
+                  }
+              }
               elseif(!$x_artik_uye_degil)    // uyeligi (yanlislikla?) iptal edilen birinin, uyeligi aktif hale getiriliyor
-               {
-                eposta_yonlendirmesi_ac($x_alias, $x_eposta1);
-                trac_veritabanina_ekle($slug[0], $x_uye_ad, $x_uye_soyad, $x_alias);
-                parola_veritabanina_ekle($x_uye_id, $slug[0], $x_uye_ad, $x_uye_soyad, $x_alias, $privilege);
-                ayrilma_bilgilerini_sifirla($x_uye_id);
-               }
+              {
+                  eposta_yonlendirmesi_ac($x_alias, $x_eposta1);
+                  trac_veritabanina_ekle($slug[0], $x_uye_ad, $x_uye_soyad, $x_alias);
+                  parola_veritabanina_ekle($x_uye_id, $slug[0], $x_uye_ad, $x_uye_soyad, $x_alias, $privilege);
+                  ayrilma_bilgilerini_sifirla($x_uye_id);
+              }
+
 		ob_end_clean();
 		
 		header("Location: uyelerview.php?key=$tkey");
