@@ -202,4 +202,46 @@ function eposta_yonlendirmesi_lkd_eposta_degistir($lkd_eposta, $hedef_eposta)
     mysql_query($sorgu) or die(mysql_error());
 }
 
+function trac_kullanici_adi_degistir($eski_lkd_login, $yeni_lkd_login)
+{
+    // Duzelt Beni: CC alanlarinin degistirilmesi -- ticket.cc || WHERE ticket_change.field = cc
+
+    mysql_select_db(DB_TRAC);
+    
+    // ticket_change tablosu ozel ilgi ister
+    $sorgu = 'UPDATE ticket_change SET oldvalue = "' . $yeni_lkd_login . '" WHERE field = "owner" AND oldvalue = "' . $eski_lkd_login . '";';
+    mysql_query($sorgu) or die(mysql_error());
+    $sorgu = 'UPDATE ticket_change SET newvalue = "' . $yeni_lkd_login . '" WHERE field = "owner" AND newvalue = "' . $eski_lkd_login . '";';
+    mysql_query($sorgu) or die(mysql_error());
+
+    // cc alanlari liste biciminde, baska kullanici adi/e-postalar da iceriyor
+    $sorgu = 'UPDATE ticket SET cc = REPLACE("cc", "' . $eski_lkd_login .  '", "' . $yeni_lkd_login . '") WHERE cc LIKE "%' . $eski_lkd_login . '%";';
+    mysql_query($sorgu) or die(mysql_error());
+
+    // geri kalanlar
+    $trac_guncellenecek_tablolar = array ( array ('attachment', 'author'),
+                                   array ('component', 'owner'),
+                                   array ('permission', 'username'),
+                                   array ('revision', 'author'),
+                                   array ('session', 'sid'),
+                                   array ('session_attribute', 'sid'),
+                                   array ('ticket', 'owner'),
+                                   array ('ticket', 'reporter'),
+                                   array ('ticket_change', 'author'),
+                                   array ('wiki', 'author') );
+    foreach ($trac_guncellenecek_tablolar as $tablo)
+    {
+        $sorgu = 'UPDATE ' . $tablo[0] . ' SET ' . $tablo[1] . ' = "' . $yeni_lkd_login . '" WHERE ' . $tablo[1] . ' = "' . $eski_lkd_login . '";';
+        mysql_query($sorgu) or die(mysql_error());
+    }
+}
+
+function trac_lkd_eposta_degistir($lkd_login, $lkd_eposta)
+{
+    mysql_select_db(DB_TRAC);
+
+    $sorgu = 'UPDATE session_attribute SET value = "' . $lkd_eposta . '" WHERE sid = "' . $lkd_login . '" AND name = "email"';
+    mysql_query($sorgu) or die(mysql_error());
+}
+
 ?>
