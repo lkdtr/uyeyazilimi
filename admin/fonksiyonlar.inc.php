@@ -182,7 +182,7 @@ function uye_hesabi_kapanis_zaman_damgasi_yaz($uye_no)
 {
     mysql_select_db(DB);
 
-    $sorgu = 'UPDATE uyeler SET kayit_kapanis_tarih = "' . date("Y-m-d H:i:s") . '" WHERE uye_id= '. $uye_no;
+    $sorgu = 'UPDATE uyeler SET artik_uye_degil = 1, kayit_kapanis_tarih = "' . date("Y-m-d H:i:s") . '" WHERE uye_id= '. $uye_no;
     mysql_query($sorgu) or die(mysql_error());
 }
 
