@@ -31,7 +31,7 @@ function parola_veritabanina_ekle($uye_no, $lkd_login, $ad, $soyad, $lkd_eposta,
 function ayrilma_bilgilerini_sifirla($uye_no)
 {
     mysql_select_db(DB);
-    $sorgu = 'UPDATE uyeler SET ayrilma_tarihi = "", Ayrilma_karar_no = "", Ayrilma_karar_tarih = "", kayit_kapanis_tarih = NULL WHERE uye_id = ' . $uye_no;
+    $sorgu = 'UPDATE uyeler SET artik_uye_degil = 0, ayrilma_tarihi = "", Ayrilma_karar_no = "", Ayrilma_karar_tarih = "", kayit_kapanis_tarih = NULL WHERE uye_id = ' . $uye_no;
     mysql_query($sorgu) or die(mysql_error());
 }
 
