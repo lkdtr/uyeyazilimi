@@ -1,0 +1,16 @@
+<?php
+
+/* ***************************************
+
+	YILIN PENGUENLERI KONFIGURASYONU
+
+*************************************** */
+
+// varsayilan yarisma
+$varsayilanYarismaNo = 1;
+// veritabani baglanti cumlesi
+$dsn = 'mysql://userName:passWord@Server/dataBase';
+// uygulamanin web bolumunun bulundugu tam yol
+$C[PATH_PREFIX] = '/var/www/dizin_adi/public_html/';
+
+?>

@@ -1,0 +1,78 @@
+
+#arayuz {
+	padding-bottom: 20px;
+}
+
+#aday h3 {
+	background-color: silver;
+	padding: 5px;
+}
+
+#aday h4 {
+	background-color: #efefef;
+	border-bottom: 1px solid #ddd;
+	padding: 5px;
+	font-size: 1.2em;
+	font-style: italic;
+}
+
+#aday {
+	border: 1px solid silver;
+}
+
+#aday .aciklama {
+	padding: 10px;
+}
+
+#yorumlar {
+	margin: 10px;
+	margin-top: 30px;
+}
+
+.yorum {
+	margin-top: 20px;
+	background: url(../img/arrow.gif) no-repeat 25px 22px;
+}
+
+.yorum .info {
+	height: 30px;
+}
+
+.yorum .info .isim {
+	float: left;
+	display: block;
+	background: url(../img/comment-user.png) no-repeat left center;
+	padding-left: 20px;
+}
+
+.yorum .info .tarih {
+	float: right;
+	display: block;
+	margin-right: 5px;
+	margin-top: 10px;
+	color: silver;
+	font-size: 0.8em;
+}
+
+.yorum .yazi {
+	border-top: 1px solid #aaa;
+	padding: 10px 0;
+}
+
+.yorumFormu {
+	margin-top: 40px;
+}
+
+.yorumFormu li {
+	background-image: none;
+}
+
+#yorumlar .yorum_yok {
+	color: gray;
+	font-style: italic;
+	margin-top: 15px;
+	font-size: 1.1em;
+}
+
+
+

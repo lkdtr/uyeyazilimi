@@ -1,0 +1,159 @@
+
+* {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 40px;
+	font-size: 13px;
+}
+
+h1, h2, h3, h4, h5 {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.3em;
+}
+
+img {
+	border:none;
+}
+
+a {
+	color: #ba131b;
+	text-decoration:none;
+}
+
+a:hover {
+	color: #ba131b;
+	text-decoration:underline;
+}
+
+
+.Form ul,
+.Form ul li {
+	clear: both;
+	display: block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.Form ul li {
+	position: relative;
+	width: 600px;
+	margin-bottom: 20px;
+}
+
+.Form label.title {
+	display: block;
+	font-weight: bold;
+	font-style: italic;
+	margin-bottom: 5px;
+}
+
+.Form .req {
+	color: red;
+}
+
+.Form.right label.title,
+.Form.left label.title {
+	float: left;
+	width: 150px;
+	margin-left: -150px;
+}
+
+.Form.right label.title {
+	text-align: right;
+	width: 130px;
+}
+
+.Form.right li,
+.Form.left li {
+	padding-left: 150px;
+}
+
+.Form .desc {
+	position: absolute;
+	top: 25px;
+	right: 0;
+	width: 175px;
+	color: gray;
+	font-size: 0.8em;
+}
+
+.Form.right .desc,
+.Form.left .desc {
+	top: 5px;
+}
+
+.Form input, .Form textarea {
+	font-size: 1.1em;
+}
+
+.Form input[type=text],
+.Form input[type=password],
+.Form textarea {
+	border-top: 1px solid #717171;
+	border-left: 1px solid #b4b4b4;
+	border-right: 1px solid #b4b4b4;
+	border-bottom: 1px solid #dadada;
+	background: url(/img/input_bg.gif) repeat-x left top;
+	padding: 5px;
+	width: 400px;
+}
+
+.Form textarea {
+	height: 200px;
+}
+
+.Form input[type=text]:focus,
+.Form input[type=password]:focus,
+.Form textarea:focus {
+	border-color: #0095ff;
+}
+
+.Form.long select,
+.Form.long input[type=text],
+.Form.long input[type=password],
+.Form.long textarea {
+	width: 650px;
+}
+
+.Form .error {
+	background-color: #ffcdcd;
+	border: 1px solid #ff4f4f;
+	font-size: 0.8em;
+	padding: 3px 10px;
+	width: 390px;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	-moz-border-radius: 5px;
+}
+
+/* ozel stiller */
+.Form .kategoriler span.option {
+	display: block;
+}
+
+.Form li.aciklama {
+	padding: 10px 20px;
+	border: 1px solid #e2df00;
+	background-color: #fcfcd3;
+}

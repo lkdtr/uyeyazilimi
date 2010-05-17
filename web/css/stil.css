@@ -1,0 +1,78 @@
+@import url("core.css");
+
+#ust {
+	width: 680px;
+	height: 350px;
+	background: url(/img/ust.jpg) no-repeat center;
+	margin: auto;
+}
+
+#ust h1 {
+	font-size: 28px;
+	font-weight: normal;
+	font-style: italic;
+	text-align: right;
+	margin: 40px 50px 0 0;
+	padding-right: 10px;
+}
+
+#genislik {
+	width: 680px;
+	background: url(/img/arka.jpg) repeat-y center;
+	margin: auto;
+}
+
+#arayuz {
+	width: 580px;
+	margin: auto;
+}
+
+ul {
+	margin: 0px;
+	padding: 10px 0 10px 30px;
+	list-style: none;
+}
+
+ul li {
+	margin: 0px;
+	padding: 3px 0 3px 13px;
+	list-style: none;
+	background: url(/img/siralama.gif) no-repeat left top;
+}
+
+#arayuz .bannerkod {
+	border: #ba131b 1px solid;
+	margin: auto;
+	text-align: center;
+	width: 500px;
+	padding: 5px;
+}
+
+#arayuz hr {
+	height: 1px;
+	border: 0;
+	border-bottom: 1px dotted gray;
+}
+
+#alt {
+	width: 680px;
+	height: 240px;
+	background: url(/img/alt.jpg) no-repeat center;
+	margin: auto;
+}
+
+#alt #altmenu {
+	float: left;
+	margin: 0 0 0 50px;
+	width: 260px;
+}
+
+#alt #altmenu #gectigimizyillar {
+	margin: 25px 0 0 0;
+	font-size: 10px
+}
+
+#alt #tlkdlogo {
+	float: right;
+	margin: 165px 60px 0 0;
+}

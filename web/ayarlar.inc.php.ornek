@@ -1,0 +1,14 @@
+<?php
+
+/* ***************************************
+
+	YILIN PENGUENLERI KONFIGURASYONU
+
+*************************************** */
+
+// varsayilan yarisma
+$varsayilanYarismaNo = 1;
+// veritabani baglanti cumlesi
+$dsn = 'mysql://userName:passWord@Server/dataBase';
+
+?>

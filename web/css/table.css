@@ -1,0 +1,18 @@
+.Table {
+  border-spacing: 1px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+.Table tr.head td {
+  background-color: #efefef;
+  font-weight: bold;
+}
+
+.Table td {
+  background-color: white;
+  padding: 2px 5px;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
