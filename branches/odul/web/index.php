@@ -19,12 +19,12 @@ $sayfaIcerigi = moduleLoader(array(
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><?=($sayfaBasligi ? $sayfaBasligi.' - ':'');?>Yılın Penguenleri</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/stil.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/source/css/stil.css" />
 </head>
 <body class="siteFront">
 
 	<div id="ust">
-		<img src="/img/ustmenu.gif" border="0" usemap="#Map" />
+		<img src="/source/img/ustmenu.gif" border="0" usemap="#Map" />
 		<map name="Map" id="Map">
 		  <area shape="rect" coords="366,38,623,163"                                  href="/yarisma-<?=$Y[anahtar];?>/" />
 		  <area shape="poly" coords="305,215,300,235,353,244,354,231,306,215"         href="/yarisma-<?=$Y[anahtar];?>/hakkinda/" />
@@ -60,7 +60,7 @@ $sayfaIcerigi = moduleLoader(array(
 
 			// yarisma suruyorsa
 			if( $Y[adim] == 1 ){
-				print '<img src="/img/altmenu.gif" border="0" usemap="#Map2" />
+				print '<img src="/source/img/altmenu.gif" border="0" usemap="#Map2" />
 
 
 
@@ -90,7 +90,7 @@ coords="98,95,108,61,122,67,138,65,145,79,169,67,193,75,217,79,235,85,229,103,22
 				<br />
 			</div>
 		</div>
-		<div id="tlkdlogo"><a href="http://www.lkd.org.tr" target="_blank"><img src="/img/tlkdlogo.gif" /></a></div>
+		<div id="tlkdlogo"><a href="http://www.lkd.org.tr" target="_blank"><img src="/source/img/tlkdlogo.gif" /></a></div>
 	</div>
 
 </body>
