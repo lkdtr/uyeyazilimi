@@ -1,0 +1,19 @@
+php_value error_reporting 7
+php_flag magic_quotes_gpc off
+
+
+Options +FollowSymlinks
+RewriteEngine on
+
+
+RewriteRule   ^yarisma-(.*)/kategoriler(/?)$          index.php?yarisma=$1&modul=kategoriler            [L]
+RewriteRule   ^yarisma-(.*)/kategori(/?)(.*)$         index.php?yarisma=$1&modul=kategori&no=$3         [L]
+RewriteRule   ^yarisma-(.*)/adaylar(/?)(.*)$          index.php?yarisma=$1&modul=adaylar                [L]
+RewriteRule   ^yarisma-(.*)/askidakiler(/?)(.*)$      index.php?yarisma=$1&modul=askidakiler                [L]
+RewriteRule   ^yarisma-(.*)/aday-goster(/?)(.*)$      index.php?yarisma=$1&modul=icerik&sayfa=7         [L]
+RewriteRule   ^yarisma-(.*)/aday(/?)(.*)$             index.php?yarisma=$1&modul=aday&no=$3             [L]
+
+RewriteRule   ^yarisma-(.*)/hakkinda(/?)$             index.php?yarisma=$1&modul=icerik&sayfa=4         [L]
+RewriteRule   ^yarisma-(.*)/yontem(/?)$               index.php?yarisma=$1&modul=icerik&sayfa=5         [L]
+RewriteRule   ^yarisma-(.*)/multimedya(/?)$           index.php?yarisma=$1&modul=icerik&sayfa=11        [L]
+RewriteRule   ^yarisma-(.*)(/?)$                      index.php?yarisma=$1&modul=anasayfa               [L]

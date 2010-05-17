@@ -1,0 +1,138 @@
+
+.pagination,
+.pagination li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.pagination li {
+	float: left;
+	margin-right: 5px;
+}
+
+.pagination li a {
+	display: block;
+	float: left;
+}
+
+
+/* Clean style */
+
+.pagination.clean li {
+	margin-right: 0;
+}
+
+.pagination.clean li a {
+	text-decoration: underline;
+	color: #006df3;
+}
+
+.pagination.clean li a:hover {
+	color: black;
+}
+
+.pagination.clean li a,
+.pagination.clean li.active,
+.pagination.clean li.dots,
+.pagination.clean li.previous-off,
+.pagination.clean li.next-off {
+	padding: 1px 8px;
+}
+
+.pagination.clean li a,
+.pagination.clean li.active,
+.pagination.clean li.dots,
+.pagination.clean li.previous-off {
+	border-right: solid 1px #dedede;
+}
+
+.pagination.clean li.active {
+	font-weight: bold;
+}
+
+.pagination.clean li.previous-off,
+.pagination.clean li.next-off {
+	color: gray;
+}
+
+.pagination.clean li.next a {
+	border-right: 0;
+}
+
+
+/* Flickr style */
+
+.pagination.flickr li {
+	margin-right: 1px;
+	margin-left: 1px;
+}
+
+.pagination.flickr li a,
+.pagination.flickr li.active {
+	color: #0063e3;
+	border: solid 1px #dedede;
+	text-decoration: none;
+	padding: 1px 5px;
+}
+
+.pagination.flickr li.active {
+	border: 0;
+	margin: 1px;
+	color: #ff0084;
+}
+
+.pagination.flickr li a:hover {
+	color: white;
+	background-color: #006df3;
+	border: 1px solid #003b83;
+}
+
+.pagination.flickr li.previous a:hover,
+.pagination.flickr li.next a:hover {
+	background-color: white;
+	color: #0063e3;
+	border: 0;
+	text-decoration: underline;
+}
+
+.pagination.flickr li.previous a,
+.pagination.flickr li.previous-off,
+.pagination.flickr li.next a,
+.pagination.flickr li.next-off {
+	border: 0;
+	margin: 0 5px;
+}
+
+
+/* Digg style */
+
+.pagination.digg li {
+	margin-right: 1px;
+	margin-left: 1px;
+}
+
+.pagination.digg li a,
+.pagination.digg li.active,
+.pagination.digg li.previous-off,
+.pagination.digg li.next-off {
+	color: #0063e3;
+	border: solid 1px #9aafe5;
+	text-decoration: none;
+	padding: 2px 5px;
+}
+
+.pagination.digg li a:hover,
+.pagination.digg li.active {
+	color: white;
+	background-color: #2e6ab1;
+	border: 1px solid #2e6ab1;
+}
+
+.pagination.digg li.previous-off,
+.pagination.digg li.next-off {
+	color: gray;
+	border: 1px solid silver;
+}
+
+

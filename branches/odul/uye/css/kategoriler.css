@@ -1,0 +1,25 @@
+
+#arayuz {
+	padding-bottom: 20px;
+}
+
+.kategori {
+	border: 1px solid #ba131b;
+	margin-bottom: 20px;
+}
+
+.kategori h4 {
+	margin: 0;
+	padding: 0;
+}
+
+.kategori h4 a {
+	display: block;
+	padding: 5px 10px 5px 30px;
+	color: white;
+	background: #ba131b url(/img/odul_icon.png) no-repeat 5px center;
+}
+
+.kategori .aciklama {
+	padding: 10px;
+}
