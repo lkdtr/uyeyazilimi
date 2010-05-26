@@ -32,7 +32,7 @@
      </tr>
    </table>
    <div class="anylinkcss" id="anylinkmenu1">
-    <a href="rapor_aidat.php" target="_blank" class="navbeyaz">Aidat Dökümü</a>
+    <a href="rapor_aidat.php" target="_blank" class="navbeyaz">Aidat Tablosu</a>
     <a href="rapor_haber_alinamayanlar.php" class="navbeyaz">Haber Alınamayanlar</a>
     <a href="rapor_kimlik_fotoistenecek_csv.php" class="navbeyaz">Kimlik Fotoğrafı (Hiç Yok İstenecek) için CSV</a>
     <a href="rapor_kimlik_yenifotoistenecek_csv.php" class="navbeyaz">Kimlik Fotoğrafı (Yenisi İstenecek) için CSV</a>
