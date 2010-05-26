@@ -39,6 +39,7 @@
     <a href="rapor_kimlik_baski_csv.php" class="navbeyaz">Kimlik Baskısı için CSV</a>
     <a href="rapor_kimlik_posta_csv.php" class="navbeyaz">Kimlik Postalanması için CSV</a>
     <a href="rapor_uyedefteri_csv.php" target="_blank" class="navbeyaz">Üye Defteri İçin Aidat Dökümü (CSV)</a>
+    <a href="rapor_vpos_odemeleri.php" target="_blank" class="navbeyaz">Kredi Kartı (VPOS) Ödemeleri Dökümü</a>
   </div> 
    </td>
   </tr>

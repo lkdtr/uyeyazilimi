@@ -16,6 +16,9 @@ define('DB_PWD', '****');
 // Trac veritabani
 define('DB_TRAC', '****');
 
+// Vpos odeme veritabani
+define('DB_VPOS', '****');
+
 // Odenti makbuzlarin kaydedilecegi dizin
 $MakbuzDizin='****';
 
