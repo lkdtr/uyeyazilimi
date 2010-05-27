@@ -13,11 +13,11 @@
                 foreach ($_GET as $key => $value)
                     $$key = intval($value);
 
-      		$Sorgu = 'SELECT odemeler.uye_id,uyeler.uye_ad,uyeler.uye_soyad,odemeler.miktar,odemeler.tarih FROM odemeler,uyeler WHERE odemeler.uye_id BETWEEN ' . $x . ' AND ' . $y . ' AND odemeler.tur = "aidat" AND uyeler.uye_id = odemeler.uye_id AND odemeler.tarih BETWEEN "' . $ilk_yil . '-' . $ilk_ay . '-' . $ilk_gun . '" AND "' . $son_yil . '-' . $son_ay . '-' . $son_gun . '" ORDER BY odemeler.uye_id,odemeler.tarih';
+      		$Sorgu = 'SELECT odemeler.uye_id,uyeler.uye_ad,uyeler.uye_soyad,odemeler.miktar,odemeler.tarih,odemeler.notlar FROM odemeler,uyeler WHERE odemeler.uye_id BETWEEN ' . $x . ' AND ' . $y . ' AND odemeler.tur = "aidat" AND uyeler.uye_id = odemeler.uye_id AND odemeler.tarih BETWEEN "' . $ilk_yil . '-' . $ilk_ay . '-' . $ilk_gun . '" AND "' . $son_yil . '-' . $son_ay . '-' . $son_gun . '" ORDER BY odemeler.uye_id,odemeler.tarih';
        	 	$Sonuc = @mysql_query($Sorgu) or die(mysql_error());
         	mysql_close($Baglanti); 
 		while( $Bilgi = mysql_fetch_array($Sonuc) )
-			echo $Bilgi["uye_id"].";".$Bilgi["uye_ad"]." ".$Bilgi["uye_soyad"].";".$Bilgi["miktar"] .";".$Bilgi["tarih"]."\n";
+		    echo $Bilgi["uye_id"] . ';' . $Bilgi['uye_ad'] . ' ' . $Bilgi['uye_soyad'] . ';' . $Bilgi['miktar'] . ';' . $Bilgi['tarih'] . ';' . trim($Bilgi['notlar']) . "\n";
 		mysql_free_result($Sonuc);
 
 	} else {
