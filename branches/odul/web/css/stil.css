@@ -3,7 +3,7 @@
 #ust {
 	width: 680px;
 	height: 350px;
-	background: url(/img/ust.jpg) no-repeat center;
+	background: url(/source/img/ust.jpg) no-repeat center;
 	margin: auto;
 }
 
@@ -18,7 +18,7 @@
 
 #genislik {
 	width: 680px;
-	background: url(/img/arka.jpg) repeat-y center;
+	background: url(/source/img/arka.jpg) repeat-y center;
 	margin: auto;
 }
 
@@ -37,7 +37,7 @@ ul li {
 	margin: 0px;
 	padding: 3px 0 3px 13px;
 	list-style: none;
-	background: url(/img/siralama.gif) no-repeat left top;
+	background: url(/source/img/siralama.gif) no-repeat left top;
 }
 
 #arayuz .bannerkod {
@@ -57,7 +57,7 @@ ul li {
 #alt {
 	width: 680px;
 	height: 240px;
-	background: url(/img/alt.jpg) no-repeat center;
+	background: url(/source/img/alt.jpg) no-repeat center;
 	margin: auto;
 }
 
