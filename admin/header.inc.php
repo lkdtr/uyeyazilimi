@@ -28,6 +28,7 @@
        <td width="120"><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="uyelerlist.php?cmd=resetall" class="navbeyaz">Üye Listesi</a></td>
        <td width="160"><img src="images/navicon_truncu.gif" width="16" height="9"> <a href="odemelerlist.php?cmd=resetall" class="navbeyaz">Yapılan Ödemeler</a></td>
        <td width="100"><img src="images/navicon_truncu.gif" width="16" height="9"><a href="#" onMouseOver="dropdownmenu(this, event, 'anylinkmenu1')" class="navbeyaz">Raporlar</a></td>
+       <td width="100"><img src="images/navicon_truncu.gif" width="16" height="9"><a href="#" onMouseOver="dropdownmenu(this, event, 'anylinkmenu2')" class="navbeyaz">Toplu İşlemler</a></td>
        <td align="right"><font color="white"><?php echo $_SERVER['PHP_AUTH_USER']; ?></font></td>
      </tr>
    </table>
@@ -40,6 +41,10 @@
     <a href="rapor_kimlik_posta_csv.php" class="navbeyaz">Kimlik Postalanması için CSV</a>
     <a href="rapor_uyedefteri_csv.php" target="_blank" class="navbeyaz">Üye Defteri İçin Aidat Dökümü (CSV)</a>
     <a href="rapor_vpos_odemeleri.php" target="_blank" class="navbeyaz">Kredi Kartı (VPOS) Ödemeleri Dökümü</a>
+  </div> 
+   <div class="anylinkcss" id="anylinkmenu2">
+    <a href="topluislem_kimlik_istiyor2basilacak.php" class="navbeyaz">Kimlik İstiyor -> Basılacak</a>
+    <a href="topluislem_kimlik_basilacak2basildi.php" class="navbeyaz">Kimlik Basılacak -> Basıldı</a>
   </div> 
    </td>
   </tr>
