@@ -3,6 +3,13 @@
 
 require('fonksiyonlar_tarih.inc.php');
 
+function veritabani_baglantisi_kur()
+{
+    @mysql_connect(HOST, USER, PASS) or die("Bağlanti kurulamadı");
+    @mysql_select_db(DB) or die("Veritabanı seçilemedi");
+    mysql_query("SET NAMES 'utf8'");
+}
+
 function eposta_yonlendirmesi_ac($lkd_eposta, $hedef_eposta)
 {
     mysql_select_db(DB_MAIL);
@@ -130,6 +137,70 @@ echo '
 </td></tr>
 ';
 
+}
+
+function html_basligi_yap($baslik)
+{
+    echo "<html>\n" .
+         ' <head><title>' . $baslik . "</title>\n" .
+         "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n" .
+         " </head>\n" .
+         "<body>\n";
+}
+
+function html_sonu_yap()
+{
+    echo "</html>\n" .
+         '</body>';
+}
+
+function tablo_basligi_yap($dizi)
+{
+    echo '<div align="center"><center><table cellpadding="3" cellspacing="1" bgcolor="#d6dde7" border="0" width="100%"><tbody> <tr bgcolor="#466176">';
+
+    foreach ($dizi as $i => $deger)
+        echo '<td align="center"><font color="#ffffff"><u>' . $deger . '</u></font></td>' . "\n";
+
+    echo '</tr>';
+}
+
+function tablo_satiri_yap($dizi, $renk_kodu)
+{
+    if($renk_kodu % 2)
+        $renk = '#ffffff';
+    else
+        $renk = '#f5f5f5';
+
+    echo '<tr bgcolor="' . $renk . '">';
+
+    foreach ($dizi as $i => $deger)
+        echo '<td align="center">' . $deger . '</td>' . "\n";
+
+    echo '</tr>';
+}
+
+function tablo_sonu_yap()
+{
+    echo '</tbody></table></div></center>';
+}
+
+function uyeler_tablo_gosterimi($sonuc)
+{
+    global $UyeResimlerDizin;
+
+    $sonuc_sayisi = mysql_num_rows($sonuc);
+
+    tablo_basligi_yap(array('Üye No', 'Ad', 'Soyad', 'E-posta', 'Fotoğraf', 'Gör', 'Düzenle', 'Aidat'));
+    while($sonuc_sayisi--)
+    {
+        $uye = mysql_fetch_array($sonuc);
+        $resim = '<a href=' . $UyeResimlerDizin . '/' . $uye['Resim'] . '><img src=' . $UyeResimlerDizin . '/w150/' . $uye['Resim'] . ' height=16 border=0></a>';
+        $duzenle = '<a href="uyeleredit.php?key=' . $uye['id'] . '"><img src="images/edit.gif" border="0"></a>';
+        $gor = '<a href="uyelerview.php?key=' . $uye['id'] . '"><img src="images/browse.gif" border="0"></a>';
+        $aidat = '<a href="odemelerlist.php?x_uye_id=' . $uye['uye_id'] . '"><img src="images/para.gif" border="0"></a>';
+        tablo_satiri_yap(array($uye['uye_id'], $uye['uye_ad'], $uye['uye_soyad'], $uye['alias'], $resim, $gor, $duzenle, $aidat), $sonuc_sayisi);
+    }
+    tablo_sonu_yap();
 }
 
 function trac_veritabanindan_sil($lkd_login)
