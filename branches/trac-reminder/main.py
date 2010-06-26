@@ -25,7 +25,7 @@ for c in componentInfo:
 # get aceepted tickets
 aCursor = db.cursor()
 aCursor.execute("SET NAMES utf8")
-aCursor.execute("SELECT id, owner, reporter, component, summary FROM ticket WHERE status = 'accepted' or status = 'new'")
+aCursor.execute("SELECT id, owner, reporter, component, summary FROM ticket WHERE status = 'accepted' or status = 'new' or status = 'assigned'")
 acceptedTickets = aCursor.fetchall()
 
 owners = {}
