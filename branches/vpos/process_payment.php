@@ -289,29 +289,26 @@ payment_info;
 success;
 
 
-	$ykto = "yk@linux.org.tr, uye@lkd.org.tr";
-	$yksubject = "Odeme";
 	$ykbody = "Yeni Ödeme Yapıldı\r\n";
 	$ykbody .= "Ad - Soyad: ".$nameText.' '.$surnameText."\r\n";
 	$ykbody .= "Açıklama: ".$descriptionTextArea."\r\n";
 	$ykbody .= "Ödeme Miktarı: ".$tutarYTLText.','.$tutarYKRText."\r\n";
-	$ykheaders = "From: yk@linux.org.tr\r\n" .
+	$ykheaders = 'From: ' . EPOSTA_YONETIM_KIMDEN . "\r\n" .
     "X-Mailer: php". "\r\n";
 	$ykheaders .= 'Content-type: text/plain; charset=UTF-8' . "\r\n";
 	$to = $emailText;
 
 
-	$subject = "LKD Ödeme Sistemi";
 	$body = "Sayın ".$nameText." ".$surnameText.",\r\nYaptığınız ödeme için teşekkür ederiz!,\r\n Ödeme Bilgileri Aşağıdadır.\r\n Linux Kullanıcıları Derneği\r\n";
 	$body .= "Ad - Soyad: ".$nameText.' '.$surnameText."\r\n";
 	$body .= "Açıklama: ".$descriptionTextArea."\r\n";
 	$body .= "Ödeme Miktarı: ".$tutarYTLText.','.$tutarYKRText."\r\n";
-	$headers = "From: yk@linux.org.tr\r\n" .
+	$headers = 'From: ' . EPOSTA_ODEYEN_KIMDEN . "\r\n" .
     "X-Mailer: php" . "\r\n";
 	$headers .= 'Content-type: text/plain; charset=UTF-8' . "\r\n";
-	mail($ykto, $yksubject, $ykbody,$ykheaders);
+	mail(EPOSTA_YONETIM_KIME, EPOSTA_YONETIM_KONU, $ykbody,$ykheaders);
 	if (check_email_address($to)) {
-		mail($to, $subject, $body,$headers);
+		mail($to, EPOSTA_ODEYEN_KONU, $body,$headers);
 	}
 
     }
