@@ -90,7 +90,7 @@ maxlength="10" style="text-align: right; width:60px;" value="0" type="text" clas
 type="text" class="inp" style="width:60px;">
 <span class="subject"> KR</span></td></tr>
 
-<tr><td><span class="subject">Güvenlik Kodu</span></td><td colspan="2"><img id="captcha" src="securimage/securimage_show.php" alt="Güvenlik Kodu" /><a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false">Resmi Yenile</a></td></tr>
+<tr><td><span class="subject">Güvenlik Kodu</span></td><td colspan="2"><img id="captcha" src="securimage/securimage_show.php" alt="Güvenlik Kodu" /><a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false"><img id="refresh" border="0" src="securimage/images/refresh.gif" alt="Resmi Yenile" /></a></td></tr>
 
             <tr><td><span class="subject"></span></td><td><input id="guvenlik_kodu" name="guvenlik_kodu" type="text" class="inp"></td></tr>
 
