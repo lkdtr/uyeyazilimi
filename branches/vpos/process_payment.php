@@ -233,7 +233,7 @@ payment_info;
     //odeme burda basliyor
 
 	$userIP = $_SERVER['REMOTE_ADDR'];
-	$getString = '/vpos724v3/?kullanici=' . BANKA_KULLANICI . '&sifre=' . BANKA_SIFRE . '&islem=PRO&uyeno=' . BANKA_UYENO . '&posno=' . BANKA_POSNO . '&kkno={$cardNoText}&gectar={$validityDate}&cvc={$cvcText}&tutar={$tutar}&provno=000000&taksits=00&islemyeri=I&uyeref={$paymentId}&vbref=0&khip={$userIP}&xcip=' . BANKA_XCIP;
+	$getString = '/vpos724v3/?kullanici=' . BANKA_KULLANICI . '&sifre=' . BANKA_SIFRE . '&islem=PRO&uyeno=' . BANKA_UYENO . '&posno=' . BANKA_POSNO . "&kkno={$cardNoText}&gectar={$validityDate}&cvc={$cvcText}&tutar={$tutar}&provno=000000&taksits=00&islemyeri=I&uyeref={$paymentId}&vbref=0&khip={$userIP}&xcip=" . BANKA_XCIP;
 	
 	//echo $getString;
 	if($cardNoText != "") {
