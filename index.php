@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>LKD Bağış Sistemi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>LKD Bağış Sistemi</title>
 
     <?php 
         function monthSelect () {
-            echo '<select name="validityDateMonth">';
+            echo '<select name="validityDateMonth" style="width:70px; height:30px;" class="inp">';
             for ($i=1;$i<=12;$i++) {
                 echo "<option value=$i>$i</option>";
 
@@ -15,7 +17,7 @@
         function yearSelect() {
             $currentYearDate = getdate();
             $currentYear =$currentYearDate['year'];
-            echo '<select name="validityDateYear">';
+            echo '<select name="validityDateYear" style="width:70px; height:30px;" class="inp">';
             for ($i=$currentYear;$i<=$currentYear+20;$i++) {
                 echo "<option value=$i>$i</option>";
             }
@@ -24,51 +26,78 @@
 
 
 ?>
-
 </head>
+<body>
+<div id="container">
+	<div id="top_content">
+    	<p class="top">Bağlantı Adresiniz, <strong><?php echo $_SERVER['REMOTE_ADDR']?></strong></p>
+    </div>
+    <div id="info-logo">
+    	<div id="logo-part">
+    		<img src="images/resmilogo.png" align="left" />
+        </div>
+        <div id="info-part">
+            <img src="images/part.png" align="left" />
+            <p>
+            <span class="subject">Derneğe banka yoluyla da bağış / aidat ödemesi yapabilirsiniz</span><br /><br />
+            <span class="subject">Banka :</span> Garanti Bankası<br>
+            <span class="subject">Şube :</span> Kızılay (Şube No: 082)<br>
+            <span class="subject">Hesap Numarası :</span> 6298573<br>
+            <span class="subject">IBAN :</span> TR51 0006 2000 0820 0006 2985 73<br>
+            </p>
+        </div>
+    </div>
+    <div id="content">
+    <!-- Form Başlangıcı -->
+    
+        <form method="POST" action="process_payment.php">
+    <input name="payment_accepted" value="false" type="hidden">
+        <table width="600" cellspacing="10" style="margin-right:auto; margin-left:auto;">
+			<tbody>
+            	<tr>
+					<td colspan="2"></td>
+                </tr>
+                <tr>
+                	<td colspan="2"><div class="subject" style="margin:10px;">Kredi kartı ile aidat/bağış ödemesi yapmak için aşağıdaki formu doldurabilirsiniz</div><br></td>
+                </tr>
+            	<tr><td><span class="subject">Ad</span></td><td><input name="nameText" type="text" class="inp"></td></tr>
+            <tr><td><span class="subject">Soyad</span></td><td><input name="surnameText" type="text" class="inp"></td></tr>
 
-<body bgcolor="white">
 
-<center>
-    <form method="POST" action="process_payment.php">
-    <input type="hidden" name="payment_accepted" value="false">
-    <img src="images/resmilogo.png" alt="LKD"><br/>
-        Bağlantı Adresiniz, <strong><?php echo $_SERVER['REMOTE_ADDR']?></strong>
-        <table>
-
-            <tr><td>Ad</td><td><input type="text" name="nameText"></td></tr>
-            <tr><td>Soyad</td><td><input type="text" name="surnameText"></td></tr>
-
-
-            <tr><td>Adres</td><td><textarea name="addressTextArea" rows="5"></textarea></td></tr>
-	    <tr><td>Telefon</td><td><input type="text" name="telephoneText"></td></tr>
-            <tr><td>Açıklama</td><td><textarea name="descriptionTextArea" rows="5"></textarea></td></tr>
-             <tr><td>Ödeme Türü</td><td><input type="radio" name="paymentTypeRadio" value="1" default> Bağış&nbsp;<input type="radio" name="paymentTypeRadio" value="2">Üyelik Ödentisi</td></tr>
+            <tr><td><span class="subject">Adres</span></td><td><textarea name="addressTextArea" 
+rows="5" class="tear"></textarea></td></tr>
+	    <tr><td><span class="subject">Telefon</span></td><td><input name="telephoneText" type="text" class="inp"></td></tr>
+            <tr><td><span class="subject">Açıklama</span></td><td><textarea 
+name="descriptionTextArea" rows="5" class="tear"></textarea></td></tr>
+             <tr><td><span class="subject">Ödeme Türü</span></td><td><input name="paymentTypeRadio" 
+value="1" default="" type="radio" style="none;"><span class="subject"> Bağış&nbsp;</span><input 
+name="paymentTypeRadio" value="2" type="radio" style="none;"><span class="subject">Üyelik Ödentisi</span></td></tr>
 			 <tr>
 				<td colspan="2">
-				<div style="color:#FF0000">Üyelik ödentisi için açıklama kısmına üye numaranızı / isminizi girmeyi unutmayınız.</div>
+				<div style="margin-top:10px;"><span class="warn">Üyelik ödentisi için açıklama 
+kısmına ÜYE NUMARANIZI / İSMİNİZİ girmeyi unutmayınız.</span></div>
 				</td>
 			 </tr>
-            <tr><td>E-Posta</td><td><input type="text" name="emailText"></td></tr>
-            <tr><td>Kart No</td><td><input type="text" name="cardNoText"></td></tr>
+            <tr><td><span class="subject">E-Posta</span></td><td><input name="emailText" type="text" class="inp"></td></tr>
+            <tr><td><span class="subject">Kart No</span></td><td><input name="cardNoText" type="text" class="inp"></td></tr>
 
-            <tr><td>Son Kullanma Tarihi</td><td><?php monthSelect();?>&nbsp;<?php yearSelect();?></td></tr>
+            <tr><td><span class="subject">Son Kullanma Tarihi</span></td><td><?php monthSelect();?>&nbsp;<?php yearSelect();?></td></tr>
 
-            <tr><td>CVC</td><td><input type="text" name="cvcText"></td></tr>
-            <tr><td>Tutar</td><td><input type="text" name="tutarYTLText" size="10" maxlength="10" style="text-align:right" value="0"> YTL&nbsp;<input type="text" name="tutarYKRText" size="2" maxlength="2" value="00"> Kuruş</td></tr>
-            <tr><td colspan="2" style="text-align:center"><input type="submit" value="Öde"></td></tr>
+            <tr><td><span class="subject">CVC</span></td><td><input name="cvcText" type="text" class="inp"></td></tr>
+            <tr><td><span class="subject">Tutar</span></td><td><input name="tutarYTLText" size="10" 
+maxlength="10" style="text-align: right; width:60px;" value="0" type="text" class="inp"> 
+<span class="subject">YTL&nbsp;</span><input name="tutarYKRText" size="2" maxlength="2" value="00" 
+type="text" class="inp" style="width:60px;"><span class="subject"> Kuruş</span></td></tr>
+            <tr><td colspan="2" style="text-align: center;"><input 
+value="Öde" type="submit" class="sub"></td></tr>
 
-        </table>
+        </tbody></table>
     </form>
-<br/>
-<p>
-<strong>Derneğe banka yoluyla da bağış/aidat ödemesi yapabilirsiniz:</strong>
-Garanti Bankası
-
-Kızılay Şubesi (Şube No: 082)
-
-Hesap Numarası : 6298573
-</p>
-</center>
+    
+    <!-- From Bitişi -->
+    
+    
+    </div>
+</div>
 </body>
 </html>
