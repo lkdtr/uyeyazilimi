@@ -192,7 +192,7 @@ echo <<<payment_info
             <tr><td>Soyisim</td><td>{$_POST['surnameText']}</td></tr>
 
             <tr><td>Adres</td><td>{$_POST['addressTextArea']}</td></tr>
-            <tr><td>Adres</td><td>{$_POST['telephoneText']}</td></tr>
+            <tr><td>Telefon</td><td>{$_POST['telephoneText']}</td></tr>
             <tr><td>E-Posta</td><td>{$_POST['emailText']}</td></tr>
             <tr><td>Kart No</td><td>{$_POST['cardNoText']}</td></tr>
 
