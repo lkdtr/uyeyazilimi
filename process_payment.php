@@ -202,7 +202,7 @@ echo <<<payment_info
             <tr><td>Tutar</td><td>{$_POST['tutarYTLText']},{$_POST['tutarYKRText']} TL<br />&nbsp;</td></tr>
             <tr><td colspan="2">Yukarıdaki bilgilerin doğruluğunu onaylıyor musunuz?<br />&nbsp;</td></tr>
             <tr><td style="text-align:center"><input type="submit" value="Ödeme İşlemini Tamamla"><br />&nbsp;</td></tr>
-			<tr><td colspan="2">* Onaylama tuşuna bir kez tıkladıktan sonra lütfen bekleyiniz. İşlem 10-30sn kadar sürebilir.<br />&nbsp;</td></tr>
+			<tr><td colspan="2"><span style="color:red">* Onaylama tuşuna bir kez tıkladıktan sonra lütfen bekleyiniz.<br /> İşlem 10-30 sn kadar sürebilir.</span><br />&nbsp;</td></tr>
 
 
     </table>
