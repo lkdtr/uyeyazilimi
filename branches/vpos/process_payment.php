@@ -1,6 +1,4 @@
 <?php
-
-
 $hata_msg['02'] = "Kartla ilgili problem";
 $hata_msg['69'] = "Eksik Parametre";                         
 $hata_msg['68'] = "Hatalı İşlem Tipi";                       
@@ -32,17 +30,37 @@ $hata_msg['86'] = "Kayit Degistirilemez";
 $hata_msg['87'] = "Kayit Iade Durumda";
 $hata_msg['88'] = "Kayit Iptal Durumda";
 $hata_msg['89'] = "Geçersiz kayıt";
-
-
 ?>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title>LKD Ödeme Sistemi</title></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>LKD Bağış Sistemi</title>
+</head>
+<body>
+<div id="container">
+	<div id="top_content">
+    	<p class="top">Bağlantı Adresiniz, <strong><?php echo $_SERVER['REMOTE_ADDR']?></strong></p>
+    </div>
+    <div id="info-logo">
+    	<div id="logo-part">
+    		<img src="images/resmilogo.png" align="left" />
+        </div>
+        <div id="info-part">
+            <img src="images/part.png" align="left" />
+            <p>
+            <span class="subject">Derneğe banka yoluyla da bağış / aidat ödemesi yapabilirsiniz</span><br /><br />
+            <span class="subject">Banka :</span> Garanti Bankası<br>
+            <span class="subject">Şube :</span> Kızılay (Şube No: 082)<br>
+            <span class="subject">Hesap Numarası :</span> 6298573<br>
+            <span class="subject">IBAN :</span> TR51 0006 2000 0820 0006 2985 73<br>
+            </p>
+        </div>
+    </div>
+    <div id="content">
 
-
-<body bgcolor="white">
 <?php
 include('config.inc.php');
 function check_email_address($email) {
@@ -315,7 +333,14 @@ success;
 	
 
 }?>
+<br />
+<br />
+<br />
 
+
+
+
+    </div>
+</div>
 </body>
-
 </html>
