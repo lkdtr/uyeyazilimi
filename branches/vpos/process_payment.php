@@ -1,12 +1,4 @@
 <?php
-include_once("securimage/securimage.php");
-$securimage = new Securimage();
-if ($securimage->check($_POST['guvenlik_kodu']) == false) {
-  die('Girdiğiniz güvenlik kodu yanlıştır! Lütfen geri dönüp tekrar deneyiniz.');
-}
-
-
-
 $hata_msg['02'] = "Kartla ilgili problem";
 $hata_msg['69'] = "Eksik Parametre";                         
 $hata_msg['68'] = "Hatalı İşlem Tipi";                       
@@ -179,6 +171,13 @@ function obfuscate_card_no($cardNo) {
 
 ?>
 <?php if ($_POST["payment_accepted"]!= "true") {
+
+include_once("securimage/securimage.php");
+$securimage = new Securimage();
+if ($securimage->check($_POST['guvenlik_kodu']) == false) {
+  die('Girdiğiniz güvenlik kodu yanlıştır! Lütfen geri dönüp tekrar deneyiniz.');
+}
+
 echo <<<payment_info
     <div align="center">
     <form method="POST" action="process_payment.php">
