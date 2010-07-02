@@ -86,8 +86,9 @@ kısmına ÜYE NUMARANIZI / İSMİNİZİ girmeyi unutmayınız.</span></div>
             <tr><td><span class="subject">CVC</span></td><td><input name="cvcText" type="text" class="inp"></td></tr>
             <tr><td><span class="subject">Tutar</span></td><td><input name="tutarYTLText" size="10" 
 maxlength="10" style="text-align: right; width:60px;" value="0" type="text" class="inp"> 
-<span class="subject">YTL&nbsp;</span><input name="tutarYKRText" size="2" maxlength="2" value="00" 
-type="text" class="inp" style="width:60px;"><span class="subject"> Kuruş</span></td></tr>
+<span class="subject">TL&nbsp;</span><input name="tutarYKRText" size="2" maxlength="2" value="00" 
+type="text" class="inp" style="width:60px;">
+<span class="subject"> KR</span></td></tr>
             <tr><td colspan="2" style="text-align: center;"><input 
 value="Öde" type="submit" class="sub"></td></tr>
 
