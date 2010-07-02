@@ -199,8 +199,8 @@ echo <<<payment_info
             <tr><td>Son Kullanma Tarihi</td><td>{$_POST['validityDateMonth']} / {$_POST['validityDateYear']}</td></tr>
 
             <tr><td>CVC</td><td>{$_POST['cvcText']}</td></tr>
-            <tr><td>Tutar</td><td>{$_POST['tutarYTLText']} YTL {$_POST['tutarYKRText']} Kuruş</td></tr>
-            <tr><td colspan="2">Yukarıdaki bilgilerin doğruluğunu onaylıyor musunuz?</td></tr>
+            <tr><td>Tutar</td><td>{$_POST['tutarYTLText']} YTL {$_POST['tutarYKRText']} Kuruş</td></tr><br />
+            <tr><td colspan="2">Yukarıdaki bilgilerin doğruluğunu onaylıyor musunuz?</td></tr><br />
             <tr><td style="text-align:center"><input type="submit" value="Ödeme İşlemini Tamamla"></td></tr>
 
 
