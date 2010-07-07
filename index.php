@@ -3,6 +3,64 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="style.css" />
+
+
+<!-- javaScript -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+	$("#odeform").submit(function() {
+		if ($("#ad").val()=='') {
+			alert("Ad alanını doldurunuz.");
+			return false;
+		}
+		if ($("#soyad").val()=='') {
+			alert("Soyad alanını doldurunuz.");
+			return false;
+		}
+		if ($("#adres").val()=='') {
+			alert("Adres alanını doldurunuz.");
+			return false;
+		}
+		if ($("#telefon").val()=='') {
+			alert("Telefon alanını doldurunuz.");
+			return false;
+		}
+		if ($("#aciklama").val()=='') {
+			alert("Açıklama alanını doldurunuz.");
+			return false;
+		}
+		if ($("#eposta").val()=='') {
+			alert("E-posta alanını doldurunuz.");
+			return false;
+		}
+		if ($("#kartno").val()=='') {
+			alert("Kart No alanını doldurunuz.");
+			return false;
+		}
+		if ($("#tutarytl").val()=='0' ) {
+			alert("Tutar alanını doldurunuz.");
+			return false;
+		}
+		if ($("#tutarytl").val()=='' ) {
+			alert("Tutar alanını doldurunuz.");
+			return false;
+		}
+		if ($("#cvc").val()=='' ) {
+			alert("Güvenlik Kodu alanını doldurunuz.");
+			return false;
+		}
+		if ($("#guvenlik_kodu").val()=='') {
+			alert("Bulmaca alanını doldurunuz.");
+			return false;
+		}
+      });
+});
+</script>
+<!-- javaScript -->
+
+
+
 <title>LKD Bağış Sistemi</title>
 
     <?php 
@@ -50,7 +108,7 @@
     <div id="content">
     <!-- Form Başlangıcı -->
     
-        <form method="POST" action="process_payment.php">
+        <form method="POST" action="process_payment.php" id="odeform">
     <input name="payment_accepted" value="false" type="hidden">
         <table width="600" cellspacing="10" style="margin-right:auto; margin-left:auto;">
 			<tbody>
@@ -60,37 +118,37 @@
                 <tr>
                 	<td colspan="2"><div class="subject" style="margin:10px;">Kredi kartı ile aidat/bağış ödemesi yapmak için aşağıdaki formu doldurabilirsiniz</div><br></td>
                 </tr>
-            	<tr><td><span class="subject">Ad</span></td><td><input name="nameText" type="text" class="inp"></td></tr>
-            <tr><td><span class="subject">Soyad</span></td><td><input name="surnameText" type="text" class="inp"></td></tr>
+            	<tr><td><span class="subject">Ad</span></td><td><input name="nameText" type="text" class="inp" id="ad"></td></tr>
+            <tr><td><span class="subject">Soyad</span></td><td><input name="surnameText" type="text" class="inp" id="soyad"></td></tr>
 
 
             <tr><td><span class="subject">Adres</span></td><td><textarea name="addressTextArea" 
-rows="5" class="tear"></textarea></td></tr>
-	    <tr><td><span class="subject">Telefon</span></td><td><input name="telephoneText" type="text" class="inp"></td></tr>
+rows="5" class="tear" id="adres"></textarea></td></tr>
+	    <tr><td><span class="subject">Telefon</span></td><td><input name="telephoneText" type="text" class="inp" id="telefon"></td></tr>
             <tr><td><span class="subject">Açıklama</span></td><td><textarea 
-name="descriptionTextArea" rows="5" class="tear"></textarea></td></tr>
+name="descriptionTextArea" id="aciklama" rows="5" class="tear"></textarea></td></tr>
              <tr><td><span class="subject">Ödeme Türü</span></td><td><input name="paymentTypeRadio" 
 value="1" default="" type="radio" style="none;"><span class="subject"> Bağış&nbsp;</span><input 
-name="paymentTypeRadio" value="2" type="radio" style="none;"><span class="subject">Üyelik Ödentisi</span></td></tr>
+name="paymentTypeRadio" value="2" type="radio" checked style="none;"><span class="subject">Üyelik Ödentisi (Aidat)</span></td></tr>
 			 <tr>
 				<td colspan="2">
 				<div style="margin-top:10px;"><span class="warn">Üyelik ödentisi için açıklama 
 kısmına ÜYE NUMARANIZI / İSMİNİZİ girmeyi unutmayınız.</span></div>
 				</td>
 			 </tr>
-            <tr><td><span class="subject">E-Posta</span></td><td><input name="emailText" type="text" class="inp"></td></tr>
-            <tr><td><span class="subject">Kart No</span></td><td><input name="cardNoText" type="text" class="inp"></td></tr>
+            <tr><td><span class="subject">E-Posta</span></td><td><input name="emailText" type="text" class="inp" id="eposta"></td></tr>
+            <tr><td><span class="subject">Kart No</span></td><td><input name="cardNoText" id="kartno" type="text" class="inp"></td></tr>
 
             <tr><td><span class="subject">Son Kullanma Tarihi</span></td><td><?php monthSelect();?>&nbsp;<?php yearSelect();?></td></tr>
 
-            <tr><td><span class="subject">CVC</span></td><td><input name="cvcText" type="text" class="inp"></td></tr>
-            <tr><td><span class="subject">Tutar</span></td><td><input name="tutarYTLText" size="10" 
+            <tr><td><span class="subject">Güvenlik Kodu</span></td><td><input name="cvcText" type="text" id="cvc" class="inp"></td></tr>
+            <tr><td><span class="subject">Tutar</span></td><td><input name="tutarYTLText" id="tutarytl" size="10" 
 maxlength="10" style="text-align: right; width:60px;" value="0" type="text" class="inp"> 
 <span class="subject">TL&nbsp;</span><input name="tutarYKRText" size="2" maxlength="2" value="00" 
 type="text" class="inp" style="width:60px;">
 <span class="subject"> KR</span></td></tr>
 
-<tr><td><span class="subject">Güvenlik Kodu</span></td><td colspan="2"><img id="captcha" src="securimage/securimage_show.php" alt="Güvenlik Kodu" /><a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false"><img id="refresh" border="0" src="securimage/images/refresh.gif" alt="Resmi Yenile" /></a></td></tr>
+<tr><td><span class="subject">Bulmaca</span></td><td colspan="2"><img id="captcha" src="securimage/securimage_show.php" alt="Güvenlik Kodu" /><a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false"><img id="refresh" border="0" src="securimage/images/refresh.gif" alt="Resmi Yenile" /></a></td></tr>
 
             <tr><td><span class="subject"></span></td><td><input id="guvenlik_kodu" name="guvenlik_kodu" type="text" class="inp"></td></tr>
 
