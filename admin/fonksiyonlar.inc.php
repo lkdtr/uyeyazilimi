@@ -242,7 +242,7 @@ function parola_veritabanini_guncelle($uye_no, $lkd_login, $ad, $soyad, $parola,
     mysql_select_db(DB_PWD);
 
     $sorgu = 'UPDATE members SET lotr_alias = "' . $lkd_login . '", name = "' . $ad . '", lastname = "' . $soyad . '", privilege = ' . $privilege;
-    if($parola)
+    if($parola != 'NULL')
         $sorgu .= ", password = $parola";
     $sorgu .= ' WHERE uye_no = ' . $uye_no;
 
