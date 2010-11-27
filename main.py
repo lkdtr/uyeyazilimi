@@ -69,6 +69,10 @@ for owner, tickets in owners.iteritems():
 
 # send mail to component owners
 for component, tickets in components.iteritems():
+    #pass components with no owner
+    if componentOwners[component] == "":
+        continue
+
     output = ""
 
     for t in tickets:
