@@ -8,54 +8,118 @@
 <!-- javaScript -->
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
+function checkEmpty(fname, flabel) {
+	if($("#" + fname).val()=='') {
+		alert(flabel + " alanını doldurunuz!");
+		return false;
+	}
+	return true;
+}
+
 $(document).ready( function() {
-	$("#odeform").submit(function() {
-		if ($("#ad").val()=='') {
-			alert("Ad alanını doldurunuz.");
-			return false;
-		}
-		if ($("#soyad").val()=='') {
-			alert("Soyad alanını doldurunuz.");
-			return false;
-		}
-		if ($("#adres").val()=='') {
-			alert("Adres alanını doldurunuz.");
-			return false;
-		}
-		if ($("#telefon").val()=='') {
-			alert("Telefon alanını doldurunuz.");
-			return false;
-		}
-		if ($("#aciklama").val()=='') {
-			alert("Açıklama alanını doldurunuz.");
-			return false;
-		}
-		if ($("#eposta").val()=='') {
-			alert("E-posta alanını doldurunuz.");
-			return false;
-		}
-		if ($("#kartno").val()=='') {
-			alert("Kart No alanını doldurunuz.");
-			return false;
-		}
-		if ($("#tutarytl").val()=='0' ) {
-			alert("Tutar alanını doldurunuz.");
-			return false;
-		}
-		if ($("#tutarytl").val()=='' ) {
-			alert("Tutar alanını doldurunuz.");
-			return false;
-		}
-		if ($("#cvc").val()=='' ) {
-			alert("Güvenlik Kodu alanını doldurunuz.");
-			return false;
-		}
-		if ($("#guvenlik_kodu").val()=='') {
-			alert("Bulmaca alanını doldurunuz.");
-			return false;
-		}
-      });
+	$("#odeform").submit(function(e) {checkAll(e);});
+	  $("#ad").blur(function () { checkEmpty('ad', 'Ad');});
+	  $("#soyad").blur(function () { checkEmpty('soyad', 'Soyad');});
+	  $("#adres").blur(function () { checkEmpty('adres', 'Adres');});
+	  $("#telefon").blur(function () { checkEmpty('telefon', 'Telefon');});
+	  $("#aciklama").blur(function () { checkEmpty('aciklama', 'Aciklama');});
+	  $("#cvc").blur(function () { checkEmpty('cvc', 'Güvenlik Kodu');});
+	  $("#guvenlik_kodu").blur(function () { checkEmpty('guvenlik_kodu', 'Bulmaca');});
+	  $("#tutarytl").blur(function () { checkNumeric('tutarytl', 'Tutar');});
+
+	  $("#kartno").blur(checkCardNumber);
+	  $("#eposta").blur(function () { checkMail('eposta', 'E-Posta');});
 });
+
+function checkAll(event) {
+	var retVal = checkEmpty('ad', 'Ad');
+	retVal &= checkEmpty('soyad', 'Soyad');
+	retVal &= checkEmpty('adres', 'Adres');
+	retVal &= checkEmpty('telefon', 'Telefon');
+	retVal &= checkEmpty('aciklama', 'Aciklama');
+	retVal &= checkEmpty('cvc', 'Güvenlik Kodu');
+	retVal &= checkEmpty('guvenlik_kodu', 'Bulmaca');
+	retVal &= checkNumeric('tutarytl', 'Tutar');
+	retVal &= checkMail('eposta', 'E-Posta');
+	retVal &= checkCardNumber();
+	if(!retVal) event.preventDefault();
+	return retVal;
+}
+
+function checkNumeric(fname, flabel) {
+	var val = parseInt($("#" + fname).val(), 10);
+	if(isNaN(val) || val <= 0.0) {
+		alert(flabel + " alanına geçerli bir değer giriniz!");
+		return false;
+	}
+	return true;
+}
+
+function checkMail(fname, flabel) {
+	var val = $("#" + fname).val();
+	if(!validateMail(val)) {
+		alert(flabel + " alanı geçerli bir e-posta adresi içermiyor!");
+		return false;
+	}
+	return true;
+}
+
+function validateMail(email) {
+	var rexp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return rexp.test(email);
+}
+
+function checkCardNumber() {
+		var kno = $("#kartno");
+	  	ret = isValidCreditCard($("#kartno").val());
+		if(!ret) {
+			alert("Geçerli bir kredi kartı numarası giriniz!");
+		}
+		return ret;
+}
+
+function isValidCreditCard(cardNumber)
+{
+  var isValid = false;
+  var allNumberPattern = /[^\d ]/;
+  isValid = !allNumberPattern.test(cardNumber);
+
+  if (isValid)
+  {
+    var cardNumbersOnly = cardNumber.replace(/ /g,"");
+    var cardNumberLength = cardNumbersOnly.length;
+    isValid = (cardNumberLength >= 12 && cardNumberLength <= 19 );
+  }
+
+  if (isValid)
+  {
+    var product;
+    var checkSum = 0;
+    //loop through the provided number, starting at the last
+    //number and moving forward
+    for (var i = cardNumberLength - 1; i >= 0; i--)
+    {
+    //add the current digit to our total
+      checkSum += parseInt (cardNumbersOnly.charAt(i));
+      //move to the next digit
+      i--;
+      //multiple that number by 2
+      product = String((cardNumbersOnly.charAt(i) * 2));
+      //loop the length of the digit
+      for (var j = 0; j < product.length; j++)
+      {
+        //add that to our running total
+        checkSum += parseInt(product.charAt(j));
+      }
+    }
+    //now we need to take our grand total and
+    //mod it by 10. If it returns zero (0) then
+    //its a valid number, otherwise its invalid
+    isValid = (checkSum % 10 == 0);
+  }
+  //return the status
+  return isValid;
+}
 </script>
 <!-- javaScript -->
 
@@ -156,6 +220,7 @@ type="text" class="inp" style="width:60px;">
 value="Öde" type="submit" class="sub"></td></tr>
 
         </tbody></table>
+	<input type="button" value="al" onclick="checkEmpty('eposta', 'E-Posta alanı');" />
     </form>
     
     <!-- From Bitişi -->
