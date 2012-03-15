@@ -88,7 +88,7 @@
 		<td colspan="2">
 			<!-- Bilgi degistirme basarili oldu ise mesaj gosterilsin. -->
 			<?php
-				$mesaj = $_GET[mesaj];
+				$mesaj = htmlspecialchars($_GET[mesaj]);
 				if(!empty($mesaj))
 				{
 					echo "<p align=center><b><font color=red>$mesaj</b></font></p>";
