@@ -20,26 +20,33 @@ $(document).ready( function() {
 	$("#odeform").submit(function(e) {checkAll(e);});
 	  $("#ad").blur(function () { checkEmpty('ad', 'Ad');});
 	  $("#soyad").blur(function () { checkEmpty('soyad', 'Soyad');});
-	  $("#adres").blur(function () { checkEmpty('adres', 'Adres');});
-	  $("#telefon").blur(function () { checkEmpty('telefon', 'Telefon');});
 	  $("#aciklama").blur(function () { checkEmpty('aciklama', 'Aciklama');});
-	  $("#cvc").blur(function () { checkEmpty('cvc', 'Güvenlik Kodu');});
+	  $("#cvc").blur(function () { checkRegex('cvc', 'Güvenlik Kodu', /[0-9]{3,}/); });
 	  $("#guvenlik_kodu").blur(function () { checkEmpty('guvenlik_kodu', 'Bulmaca');});
 	  $("#tutarytl").blur(function () { checkNumeric('tutarytl', 'Tutar');});
-
+	  $("#tutarkr").blur(function () { checkRegex('tutarkr', 'Kuruş', /[0-9]{2}/);});
 	  $("#kartno").blur(checkCardNumber);
 	  $("#eposta").blur(function () { checkMail('eposta', 'E-Posta');});
 });
 
+function checkRegex(fname, flabel, regex) {
+	var val = $("#" + fname).val();
+	var ret = regex.test(val);
+	if(false == ret) {
+		alert(flabel + " alanına geçerli bir değer giriniz!");
+		return false;
+	}
+	return true;
+}
+
 function checkAll(event) {
 	var retVal = checkEmpty('ad', 'Ad');
 	retVal &= checkEmpty('soyad', 'Soyad');
-	retVal &= checkEmpty('adres', 'Adres');
-	retVal &= checkEmpty('telefon', 'Telefon');
 	retVal &= checkEmpty('aciklama', 'Aciklama');
 	retVal &= checkEmpty('cvc', 'Güvenlik Kodu');
 	retVal &= checkEmpty('guvenlik_kodu', 'Bulmaca');
 	retVal &= checkNumeric('tutarytl', 'Tutar');
+	retVal &= checkRegex('tutarkr', 'Kuruş', /[0-9]{2}/);
 	retVal &= checkMail('eposta', 'E-Posta');
 	retVal &= checkCardNumber();
 	if(!retVal) event.preventDefault();
@@ -84,21 +91,18 @@ function isValidCreditCard(cardNumber)
   var allNumberPattern = /[^\d ]/;
   isValid = !allNumberPattern.test(cardNumber);
 
-  if (isValid)
-  {
+  if (isValid) {
     var cardNumbersOnly = cardNumber.replace(/ /g,"");
     var cardNumberLength = cardNumbersOnly.length;
     isValid = (cardNumberLength >= 12 && cardNumberLength <= 19 );
   }
 
-  if (isValid)
-  {
+  if (isValid) {
     var product;
     var checkSum = 0;
     //loop through the provided number, starting at the last
     //number and moving forward
-    for (var i = cardNumberLength - 1; i >= 0; i--)
-    {
+    for (var i = cardNumberLength - 1; i >= 0; i--) {
     //add the current digit to our total
       checkSum += parseInt (cardNumbersOnly.charAt(i));
       //move to the next digit
@@ -106,8 +110,7 @@ function isValidCreditCard(cardNumber)
       //multiple that number by 2
       product = String((cardNumbersOnly.charAt(i) * 2));
       //loop the length of the digit
-      for (var j = 0; j < product.length; j++)
-      {
+      for (var j = 0; j < product.length; j++) {
         //add that to our running total
         checkSum += parseInt(product.charAt(j));
       }
@@ -205,10 +208,10 @@ kısmına ÜYE NUMARANIZI / İSMİNİZİ girmeyi unutmayınız.</span></div>
 
             <tr><td><span class="subject">Son Kullanma Tarihi</span></td><td><?php monthSelect();?>&nbsp;<?php yearSelect();?></td></tr>
 
-            <tr><td><span class="subject">Güvenlik Kodu</span></td><td><input name="cvcText" type="text" id="cvc" class="inp"></td></tr>
+            <tr><td><span class="subject">Güvenlik Kodu</span></td><td><input name="cvcText" type="text" id="cvc" maxlength="4" class="inp"></td></tr>
             <tr><td><span class="subject">Tutar</span></td><td><input name="tutarYTLText" id="tutarytl" size="10" 
 maxlength="10" style="text-align: right; width:60px;" value="0" type="text" class="inp"> 
-<span class="subject">TL&nbsp;</span><input name="tutarYKRText" size="2" maxlength="2" value="00" 
+<span class="subject">TL&nbsp;</span><input name="tutarYKRText" id="tutarkr" size="2" maxlength="2" value="00" 
 type="text" class="inp" style="width:60px;">
 <span class="subject"> KR</span></td></tr>
 
@@ -220,7 +223,6 @@ type="text" class="inp" style="width:60px;">
 value="Öde" type="submit" class="sub"></td></tr>
 
         </tbody></table>
-	<input type="button" value="al" onclick="checkEmpty('eposta', 'E-Posta alanı');" />
     </form>
     
     <!-- From Bitişi -->
