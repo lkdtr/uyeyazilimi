@@ -175,7 +175,7 @@ function obfuscate_card_no($cardNo) {
 include_once("securimage/securimage.php");
 $securimage = new Securimage();
 if ($securimage->check($_POST['guvenlik_kodu']) == false) {
-  die('Girdiğiniz güvenlik kodu yanlıştır! Lütfen geri dönüp tekrar deneyiniz.');
+  die('Girdiğiniz bulmaca cevabı yanlıştır! Lütfen geri dönüp tekrar deneyiniz.');
 }
 
 echo <<<payment_info
