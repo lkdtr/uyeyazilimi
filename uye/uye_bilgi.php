@@ -292,7 +292,7 @@
   <div id="Davet" style="display: none;">
     <!-- Arkadaşımı Derneğe Davet Etmek İstiyorum #566 -->
     <table>
-      <form action="davet_et.php" method="post"></form>
+      <form action="davet_et.php" method="post">
       <tbody>
         <tr>
           <td bgcolor="#466176"><font color="#FFFFFF">Arkadaşınızın Adı</font></td>
@@ -306,6 +306,7 @@
             <td bgcolor="#466176" colspan="2"><input type="submit" value="Davet Yazısı Gönder"></td>
         </tr>
       </tbody>
+      </form>
     </table>
   </div>
  </body>
