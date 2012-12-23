@@ -19,7 +19,7 @@
  $uye_adi = $user_info['uye_ad'] . ' ' . $user_info['uye_soyad'];
  $uye_eposta = $slug . '@linux.org.tr';
  $uye_kayit_tarih = new DateTime($user_info['kayit_acilis_tarih']);
- $uye_telefon = $user_info['telefon1'];
+ $uye_telefon = $user_info['Telefon1'];
  
  $davet_edilen = mysql_real_escape_string(@strip_tags($_POST['adi']));
  $davet_eposta = mysql_real_escape_string(@strip_tags($_POST['eposta']));
