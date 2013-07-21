@@ -38,6 +38,11 @@ input {
 	margin-right:10px;
 }
 
+#Davet {
+	position: relative;
+	float: left;
+}
+
 img.siyahcerceve {
         border: 3px black solid;
 }
