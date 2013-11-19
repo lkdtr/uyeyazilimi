@@ -37,6 +37,17 @@
         $ko1 = "";
         $ko2 = "Selected";
     }
+    //uye karti durumu
+    if($user_info['kimlik_durumu'] == 1)
+    {
+        $kdo1 = "Selected";
+        $kdo2 = "";
+    }
+    else
+    {
+        $kdo1 = "";
+        $kdo2 = "Selected";
+    }
 
     //oylama durumu
     if($user_info['oylama'] == 1)
@@ -94,6 +105,23 @@
         <tr>
             <td bgcolor="#466176"><font color="#FFFFFF">Yaşadığı Şehir</td>
             <td bgcolor="#F5F5F5"><input type='text' name='txt_sehir' value='<?php echo $user_info['sehir']; ?>'/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#466176"><font color="#FFFFFF">Posta Adresi</td>
+            <td bgcolor="#F5F5F5"><input type='text' name='txt_is_addr' value='<?php echo $user_info['is_addr']; ?>'/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#466176"><font color="#FFFFFF">TCKimlikNo</td>
+            <td bgcolor="#F5F5F5"><input type='text' name='txt_TCKimlikNo' value='<?php echo $user_info['TCKimlikNo']; ?>'/></td>
+        </tr>
+        <tr>
+            <td bgcolor="#466176"><font color="#FFFFFF">Dernek Üye Kartı Bilgisi</td>
+            <td bgcolor="#F5F5F5">
+                <select name='txt_kimlik_durumu'>
+                    <option value='İstiyor' <?php echo $kdo1;?>>İstiyor</option>
+                    <option value='Var/İstemiyor' <?php echo $kdo2;?>>Var/İstemiyor</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td bgcolor="#466176"><font color="#FFFFFF">LKD Üye E-posta Listesi</td>
