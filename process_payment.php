@@ -1,4 +1,7 @@
 <?php
+echo "Bakim Calismasi";
+exit();
+
 $hata_msg['02'] = "Kartla ilgili problem";
 $hata_msg['69'] = "Eksik Parametre";                         
 $hata_msg['68'] = "Hatalı İşlem Tipi";                       
