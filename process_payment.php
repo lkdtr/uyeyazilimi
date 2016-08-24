@@ -236,7 +236,7 @@ payment_info;
     $tutarYKRText = sanitize_sql_string($_POST['tutarYKRText']);
     $ipAddress = $_SERVER['REMOTE_ADDR'];
     $dbCardNo = obfuscate_card_no($cardNoText);
-    $paymentDate = date('c');
+    $paymentDate = date('Y-m-d H:i:s');
 
 	$validityDate = substr($validityDateYear,2,2).str_pad($validityDateMonth,2,'0',STR_PAD_LEFT);
 	
